@@ -114,5 +114,5 @@ $(function() {
         },
         colors: ["#5abcdf", "#ff8673"]
     };
-    var plot = $.plot($("#main-chart #main-chart-container"), data, options);
+    //var plot = $.plot($("#main-chart #main-chart-container"), data, options);
 });

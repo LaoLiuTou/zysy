@@ -1,20 +1,26 @@
 package com.zysy.controller.user;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.zysy.service.user.IUserService;
+
 import com.zysy.model.user.User;
+import com.zysy.service.user.IUserService;
+import com.zysy.utils.MD5Encryption;
+import com.zysy.utils.TokenUtils; 
 @Controller
 public class UserController {
 	@Autowired
@@ -82,6 +88,61 @@ public class UserController {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "查询失败！");
 			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/login")
+	@ResponseBody
+	public Map login(HttpServletRequest request,User user){
+		Map resultMap=new HashMap();
+		try {
+			if(user.getUsername()!=null&&user.getPassword()!=null){
+				
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",0);
+				paramMap.put("toPage",1); 
+				paramMap.put("username",user.getUsername());
+				paramMap.put("state",0);
+				List<User> list=iUserService.selectUserByParam(paramMap);
+				if(list.size()>0){
+					if(list.get(0).getPassword().equals(MD5Encryption.getEncryption(user.getPassword()).toLowerCase())){
+						String userToken= UUID.randomUUID().toString();
+						 
+						resultMap.put("status", "0");
+						resultMap.put("token", userToken);
+						resultMap.put("msg", list.get(0));
+						logger.info("用户登录："+list.get(0).getUsername());
+						TokenUtils.TokenBean tokenBean =new TokenUtils().new TokenBean();
+						tokenBean.setTimesamp(System.currentTimeMillis()+"");
+						tokenBean.setUsername(list.get(0).getUsername());
+						tokenBean.setUserid(list.get(0).getId()+"");
+	  					TokenUtils.add(userToken, tokenBean);
+					}
+					else{
+						resultMap.put("status", "-1");
+						resultMap.put("msg", "密码错误！");
+					}
+					
+				}
+				else{
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "用户名不存在！");
+				}
+				
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户名或密码不能为空！");
+			}
+			 
+			 
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "登录失败！");
+			logger.info("登录失败！"+e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		return resultMap;
