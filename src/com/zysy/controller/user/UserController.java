@@ -33,10 +33,19 @@ public class UserController {
 	public Map add(User user){
 		Map resultMap=new HashMap();
 		try {
-			iUserService.addUser(user);
-			resultMap.put("status", "0");
-			resultMap.put("msg", user.getId());
-			logger.info("新建成功，主键："+user.getId());
+			if(user.getUsername()!=null&&user.getPassword()!=null){
+				String password=MD5Encryption.getEncryption(user.getPassword()).toLowerCase();
+				user.setPassword(password);
+				iUserService.addUser(user);
+				resultMap.put("status", "0");
+				resultMap.put("msg", user.getId());
+				logger.info("新建成功，主键："+user.getId());
+			}
+			else{
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "用户名或密码不能为空！");
+			}
+			
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");
