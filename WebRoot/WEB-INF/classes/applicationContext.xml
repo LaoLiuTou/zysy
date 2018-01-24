@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc/jdbc.properties"/>
+</bean>
+<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="${driverClassName}"/>
+	<property name="url" value="${url}"/>
+	<property name="username" value="${username}"/>
+	<property name="password" value="${password}"/>
+</bean>-->
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName"><value>${driverClassName}</value></property>
+	<property name="url"><value>${url}</value></property> 
+	<property name="username"><value>${username}</value></property>
+	<property name="password"><value>${password}</value></property>
+	<property name="maxActive"><value>255</value></property> 
+	<property name="maxIdle"><value>2</value></property>
+	<property name="maxWait"><value>120000</value></property>
+</bean>
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="configLocation"><value>classpath:Configuration.xml</value></property>
+	<property name="dataSource"><ref bean="dataSource"/></property>
+ </bean>
+<bean id="sqlSessionTemplate_app" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg index="0" ref="sqlSessionFactory" />
+</bean>
+<!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+<!-- 配置事务管理器 -->
+<bean id="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	p:dataSource-ref="dataSource">
+</bean>
+<!-- 配置多个事务管理器 -->
+<!--<bean id="tran_1"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	p:dataSource-ref="dataSource">
+	<qualifier value="tran_1"/>
+</bean>
+@Transactional("tran_1")
+-->
+<!-- enables scanning for @Transactional annotations -->
+<tx:annotation-driven transaction-manager="transactionManager"/>
+<bean id="iMaterialMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.material.IMaterialMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iMaterialService" class="com.zysy.service.material.MaterialServiceImpl"></bean>
+<bean id="iMatteboardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.matteboard.IMatteboardMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iMatteboardService" class="com.zysy.service.matteboard.MatteboardServiceImpl"></bean>
+<bean id="iStockMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.stock.IStockMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iStockService" class="com.zysy.service.stock.StockServiceImpl"></bean>
+<bean id="iStoneblockMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.stoneblock.IStoneblockMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iStoneblockService" class="com.zysy.service.stoneblock.StoneblockServiceImpl"></bean>
+<bean id="iUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.user.IUserMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iUserService" class="com.zysy.service.user.UserServiceImpl"></bean>
+<bean id="iWorkshopMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.workshop.IWorkshopMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iWorkshopService" class="com.zysy.service.workshop.WorkshopServiceImpl"></bean>
+</beans>

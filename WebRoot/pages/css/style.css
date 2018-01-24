@@ -4707,3 +4707,10 @@ ol.comment-list {
     border-radius: 5px;
     -webkit-border-radius: 5px;
 }
+
+.mr10 {
+    margin-right: 10px;
+}
+.ml10 {
+    margin-left: 10px;
+}

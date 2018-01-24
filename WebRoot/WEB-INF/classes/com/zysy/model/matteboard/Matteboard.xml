@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zysy.dao.matteboard.IMatteboardMapper"> 
+	<select id="selectmatteboardById" parameterType="String" resultType="Matteboard">
+		SELECT * FROM matteboard WHERE ID=#{id}
+	</select>
+
+
+	<delete id="deletematteboard" parameterType="String"> 
+		DELETE FROM matteboard WHERE ID=#{id}
+	</delete>
+
+	<select id="selectmatteboardByParam" parameterType="java.util.Map" resultType="Matteboard">
+		SELECT *
+		FROM matteboard
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="sb_id != null"> AND SB_ID =#{sb_id} </if>
+			<if test="sb_code != null"> AND SB_CODE =#{sb_code} </if>
+			<if test="sb_spec != null"> AND SB_SPEC =#{sb_spec} </if>
+			<if test="sb_cube != null"> AND SB_CUBE =#{sb_cube} </if>
+			<if test="layer != null"> AND LAYER =#{layer} </if>
+			<if test="size != null"> AND SIZE =#{size} </if>
+			<if test="height != null"> AND HEIGHT =#{height} </if>
+			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
+			<if test="square != null"> AND SQUARE =#{square} </if>
+			<if test="belowgradeblock != null"> AND BELOWGRADEBLOCK =#{belowgradeblock} </if>
+			<if test="belowgradesquare != null"> AND BELOWGRADESQUARE =#{belowgradesquare} </if>
+			<if test="comment != null"> AND COMMENT =#{comment} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+		ORDER BY ID DESC 
+		LIMIT #{fromPage},#{toPage} 
+	</select>
+
+	<select id="selectCountmatteboardByParam" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(id) 
+		FROM matteboard 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND ID =#{id} </if>
+			<if test="sb_id != null"> AND SB_ID =#{sb_id} </if>
+			<if test="sb_code != null"> AND SB_CODE =#{sb_code} </if>
+			<if test="sb_spec != null"> AND SB_SPEC =#{sb_spec} </if>
+			<if test="sb_cube != null"> AND SB_CUBE =#{sb_cube} </if>
+			<if test="layer != null"> AND LAYER =#{layer} </if>
+			<if test="size != null"> AND SIZE =#{size} </if>
+			<if test="height != null"> AND HEIGHT =#{height} </if>
+			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
+			<if test="square != null"> AND SQUARE =#{square} </if>
+			<if test="belowgradeblock != null"> AND BELOWGRADEBLOCK =#{belowgradeblock} </if>
+			<if test="belowgradesquare != null"> AND BELOWGRADESQUARE =#{belowgradesquare} </if>
+			<if test="comment != null"> AND COMMENT =#{comment} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="state != null"> AND STATE =#{state} </if>
+		</trim>  
+	</select>
+
+	<update id="updatematteboard" parameterType="Matteboard">
+		UPDATE matteboard 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="id != null">ID=#{id}, </if>
+			<if test="sb_id != null">SB_ID=#{sb_id}, </if>
+			<if test="sb_code != null">SB_CODE=#{sb_code}, </if>
+			<if test="sb_spec != null">SB_SPEC=#{sb_spec}, </if>
+			<if test="sb_cube != null">SB_CUBE=#{sb_cube}, </if>
+			<if test="layer != null">LAYER=#{layer}, </if>
+			<if test="size != null">SIZE=#{size}, </if>
+			<if test="height != null">HEIGHT=#{height}, </if>
+			<if test="blocknumber != null">BLOCKNUMBER=#{blocknumber}, </if>
+			<if test="square != null">SQUARE=#{square}, </if>
+			<if test="belowgradeblock != null">BELOWGRADEBLOCK=#{belowgradeblock}, </if>
+			<if test="belowgradesquare != null">BELOWGRADESQUARE=#{belowgradesquare}, </if>
+			<if test="comment != null">COMMENT=#{comment}, </if>
+			<if test="c_dt != null">C_DT=#{c_dt}, </if>
+			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="state != null">STATE=#{state}, </if>
+		</trim>
+		WHERE ID=#{id}
+	</update>
+
+	<insert id="addmatteboard" parameterType="Matteboard">
+		INSERT INTO matteboard 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sb_id != null">SB_ID, </if>
+			<if test="sb_code != null">SB_CODE, </if>
+			<if test="sb_spec != null">SB_SPEC, </if>
+			<if test="sb_cube != null">SB_CUBE, </if>
+			<if test="layer != null">LAYER, </if>
+			<if test="size != null">SIZE, </if>
+			<if test="height != null">HEIGHT, </if>
+			<if test="blocknumber != null">BLOCKNUMBER, </if>
+			<if test="square != null">SQUARE, </if>
+			<if test="belowgradeblock != null">BELOWGRADEBLOCK, </if>
+			<if test="belowgradesquare != null">BELOWGRADESQUARE, </if>
+			<if test="comment != null">COMMENT, </if>
+			<if test="c_dt != null">C_DT, </if>
+			<if test="u_dt != null">U_DT, </if>
+			<if test="state != null">STATE, </if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
+			<if test="sb_id != null">#{sb_id}, </if>
+			<if test="sb_code != null">#{sb_code}, </if>
+			<if test="sb_spec != null">#{sb_spec}, </if>
+			<if test="sb_cube != null">#{sb_cube}, </if>
+			<if test="layer != null">#{layer}, </if>
+			<if test="size != null">#{size}, </if>
+			<if test="height != null">#{height}, </if>
+			<if test="blocknumber != null">#{blocknumber}, </if>
+			<if test="square != null">#{square}, </if>
+			<if test="belowgradeblock != null">#{belowgradeblock}, </if>
+			<if test="belowgradesquare != null">#{belowgradesquare}, </if>
+			<if test="comment != null">#{comment}, </if>
+			<if test="c_dt != null">#{c_dt}, </if>
+			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="state != null">#{state}, </if>
+		</trim>
+		<selectKey order="AFTER" resultType="long" keyProperty="id" > 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+</mapper>

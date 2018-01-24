@@ -54,7 +54,7 @@
         <div class="left-side-inner">
 
             <!-- visible to small devices only -->
-            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+            <!--<div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media logged-user">
                     <img alt="" src="images/photos/user-avatar.png" class="media-object">
                     <div class="media-body">
@@ -67,9 +67,9 @@
                 <ul class="nav nav-pills nav-stacked custom-nav">
                     <li><a href="#"><i class="fa fa-user"></i> <span>个人信息</span></a></li>
                     <li><a href="#"><i class="fa fa-cog"></i> <span>设置</span></a></li>
-                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>退出</span></a></li>
+                    <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> <span>退出</span></a></li>
                 </ul>
-            </div>
+            </div>-->
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
@@ -124,13 +124,13 @@
                     <li>
                         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <img src="images/photos/user-avatar.png" alt="" />
-                            用户名
+                            <span id="loginName"></span>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i>  设置</a></li>
-                            <li><a href="#"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                            <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
                         </ul>
                     </li>
 
@@ -293,6 +293,7 @@
 <!--Dashboard Charts-->
 <script src="js/dashboard-chart-init.js"></script>
 
-
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
 </body>
 </html>

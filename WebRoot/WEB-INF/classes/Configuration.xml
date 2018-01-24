@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/> 
+		<setting name="cacheEnabled" value="true"/> 
+		<setting name="lazyLoadingEnabled" value="true"/> 
+		<setting name="multipleResultSetsEnabled" value="true"/> 
+		<setting name="useColumnLabel" value="true"/> 
+		<setting name="useGeneratedKeys" value="false"/> 
+		<setting name="autoMappingBehavior" value="PARTIAL"/> 
+		<setting name="defaultExecutorType" value="SIMPLE"/> 
+		<setting name="defaultStatementTimeout" value="25"/> 
+		<setting name="safeRowBoundsEnabled" value="false"/> 
+		<setting name="mapUnderscoreToCamelCase" value="false"/> 
+		<setting name="localCacheScope" value="SESSION"/> 
+		<setting name="jdbcTypeForNull" value="OTHER"/> 
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/> 
+	</settings> 
+	<typeAliases>
+		<typeAlias alias="Material" type="com.zysy.model.material.Material" /> 
+		<typeAlias alias="Matteboard" type="com.zysy.model.matteboard.Matteboard" /> 
+		<typeAlias alias="Stock" type="com.zysy.model.stock.Stock" /> 
+		<typeAlias alias="Stoneblock" type="com.zysy.model.stoneblock.Stoneblock" /> 
+		<typeAlias alias="User" type="com.zysy.model.user.User" /> 
+		<typeAlias alias="Workshop" type="com.zysy.model.workshop.Workshop" /> 
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/zysy/model/material/Material.xml"/> 
+		<mapper resource="com/zysy/model/matteboard/Matteboard.xml"/> 
+		<mapper resource="com/zysy/model/stock/Stock.xml"/> 
+		<mapper resource="com/zysy/model/stoneblock/Stoneblock.xml"/> 
+		<mapper resource="com/zysy/model/user/User.xml"/> 
+		<mapper resource="com/zysy/model/workshop/Workshop.xml"/> 
+	</mappers>  
+</configuration>
