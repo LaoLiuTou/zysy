@@ -140,6 +140,7 @@ public class WorkshopController {
 				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+				paramMap.put("c_id",workshop.getC_id());
 				List<Workshop> list=iWorkshopService.selectWorkshopByParam(paramMap);
 				int totalnumber=iWorkshopService.selectCountWorkshopByParam(paramMap);
 				Map tempMap=new HashMap();

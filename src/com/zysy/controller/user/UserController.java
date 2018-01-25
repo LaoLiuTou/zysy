@@ -198,7 +198,20 @@ public class UserController {
 				paramMap.put("password",user.getPassword());
 				paramMap.put("nickname",user.getNickname());
 				paramMap.put("comment",user.getComment());
+				paramMap.put("c_id",user.getC_id());
 				paramMap.put("state",user.getState());
+				String c_dtFrom=request.getParameter("c_dtFrom");
+				String c_dtTo=request.getParameter("c_dtTo");
+				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+				paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+				if(c_dtTo!=null&&!c_dtTo.equals(""))
+				paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+				String u_dtFrom=request.getParameter("u_dtFrom");
+				String u_dtTo=request.getParameter("u_dtTo");
+				if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+				if(u_dtTo!=null&&!u_dtTo.equals(""))
+				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				List<User> list=iUserService.selectUserByParam(paramMap);
 				int totalnumber=iUserService.selectCountUserByParam(paramMap);
 				Map tempMap=new HashMap();

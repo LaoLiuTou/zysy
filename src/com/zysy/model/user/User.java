@@ -45,6 +45,14 @@ public class User {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	/** 创建人id */
+	private  Long c_id;
+	public Long getC_id() {
+		return c_id;
+	}
+	public void setC_id(Long c_id) {
+		this.c_id = c_id;
+	}
 	/**  */
 	private  Long state;
 	public Long getState() {
@@ -52,6 +60,22 @@ public class User {
 	}
 	public void setState(Long state) {
 		this.state = state;
+	}
+	/**  */
+	private  Date c_dt;
+	public Date getC_dt() {
+		return c_dt;
+	}
+	public void setC_dt(Date c_dt) {
+		this.c_dt = c_dt;
+	}
+	/**  */
+	private  Date u_dt;
+	public Date getU_dt() {
+		return u_dt;
+	}
+	public void setU_dt(Date u_dt) {
+		this.u_dt = u_dt;
 	}
 
 

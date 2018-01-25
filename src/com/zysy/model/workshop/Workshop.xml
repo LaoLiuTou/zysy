@@ -26,6 +26,7 @@
 			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
 			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 		</trim>  
 		ORDER BY ID DESC 
 		LIMIT #{fromPage},#{toPage} 
@@ -46,6 +47,7 @@
 			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
 			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
+			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 		</trim>  
 	</select>
 
@@ -59,6 +61,7 @@
 			<if test="state != null">STATE=#{state}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
+			<if test="c_id != null">C_ID=#{c_id}, </if>
 		</trim>
 		WHERE ID=#{id}
 	</update>
@@ -72,6 +75,7 @@
 			<if test="state != null">STATE, </if>
 			<if test="c_dt != null">C_DT, </if>
 			<if test="u_dt != null">U_DT, </if>
+			<if test="c_id != null">C_ID, </if>
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 			<if test="name != null">#{name}, </if>
@@ -80,6 +84,7 @@
 			<if test="state != null">#{state}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>
 			<if test="u_dt != null">#{u_dt}, </if>
+			<if test="c_id != null">#{c_id}, </if>
 		</trim>
 		<selectKey order="AFTER" resultType="long" keyProperty="id" > 
 			SELECT LAST_INSERT_ID()

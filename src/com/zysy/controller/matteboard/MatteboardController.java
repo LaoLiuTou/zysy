@@ -149,6 +149,7 @@ public class MatteboardController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",matteboard.getState());
+				paramMap.put("c_id",matteboard.getC_id());
 				List<Matteboard> list=iMatteboardService.selectMatteboardByParam(paramMap);
 				int totalnumber=iMatteboardService.selectCountMatteboardByParam(paramMap);
 				Map tempMap=new HashMap();

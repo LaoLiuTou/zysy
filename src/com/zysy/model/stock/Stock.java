@@ -46,12 +46,13 @@ public class Stock {
 		this.unit = unit;
 	}
 	/** 板材尺寸 */
-	private  String size;
-	public String getSize() {
-		return size;
+	private  String msize;
+	 
+	public String getMsize() {
+		return msize;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setMsize(String msize) {
+		this.msize = msize;
 	}
 	/** 厚 */
 	private  String height;
@@ -108,6 +109,14 @@ public class Stock {
 	}
 	public void setU_dt(Date u_dt) {
 		this.u_dt = u_dt;
+	}
+	/** 创建人id */
+	private  Long c_id;
+	public Long getC_id() {
+		return c_id;
+	}
+	public void setC_id(Long c_id) {
+		this.c_id = c_id;
 	}
 
 

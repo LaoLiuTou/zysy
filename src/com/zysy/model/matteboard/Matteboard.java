@@ -133,6 +133,14 @@ public class Matteboard {
 	public void setState(Long state) {
 		this.state = state;
 	}
+	/** 创建人id */
+	private  Long c_id;
+	public Long getC_id() {
+		return c_id;
+	}
+	public void setC_id(Long c_id) {
+		this.c_id = c_id;
+	}
 
 
 

@@ -139,6 +139,7 @@ public class MaterialController {
 				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+				paramMap.put("c_id",material.getC_id());
 				List<Material> list=iMaterialService.selectMaterialByParam(paramMap);
 				int totalnumber=iMaterialService.selectCountMaterialByParam(paramMap);
 				Map tempMap=new HashMap();

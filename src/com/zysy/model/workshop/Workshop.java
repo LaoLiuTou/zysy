@@ -61,6 +61,14 @@ public class Workshop {
 	public void setU_dt(Date u_dt) {
 		this.u_dt = u_dt;
 	}
+	/** 创建人id */
+	private  Long c_id;
+	public Long getC_id() {
+		return c_id;
+	}
+	public void setC_id(Long c_id) {
+		this.c_id = c_id;
+	}
 
 
 

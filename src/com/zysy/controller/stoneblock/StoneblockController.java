@@ -153,6 +153,7 @@ public class StoneblockController {
 				paramMap.put("comment",stoneblock.getComment());
 				paramMap.put("state",stoneblock.getState());
 				paramMap.put("blocknumber",stoneblock.getBlocknumber());
+				paramMap.put("c_id",stoneblock.getC_id());
 				List<Stoneblock> list=iStoneblockService.selectStoneblockByParam(paramMap);
 				int totalnumber=iStoneblockService.selectCountStoneblockByParam(paramMap);
 				Map tempMap=new HashMap();

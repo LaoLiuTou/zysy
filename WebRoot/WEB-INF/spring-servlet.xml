@@ -17,7 +17,7 @@
 		<mvc:message-converters>  
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
 				<property name="objectMapper"> 
-					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+					<bean class="com.zysy.utils.JsonObjectMapper">
 						<property name="dateFormat">
 							<bean class="java.text.SimpleDateFormat">
 								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />

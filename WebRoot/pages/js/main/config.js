@@ -1,9 +1,12 @@
 //后台服务地址
-var url = 'http://127.0.0.1:8080/zysy/';
+var url = 'http://127.0.0.1/zysy/';
 //secret key
 var sk = 'TTILY';
 
 $(document).ready(function(){
+    //logo
+    $('.logo').html(' <a href=""><img src="images/logo.png" alt=""></a>');
+    $('.logo-icon').html(' <a href=""><img src="images/logo.png" alt=""></a>');
     $('#logoutBtn').click(function () {
         sessionStorage.clear();
         window.location.href='login.html';
@@ -119,42 +122,4 @@ function GetQueryString(name)
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
-}
-
-function  querySys_members (displayname) {
-    var param='';
-    if(displayname==''){
-        param='{"page":"1","size":"10","order":"order by id desc"}';
-    }
-    else{
-        param='{"page":"1","size":"10","order":"order by id desc","displayname":"'+displayname+'"}';
-    }
-    var bodyParam={'method':'query','tableName':'sys_members','param':param};
-    var httpR = new createHttpR(url+'DipService','post','text',bodyParam,'callBack');
-    httpR.HttpRequest(function(response){
-        var obj = JSON.parse(response);
-        var status = obj['status'];
-        var msg = obj['msg'];
-        if(status=='0'){
-            var data=msg['data'];
-            //console.log(data);
-            var html='';
-            for(var o in data){
-                var c_name='';
-                for(var p in data){
-                    if(data[o].mem_id==data[p].id){
-                        c_name=data[p].displayname;
-                    }
-                }
-                html+='<tr id='+data[o].id+'>'+
-                    '<td>'+data[o].displayname+'</td>'+
-                    '<td>'+data[o].username+'</td>'+
-                    //'<td>'+data[o].userpwd+'</td>'+
-                    '<td>'+data[o].c_dt+'</td>'+
-                    '<td>'+c_name+'</td>'+
-                    '</tr>';
-            }
-            $('#data_tbody').html(html);
-        }
-    });
 }
