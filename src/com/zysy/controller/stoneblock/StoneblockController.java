@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zysy.service.stoneblock.IStoneblockService;
+import com.zysy.model.stock.Stock;
 import com.zysy.model.stoneblock.Stoneblock;
 @Controller
 public class StoneblockController {
@@ -24,10 +28,12 @@ public class StoneblockController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addStoneblock")
 	@ResponseBody
-	public Map add(Stoneblock stoneblock){
+	public Map add(Stoneblock stoneblock,Stock stock){
 		Map resultMap=new HashMap();
 		try {
-			iStoneblockService.addStoneblock(stoneblock);
+			 stock.setMsize(stoneblock.getLength()+"*"+stoneblock.getWidth());
+			 stock.setUnit("立方米");
+			iStoneblockService.addStoneblock(stoneblock,stock);
 			resultMap.put("status", "0");
 			resultMap.put("msg", stoneblock.getId());
 			logger.info("新建成功，主键："+stoneblock.getId());
@@ -125,6 +131,8 @@ public class StoneblockController {
 				paramMap.put("toPage",Integer.parseInt(size)); 
 				paramMap.put("id",stoneblock.getId());
 				paramMap.put("code",stoneblock.getCode());
+				if(stoneblock.getS_dt()!=null&&!stoneblock.getS_dt().equals(""))
+				paramMap.put("s_dt",stoneblock.getS_dt());
 				paramMap.put("source",stoneblock.getSource());
 				paramMap.put("place",stoneblock.getPlace());
 				String c_dtFrom=request.getParameter("c_dtFrom");
@@ -174,4 +182,10 @@ public class StoneblockController {
 		}
 		return resultMap;
 	}
+	@InitBinder  
+	public void initBinder(WebDataBinder binder) {  
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+		dateFormat.setLenient(false);  
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));  
+	} 
 }

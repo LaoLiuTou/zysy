@@ -4,11 +4,15 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.zysy.dao.matteboard.IMatteboardMapper;
+import com.zysy.dao.stock.IStockMapper;
 import com.zysy.model.matteboard.Matteboard;
+import com.zysy.model.stock.Stock;
 public class MatteboardServiceImpl  implements IMatteboardService {
 
 	@Autowired
 	private IMatteboardMapper iMatteboardMapper;
+	@Autowired
+	private IStockMapper iStockMapper;
 	/**
  * 通过id选取
  * @return
@@ -49,7 +53,18 @@ public class MatteboardServiceImpl  implements IMatteboardService {
  * @return
  */ 
  @Transactional
-	public  int addMatteboard(Matteboard matteboard){
+	public  int addMatteboard(Matteboard matteboard,Stock stock){
+	 
+		if(matteboard.getBelowgradeblock()>0){
+			Stock temp=stock;
+			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
+			temp.setState(Long.parseLong("0"));
+			iStockMapper.addstock(temp);
+			temp.setNumber((matteboard.getBelowgradeblock())+"");
+			temp.setState(Long.parseLong("2"));
+			iStockMapper.addstock(temp);
+		}
+	 
 		return iMatteboardMapper.addmatteboard(matteboard);
 	}
 

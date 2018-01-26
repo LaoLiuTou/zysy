@@ -11,7 +11,25 @@ $(document).ready(function(){
 ///////////////////////////////////库存管理////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 /**
- * 添加用户
+ * 添加库存
+ */
+function addStockByParam(bodyParam){
+
+    var httpR = new createHttpR(url+'addStock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        //var msg = obj['msg'];
+        if(status=='0'){
+            alert("新建成功！");
+            window.location.reload();
+            //window.location.href="interface.html?index="+interfaceIndex;
+        }
+    });
+}
+
+/**
+ * 添加库存
  */
 function addStock(){
     var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -31,7 +49,7 @@ function addStock(){
 }
 
 /**
- * 修改用户
+ * 修改库存
  * @param id
  */
 function updateStock(id){
@@ -52,7 +70,7 @@ function updateStock(id){
 }
 
 /**
- * 删除用户
+ * 删除库存
  * @param id
  */
 function deleteStock(id){
@@ -69,7 +87,7 @@ function deleteStock(id){
     });
 }
 /**
- * 查询用户
+ * 查询库存
  * @param stockname
  * @param currentPage
  * @param pageSize
@@ -199,6 +217,8 @@ function  queryStock (stockname,currentPage,pageSize) {
                 $('.pagination').html(pageHtml);
             }
 
+            selectMaterial(1,100);
+            selectWorkshop(1,100);
         }
     });
 }

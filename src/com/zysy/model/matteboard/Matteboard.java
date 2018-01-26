@@ -45,6 +45,29 @@ public class Matteboard {
 	public void setSb_cube(String sb_cube) {
 		this.sb_cube = sb_cube;
 	}
+	private String code;
+	private String auditor;
+	private Date m_dt;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getAuditor() {
+		return auditor;
+	}
+	public void setAuditor(String auditor) {
+		this.auditor = auditor;
+	}
+	 
+	public Date getM_dt() {
+		return m_dt;
+	}
+	public void setM_dt(Date m_dt) {
+		this.m_dt = m_dt;
+	}
 	/** 料层-上中下 */
 	private  String layer;
 	public String getLayer() {

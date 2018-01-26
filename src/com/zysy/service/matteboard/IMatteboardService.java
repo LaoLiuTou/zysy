@@ -2,6 +2,7 @@ package com.zysy.service.matteboard;
 import java.util.List;
 import java.util.Map;
 import com.zysy.model.matteboard.Matteboard;
+import com.zysy.model.stock.Stock;
 public interface IMatteboardService {
 	/**
  * 通过id选取
@@ -29,7 +30,7 @@ public interface IMatteboardService {
  * 添加 
  * @return
  */ 
-	public  int addMatteboard(Matteboard matteboard);
+	public  int addMatteboard(Matteboard matteboard,Stock stock);
 	/**
  * 删除 
  * @return 

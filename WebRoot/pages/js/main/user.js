@@ -83,7 +83,7 @@ function  queryUsers (username,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'username':username};
+        var bodyParam={'page':currentPage,'size':pageSize,'username':'%'+username+'%'};
     }
 
     var httpR = new createHttpR(url+'listUser','post','text',bodyParam,'callBack');

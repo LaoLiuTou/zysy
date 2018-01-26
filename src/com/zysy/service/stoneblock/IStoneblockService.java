@@ -1,6 +1,8 @@
 package com.zysy.service.stoneblock;
 import java.util.List;
 import java.util.Map;
+
+import com.zysy.model.stock.Stock;
 import com.zysy.model.stoneblock.Stoneblock;
 public interface IStoneblockService {
 	/**
@@ -29,7 +31,7 @@ public interface IStoneblockService {
  * 添加 
  * @return
  */ 
-	public  int addStoneblock(Stoneblock stoneblock);
+	public  int addStoneblock(Stoneblock stoneblock,Stock stock);
 	/**
  * 删除 
  * @return 

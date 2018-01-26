@@ -16,7 +16,7 @@
 		FROM workshop
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="name != null"> AND NAME =#{name} </if>
+			<if test="name != null"> AND NAME LIKE #{name} </if>
 			<if test="leader != null"> AND LEADER =#{leader} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
@@ -37,7 +37,7 @@
 		FROM workshop 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="name != null"> AND NAME =#{name} </if>
+			<if test="name != null"> AND NAME  LIKE #{name} </if>
 			<if test="leader != null"> AND LEADER =#{leader} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="state != null"> AND STATE =#{state} </if>

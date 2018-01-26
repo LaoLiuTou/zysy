@@ -3,12 +3,17 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.zysy.dao.stock.IStockMapper;
 import com.zysy.dao.stoneblock.IStoneblockMapper;
+import com.zysy.model.stock.Stock;
 import com.zysy.model.stoneblock.Stoneblock;
 public class StoneblockServiceImpl  implements IStoneblockService {
 
 	@Autowired
 	private IStoneblockMapper iStoneblockMapper;
+	@Autowired
+	private IStockMapper iStockMapper;
 	/**
  * 通过id选取
  * @return
@@ -49,7 +54,8 @@ public class StoneblockServiceImpl  implements IStoneblockService {
  * @return
  */ 
  @Transactional
-	public  int addStoneblock(Stoneblock stoneblock){
+	public  int addStoneblock(Stoneblock stoneblock,Stock stock){
+	 	iStockMapper.addstock(stock);
 		return iStoneblockMapper.addstoneblock(stoneblock);
 	}
 

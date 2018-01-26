@@ -16,9 +16,9 @@
 		FROM user
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="username != null"> AND USERNAME =#{username} </if>
+			<if test="username != null"> AND USERNAME LIKE #{username} </if>
 			<if test="password != null"> AND PASSWORD =#{password} </if>
-			<if test="nickname != null"> AND NICKNAME =#{nickname} </if>
+			<if test="nickname != null"> AND NICKNAME LIKE #{nickname} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
@@ -38,9 +38,9 @@
 		FROM user 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="username != null"> AND USERNAME =#{username} </if>
+			<if test="username != null"> AND USERNAME LIKE #{username} </if>
 			<if test="password != null"> AND PASSWORD =#{password} </if>
-			<if test="nickname != null"> AND NICKNAME =#{nickname} </if>
+			<if test="nickname != null"> AND NICKNAME LIKE #{nickname} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="state != null"> AND STATE =#{state} </if>

@@ -29,6 +29,14 @@ public class Stoneblock {
 	public void setSource(String source) {
 		this.source = source;
 	}
+	/**  */
+	private  Date s_dt;
+	public Date getS_dt() {
+		return s_dt;
+	}
+	public void setS_dt(Date s_dt) {
+		this.s_dt = s_dt;
+	}
 	/** 入库地点 */
 	private  String place;
 	public String getPlace() {

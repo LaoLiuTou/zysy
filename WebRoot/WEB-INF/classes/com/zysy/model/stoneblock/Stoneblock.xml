@@ -17,6 +17,9 @@
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
 			<if test="code != null"> AND CODE =#{code} </if>
+			<if test="s_dtFrom != null"> AND unix_timestamp(S_DT) &gt;=unix_timestamp(#{s_dtFrom}) </if>
+			<if test="s_dtTo != null"> AND unix_timestamp(S_DT) &lt;=unix_timestamp(#{s_dtTo}) </if>
+			<if test="s_dt != null"> AND S_DT =#{s_dt} </if>
 			<if test="source != null"> AND SOURCE =#{source} </if>
 			<if test="place != null"> AND PLACE =#{place} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
@@ -51,6 +54,10 @@
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
 			<if test="code != null"> AND CODE =#{code} </if>
+			<if test="s_dt != null"> AND S_DT =#{s_dt} </if>
+			<if test="s_dtFrom != null"> AND unix_timestamp(S_DT) &gt;=unix_timestamp(#{s_dtFrom}) </if>
+			<if test="s_dtTo != null"> AND unix_timestamp(S_DT) &lt;=unix_timestamp(#{s_dtTo}) </if>
+			<if test="s_dt != null"> AND S_DT =#{s_dt} </if>
 			<if test="source != null"> AND SOURCE =#{source} </if>
 			<if test="place != null"> AND PLACE =#{place} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
@@ -82,6 +89,7 @@
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="id != null">ID=#{id}, </if>
 			<if test="code != null">CODE=#{code}, </if>
+			<if test="s_dt != null">S_DT=#{s_dt}, </if>
 			<if test="source != null">SOURCE=#{source}, </if>
 			<if test="place != null">PLACE=#{place}, </if>
 			<if test="c_dt != null">C_DT=#{c_dt}, </if>
@@ -109,6 +117,7 @@
 		INSERT INTO stoneblock 
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="code != null">CODE, </if>
+			<if test="s_dt != null">S_DT, </if>
 			<if test="source != null">SOURCE, </if>
 			<if test="place != null">PLACE, </if>
 			<if test="c_dt != null">C_DT, </if>
@@ -131,6 +140,7 @@
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 			<if test="code != null">#{code}, </if>
+			<if test="s_dt != null">#{s_dt}, </if>
 			<if test="source != null">#{source}, </if>
 			<if test="place != null">#{place}, </if>
 			<if test="c_dt != null">#{c_dt}, </if>

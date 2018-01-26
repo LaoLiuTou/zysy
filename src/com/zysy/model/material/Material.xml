@@ -16,7 +16,7 @@
 		FROM material
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="name != null"> AND NAME =#{name} </if>
+			<if test="name != null"> AND NAME LIKE #{name} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
@@ -36,7 +36,7 @@
 		FROM material 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND ID =#{id} </if>
-			<if test="name != null"> AND NAME =#{name} </if>
+			<if test="name != null"> AND NAME LIKE #{name} </if>
 			<if test="comment != null"> AND COMMENT =#{comment} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>

@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zysy.service.matteboard.IMatteboardService;
 import com.zysy.model.matteboard.Matteboard;
+import com.zysy.model.stock.Stock;
 @Controller
 public class MatteboardController {
 	@Autowired
@@ -24,10 +28,13 @@ public class MatteboardController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addMatteboard")
 	@ResponseBody
-	public Map add(Matteboard matteboard){
+	public Map add(Matteboard matteboard,Stock stock){
 		Map resultMap=new HashMap();
 		try {
-			iMatteboardService.addMatteboard(matteboard);
+			stock.setNumber(matteboard.getBlocknumber()+"");
+			stock.setMsize(matteboard.getSize());
+			stock.setUnit("平方米");
+			iMatteboardService.addMatteboard(matteboard,stock);
 			resultMap.put("status", "0");
 			resultMap.put("msg", matteboard.getId());
 			logger.info("新建成功，主键："+matteboard.getId());
@@ -128,6 +135,10 @@ public class MatteboardController {
 				paramMap.put("sb_code",matteboard.getSb_code());
 				paramMap.put("sb_spec",matteboard.getSb_spec());
 				paramMap.put("sb_cube",matteboard.getSb_cube());
+				paramMap.put("code",matteboard.getCode());
+				paramMap.put("auditor",matteboard.getAuditor());
+				if(matteboard.getM_dt()!=null&&!matteboard.getM_dt().equals(""))
+				paramMap.put("m_dt",matteboard.getM_dt());
 				paramMap.put("layer",matteboard.getLayer());
 				paramMap.put("size",matteboard.getSize());
 				paramMap.put("height",matteboard.getHeight());
@@ -170,4 +181,10 @@ public class MatteboardController {
 		}
 		return resultMap;
 	}
+	@InitBinder  
+	public void initBinder(WebDataBinder binder) {  
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+		dateFormat.setLenient(false);  
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));  
+	} 
 }

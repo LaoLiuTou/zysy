@@ -8,10 +8,10 @@ $(document).ready(function(){
 
 
 ////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////用户管理////////////////////////////////////////
+///////////////////////////////////产品管理////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 /**
- * 添加用户
+ * 添加产品
  */
 function addMaterial(){
     var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -52,7 +52,7 @@ function updateMaterial(id){
 }
 
 /**
- * 删除用户
+ * 删除产品
  * @param id
  */
 function deleteMaterial(id){
@@ -69,7 +69,7 @@ function deleteMaterial(id){
     });
 }
 /**
- * 查询用户
+ * 查询产品
  * @param Materialname
  * @param currentPage
  * @param pageSize
@@ -82,7 +82,7 @@ function  queryMaterial (materialname,currentPage,pageSize) {
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'name':materialname};
+        var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+materialname+'%'};
     }
 
     var httpR = new createHttpR(url+'listMaterial','post','text',bodyParam,'callBack');
@@ -189,6 +189,33 @@ function  queryMaterial (materialname,currentPage,pageSize) {
 
                 $('.pagination').html(pageHtml);
             }
+
+        }
+    });
+}
+/**
+ * 查询select
+
+ * @param currentPage
+ * @param pageSize
+ */
+function  selectMaterial (currentPage,pageSize) {
+
+    var bodyParam={'page':currentPage,'size':pageSize};
+
+    var httpR = new createHttpR(url+'listMaterial','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+            var data=msg['data'];
+            var html='<option value=""></option>\n';
+            for(var o in data){
+                html+='<option value="'+data[o].id+'">'+data[o].name+'</option>\n';
+            }
+            $('#material').html(html);
+            $('#update_material').html(html);
 
         }
     });
