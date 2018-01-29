@@ -166,7 +166,7 @@
 
                                     </tr>
                                     </thead>
-                                    <tbody id="stockTbody">
+                                    <tbody id="reportTbody">
 
                                     </tbody>
                                 </table>
@@ -223,7 +223,7 @@
         });
 
         //列表
-        reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
+        reportStock($('#searchDate').val(),$('#searchStock').val(),'');
 
         //打印
         $('#printBtn').click(function () {
