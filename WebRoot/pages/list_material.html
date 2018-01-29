@@ -150,8 +150,16 @@
                          </span>
                         </header>
                         <div class="panel-body">
-                            <input type="text"  id="searchText" placeholder="请输入您要搜索的用户名..." />
-                            <button id="searchBtn">搜索</button>
+
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group col-md-3 mr10">
+                                    <div class="col-md-12 pdnone">
+                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
+                                    </div>
+                                </div>
+                                <button id="searchBtn" type="button" class="btn btn-primary mb10">搜索</button>
+                            </form>
+
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
