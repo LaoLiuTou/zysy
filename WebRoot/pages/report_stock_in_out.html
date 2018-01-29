@@ -150,10 +150,38 @@
                         </header>
                         <div class="panel-body">
 
-                            库别：<input type="text"  id="searchStock" />
-                            车间：<select  id="searchWorkshop"></select>
-                            物品类别：<select  id="searchMaterial"></select>
-                            <button id="searchBtn">搜索</button>
+                            <form class="form-horizontal" role="form">
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-4 form-sm-title pdnone">库别：</label>
+                                    <div class="col-md-8 pdnone">
+                                        <input class="form-control" id="searchStock" size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-4 form-sm-title pdnone">车间：</label>
+                                    <div class="col-md-8 pdnone">
+                                        <select class="form-control" id="searchWorkshop">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-4 form-sm-title pdnone">物品类别：</label>
+                                    <div class="col-md-8 pdnone">
+                                        <select class="form-control" id="searchMaterial">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mb10" id="searchBtn">搜索</button>
+                            </form>
+
+                            <!--库别：<input type="text"  id="searchStock" />-->
+                            <!--车间：<select  id="searchWorkshop"></select>-->
+                            <!--物品类别：<select  id="searchMaterial"></select>-->
+                            <!--<button id="searchBtn">搜索</button>-->
+
+
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
