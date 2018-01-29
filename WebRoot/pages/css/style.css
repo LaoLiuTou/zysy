@@ -4714,3 +4714,19 @@ ol.comment-list {
 .ml10 {
     margin-left: 10px;
 }
+.form-sm-title {
+    line-height: 34px;
+    text-align: left!important;
+}
+.pdnone {
+    padding: 0!important;
+}
+.ml10 {
+    margin-left: 10px;
+}
+.mr10 {
+    margin-right: 10px!important;
+}
+.mb10 {
+    margin-bottom: 10px!important;
+}
