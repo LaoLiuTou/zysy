@@ -25,6 +25,22 @@ public class StockServiceImpl  implements IStockService {
 	public List<Stock> selectStockByParam(Map paramMap){ 
 		return iStockMapper.selectstockByParam(paramMap);
 	}
+ /**
+  *库存
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectReportStock(Map paramMap){ 
+	 return iStockMapper.selectReportStock(paramMap);
+ }
+ /**
+  *进出库
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectStockInOut(Map paramMap){ 
+	 return iStockMapper.selectStockInOut(paramMap);
+ }
 
 	/**
 	* 通过查询参数获取总条数
@@ -50,6 +66,9 @@ public class StockServiceImpl  implements IStockService {
  */ 
  @Transactional
 	public  int addStock(Stock stock){
+	 	if((stock.getState()+"").equals("1")){
+			stock.setNumber("-"+stock.getNumber());
+		}
 		return iStockMapper.addstock(stock);
 	}
 

@@ -7,11 +7,11 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>用户</title>
+  <title>库存统计</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="js/html5shiv.js"></script>
@@ -49,11 +49,11 @@
                     </ul>
                 </li>
                 <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="report_stock.html">库存</a></li>
-                        <li><a href="report_stock_in_out.html">出入库明细</a></li>
-                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li ><a href="report_stock.html">库存</a></li>
+                        <li ><a href="report_stock_in_out.html">出入库明细</a></li>
+                        <li class="active"><a href="report_workshop_in_out.html">车间进出配比</a></li>
                         <li><a href="report_stoneblock.html">原材料明细</a></li>
                         <li><a href="report_matteboard.html">大锯产量统计</a></li>
                         <li><a href="report_yield.html">产量日报</a></li>
@@ -61,7 +61,7 @@
 
                     </ul>
                 </li>
-                <li class="active"><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
 
             </ul>
             <!--sidebar nav end-->
@@ -140,32 +140,38 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            用户管理
+                            库存统计
 
-                            <span class="tools pull-right">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
                             <!--<span class="tools pull-right">-->
-                            <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
-                            <!--<a href="javascript:;" class="fa fa-times"></a>-->
-                         </span>
+                            <!--<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>-->
+                            <!--&lt;!&ndash;<span class="tools pull-right">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-chevron-down"></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-times"></a>&ndash;&gt;-->
+                            <!--</span>-->
                         </header>
                         <div class="panel-body">
-                            <input type="text"  id="searchText" placeholder="请输入您要搜索的用户名..." />
+                            日期：<input type="text"  id="searchDate" placeholder="请输入您要搜索的日期..." />
+                            库别：<input type="text"  id="searchStock" />
+                            车间：<select class="form-control m-bot15" id="searchWorkshop"></select>
                             <button id="searchBtn">搜索</button>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>用户名</th>
-                                        <th>昵称</th>
+                                        <th>材料</th>
+                                        <th>库别</th>
+                                        <th>车间</th>
+                                        <th>板材尺寸</th>
+                                        <th>厚度</th>
+                                        <th>单位</th>
+                                        <th>数量</th>
                                         <th>备注</th>
-                                        <th>创建时间</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="userTbody">
+                                    <tbody id="stockTbody">
 
                                     </tbody>
                                 </table>
@@ -184,6 +190,7 @@
                                         <li><a href="#">8</a></li>
                                         <li><a href="#">&raquo;</a></li>-->
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -205,120 +212,6 @@
     <!-- main content end-->
 </section>
 
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="update-box" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">修改</h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="update_username" placeholder="请输入用户名">
-                    </div>
-                    <!--<div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="update_password" placeholder="请输入密码">
-                    </div>-->
-                    <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="update_nickname" placeholder="请输入密码">
-                    </div>
-
-                    <div class="form-group">
-                        <label>备注</label>
-                        <textarea class="form-control textarea-line" id="update_comment" placeholder="请输入描述"></textarea>
-
-                    </div>
-                    <div class="form-group">
-                        <label>状态</label>
-                        <select class="form-control m-bot15" id="update_state">
-                            <option value="0">启用</option>
-                            <option value="1">禁用</option>
-                        </select>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-primary" type="button" id="updateBtn">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="delete-box" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">删除</h4>
-            </div>
-            <div class="modal-body">
-                确定要删除记录吗？
-            </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-primary" type="button" id="deleteBtn">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="newly-box" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">新建</h4>
-            </div>
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
-                    </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="password" placeholder="请输入密码">
-                    </div>
-                    <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="nickname" placeholder="请输入密码">
-                    </div>
-
-                    <div class="form-group">
-                        <label>备注</label>
-                        <textarea class="form-control textarea-line" id="comment" placeholder="请输入描述"></textarea>
-
-                    </div>
-                    <div class="form-group">
-                        <label>状态</label>
-                        <select class="form-control m-bot15" id="state">
-                            <option value="0">启用</option>
-                            <option value="1">禁用</option>
-                        </select>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="clearfix"></div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-primary" type="button" id="addBtn">提交</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- modal -->
 
 
 
@@ -335,39 +228,47 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/user.js"></script>
+<script src="js/main/stock.js"></script>
+<script src="js/main/material.js"></script>
+<script src="js/main/workshop.js"></script>
+<script src="js/main/stoneblock.js"></script>
+<script src="js/main/matteboard.js"></script>
+<!--时间选择器-->
+<script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script>
     $(document).ready(function () {
 
+
         //搜索
         $('#searchBtn').click(function () {
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchText').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryUsers($('#searchText').val(),currentPage,pageSize);
+        queryStock($('#searchText').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchText').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryUsers($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryStock($('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
@@ -376,53 +277,132 @@
 
         //新建
         $('#addBtn').click(function () {
-            if($('#username').val()==''){
-                alert('用户名不能为空！');
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+            var param={};
+            param['c_id']=userinfo['id'];
+            $('#addForm').find('input').each(function () {
+                if($(this).val()!='')
+                param[$(this).attr('id')]=$(this).val();
+
+            });
+            $('#addForm').find('select').each(function () {
+                if($(this).val()!='')
+                param[$(this).attr('id')]=$(this).val();
+
+            });
+
+            alert(JSON.stringify(param));
+            if($('#material').val()==''){
+                alert('产品名称不能为空！');
                 return false;
             }
-            if($('#password').val()==''){
-                alert('用户密码不能为空！');
-                return false;
+
+            if($('#material').val()=='1'){
+                if($('#code').val()==''){
+                    alert('单据编号不能为空！');
+                    return false;
+                }
+                if($('#s_dt').val()==''){
+                    alert('单据日期不能为空！');
+                    return false;
+                }
+                if($('#length').val()==''){
+                    alert('原料长度不能为空！');
+                    return false;
+                }
+                if($('#width').val()==''){
+                    alert('原料宽度不能为空！');
+                    return false;
+                }
+                if($('#height').val()==''){
+                    alert('原料高度不能为空！');
+                    return false;
+                }
+                addStoneblock(param);
+
             }
-            if($('#nickname').val()==''){
-                alert('用户昵称不能为空！');
-                return false;
+            else if($('#material').val()=='2'){
+                if($('#code').val()==''){
+                    alert('单据编号不能为空！');
+                    return false;
+                }
+                if($('#m_dt').val()==''){
+                    alert('单据日期不能为空！');
+                    return false;
+                }
+                if($('#size').val()==''){
+                    alert('板材尺寸不能为空！');
+                    return false;
+                }
+                if($('#height').val()==''){
+                    alert('原料高度不能为空！');
+                    return false;
+                }
+                if($('#blocknumber').val()==''){
+                    alert('总块数不能为空！');
+                    return false;
+                }
+                addMatteboard(param);
             }
-            addUser();
+            else{
+
+                if($('#size').val()==''){
+                    alert('板材尺寸不能为空！');
+                    return false;
+                }
+                if($('#height').val()==''){
+                    alert('原料高度不能为空！');
+                    return false;
+                }
+                if($('#number').val()==''){
+                    alert('数量不能为空！');
+                    return false;
+                }
+                addStockByParam(param);
+            }
+
+
+
         });
 
         //修改
-        $('.updateUser').click(function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
+        $('.updateStock').click(function () {
+            stockIndex=$(this).attr('index');
+            currentStock=stockList[stockIndex];
 
-            $('#update_username').val(currentUser.username);
-            /*$('#update_password').val(currentUser.password);*/
-            $('#update_nickname').val(currentUser.nickname);
-            $('#update_comment').val(currentUser.comment);
-            $('#update_state').val(currentUser.state);
+            $('#update_material').val(currentStock.material);
+            $('#update_stocktype').val(currentStock.stocktype);
+            $('#update_workshop').val(currentStock.workshop);
+            $('#update_unit').val(currentStock.unit);
+            $('#update_msize').val(currentStock.msize);
+            $('#update_height').val(currentStock.height);
+            $('#update_number').val(currentStock.number);
+            $('#update_comment').val(currentStock.comment);
+            $('#update_state').val(currentStock.state);
+
         });
         $('#updateBtn').click(function () {
-            if($('#update_username').val()==''){
-                alert('用户名不能为空！');
+            if($('#update_name').val()==''){
+                alert('车间名不能为空！');
                 return false;
             }
 
-            if($('#update_nickname').val()==''){
-                alert('用户昵称不能为空！');
-                return false;
-            }
-            updateUser(currentUser.id);
+            updateStock(currentStock.id);
         });
 
         //删除
-        $('.deleteUser').click(function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
+        $('.deleteStock').click(function () {
+            stockIndex=$(this).attr('index');
+            currentStock=stockList[stockIndex];
         });
         $('#deleteBtn').click(function () {
-            deleteUser(currentUser.id);
+            deleteStock(currentStock.id);
         });
+
+
+
+
+
     });
 
 </script>

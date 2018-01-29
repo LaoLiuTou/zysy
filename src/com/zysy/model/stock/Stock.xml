@@ -12,29 +12,32 @@
 	</delete>
 
 	<select id="selectstockByParam" parameterType="java.util.Map" resultType="Stock">
-		SELECT *
-		FROM stock
+		SELECT a.*,b.name as material_name,c.name as workshop_name  
+		FROM stock a 
+		left join material b on a.material=b.id 
+		left join workshop c on a.workshop=c.id 
+		
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="id != null"> AND ID =#{id} </if>
-			<if test="material != null"> AND MATERIAL =#{material} </if>
-			<if test="stocktype != null"> AND STOCKTYPE =#{stocktype} </if>
-			<if test="workshop != null"> AND WORKSHOP =#{workshop} </if>
-			<if test="unit != null"> AND UNIT =#{unit} </if>
-			<if test="msize != null"> AND MSIZE =#{msize} </if>
-			<if test="height != null"> AND HEIGHT =#{height} </if>
-			<if test="number != null"> AND NUMBER =#{number} </if>
-			<if test="comment != null"> AND COMMENT =#{comment} </if>
-			<if test="damage != null"> AND DAMAGE =#{damage} </if>
-			<if test="state != null"> AND STATE =#{state} </if>
-			<if test="c_dtFrom != null"> AND unix_timestamp(C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
-			<if test="c_dtTo != null"> AND unix_timestamp(C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
-			<if test="c_dt != null"> AND C_DT =#{c_dt} </if>
-			<if test="u_dtFrom != null"> AND unix_timestamp(U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
-			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
-			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
-			<if test="c_id != null"> AND C_ID =#{c_id} </if>
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="material != null"> AND a.MATERIAL =#{material} </if>
+			<if test="stocktype != null"> AND a.STOCKTYPE =#{stocktype} </if>
+			<if test="workshop != null"> AND a.WORKSHOP =#{workshop} </if>
+			<if test="unit != null"> AND a.UNIT =#{unit} </if>
+			<if test="msize != null"> AND a.MSIZE =#{msize} </if>
+			<if test="height != null"> AND a.HEIGHT =#{height} </if>
+			<if test="number != null"> AND a.NUMBER =#{number} </if>
+			<if test="comment != null"> AND a.COMMENT =#{comment} </if>
+			<if test="damage != null"> AND a.DAMAGE =#{damage} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 		</trim>  
-		ORDER BY ID DESC 
+		ORDER BY a.ID DESC 
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 
@@ -120,4 +123,62 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey> 
 	</insert>
+	
+	<select id="selectReportStock" parameterType="java.util.Map" resultType="Stock">
+		SELECT a.*,b.name as material_name,c.name as workshop_name,SUM(a.number) as sum_number 
+		FROM stock a 
+		left join material b on a.material=b.id 
+		left join workshop c on a.workshop=c.id 
+		
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="material != null"> AND a.MATERIAL =#{material} </if>
+			<if test="stocktype != null"> AND a.STOCKTYPE =#{stocktype} </if>
+			<if test="workshop != null"> AND a.WORKSHOP =#{workshop} </if>
+			<if test="unit != null"> AND a.UNIT =#{unit} </if>
+			<if test="msize != null"> AND a.MSIZE =#{msize} </if>
+			<if test="height != null"> AND a.HEIGHT =#{height} </if>
+			<if test="number != null"> AND a.NUMBER =#{number} </if>
+			<if test="comment != null"> AND a.COMMENT =#{comment} </if>
+			<if test="damage != null"> AND a.DAMAGE =#{damage} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
+		</trim>  
+		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
+	</select>
+	<select id="selectStockInOut" parameterType="java.util.Map" resultType="Stock">
+		SELECT a.*,b.name as material_name,c.name as workshop_name,
+		SUM(CASE WHEN a.state=0 THEN number ELSE 0 END)  as sum_in, 
+		SUM(CASE WHEN a.state=1 THEN number ELSE 0 END)  as sum_out 
+		FROM stock a 
+		left join material b on a.material=b.id 
+		left join workshop c on a.workshop=c.id 
+		<trim prefix="" prefixOverrides="AND|OR">
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="material != null"> AND a.MATERIAL =#{material} </if>
+			<if test="stocktype != null"> AND a.STOCKTYPE =#{stocktype} </if>
+			<if test="workshop != null"> AND a.WORKSHOP =#{workshop} </if>
+			<if test="unit != null"> AND a.UNIT =#{unit} </if>
+			<if test="msize != null"> AND a.MSIZE =#{msize} </if>
+			<if test="height != null"> AND a.HEIGHT =#{height} </if>
+			<if test="number != null"> AND a.NUMBER =#{number} </if>
+			<if test="comment != null"> AND a.COMMENT =#{comment} </if>
+			<if test="damage != null"> AND a.DAMAGE =#{damage} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
+		</trim>  
+		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
+	</select>
 </mapper>

@@ -120,5 +120,44 @@ public class Stock {
 	}
 
 
+	
+	private String material_name;
+	private String workshop_name;
+	public String getMaterial_name() {
+		return material_name;
+	}
+	public void setMaterial_name(String material_name) {
+		this.material_name = material_name;
+	}
+	public String getWorkshop_name() {
+		return workshop_name;
+	}
+	public void setWorkshop_name(String workshop_name) {
+		this.workshop_name = workshop_name;
+	}
+	
 
+	private String sum_number;
+	public String getSum_number() {
+		return sum_number;
+	}
+	public void setSum_number(String sum_number) {
+		this.sum_number = sum_number;
+	}
+	private String sum_in;
+	private String sum_out;
+	public String getSum_in() {
+		return sum_in;
+	}
+	public void setSum_in(String sum_in) {
+		this.sum_in = sum_in;
+	}
+	public String getSum_out() {
+		return sum_out;
+	}
+	public void setSum_out(String sum_out) {
+		this.sum_out = sum_out;
+	}
+	
+	
 }

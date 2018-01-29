@@ -14,6 +14,18 @@ public interface IStockService {
  */ 
  @SuppressWarnings("rawtypes")
 	public List<Stock> selectStockByParam(Map paramMap); 
+ /**
+  * 库存
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectReportStock(Map paramMap); 
+ /**
+  * 进出库
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectStockInOut(Map paramMap); 
 	/**
 	* 通过查询参数获取总条数
 	 * @return

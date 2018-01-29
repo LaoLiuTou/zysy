@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>库存统计</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <!-- <a href=""><img src="images/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="logo-icon text-center" id="title">
+            <!--<a href=""><img src="images/logo_icon.png" alt=""></a>-->
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="list_workshop.html">车间管理</a></li>
+                        <li><a href="list_material.html">产品管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
+                    <ul class="sub-menu-list">
+                        <li class="active"><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_stock_in_out.html">出入库明细</a></li>
+                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li><a href="report_stoneblock.html">原材料明细</a></li>
+                        <li><a href="report_matteboard.html">大锯产量统计</a></li>
+                        <li><a href="report_yield.html">产量日报</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>
+
+                    </ul>
+                </li>
+                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+       <!-- <form class="searchform" action="index.html" method="post">
+            <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+        </form>-->
+        <!--search end-->
+
+            <!-- header section start-->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                <!--search end-->
+                <!--<form class="searchform" action="" method="post">
+                    <input type="text" class="form-control" id="searchText" placeholder="请输入您要搜索的用户名..." />
+                    <button>搜索</button>
+                </form>-->
+
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <ul class="notification-menu">
+
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/photos/user-avatar.png" alt="" />
+                                <span id="loginName"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                                <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </div>
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <!--<div class="page-heading">-->
+            <!--页面标题-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <!--表格开始-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            库存统计
+
+                            <span class="tools pull-right">
+                            <button type="button" class="btn btn-primary" id="printBtn">打印</button>
+                            <!--&lt;!&ndash;<span class="tools pull-right">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-chevron-down"></a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-times"></a>&ndash;&gt;-->
+                            </span>
+                        </header>
+                        <div class="panel-body">
+                            日期：<input type="text"  id="searchDate" class="dateform" placeholder="" />
+                            库别：<input type="text"  id="searchStock" />
+                            车间：<select  id="searchWorkshop"></select>
+                            <button id="searchBtn">搜索</button>
+                            <div class="adv-table">
+                                <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>类别</th>
+                                        <th>厚度</th>
+                                        <th>规格</th>
+                                        <th>单位</th>
+                                        <th>数量</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="stockTbody">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--表格结束-->
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2018 &copy; 版权所有
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/report.js"></script>
+<script src="js/main/jquery.jqprint-0.3.js"></script>
+<!--时间选择器-->
+<script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        //搜索
+        $('#searchBtn').click(function () {
+            reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
+        });
+
+        //列表
+        reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
+
+        //打印
+        $('#printBtn').click(function () {
+            var $pringDom=$('.wrapper').clone();
+            $pringDom.find('#printBtn').hide();
+            $pringDom.find('#searchBtn').hide();
+            $pringDom.jqprint();
+        });
+
+        //日期
+        $('.dateform').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 4,
+            forceParse: 0,
+            pickerPosition:'bottom'//日期插件弹出的位置
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

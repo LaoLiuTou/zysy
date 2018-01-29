@@ -116,13 +116,13 @@ function  queryStock (stockname,currentPage,pageSize) {
 
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].id+'</td>\n' +
-                    '<td>'+data[o].material+'</td>\n' +
+                    '<td>'+data[o].material_name+'</td>\n' +
                     '<td>'+data[o].stocktype+'</td>\n' +
-                    '<td>'+data[o].workshop+'</td>\n' +
+                    '<td>'+data[o].workshop_name+'</td>\n' +
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+data[o].number+'</td>\n' +
+                    '<td>'+Math.abs(data[o].number)+'</td>\n' +
                     '<td>'+data[o].comment+'</td>\n'  ;
                 if(data[o].state=='0'){
                     html+='<td><span class="label label-success label-mini">入库</span></td>\n';
