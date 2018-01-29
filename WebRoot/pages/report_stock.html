@@ -9,6 +9,14 @@
 
   <title>库存统计</title>
 
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+
+
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
@@ -150,10 +158,38 @@
                             </span>
                         </header>
                         <div class="panel-body">
-                            日期：<input type="text"  id="searchDate" class="dateform" placeholder="" />
-                            库别：<input type="text"  id="searchStock" />
-                            车间：<select  id="searchWorkshop"></select>
-                            <button id="searchBtn">搜索</button>
+                            <form class="form-horizontal" role="form">
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control form-control-inline input-medium default-date-picker"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">库别：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">车间：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control">
+                                            <option>选择车间</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mb10">搜索</button>
+                            </form>
+
+                            <!--日期：<input type="text"  id="searchDate" class="dateform" placeholder="" />-->
+                            <!--库别：<input type="text"  id="searchStock" />-->
+                            <!--车间：<select  id="searchWorkshop"></select>-->
+                            <!--<button id="searchBtn">搜索</button>-->
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
@@ -210,45 +246,57 @@
 <script src="js/main/report.js"></script>
 <script src="js/main/jquery.jqprint-0.3.js"></script>
 <!--时间选择器-->
-<script src="js/bootstrap-datetimepicker.js"></script>
-<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--<script src="js/bootstrap-datetimepicker.js"></script>-->
+<!--<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>-->
 
-<script>
-    $(document).ready(function () {
+<!--pickers plugins-->
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<!--pickers initialization-->
+<script src="js/pickers-init.js"></script>
+<!--时间选择器end-->
+
+<!--<script>-->
+    <!--$(document).ready(function () {-->
 
 
-        //搜索
-        $('#searchBtn').click(function () {
-            reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
-        });
+        <!--//搜索-->
+        <!--$('#searchBtn').click(function () {-->
+            <!--reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());-->
+        <!--});-->
 
-        //列表
-        reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
+        <!--//列表-->
+        <!--reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());-->
 
-        //打印
-        $('#printBtn').click(function () {
-            var $pringDom=$('.wrapper').clone();
-            $pringDom.find('#printBtn').hide();
-            $pringDom.find('#searchBtn').hide();
-            $pringDom.jqprint();
-        });
+        <!--//打印-->
+        <!--$('#printBtn').click(function () {-->
+            <!--var $pringDom=$('.wrapper').clone();-->
+            <!--$pringDom.find('#printBtn').hide();-->
+            <!--$pringDom.find('#searchBtn').hide();-->
+            <!--$pringDom.jqprint();-->
+        <!--});-->
 
-        //日期
-        $('.dateform').datetimepicker({
-            format: 'yyyy-mm-dd',
-            language:  'zh-CN',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 4,
-            forceParse: 0,
-            pickerPosition:'bottom'//日期插件弹出的位置
-        });
-    });
+        <!--//日期-->
+        <!--$('.dateform').datetimepicker({-->
+            <!--format: 'yyyy-mm-dd',-->
+            <!--language:  'zh-CN',-->
+            <!--weekStart: 1,-->
+            <!--todayBtn:  1,-->
+            <!--autoclose: 1,-->
+            <!--todayHighlight: 1,-->
+            <!--startView: 2,-->
+            <!--minView: 4,-->
+            <!--forceParse: 0,-->
+            <!--pickerPosition:'bottom'//日期插件弹出的位置-->
+        <!--});-->
+    <!--});-->
 
-</script>
+<!--</script>-->
 
 
 </body>
