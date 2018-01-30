@@ -41,7 +41,7 @@ function  reportStock (c_dt,stocktype,workshop) {
                     '<td>'+data[o].unit+'</td>\n' +
                     '<td>'+data[o].sum_number+'</td>\n</tr>' ;
             }
-            $('#stockTbody').html(html);
+            $('#reportTbody').html(html);
             selectWorkshop(1,100,workshop);
         }
     });
@@ -62,9 +62,10 @@ function  reportStockInOut (stocktype,workshop,material) {
         bodyParam['workshop']=workshop;
     }
     if(material!=''){
+        alert(material);
         bodyParam['material']=material;
     }
-    var httpR = new createHttpR(url+'reportStock','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'reportStockInOut','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -73,18 +74,20 @@ function  reportStockInOut (stocktype,workshop,material) {
             var html='';
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+data[o].material_name+'</td>\n' +
-                    '<td>'+data[o].c_dt+'</td>\n'+
-                    '<td>'+data[o].height+'</td>\n' + 
+                    '<td>'+data[o].c_dt+'</td>\n' +
+                    '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+data[o].sum_number+'</td>\n</tr>' ;
+                    '<td>'+Math.abs(data[o].sum_in)+'</td>\n' +
+                    '<td>'+Math.abs(data[o].sum_out)+'</td>\n</tr>' ;
             }
-            $('#stockInOutTbody').html(html);
+            $('#reportTbody').html(html);
             selectWorkshop(1,100,workshop);
+            selectMaterial(1,100,material);
         }
     });
 }
+
 /**
  * 车间select
 

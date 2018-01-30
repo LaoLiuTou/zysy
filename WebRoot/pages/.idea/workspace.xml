@@ -48,8 +48,8 @@
       <file leaf-file-name="report_stock.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report_stock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1367">
-              <caret line="132" column="32" lean-forward="true" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
+            <state relative-caret-position="192">
+              <caret line="225" column="69" lean-forward="false" selection-start-line="225" selection-start-column="69" selection-end-line="225" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -68,8 +68,18 @@
       <file leaf-file-name="report.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main/report.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="77" column="54" lean-forward="false" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
+            <state relative-caret-position="536">
+              <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report_stock_in_out.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/report_stock_in_out.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="165" column="53" lean-forward="true" selection-start-line="160" selection-start-column="40" selection-end-line="165" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -96,6 +106,8 @@
       <find>workshop</find>
       <find>stoneblock</find>
       <find>addStoneblock</find>
+      <find>searchMaterial</find>
+      <find>reportStockInOut</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -111,7 +123,6 @@
         <option value="$PROJECT_DIR$/js/main/user.js" />
         <option value="$PROJECT_DIR$/js/main/stoneblock.js" />
         <option value="$PROJECT_DIR$/js/main/matteboard.js" />
-        <option value="$PROJECT_DIR$/report_stock_in_out.html" />
         <option value="$PROJECT_DIR$/report_workshop_in_out.html" />
         <option value="$PROJECT_DIR$/report_stoneblock.html" />
         <option value="$PROJECT_DIR$/report_matteboard.html" />
@@ -125,6 +136,7 @@
         <option value="$PROJECT_DIR$/js/main/workshop.js" />
         <option value="$PROJECT_DIR$/js/main/stock.js" />
         <option value="$PROJECT_DIR$/report_stock.html" />
+        <option value="$PROJECT_DIR$/report_stock_in_out.html" />
         <option value="$PROJECT_DIR$/js/main/report.js" />
       </list>
     </option>
@@ -135,7 +147,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="93" />
     <option name="y" value="402" />
     <option name="width" value="1185" />
@@ -253,15 +265,15 @@
       <workItem from="1516758699402" duration="5268000" />
       <workItem from="1516795643034" duration="5190000" />
       <workItem from="1516926857428" duration="19817000" />
-      <workItem from="1517186396375" duration="13079000" />
+      <workItem from="1517186396375" duration="15980000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65234000" />
+    <option name="totallyTimeSpent" value="68135000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-5" y="-5" width="1450" height="870" extended-state="7" />
+    <frame x="-5" y="-5" width="1450" height="870" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22143865" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -570,14 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/report_stock_in_out.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="55" column="59" lean-forward="false" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/report_stoneblock.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -697,14 +701,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/report_stock.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1367">
-          <caret line="132" column="32" lean-forward="true" selection-start-line="132" selection-start-column="32" selection-end-line="132" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/main/workshop.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
@@ -722,10 +718,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/report_stock.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="225" column="69" lean-forward="false" selection-start-line="225" selection-start-column="69" selection-end-line="225" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report_stock_in_out.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="165" column="53" lean-forward="true" selection-start-line="160" selection-start-column="40" selection-end-line="165" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/main/report.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="77" column="54" lean-forward="false" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
+        <state relative-caret-position="536">
+          <caret line="88" column="1" lean-forward="true" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
           <folding />
         </state>
       </provider>
