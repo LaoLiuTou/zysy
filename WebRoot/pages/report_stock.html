@@ -158,7 +158,8 @@
                         </header>
                         <div class="panel-body">
 
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" id="form">
+
 
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
@@ -269,8 +270,15 @@
         //打印
         $('#printBtn').click(function () {
             var $pringDom=$('.wrapper').clone();
+            $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
-            $pringDom.find('#searchBtn').hide();
+            var html='<label >日期：</label>\n' +
+                    '<label >'+$('#searchDate').val()+'</label>\n' +
+                    '<label style="padding-left: 40px;">库别：</label>\n' +
+                    '<label >'+$('#searchStock').val()+'</label>\n' +
+                    '<label style="padding-left: 40px;">车间：</label>\n' +
+                    '<label >'+$('#searchWorkshop option:selected').text()+'</label>\n';
+            $pringDom.find('#form').html(html);
             $pringDom.jqprint();
         });
 
