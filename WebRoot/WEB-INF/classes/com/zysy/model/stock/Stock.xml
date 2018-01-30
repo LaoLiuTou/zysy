@@ -154,12 +154,12 @@
 	</select>
 	<select id="selectStockInOut" parameterType="java.util.Map" resultType="Stock">
 		SELECT a.*,b.name as material_name,c.name as workshop_name,
-		SUM(CASE WHEN a.state=0 THEN number ELSE 0 END)  as sum_in, 
-		SUM(CASE WHEN a.state=1 THEN number ELSE 0 END)  as sum_out 
+		SUM(CASE WHEN a.state=0 THEN a.number ELSE 0 END)  as sum_in, 
+		SUM(CASE WHEN a.state=1 THEN a.number ELSE 0 END)  as sum_out 
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 
-		<trim prefix="" prefixOverrides="AND|OR">
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND a.ID =#{id} </if>
 			<if test="material != null"> AND a.MATERIAL =#{material} </if>
 			<if test="stocktype != null"> AND a.STOCKTYPE =#{stocktype} </if>
