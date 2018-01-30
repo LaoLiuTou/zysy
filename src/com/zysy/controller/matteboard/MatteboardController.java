@@ -32,7 +32,7 @@ public class MatteboardController {
 		Map resultMap=new HashMap();
 		try {
 			stock.setNumber(matteboard.getBlocknumber()+"");
-			stock.setMsize(matteboard.getSize());
+			stock.setMsize(matteboard.getMsize());
 			stock.setUnit("平方米");
 			iMatteboardService.addMatteboard(matteboard,stock);
 			resultMap.put("status", "0");
@@ -139,8 +139,9 @@ public class MatteboardController {
 				paramMap.put("auditor",matteboard.getAuditor());
 				if(matteboard.getM_dt()!=null&&!matteboard.getM_dt().equals(""))
 				paramMap.put("m_dt",matteboard.getM_dt());
+				paramMap.put("workgroup",matteboard.getWorkgroup());
 				paramMap.put("layer",matteboard.getLayer());
-				paramMap.put("size",matteboard.getSize());
+				paramMap.put("msize",matteboard.getMsize());
 				paramMap.put("height",matteboard.getHeight());
 				paramMap.put("blocknumber",matteboard.getBlocknumber());
 				paramMap.put("square",matteboard.getSquare());

@@ -77,12 +77,13 @@ public class Matteboard {
 		this.layer = layer;
 	}
 	/** 板材尺寸 */
-	private  String size;
-	public String getSize() {
-		return size;
+	private  String msize;
+	 
+	public String getMsize() {
+		return msize;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setMsize(String msize) {
+		this.msize = msize;
 	}
 	/** 厚 */
 	private  String height;
@@ -165,6 +166,14 @@ public class Matteboard {
 		this.c_id = c_id;
 	}
 
+	private String workgroup;
+	public String getWorkgroup() {
+		return workgroup;
+	}
+	public void setWorkgroup(String workgroup) {
+		this.workgroup = workgroup;
+	}
+	
 
 
 }

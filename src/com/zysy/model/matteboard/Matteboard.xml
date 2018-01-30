@@ -26,9 +26,9 @@
 			<if test="m_dtFrom != null"> AND unix_timestamp(M_DT) &gt;=unix_timestamp(#{m_dtFrom}) </if>
 			<if test="m_dtTo != null"> AND unix_timestamp(M_DT) &lt;=unix_timestamp(#{m_dtTo}) </if>
 			<if test="m_dt != null"> AND M_DT =#{m_dt} </if>
-			
+			<if test="workgroup != null"> AND WORKGROUP =#{workgroup} </if>
 			<if test="layer != null"> AND LAYER =#{layer} </if>
-			<if test="size != null"> AND SIZE =#{size} </if>
+			<if test="msize != null"> AND MSIZE =#{msize} </if>
 			<if test="height != null"> AND HEIGHT =#{height} </if>
 			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
 			<if test="square != null"> AND SQUARE =#{square} </if>
@@ -62,8 +62,9 @@
 			<if test="m_dtFrom != null"> AND unix_timestamp(M_DT) &gt;=unix_timestamp(#{m_dtFrom}) </if>
 			<if test="m_dtTo != null"> AND unix_timestamp(M_DT) &lt;=unix_timestamp(#{m_dtTo}) </if>
 			<if test="m_dt != null"> AND M_DT =#{m_dt} </if>
+			<if test="workgroup != null"> AND WORKGROUP =#{workgroup} </if>
 			<if test="layer != null"> AND LAYER =#{layer} </if>
-			<if test="size != null"> AND SIZE =#{size} </if>
+			<if test="msize != null"> AND MSIZE =#{msize} </if>
 			<if test="height != null"> AND HEIGHT =#{height} </if>
 			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
 			<if test="square != null"> AND SQUARE =#{square} </if>
@@ -92,8 +93,9 @@
 			<if test="code != null">CODE=#{code}, </if>
 			<if test="auditor != null">AUDITOR=#{auditor}, </if>
 			<if test="m_dt != null">M_DT=#{m_dt}, </if>
+			<if test="workgroup != null">WORKGROUP=#{workgroup}, </if>
 			<if test="layer != null">LAYER=#{layer}, </if>
-			<if test="size != null">SIZE=#{size}, </if>
+			<if test="msize != null">MSIZE=#{msize}, </if>
 			<if test="height != null">HEIGHT=#{height}, </if>
 			<if test="blocknumber != null">BLOCKNUMBER=#{blocknumber}, </if>
 			<if test="square != null">SQUARE=#{square}, </if>
@@ -118,8 +120,9 @@
 			<if test="code != null">CODE, </if>
 			<if test="auditor != null">AUDITOR, </if>
 			<if test="m_dt != null">M_DT, </if>
+			<if test="workgroup != null">WORKGROUP, </if>
 			<if test="layer != null">LAYER, </if>
-			<if test="size != null">SIZE, </if>
+			<if test="msize != null">MSIZE, </if>
 			<if test="height != null">HEIGHT, </if>
 			<if test="blocknumber != null">BLOCKNUMBER, </if>
 			<if test="square != null">SQUARE, </if>
@@ -139,8 +142,9 @@
 			<if test="code != null">#{code}, </if>
 			<if test="auditor != null">#{auditor}, </if>
 			<if test="m_dt != null">#{m_dt}, </if>
+			<if test="workgroup != null">#{workgroup}, </if>
 			<if test="layer != null">#{layer}, </if>
-			<if test="size != null">#{size}, </if>
+			<if test="msize != null">#{msize}, </if>
 			<if test="height != null">#{height}, </if>
 			<if test="blocknumber != null">#{blocknumber}, </if>
 			<if test="square != null">#{square}, </if>
