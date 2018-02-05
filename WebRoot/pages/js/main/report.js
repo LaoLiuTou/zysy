@@ -43,6 +43,7 @@ function  reportStock (c_dt,stocktype,workshop) {
             }
             $('#reportTbody').html(html);
             selectWorkshop(1,100,workshop);
+            selectStocktype(1,100,stocktype);
         }
     });
 }
@@ -62,7 +63,6 @@ function  reportStockInOut (stocktype,workshop,material) {
         bodyParam['workshop']=workshop;
     }
     if(material!=''){
-        alert(material);
         bodyParam['material']=material;
     }
     var httpR = new createHttpR(url+'reportStockInOut','post','text',bodyParam,'callBack');
@@ -84,6 +84,7 @@ function  reportStockInOut (stocktype,workshop,material) {
             $('#reportTbody').html(html);
             selectWorkshop(1,100,workshop);
             selectMaterial(1,100,material);
+            selectStocktype(1,100,stocktype);
         }
     });
 }
@@ -257,6 +258,30 @@ function  selectMaterial (currentPage,pageSize,material) {
             }
             $('#searchMaterial').html(html);
             $('#searchMaterial').val(material);
+        }
+    });
+}
+
+/**
+ * 物品select
+ * @param currentPage
+ * @param pageSize
+ */
+function  selectStocktype (currentPage,pageSize,stocktype) {
+    var bodyParam={'page':currentPage,'size':pageSize};
+    var httpR = new createHttpR(url+'listStocktype','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+            var data=msg['data'];
+            var html='<option value="">全部</option>';
+            for(var o in data){
+                html+='<option value="'+data[o].id+'">'+data[o].name+'</option>\n';
+            }
+            $('#searchStocktype').html(html);
+            $('#searchStocktype').val(stocktype);
         }
     });
 }

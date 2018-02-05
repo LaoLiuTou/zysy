@@ -12,10 +12,11 @@
 	</delete>
 
 	<select id="selectstockByParam" parameterType="java.util.Map" resultType="Stock">
-		SELECT a.*,b.name as material_name,c.name as workshop_name  
+		SELECT a.*,b.name as material_name,c.name as workshop_name ,d.name as  stocktype_name
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 
+		left join stocktype d on a.stocktype=d.id 
 		
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="id != null"> AND a.ID =#{id} </if>

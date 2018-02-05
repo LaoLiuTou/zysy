@@ -25,6 +25,7 @@
 		<typeAlias alias="Stoneblock" type="com.zysy.model.stoneblock.Stoneblock" /> 
 		<typeAlias alias="User" type="com.zysy.model.user.User" /> 
 		<typeAlias alias="Workshop" type="com.zysy.model.workshop.Workshop" /> 
+		<typeAlias alias="Stocktype" type="com.zysy.model.stocktype.Stocktype" /> 
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/zysy/model/material/Material.xml"/> 
@@ -33,5 +34,6 @@
 		<mapper resource="com/zysy/model/stoneblock/Stoneblock.xml"/> 
 		<mapper resource="com/zysy/model/user/User.xml"/> 
 		<mapper resource="com/zysy/model/workshop/Workshop.xml"/> 
+		<mapper resource="com/zysy/model/stocktype/Stocktype.xml"/> 
 	</mappers>  
 </configuration>

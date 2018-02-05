@@ -51,6 +51,7 @@
 
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
+                        <li><a href="list_stocktype.html">库别管理</a></li>
                         <li><a href="list_workshop.html">车间管理</a></li>
                         <li><a href="list_material.html">产品管理</a></li>
                     </ul>
@@ -171,7 +172,8 @@
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">库别：</label>
                                     <div class="col-md-9 pdnone">
-                                        <input class="form-control" id="searchStock" size="16" type="text" value="" />
+                                        <select class="form-control" id="searchStocktype">
+                                        </select>
                                     </div>
                                 </div>
 
@@ -183,7 +185,7 @@
                                     </div>
                                 </div>
 
-                                <button type="bvutton" class="btn btn-primary mb10" id="searchBtn">搜索</button>
+                                <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
                             </form>
 
                             <!--日期：<input type="text"  id="searchDate" class="dateform" placeholder="" />-->
@@ -261,11 +263,11 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            reportStock($('#searchDate').val(),$('#searchStock').val(),$('#searchWorkshop').val());
+            reportStock($('#searchDate').val(),$('#searchStocktype').val(),$('#searchWorkshop').val());
         });
 
         //列表
-        reportStock($('#searchDate').val(),$('#searchStock').val(),'');
+        reportStock('','','');
 
         //打印
         $('#printBtn').click(function () {
@@ -275,7 +277,7 @@
             var html='<label >日期：</label>\n' +
                     '<label >'+$('#searchDate').val()+'</label>\n' +
                     '<label style="padding-left: 40px;">库别：</label>\n' +
-                    '<label >'+$('#searchStock').val()+'</label>\n' +
+                    '<label >'+$('#searchStocktype option:selected').text()+'</label>\n' +
                     '<label style="padding-left: 40px;">车间：</label>\n' +
                     '<label >'+$('#searchWorkshop option:selected').text()+'</label>\n';
             $pringDom.find('#form').html(html);

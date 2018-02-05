@@ -80,4 +80,9 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 </bean>
 <bean id="iWorkshopService" class="com.zysy.service.workshop.WorkshopServiceImpl"></bean>
+<bean id="iStocktypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<property name="mapperInterface" value="com.zysy.dao.stocktype.IStocktypeMapper "/>
+	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+<bean id="iStocktypeService" class="com.zysy.service.stocktype.StocktypeServiceImpl"></bean>
 </beans>

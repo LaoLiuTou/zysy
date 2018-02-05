@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
     //选取的Workshop
-    var workshopList;
-    var workshopIndex;
-    var currentWorkshop;
+    var stocktypeList;
+    var stocktypeIndex;
+    var currentStocktype;
 });
 
 
@@ -13,11 +13,11 @@ $(document).ready(function(){
 /**
  * 添加用户
  */
-function addWorkshop(){
+function addStocktype(){
     var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     var bodyParam={'name':$('#name').val(),'leader':$('#leader').val(),
         'comment':$('#comment').val(),'state':$('#state').val(),'c_id':userinfo['id']};
-    var httpR = new createHttpR(url+'addWorkshop','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'addStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -34,11 +34,11 @@ function addWorkshop(){
  * 修改用户
  * @param id
  */
-function updateWorkshop(id){
+function updateStocktype(id){
     var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     var bodyParam={'id':id,'name':$('#update_name').val(),'leader':$('#update_leader').val(),
         'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
-    var httpR = new createHttpR(url+'updateWorkshop','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'updateStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -55,9 +55,9 @@ function updateWorkshop(id){
  * 删除用户
  * @param id
  */
-function deleteWorkshop(id){
+function deleteStocktype(id){
     var bodyParam={'id':id};
-    var httpR = new createHttpR(url+'deleteWorkshop','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'deleteStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -70,29 +70,29 @@ function deleteWorkshop(id){
 }
 /**
  * 查询用户
- * @param Workshopname
+ * @param Stocktypename
  * @param currentPage
  * @param pageSize
  */
-function  queryWorkshop (workshopname,currentPage,pageSize) {
+function  queryStocktype (stocktypename,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    if(workshopname==null||workshopname==''){
+    if(stocktypename==null||stocktypename==''){
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
-        var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+workshopname+'%'};
+        var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+stocktypename+'%'};
     }
 
-    var httpR = new createHttpR(url+'listWorkshop','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'listStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         var msg = obj['msg'];
         if(status=='0'){
             var data=msg['data'];
-            workshopList=msg['data'];
+            stocktypeList=msg['data'];
             var html='';
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
@@ -107,11 +107,11 @@ function  queryWorkshop (workshopname,currentPage,pageSize) {
                 else{
                     html+='<td><span class="label label-danger label-mini">禁用</span></td>\n';
                 }
-                html+='<td><a class="updateWorkshop" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteWorkshop" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                html+='<td><a class="updateStocktype" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
+                    '<a class="deleteStocktype" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
-            $('#workshopTbody').html(html);
+            $('#stocktypeTbody').html(html);
             var num=msg['num'];
             if(num>0) {
                 var pageHtml = '';
@@ -201,11 +201,11 @@ function  queryWorkshop (workshopname,currentPage,pageSize) {
  * @param currentPage
  * @param pageSize
  */
-function  selectWorkshop (currentPage,pageSize) {
+function  selectStocktype (currentPage,pageSize) {
 
     var bodyParam={'page':currentPage,'size':pageSize};
 
-    var httpR = new createHttpR(url+'listWorkshop','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'listStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -216,12 +216,10 @@ function  selectWorkshop (currentPage,pageSize) {
             for(var o in data){
                 html+='<option value="'+data[o].id+'">'+data[o].name+'</option>\n';
             }
-            $('#workshop').html(html);
-            $('#update_workshop').html(html);
+            $('#stocktype').html(html);
+            $('#update_stocktype').html(html);
             html='<option value=""></option>'+html;
-            $('#searchWorkshop').html(html);
-
-
+            $('#searchStocktype').html(html);
         }
     });
 }

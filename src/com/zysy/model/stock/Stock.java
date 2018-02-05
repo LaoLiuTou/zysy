@@ -123,6 +123,7 @@ public class Stock {
 	
 	private String material_name;
 	private String workshop_name;
+	private String stocktype_name;
 	public String getMaterial_name() {
 		return material_name;
 	}
@@ -135,8 +136,12 @@ public class Stock {
 	public void setWorkshop_name(String workshop_name) {
 		this.workshop_name = workshop_name;
 	}
-	
-
+	public String getStocktype_name() {
+		return stocktype_name;
+	}
+	public void setStocktype_name(String stocktype_name) {
+		this.stocktype_name = stocktype_name;
+	}
 	private String sum_number;
 	public String getSum_number() {
 		return sum_number;

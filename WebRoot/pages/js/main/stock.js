@@ -92,15 +92,22 @@ function deleteStock(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryStock (stockname,currentPage,pageSize) {
+function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    if(stockname==null||stockname==''){
-        var bodyParam={'page':currentPage,'size':pageSize};
+    var bodyParam={'page':currentPage,'size':pageSize};
+    if(material!=''){
+        bodyParam['material']=material;
+        $('#searchMaterial').val(material)
     }
-    else{
-        var bodyParam={'page':currentPage,'size':pageSize,'name':stockname};
+    if(stocktype!=''){
+        bodyParam['stocktype']=stocktype;
+        $('#searchStocktype').val(stocktype);
+    }
+    if(workshop!=''){
+        bodyParam['workshop']=workshop;
+        $('#searchWorkshop').val(workshop);
     }
 
     var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
@@ -117,7 +124,7 @@ function  queryStock (stockname,currentPage,pageSize) {
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].id+'</td>\n' +
                     '<td>'+data[o].material_name+'</td>\n' +
-                    '<td>'+data[o].stocktype+'</td>\n' +
+                    '<td>'+data[o].stocktype_name+'</td>\n' +
                     '<td>'+data[o].workshop_name+'</td>\n' +
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
@@ -132,6 +139,9 @@ function  queryStock (stockname,currentPage,pageSize) {
                 }
                 else if(data[o].state=='2'){
                     html+='<td><span class="label label-danger label-mini">破损</span></td>\n';
+                }
+                else if(data[o].state=='3'){
+                    html+='<td><span class="label label-primary label-mini">领料</span></td>\n';
                 }
                 html+='<td><a class="updateStock" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteStock" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
@@ -217,8 +227,7 @@ function  queryStock (stockname,currentPage,pageSize) {
                 $('.pagination').html(pageHtml);
             }
 
-            selectMaterial(1,100);
-            selectWorkshop(1,100);
+
         }
     });
 }

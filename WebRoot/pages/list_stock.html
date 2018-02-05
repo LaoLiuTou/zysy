@@ -50,6 +50,7 @@
 
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
+                        <li><a href="list_stocktype.html">库别管理</a></li>
                         <li><a href="list_workshop.html">车间管理</a></li>
                         <li><a href="list_material.html">产品管理</a></li>
                     </ul>
@@ -158,8 +159,24 @@
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group col-md-3 mr10">
-                                    <div class="col-md-12 pdnone">
-                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
+                                    <label class="control-label col-md-3 form-sm-title pdnone">物品：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control" id="searchMaterial">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">库别：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control" id="searchStocktype">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">车间：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control" id="searchWorkshop">
+                                        </select>
                                     </div>
                                 </div>
                                 <button id="searchBtn" type="button" class="btn btn-primary mb10">搜索</button>
@@ -324,7 +341,9 @@
                     </div>
                     <div class="form-group">
                         <label>库别</label>
-                        <input type="text" class="form-control" id="stocktype" placeholder="请输入库别">
+                        <select class="form-control m-bot15" id="stocktype">
+
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>车间</label>
@@ -343,6 +362,7 @@
                             <option value="0">入库</option>
                             <option value="1">出库</option>
                             <option value="2">破损</option>
+                            <option value="3">领料</option>
                         </select>
                     </div>
 
@@ -376,6 +396,7 @@
 <script src="js/main/stock.js"></script>
 <script src="js/main/material.js"></script>
 <script src="js/main/workshop.js"></script>
+<script src="js/main/stocktype.js"></script>
 <script src="js/main/stoneblock.js"></script>
 <script src="js/main/matteboard.js"></script>
 <!--pickers plugins-->
@@ -561,32 +582,37 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            queryStock($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryStock($('#searchText').val(),currentPage,pageSize);
+        queryStock('','','',currentPage,pageSize);
+
+        selectMaterial(1,100);
+        selectWorkshop(1,100);
+        selectStocktype(1,100);
+
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryStock($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),$('#searchWorkshop').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryStock($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryStock($('#searchText').val(),currentPage,pageSize);
+            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryStock($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;

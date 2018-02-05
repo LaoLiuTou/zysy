@@ -7,7 +7,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>用户</title>
+  <title>库别</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -42,9 +42,9 @@
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="list_stocktype.html">库别管理</a></li>
+                        <li class="active"><a href="list_stocktype.html">库别管理</a></li>
                         <li><a href="list_workshop.html">车间管理</a></li>
                         <li><a href="list_material.html">产品管理</a></li>
                     </ul>
@@ -62,7 +62,7 @@
 
                     </ul>
                 </li>
-                <li class="active"><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
 
             </ul>
             <!--sidebar nav end-->
@@ -141,7 +141,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            用户管理
+                            库别管理
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
@@ -151,28 +151,30 @@
                          </span>
                         </header>
                         <div class="panel-body">
+
                             <form class="form-horizontal" role="form">
                                 <div class="form-group col-md-3 mr10">
                                     <div class="col-md-12 pdnone">
-                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的用户名..." />
+                                        <input class="form-control" id="searchText" size="16" type="text" placeholder="请输入您要搜索的库名..." />
                                     </div>
                                 </div>
                                 <button id="searchBtn" type="button" class="btn btn-primary mb10">搜索</button>
                             </form>
+
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>用户名</th>
-                                        <th>昵称</th>
+                                        <th>库名</th>
+                                        <th>负责人</th>
                                         <th>备注</th>
                                         <th>创建时间</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="userTbody">
+                                    <tbody id="stocktypeTbody">
 
                                     </tbody>
                                 </table>
@@ -224,16 +226,12 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="update_username" placeholder="请输入用户名">
+                        <label>库名</label>
+                        <input type="text" class="form-control" id="update_name" placeholder="请输入库名">
                     </div>
-                    <!--<div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="update_password" placeholder="请输入密码">
-                    </div>-->
                     <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="update_nickname" placeholder="请输入密码">
+                        <label>负责人</label>
+                        <input type="text" class="form-control" id="update_leader" placeholder="请输入负责人">
                     </div>
 
                     <div class="form-group">
@@ -289,16 +287,12 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                        <label>库名</label>
+                        <input type="text" class="form-control" id="name" placeholder="请输入库名">
                     </div>
                     <div class="form-group">
-                        <label>密码</label>
-                        <input type="text" class="form-control" id="password" placeholder="请输入密码">
-                    </div>
-                    <div class="form-group">
-                        <label>昵称</label>
-                        <input type="text" class="form-control" id="nickname" placeholder="请输入密码">
+                        <label>负责人</label>
+                        <input type="text" class="form-control" id="leader" placeholder="请输入负责人">
                     </div>
 
                     <div class="form-group">
@@ -342,39 +336,40 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
-<script src="js/main/user.js"></script>
+<script src="js/main/stocktype.js"></script>
 
 <script>
     $(document).ready(function () {
 
+
         //搜索
         $('#searchBtn').click(function () {
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStocktype($('#searchText').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryUsers($('#searchText').val(),currentPage,pageSize);
+        queryStocktype($('#searchText').val(),currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStocktype($('#searchText').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStocktype($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryUsers($('#searchText').val(),currentPage,pageSize);
+            queryStocktype($('#searchText').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryUsers($('#searchText').val(),$('#jumpPageText').val(),pageSize);
+                queryStocktype($('#searchText').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
@@ -383,52 +378,40 @@
 
         //新建
         $('#addBtn').click(function () {
-            if($('#username').val()==''){
-                alert('用户名不能为空！');
+            if($('#name').val()==''){
+                alert('车间名不能为空！');
                 return false;
             }
-            if($('#password').val()==''){
-                alert('用户密码不能为空！');
-                return false;
-            }
-            if($('#nickname').val()==''){
-                alert('用户昵称不能为空！');
-                return false;
-            }
-            addUser();
+
+            addStocktype();
         });
 
         //修改
-        $('.updateUser').click(function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
+        $('.updateStocktype').click(function () {
+            stocktypeIndex=$(this).attr('index');
+            currentStocktype=stocktypeList[stocktypeIndex];
 
-            $('#update_username').val(currentUser.username);
-            /*$('#update_password').val(currentUser.password);*/
-            $('#update_nickname').val(currentUser.nickname);
-            $('#update_comment').val(currentUser.comment);
-            $('#update_state').val(currentUser.state);
+            $('#update_name').val(currentStocktype.name);
+            $('#update_leader').val(currentStocktype.leader);
+            $('#update_comment').val(currentStocktype.comment);
+            $('#update_state').val(currentStocktype.state);
         });
         $('#updateBtn').click(function () {
-            if($('#update_username').val()==''){
-                alert('用户名不能为空！');
+            if($('#update_name').val()==''){
+                alert('车间名不能为空！');
                 return false;
             }
 
-            if($('#update_nickname').val()==''){
-                alert('用户昵称不能为空！');
-                return false;
-            }
-            updateUser(currentUser.id);
+            updateStocktype(currentStocktype.id);
         });
 
         //删除
-        $('.deleteUser').click(function () {
-            userIndex=$(this).attr('index');
-            currentUser=userList[userIndex];
+        $('.deleteStocktype').click(function () {
+            stocktypeIndex=$(this).attr('index');
+            currentStocktype=stocktypeList[stocktypeIndex];
         });
         $('#deleteBtn').click(function () {
-            deleteUser(currentUser.id);
+            deleteStocktype(currentStocktype.id);
         });
     });
 
