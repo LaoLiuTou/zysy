@@ -98,6 +98,7 @@ createHttpR.prototype.HttpRequest = function(callBack){
             },
             error:function(response){
                 alert('请求失败！');
+                return false;
             },
             beforeSend:function(){
                 //alert('before');

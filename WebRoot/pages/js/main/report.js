@@ -89,6 +89,38 @@ function  reportStockInOut (stocktype,workshop,material) {
     });
 }
 /**
+ * 车间进出配比
+ * @param c_dt
+ * @param stocktype
+ * @param workshop
+ */
+function  reportWorkshopInOut (c_dt) {
+    var bodyParam={};
+    if(c_dt!=''){
+        bodyParam['c_dtFrom']=c_dt+' 00:00:00';
+        bodyParam['c_dtTo']=c_dt+' 23:59:59';
+    }
+    var httpR = new createHttpR(url+'reportWorkshopInOut','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var data = obj['msg'];
+        if(status=='0'){
+            var html='';
+            for(var o in data){
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+data[o].workshop_name+'</td>\n' +
+                    '<td>'+data[o].unit+'</td>\n' +
+                    '<td>'+Math.abs(data[o].sum_in)+'</td>\n' +
+                    '<td>'+Math.abs(data[o].sum_out)+'</td>\n' +
+                    '<td>'+1+'</td>\n</tr>' ;
+            }
+            $('#reportTbody').html(html);
+
+        }
+    });
+}
+/**
  * 大锯产量统计
  * @param m_dt
  * @param currentPage
@@ -263,7 +295,7 @@ function  selectMaterial (currentPage,pageSize,material) {
 }
 
 /**
- * 物品select
+ * 库别select
  * @param currentPage
  * @param pageSize
  */

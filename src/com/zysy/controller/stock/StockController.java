@@ -133,6 +133,7 @@ public class StockController {
 				paramMap.put("height",stock.getHeight());
 				paramMap.put("number",stock.getNumber());
 				paramMap.put("comment",stock.getComment());
+				paramMap.put("qualify",stock.getQualify());
 				paramMap.put("damage",stock.getDamage());
 				paramMap.put("state",stock.getState());
 				String c_dtFrom=request.getParameter("c_dtFrom");
@@ -186,6 +187,7 @@ public class StockController {
 			paramMap.put("height",stock.getHeight());
 			paramMap.put("number",stock.getNumber());
 			paramMap.put("comment",stock.getComment());
+			paramMap.put("qualify",stock.getQualify());
 			paramMap.put("damage",stock.getDamage());
 			paramMap.put("state",stock.getState());
 			String c_dtFrom=request.getParameter("c_dtFrom");
@@ -233,6 +235,7 @@ public class StockController {
 			paramMap.put("height",stock.getHeight());
 			paramMap.put("number",stock.getNumber());
 			paramMap.put("comment",stock.getComment());
+			paramMap.put("qualify",stock.getQualify());
 			paramMap.put("damage",stock.getDamage());
 			paramMap.put("state",stock.getState());
 			String c_dtFrom=request.getParameter("c_dtFrom");
@@ -251,6 +254,150 @@ public class StockController {
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectStockInOut(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+			
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/reportWorkshopInOut")
+	@ResponseBody
+	public Map reportWorkshopInOut(HttpServletRequest request, HttpServletResponse response,Stock stock)
+			throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			
+			Map paramMap=new HashMap();
+			paramMap.put("id",stock.getId());
+			paramMap.put("material",stock.getMaterial());
+			paramMap.put("stocktype",stock.getStocktype());
+			paramMap.put("workshop",stock.getWorkshop());
+			paramMap.put("unit",stock.getUnit());
+			paramMap.put("msize",stock.getMsize());
+			paramMap.put("height",stock.getHeight());
+			paramMap.put("number",stock.getNumber());
+			paramMap.put("comment",stock.getComment());
+			paramMap.put("qualify",stock.getQualify());
+			paramMap.put("damage",stock.getDamage());
+			paramMap.put("state",stock.getState());
+			String c_dtFrom=request.getParameter("c_dtFrom");
+			String c_dtTo=request.getParameter("c_dtTo");
+			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+				paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+			if(c_dtTo!=null&&!c_dtTo.equals(""))
+				paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+			String u_dtFrom=request.getParameter("u_dtFrom");
+			String u_dtTo=request.getParameter("u_dtTo");
+			if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+			if(u_dtTo!=null&&!u_dtTo.equals(""))
+				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+			paramMap.put("c_id",stock.getC_id());
+			String stateIn=request.getParameter("statein");
+			paramMap.put("statein",stateIn);
+			List<Stock> list=iStockService.selectWorkshopInOut(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+			
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/reportYield")
+	@ResponseBody
+	public Map reportYield(HttpServletRequest request, HttpServletResponse response,Stock stock)
+			throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			
+			Map paramMap=new HashMap();
+			paramMap.put("id",stock.getId());
+			paramMap.put("material",stock.getMaterial());
+			paramMap.put("stocktype",stock.getStocktype());
+			paramMap.put("workshop",stock.getWorkshop());
+			paramMap.put("unit",stock.getUnit());
+			paramMap.put("msize",stock.getMsize());
+			paramMap.put("height",stock.getHeight());
+			paramMap.put("number",stock.getNumber());
+			paramMap.put("comment",stock.getComment());
+			paramMap.put("qualify",stock.getQualify());
+			paramMap.put("damage",stock.getDamage());
+			paramMap.put("state",stock.getState());
+			String c_dtFrom=request.getParameter("c_dtFrom");
+			String c_dtTo=request.getParameter("c_dtTo");
+			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+				paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+			if(c_dtTo!=null&&!c_dtTo.equals(""))
+				paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+			String u_dtFrom=request.getParameter("u_dtFrom");
+			String u_dtTo=request.getParameter("u_dtTo");
+			if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+			if(u_dtTo!=null&&!u_dtTo.equals(""))
+				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+			paramMap.put("c_id",stock.getC_id());
+			String stateIn=request.getParameter("statein");
+			paramMap.put("statein",stateIn);
+			List<Stock> list=iStockService.selectYield(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+			
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/reportDamage")
+	@ResponseBody
+	public Map reportDamage(HttpServletRequest request, HttpServletResponse response,Stock stock)
+			throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			
+			Map paramMap=new HashMap();
+			paramMap.put("id",stock.getId());
+			paramMap.put("material",stock.getMaterial());
+			paramMap.put("stocktype",stock.getStocktype());
+			paramMap.put("workshop",stock.getWorkshop());
+			paramMap.put("unit",stock.getUnit());
+			paramMap.put("msize",stock.getMsize());
+			paramMap.put("height",stock.getHeight());
+			paramMap.put("number",stock.getNumber());
+			paramMap.put("comment",stock.getComment());
+			paramMap.put("qualify",stock.getQualify());
+			paramMap.put("damage",stock.getDamage());
+			paramMap.put("state",stock.getState());
+			String c_dtFrom=request.getParameter("c_dtFrom");
+			String c_dtTo=request.getParameter("c_dtTo");
+			if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+				paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+			if(c_dtTo!=null&&!c_dtTo.equals(""))
+				paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+			String u_dtFrom=request.getParameter("u_dtFrom");
+			String u_dtTo=request.getParameter("u_dtTo");
+			if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+			if(u_dtTo!=null&&!u_dtTo.equals(""))
+				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+			paramMap.put("c_id",stock.getC_id());
+			String stateIn=request.getParameter("statein");
+			paramMap.put("statein",stateIn);
+			List<Stock> list=iStockService.selectDamage(paramMap);
 			resultMap.put("status", "0");
 			resultMap.put("msg", list);
 			

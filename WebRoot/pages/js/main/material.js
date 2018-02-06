@@ -216,7 +216,6 @@ function  selectMaterial (currentPage,pageSize) {
             }
             $('#material').html(html);
             $('#update_material').html(html);
-            html='<option value=""></option>'+html;
             $('#searchMaterial').html(html);
         }
     });

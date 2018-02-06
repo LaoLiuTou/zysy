@@ -588,11 +588,14 @@
         //列表
         var currentPage=1;
         var pageSize=10;
+        //$.when(queryStock('','','',currentPage,pageSize)).then(selectMaterial(1,100)).then(selectWorkshop(1,100)).then(selectStocktype(1,100));
         queryStock('','','',currentPage,pageSize);
+        setTimeout(function() {
+            selectMaterial(1,100);
+            selectWorkshop(1,100);
+            selectStocktype(1,100);
+        }, 500);
 
-        selectMaterial(1,100);
-        selectWorkshop(1,100);
-        selectStocktype(1,100);
 
 
         $('.pagination').on('click','.pageBtn',function(){

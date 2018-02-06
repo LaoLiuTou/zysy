@@ -94,20 +94,22 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
             var html='';
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+data[o].id+'</td>\n' +
-                    '<td>'+data[o].name+'</td>\n' +
-                    '<td>'+data[o].leader+'</td>\n' +
-                    '<td>'+data[o].comment+'</td>\n' +
-                    '<td>'+data[o].c_dt+'</td>\n' ;
-                if(data[o].state=='0'){
-                    html+='<td><span class="label label-success label-mini">可用</span></td>\n';
-                }
-                else{
-                    html+='<td><span class="label label-danger label-mini">禁用</span></td>\n';
-                }
-                html+='<td><a class="updateStoneblock" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteStoneblock" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
-                html+='</tr>';
+                    '<td>'+data[o].s_dt+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
+                    '<td>'+data[o].source+'</td>\n' +
+                    '<td>'+data[o].place+'</td>\n' +
+                    '<td>'+data[o].number+'</td>\n'  +
+                    '<td>'+data[o].length+'</td>\n'  +
+                    '<td>'+data[o].width+'</td>\n'  +
+                    '<td>'+data[o].height+'</td>\n'  +
+                    '<td>'+data[o].cube+'</td>\n'  +
+                    '<td>'+data[o].price+'</td>\n'  +
+                    '<td>'+data[o].sum+'</td>\n'  +
+                    '<td>'+data[o].platenumber+'</td>\n'  +
+                    '<td>'+'待开发'+'</td>\n'  +
+                    '<td>'+'待开发'+'</td>\n'  +
+                    '</tr>';
+
             }
             $('#stoneblockTbody').html(html);
             var num=msg['num'];

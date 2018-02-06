@@ -26,6 +26,24 @@ public interface IStockService {
   */ 
  @SuppressWarnings("rawtypes")
  public List<Stock> selectStockInOut(Map paramMap); 
+ /**
+  * 车间进出
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectWorkshopInOut(Map paramMap); 
+ /**
+  * 日报
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectYield(Map paramMap); 
+ /**
+  * 破损
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectDamage(Map paramMap); 
 	/**
 	* 通过查询参数获取总条数
 	 * @return

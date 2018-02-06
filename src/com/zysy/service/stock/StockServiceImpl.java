@@ -41,6 +41,30 @@ public class StockServiceImpl  implements IStockService {
  public List<Stock> selectStockInOut(Map paramMap){ 
 	 return iStockMapper.selectStockInOut(paramMap);
  }
+ /**
+  *车间进出
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectWorkshopInOut(Map paramMap){ 
+	 return iStockMapper.selectWorkshopInOut(paramMap);
+ }
+ /**
+  *日报
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectYield(Map paramMap){ 
+	 return iStockMapper.selectYield(paramMap);
+ }
+ /**
+  *破损
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectDamage(Map paramMap){ 
+	 return iStockMapper.selectDamage(paramMap);
+ }
 
 	/**
 	* 通过查询参数获取总条数

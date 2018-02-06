@@ -94,6 +94,14 @@ public class Stock {
 	public void setState(Long state) {
 		this.state = state;
 	}
+	private String  qualify;
+	
+	public String getQualify() {
+		return qualify;
+	}
+	public void setQualify(String qualify) {
+		this.qualify = qualify;
+	}
 	/**  */
 	private  Date c_dt;
 	public Date getC_dt() {

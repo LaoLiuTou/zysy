@@ -192,7 +192,7 @@
                                     </tbody>
                                 </table>
                                 <!--分页-->
-                                <div class="text-center">
+                                <div class="text-center" id="pagination">
                                     <ul class="pagination">
 
                                     </ul>
@@ -288,7 +288,7 @@
             var $pringDom=$('.wrapper').clone();
             $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
-            $pringDom.find('.pagination').remove();
+            $pringDom.find('#pagination').remove();
             var html='<label >日期：</label>\n' +
                 '<label >'+$('#searchDate').val()+'</label>\n' ;
             $pringDom.find('#form').html(html);
