@@ -16,11 +16,7 @@
   <link href="js/iCheck/skins/square/red.css" rel="stylesheet">
   <link href="js/iCheck/skins/square/blue.css" rel="stylesheet">
 
-  <!--dashboard calendar-->
-  <link href="css/clndr.css" rel="stylesheet">
 
-  <!--Morris Chart CSS -->
-  <link rel="stylesheet" href="js/morris-chart/morris.css">
 
   <!--common-->
   <link href="css/style.css" rel="stylesheet">
@@ -144,60 +140,16 @@
         <!--body wrapper start-->
         <div class="wrapper">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!--statistics start-->
-                    <div class="row state-overview">
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <div class="panel purple">
-                                <div class="symbol">
-                                    <i class="fa fa-gavel"></i>
-                                </div>
-                                <div class="state-value">
-                                    <div class="value">230</div>
-                                    <div class="title">New Order</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <div class="panel red">
-                                <div class="symbol">
-                                    <i class="fa fa-tags"></i>
-                                </div>
-                                <div class="state-value">
-                                    <div class="value">3490</div>
-                                    <div class="title">Copy Sold</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row state-overview" id="stockDiv">
+
                     </div>
-                    <div class="row state-overview">
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <div class="panel blue">
-                                <div class="symbol">
-                                    <i class="fa fa-money"></i>
-                                </div>
-                                <div class="state-value">
-                                    <div class="value">22014</div>
-                                    <div class="title"> Total Revenue</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xs-12 col-sm-6">
-                            <div class="panel green">
-                                <div class="symbol">
-                                    <i class="fa fa-eye"></i>
-                                </div>
-                                <div class="state-value">
-                                    <div class="value">390</div>
-                                    <div class="title"> Unique Visitors</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!--statistics end-->
                 </div>
-                <div class="col-md-6">
-                    <!--more statistics box start-->
+                <!--<div class="col-md-6">
+                    &lt;!&ndash;more statistics box start&ndash;&gt;
                     <div class="panel deep-purple-box">
                         <div class="panel-body">
                             <div class="row">
@@ -216,8 +168,8 @@
                             </div>
                         </div>
                     </div>
-                    <!--more statistics box end-->
-                </div>
+                    &lt;!&ndash;more statistics box end&ndash;&gt;
+                </div>-->
             </div>
 
 
@@ -244,41 +196,70 @@
 <script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
 
-<!--easy pie chart-->
-<script src="js/easypiechart/jquery.easypiechart.js"></script>
-<script src="js/easypiechart/easypiechart-init.js"></script>
-
-<!--Sparkline Chart-->
-<script src="js/sparkline/jquery.sparkline.js"></script>
-<script src="js/sparkline/sparkline-init.js"></script>
-
-<!--icheck -->
-<script src="js/iCheck/jquery.icheck.js"></script>
-<script src="js/icheck-init.js"></script>
-
-<!-- jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
-<script src="js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="js/flot-chart/jquery.flot.resize.js"></script>
-
-
-<!--Morris Chart-->
-<script src="js/morris-chart/morris.js"></script>
-<script src="js/morris-chart/raphael-min.js"></script>
-
-<!--Calendar-->
-<script src="js/calendar/clndr.js"></script>
-<script src="js/calendar/evnt.calendar.init.js"></script>
-<script src="js/calendar/moment-2.2.1.js"></script>
-<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>-->
-
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
 
-<!--Dashboard Charts-->
-<script src="js/dashboard-chart-init.js"></script>
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+        reportStock('','','');
+
+    });
+    /**
+     * 统计库存
+     * @param c_dt
+     * @param stocktype
+     * @param workshop
+     */
+    function  reportStock (c_dt,stocktype,workshop) {
+        var bodyParam={};
+        if(c_dt!=''){
+            bodyParam['c_dtFrom']=c_dt+' 00:00:00';
+            bodyParam['c_dtTo']=c_dt+' 23:59:59';
+        }
+        if(stocktype!=''){
+            bodyParam['stocktype']=stocktype;
+        }
+        if(workshop!=''){
+            bodyParam['workshop']=workshop;
+        }
+        var colors = ['purple','red','blue','green'];
+
+
+
+        var httpR = new createHttpR(url+'reportStock','post','text',bodyParam,'callBack');
+        httpR.HttpRequest(function(response){
+            var obj = JSON.parse(response);
+            var status = obj['status'];
+            var data = obj['msg'];
+            if(status=='0'){
+                var html='';
+                for(var o in data){
+                    var color = colors[Math.floor(Math.random()*colors.length)];
+                    html+='<div class="col-md-3 col-xs-12 col-sm-6">\n' +
+                        '<div class="panel '+color+'">\n' +
+                        '    <div class="symbol">\n' +
+                        '        <i class="fa fa-tags"></i>\n' +
+                        '    </div>\n' +
+                        '    <div class="state-value">\n' +
+                        '        <div class="value">'+data[o].sum_number+'</div>\n' +
+                        '        <div class="title">'+data[o].material_name+'</div>\n' +
+                        '        <div class="title">'+data[o].msize+'*'+data[o].height+'</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '</div>';
+
+                }
+                $('#stockDiv').html(html);
+                //selectWorkshop(1,100,workshop);
+                //selectStocktype(1,100,stocktype);
+            }
+        });
+    }
+</script>
 </body>
 </html>

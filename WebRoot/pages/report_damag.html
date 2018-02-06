@@ -253,11 +253,11 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            reportStock($('#searchDate').val(),$('#searchStocktype').val(),$('#searchWorkshop').val());
+            reportDamage($('#searchDate').val(),$('#searchWorkshop').val());
         });
 
         //列表
-        reportStock('','','');
+        reportDamage('','');
 
         //打印
         $('#printBtn').click(function () {

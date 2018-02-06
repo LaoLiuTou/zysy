@@ -246,6 +246,75 @@ function  reportMatteboard (m_dt,currentPage,pageSize) {
         }
     });
 }
+
+
+/**
+ * 日报
+ * @param c_dt
+ * @param workshop
+ */
+function  reportYield (c_dt,workshop) {
+    var bodyParam={};
+    if(c_dt!=''){
+        bodyParam['c_dtFrom']=c_dt+' 00:00:00';
+        bodyParam['c_dtTo']=c_dt+' 23:59:59';
+    }
+    if(workshop!=''){
+        bodyParam['workshop']=workshop;
+    }
+    var httpR = new createHttpR(url+'reportYield','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var data = obj['msg'];
+        if(status=='0'){
+            var html='';
+            for(var o in data){
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].unit+'</td>\n' +
+                    '<td>'+data[o].sum_in+'*'+data[o].msize+'</td>\n' +
+                    '<td>'+data[o].sum_out+'*'+data[o].msize+'</td>\n</tr>' ;
+            }
+
+            $('#reportTbody').html(html);
+            selectWorkshop(1,100,workshop);
+        }
+    });
+}
+/**
+ * 破损
+ * @param c_dt
+ * @param workshop
+ */
+function  reportDamage (c_dt,workshop) {
+    var bodyParam={};
+    if(c_dt!=''){
+        bodyParam['c_dtFrom']=c_dt+' 00:00:00';
+        bodyParam['c_dtTo']=c_dt+' 23:59:59';
+    }
+    if(workshop!=''){
+        bodyParam['workshop']=workshop;
+    }
+    var httpR = new createHttpR(url+'reportDamage','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var data = obj['msg'];
+        if(status=='0'){
+            var html='';
+            for(var o in data){
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].unit+'</td>\n' +
+                    '<td>'+data[o].sum_out+'</td></tr>' ;
+            }
+
+            $('#reportTbody').html(html);
+            selectWorkshop(1,100,workshop);
+        }
+    });
+}
 /**
  * 车间select
 
