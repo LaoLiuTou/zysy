@@ -387,7 +387,7 @@
         });
 
         //修改
-        $('.updateStocktype').click(function () {
+        $('#stocktypeTbody').on('click','.updateStocktype',function () {
             stocktypeIndex=$(this).attr('index');
             currentStocktype=stocktypeList[stocktypeIndex];
 
@@ -406,7 +406,7 @@
         });
 
         //删除
-        $('.deleteStocktype').click(function () {
+        $('#stocktypeTbody').on('click','.deleteStocktype',function () {
             stocktypeIndex=$(this).attr('index');
             currentStocktype=stocktypeList[stocktypeIndex];
         });

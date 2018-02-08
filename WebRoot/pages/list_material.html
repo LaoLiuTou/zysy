@@ -378,7 +378,7 @@
         });
 
         //修改
-        $('.updateMaterial').click(function () {
+        $('#materialTbody').on('click','.updateMaterial',function () {
             materialIndex=$(this).attr('index');
             currentMaterial=materialList[materialIndex];
 
@@ -400,7 +400,7 @@
         });
 
         //删除
-        $('.deleteMaterial').click(function () {
+        $('#materialTbody').on('click','.deleteMaterial',function () {
             materialIndex=$(this).attr('index');
             currentMaterial=materialList[materialIndex];
         });

@@ -138,11 +138,23 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
                     html+='<td><span class="label label-warning label-mini">出库</span></td>\n';
                 }
                 else if(data[o].state=='2'){
-                    html+='<td><span class="label label-danger label-mini">破损</span></td>\n';
-                }
-                else if(data[o].state=='3'){
                     html+='<td><span class="label label-primary label-mini">领料</span></td>\n';
                 }
+
+                if(data[o].qualify=='是'){
+                    html+='<td><span class="label label-success label-mini">是</span></td>\n';
+                }
+                else{
+                    html+='<td><span class="label label-danger label-mini">否</span></td>\n';
+                }
+
+                if(data[o].damage=='是'){
+                    html+='<td><span class="label label-danger label-mini">是</span></td>\n';
+                }
+                else{
+                    html+='<td><span class="label label-success label-mini">否</span></td>\n';
+                }
+
                 html+='<td><a class="updateStock" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteStock" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
                 html+='</tr>';

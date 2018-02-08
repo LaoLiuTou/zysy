@@ -399,7 +399,7 @@
         });
 
         //修改
-        $('.updateUser').click(function () {
+        $('#userTbody').on('click','.updateUser',function () {
             userIndex=$(this).attr('index');
             currentUser=userList[userIndex];
 
@@ -423,7 +423,7 @@
         });
 
         //删除
-        $('.deleteUser').click(function () {
+        $('#userTbody').on('click','.deleteUser',function () {
             userIndex=$(this).attr('index');
             currentUser=userList[userIndex];
         });

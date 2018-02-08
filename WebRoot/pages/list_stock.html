@@ -195,6 +195,8 @@
                                         <th>数量</th>
                                         <th>备注</th>
                                         <th>状态</th>
+                                        <th>合格</th>
+                                        <th>破损</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -258,7 +260,9 @@
                     </div>
                     <div class="form-group">
                         <label>库别</label>
-                        <input type="text" class="form-control" id="update_stocktype" placeholder="请输入库别">
+                        <select class="form-control m-bot15" id="update_stocktype">
+
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>车间</label>
@@ -288,10 +292,25 @@
                     </div>
                     <div class="form-group">
                         <label>状态</label>
-                        <select class="form-control m-bot15" id="update_state">
+                        <select class="form-control" id="update_state">
                             <option value="0">入库</option>
                             <option value="1">出库</option>
-                            <option value="2">破损</option>
+                            <option value="2">领料</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>是否合格</label>
+                        <select class="form-control m-bot15" id="update_qualify">
+                            <option value="是">是</option>
+                            <option value="否">否</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>是否破损</label>
+                        <select class="form-control m-bot15" id="update_damage">
+                            <option value="否">否</option>
+                            <option value="是">是</option>
                         </select>
                     </div>
 
@@ -333,22 +352,47 @@
             <div class="modal-body">
 
                 <form role="form" id="addForm">
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>产品名称</label>
                         <select class="form-control m-bot15" id="material">
 
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>库别</label>
                         <select class="form-control m-bot15" id="stocktype">
 
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>车间</label>
                         <select class="form-control m-bot15" id="workshop">
 
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>状态</label>
+                        <select class="form-control m-bot15" id="state">
+                            <option value="0">入库</option>
+                            <option value="1">出库</option>
+                            <option value="2">领料</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>是否合格</label>
+                        <select class="form-control m-bot15" id="qualify">
+                            <option value="合格">合格</option>
+                            <option value="不合格">不合格</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>是否破损</label>
+                        <select class="form-control m-bot15" id="damage">
+                            <option value="否">否</option>
+                            <option value="是">是</option>
                         </select>
                     </div>
 
@@ -356,15 +400,7 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label>状态</label>
-                        <select class="form-control m-bot15" id="state">
-                            <option value="0">入库</option>
-                            <option value="1">出库</option>
-                            <option value="2">破损</option>
-                            <option value="3">领料</option>
-                        </select>
-                    </div>
+
 
                 </form>
             </div>
@@ -419,101 +455,101 @@
         $('#material').change(function () {
             var html='';
             if($(this).val()=='1'){
-                html='<div class="form-group">\n' +
+                html='<div class="form-group col-md-6">\n' +
                     '    <label>单据编号</label>\n' +
                     '    <input type="text" class="form-control" id="code" placeholder="请输入单据编号">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>来源</label>\n' +
                     '    <input type="text" class="form-control" id="source" placeholder="请输入来源">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>单据日期</label>\n' +
                     '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="s_dt" placeholder="请输入单据日期">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>入库地点</label>\n' +
                     '    <input type="text" class="form-control" id="place" placeholder="请输入入库地点">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>厂内料号</label>\n' +
                     '    <input type="text" class="form-control" id="number" placeholder="请输入厂内料号">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>长</label>\n' +
                     '    <input type="text" class="form-control" id="length" placeholder="请输入长度">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>宽</label>\n' +
                     '    <input type="text" class="form-control" id="width" placeholder="请输入长度">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>高</label>\n' +
                     '    <input type="text" class="form-control" id="height" placeholder="请输入长度">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>立方数</label>\n' +
                     '    <input type="text" class="form-control" id="cube" placeholder="请输入立方数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>单价</label>\n' +
                     '    <input type="text" class="form-control" id="price" placeholder="请输入单价">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>金额</label>\n' +
                     '    <input type="text" class="form-control" id="sum" placeholder="请输入金额">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>车牌号</label>\n' +
                     '    <input type="text" class="form-control" id="platenumber" placeholder="请输入车牌号">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>账差</label>\n' +
                     '    <input type="text" class="form-control" id="accountdiff" placeholder="请输入账差">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>审核人</label>\n' +
                     '    <input type="text" class="form-control" id="auditor" placeholder="请输入审核人">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>录入人</label>\n' +
                     '    <input type="text" class="form-control" id="editor" placeholder="请输入录入人">\n' +
                     '</div> \n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>备注</label>\n' +
                     '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
                     '</div>\n' ;
             }
             else if($(this).val()=='2'){
-                html='<div class="form-group">\n' +
+                html='<div class="form-group col-md-6">\n' +
                     '    <label>荒料编号</label>\n' +
                     '    <input type="text" class="form-control" id="sb_code" placeholder="请输入荒料编号">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>荒料规格</label>\n' +
                     '    <input type="text" class="form-control" id="sb_spec" placeholder="请输入荒料规格">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>立方数</label>\n' +
                     '    <input type="text" class="form-control" id="sb_cube" placeholder="请输入立方数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>单据编号</label>\n' +
                     '    <input type="text" class="form-control" id="code" placeholder="请输入单据编号">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>验收人</label>\n' +
                     '    <input type="text" class="form-control" id="auditor" placeholder="请输入验收人">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>单据日期</label>\n' +
                     '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="m_dt" placeholder="请输入单据日期">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>工组</label>\n' +
                     '    <input type="text" class="form-control" id="workgroup" placeholder="请输入工组">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>料层</label>\n' +
                     '    <select class="form-control m-bot15" id="layer">\n' +
                     '        <option value="1">上</option>\n' +
@@ -521,53 +557,53 @@
                     '        <option value="3">下</option>\n' +
                     '    </select>\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>板材尺寸</label>\n' +
                     '    <input type="text" class="form-control" id="size" placeholder="请输入板材尺寸">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>厚度</label>\n' +
                     '    <input type="text" class="form-control" id="height" placeholder="请输入板材厚度">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>总块数</label>\n' +
                     '    <input type="text" class="form-control" id="blocknumber" placeholder="请输入总块数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>平方数</label>\n' +
                     '    <input type="text" class="form-control" id="square" placeholder="请输入平方数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>不合格块数</label>\n' +
                     '    <input type="text" class="form-control" id="belowgradeblock" placeholder="请输入不合格块数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>不合格平方数</label>\n' +
                     '    <input type="text" class="form-control" id="belowgradesquare" placeholder="请输入不合格平方数">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>备注</label>\n' +
                     '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
                     '</div>\n' ;
             }
             else{
-                html='<div class="form-group">\n' +
+                html='<div class="form-group col-md-6">\n' +
                     '    <label>单位</label>\n' +
                     '    <input type="text" class="form-control" id="unit" placeholder="请输入单位">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>板材尺寸</label>\n' +
                     '    <input type="text" class="form-control" id="msize" placeholder="请输入板材尺寸">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>厚度</label>\n' +
                     '    <input type="text" class="form-control" id="height" placeholder="请输入板材厚度">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>数量</label>\n' +
                     '    <input type="text" class="form-control" id="number" placeholder="请输入数量">\n' +
                     '</div>\n' +
-                    '<div class="form-group">\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>备注</label>\n' +
                     '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
                     '</div>';
@@ -712,7 +748,7 @@
         });
 
         //修改
-        $('.updateStock').click(function () {
+        $('#stockTbody').on('click','.updateStock',function () {
             stockIndex=$(this).attr('index');
             currentStock=stockList[stockIndex];
 
@@ -725,6 +761,8 @@
             $('#update_number').val(currentStock.number);
             $('#update_comment').val(currentStock.comment);
             $('#update_state').val(currentStock.state);
+            $('#update_qualify').val(currentStock.qualify);
+            $('#update_damage').val(currentStock.damage);
 
         });
         $('#updateBtn').click(function () {
@@ -737,7 +775,7 @@
         });
 
         //删除
-        $('.deleteStock').click(function () {
+        $('#stockTbody').on('click','.deleteStock',function () {
             stockIndex=$(this).attr('index');
             currentStock=stockList[stockIndex];
         });

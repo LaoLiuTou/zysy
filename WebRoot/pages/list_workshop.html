@@ -387,7 +387,7 @@
         });
 
         //修改
-        $('.updateWorkshop').click(function () {
+        $('#workshopTbody').on('click','.updateWorkshop',function () {
             workshopIndex=$(this).attr('index');
             currentWorkshop=workshopList[workshopIndex];
 
@@ -406,7 +406,7 @@
         });
 
         //删除
-        $('.deleteWorkshop').click(function () {
+        $('#workshopTbody').on('click','.deleteWorkshop',function () {
             workshopIndex=$(this).attr('index');
             currentWorkshop=workshopList[workshopIndex];
         });

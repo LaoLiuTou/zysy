@@ -270,11 +270,12 @@ function  reportYield (c_dt,workshop) {
         if(status=='0'){
             var html='';
             for(var o in data){
+
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+data[o].sum_in+'*'+data[o].msize+'</td>\n' +
-                    '<td>'+data[o].sum_out+'*'+data[o].msize+'</td>\n</tr>' ;
+                    '<td>'+(data[o].sum_in*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+(data[o].sum_out*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n</tr>' ;
             }
 
             $('#reportTbody').html(html);
