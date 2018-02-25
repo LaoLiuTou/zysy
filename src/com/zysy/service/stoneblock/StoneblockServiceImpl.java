@@ -55,8 +55,11 @@ public class StoneblockServiceImpl  implements IStoneblockService {
  */ 
  @Transactional
 	public  int addStoneblock(Stoneblock stoneblock,Stock stock){
+	 	int result = 0;
+	 	result=iStoneblockMapper.addstoneblock(stoneblock);
+	 	stock.setPid(stoneblock.getId());
 	 	iStockMapper.addstock(stock);
-		return iStoneblockMapper.addstoneblock(stoneblock);
+		return result;
 	}
 
 	/**

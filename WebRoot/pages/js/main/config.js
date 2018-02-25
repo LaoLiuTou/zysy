@@ -5,8 +5,10 @@ var sk = 'TTILY';
 
 $(document).ready(function(){
     //logo
-    $('.logo').html(' <a href=""><img src="images/logo.png" alt=""></a>');
-    $('.logo-icon').html(' <a href=""><img src="images/logo.png" alt=""></a>');
+    $('.logo').html(' <a href="index.html" style="padding-top: 10px;">吉林卓远石业</a>');
+    $('footer').html("版权所有 © 2018  吉林卓远石业");
+    //$('.logo').html(' <a href=""><img src="images/logo.png" alt=""></a>');
+    //$('.logo-icon').html(' <a href=""><img src="images/logo.png" alt=""></a>');
     $('#logoutBtn').click(function () {
         sessionStorage.clear();
         window.location.href='login.html';

@@ -105,10 +105,20 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
                     '<td>'+data[o].cube+'</td>\n'  +
                     '<td>'+data[o].price+'</td>\n'  +
                     '<td>'+data[o].sum+'</td>\n'  +
-                    '<td>'+data[o].platenumber+'</td>\n'  +
-                    '<td>'+'待开发'+'</td>\n'  +
-                    '<td>'+'待开发'+'</td>\n'  +
-                    '</tr>';
+                    '<td>'+data[o].platenumber+'</td>\n';
+                if(data[o].rz_dt==''){
+                    html+='<td>'+'否'+'</td>\n';
+                }
+                else{
+                    html+='<td>'+data[o].rz_dt+'</td>\n';
+                }
+                if(data[o].yf_dt==''){
+                    html+='<td>'+'否'+'</td>\n';
+                }
+                else{
+                    html+='<td>'+data[o].yf_dt+'</td>\n';
+                }
+                html+= '</tr>';
 
             }
             $('#stoneblockTbody').html(html);
@@ -196,3 +206,112 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
     });
 }
 
+/**
+ * 根据编号查询荒料
+ * @param code
+ * @param currentPage
+ * @param pageSize
+ */
+function  queryStoneblockByCode (code) {
+
+    var bodyParam={'page':1,'size':1,'code':code};
+
+    var httpR = new createHttpR(url+'listStoneblock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+            var data=msg['data'];
+            stoneblockList=msg['data'];
+            for(var o in data){
+                $('#sb_spec').val(data[o].length+'*'+data[o].width+'*'+data[o].height);
+                $('#sb_cube').val(data[o].cube);
+            }
+        }
+    });
+}
+
+/**
+ * 修改库存查询荒料
+ * @param id
+ */
+function  queryStoneblockById (id) {
+
+    var bodyParam={'id':id};
+
+    var httpR = new createHttpR(url+'selectStoneblock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+            var  html='<div class="form-group col-md-6">\n' +
+                '    <label>单据编号</label>\n' +
+                '    <input type="text" class="form-control" id="update_code" name="code" value="'+msg['code']+'" placeholder="请输入单据编号">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>来源</label>\n' +
+                '    <input type="text" class="form-control" id="update_source" name="source" value="'+msg['source']+'" placeholder="请输入来源">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>单据日期</label>\n' +
+                '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="update_s_dt" name="s_dt" value="'+msg['s_dt']+'" placeholder="请输入单据日期">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>入库地点</label>\n' +
+                '    <input type="text" class="form-control" id="update_place" name="place" value="'+msg['place']+'" placeholder="请输入入库地点">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>厂内料号</label>\n' +
+                '    <input type="text" class="form-control" id="update_number" name="number" value="'+msg['number']+'" placeholder="请输入厂内料号">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>长</label>\n' +
+                '    <input type="text" class="form-control" id="update_length" name="length" value="'+msg['length']+'" placeholder="请输入长度">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>宽</label>\n' +
+                '    <input type="text" class="form-control" id="update_width" name="width" value="'+msg['width']+'" placeholder="请输入长度">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>高</label>\n' +
+                '    <input type="text" class="form-control" id="update_height" name="height" value="'+msg['height']+'" placeholder="请输入长度">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>立方数</label>\n' +
+                '    <input type="text" class="form-control" id="update_cube" name="cube" value="'+msg['cube']+'" placeholder="请输入立方数">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>单价</label>\n' +
+                '    <input type="text" class="form-control" id="update_price" name="price" value="'+msg['price']+'" placeholder="请输入单价">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>总块数</label>\n' +
+                '    <input type="text" class="form-control" id="update_blocknumber" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>金额</label>\n' +
+                '    <input type="text" class="form-control" id="update_sum" name="sum" value="'+msg['sum']+'" placeholder="请输入金额">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>车牌号</label>\n' +
+                '    <input type="text" class="form-control" id="update_platenumber" name="platenumber" value="'+msg['platenumber']+'" placeholder="请输入车牌号">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>账差</label>\n' +
+                '    <input type="text" class="form-control" id="update_accountdiff" name="accountdiff" value="'+msg['accountdiff']+'" placeholder="请输入账差">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>审核人</label>\n' +
+                '    <input type="text" class="form-control" id="update_auditor" name="auditor" value="'+msg['auditor']+'" placeholder="请输入审核人">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>录入人</label>\n' +
+                '    <input type="text" class="form-control" id="update_editor" name="editor" value="'+msg['editor']+'" placeholder="请输入录入人">\n' +
+                '</div> \n' ;
+            $('#updateForms').html(html);
+        }
+    });
+}

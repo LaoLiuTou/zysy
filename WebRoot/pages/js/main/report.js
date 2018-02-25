@@ -113,7 +113,7 @@ function  reportWorkshopInOut (c_dt) {
                     '<td>'+data[o].unit+'</td>\n' +
                     '<td>'+Math.abs(data[o].sum_in)+'</td>\n' +
                     '<td>'+Math.abs(data[o].sum_out)+'</td>\n' +
-                    '<td>'+1+'</td>\n</tr>' ;
+                    '<td>'+(Math.abs(data[o].sum_in)-Math.abs(data[o].sum_out))+'</td>\n</tr>' ;
             }
             $('#reportTbody').html(html);
 
@@ -274,8 +274,8 @@ function  reportYield (c_dt,workshop) {
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+(data[o].sum_in*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
-                    '<td>'+(data[o].sum_out*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n</tr>' ;
+                    '<td>'+(data[o].sum_in*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/10000).toFixed(2)+'</td>\n' +
+                    '<td>'+(data[o].sum_out*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/10000).toFixed(2)+'</td>\n</tr>' ;
             }
 
             $('#reportTbody').html(html);
@@ -323,7 +323,7 @@ function  reportDamage (c_dt,workshop) {
  * @param pageSize
  */
 function  selectWorkshop (currentPage,pageSize,workshop) {
-    var bodyParam={'page':currentPage,'size':pageSize};
+    var bodyParam={'page':currentPage,'size':pageSize,'state':'0'};
     var httpR = new createHttpR(url+'listWorkshop','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -346,7 +346,7 @@ function  selectWorkshop (currentPage,pageSize,workshop) {
  * @param pageSize
  */
 function  selectMaterial (currentPage,pageSize,material) {
-    var bodyParam={'page':currentPage,'size':pageSize};
+    var bodyParam={'page':currentPage,'size':pageSize,'state':'0'};
     var httpR = new createHttpR(url+'listMaterial','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -370,7 +370,7 @@ function  selectMaterial (currentPage,pageSize,material) {
  * @param pageSize
  */
 function  selectStocktype (currentPage,pageSize,stocktype) {
-    var bodyParam={'page':currentPage,'size':pageSize};
+    var bodyParam={'page':currentPage,'size':pageSize,'state':'0'};
     var httpR = new createHttpR(url+'listStocktype','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);

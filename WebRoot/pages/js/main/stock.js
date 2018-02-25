@@ -52,11 +52,11 @@ function addStock(){
  * 修改库存
  * @param id
  */
-function updateStock(id){
-    var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+function updateStock(param){
+    /*var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
     var bodyParam={'id':id,'name':$('#update_name').val(),'leader':$('#update_leader').val(),
-        'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
-    var httpR = new createHttpR(url+'updateStock','post','text',bodyParam,'callBack');
+        'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};*/
+    var httpR = new createHttpR(url+'updateStock','post','text',param,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -139,6 +139,9 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
                 }
                 else if(data[o].state=='2'){
                     html+='<td><span class="label label-primary label-mini">领料</span></td>\n';
+                }
+                else{
+                    html+='<td><span class="label label-primary label-mini"></span></td>\n';
                 }
 
                 if(data[o].qualify=='是'){

@@ -251,69 +251,70 @@
             </div>
             <div class="modal-body">
 
-                <form role="form">
-                    <div class="form-group">
+                <form role="form" id="updateForm">
+                    <div class="form-group col-md-6">
                         <label>产品名称</label>
-                        <select class="form-control m-bot15" id="update_material">
+                        <select class="form-control m-bot15" name="material" id="update_material">
 
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>库别</label>
-                        <select class="form-control m-bot15" id="update_stocktype">
+                        <select class="form-control m-bot15" id="update_stocktype" name="stocktype">
 
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>车间</label>
-                        <select class="form-control m-bot15" id="update_workshop">
+                        <select class="form-control m-bot15" id="update_workshop" name="workshop">
 
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>单位</label>
-                        <input type="text" class="form-control" id="update_unit" placeholder="请输入单位">
+                        <input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>板材尺寸</label>
-                        <input type="text" class="form-control" id="update_msize" placeholder="请输入板材尺寸">
+                        <input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>厚度</label>
-                        <input type="text" class="form-control" id="update_height" placeholder="请输入板材厚度">
+                        <input type="text" class="form-control m-bot15" id="update_height" placeholder="请输入板材厚度" name="height">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>数量</label>
-                        <input type="text" class="form-control" id="update_number" placeholder="请输入数量">
+                        <input type="text" class="form-control m-bot15" id="update_number" placeholder="请输入数量" name="number">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>备注</label>
-                        <input type="text" class="form-control" id="update_comment" placeholder="请输入描述">
+                        <input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>状态</label>
-                        <select class="form-control" id="update_state">
+                        <select class="form-control m-bot15" id="update_state" name="state">
                             <option value="0">入库</option>
                             <option value="1">出库</option>
                             <option value="2">领料</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>是否合格</label>
-                        <select class="form-control m-bot15" id="update_qualify">
+                        <select class="form-control m-bot15" id="update_qualify" name="qualify">
                             <option value="是">是</option>
                             <option value="否">否</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>是否破损</label>
-                        <select class="form-control m-bot15" id="update_damage">
+                        <select class="form-control m-bot15" id="update_damage" name="damage">
                             <option value="否">否</option>
                             <option value="是">是</option>
                         </select>
                     </div>
-
+                    <div class="clearfix"></div>
+                    <div id="updateForms">
+                    </div>
                 </form>
             </div>
             <div class="clearfix"></div>
@@ -383,8 +384,8 @@
                     <div class="form-group col-md-6">
                         <label>是否合格</label>
                         <select class="form-control m-bot15" id="qualify">
-                            <option value="合格">合格</option>
-                            <option value="不合格">不合格</option>
+                            <option value="是">是</option>
+                            <option value="否">否</option>
                         </select>
                     </div>
 
@@ -496,6 +497,10 @@
                     '    <input type="text" class="form-control" id="price" placeholder="请输入单价">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
+                    '    <label>总块数</label>\n' +
+                    '    <input type="text" class="form-control" id="blocknumber" placeholder="请输入总块数">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>金额</label>\n' +
                     '    <input type="text" class="form-control" id="sum" placeholder="请输入金额">\n' +
                     '</div>\n' +
@@ -559,7 +564,7 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>板材尺寸</label>\n' +
-                    '    <input type="text" class="form-control" id="size" placeholder="请输入板材尺寸">\n' +
+                    '    <input type="text" class="form-control" id="msize" placeholder="请输入板材尺寸">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>厚度</label>\n' +
@@ -658,6 +663,32 @@
             }
         });
 
+
+        //根据高度宽度计算体积
+        $('#forms').on('blur','#length',function(){
+            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
+        });
+        $('#forms').on('blur','#width',function(){
+            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
+        });
+        $('#forms').on('blur','#height',function(){
+            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
+        });
+        //金额
+        $('#forms').on('blur','#price',function(){
+            $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
+        });
+        $('#forms').on('blur','#blocknumber',function(){
+            $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
+        });
+
+        //根据编号查询荒料
+        $('#forms').on('blur','#sb_code',function(){
+             alert($('#sb_code').val());
+            queryStoneblockByCode($('#sb_code').val());
+        });
+
+
         //新建
         $('#addBtn').click(function () {
             var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
@@ -700,6 +731,8 @@
                     alert('原料高度不能为空！');
                     return false;
                 }
+
+                //$('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
                 addStoneblock(param);
 
             }
@@ -764,14 +797,37 @@
             $('#update_qualify').val(currentStock.qualify);
             $('#update_damage').val(currentStock.damage);
 
+            $('#updateForms').html('');
+
+            if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){
+                queryStoneblockById(currentStock.pid);
+            }
+            else if(currentStock.material=='2'&&currentStock.pid!='0'&&currentStock.pid!=''){
+                queryMatteboardById(currentStock.pid);
+            }
+            else{
+
+            }
+
         });
         $('#updateBtn').click(function () {
             if($('#update_name').val()==''){
                 alert('车间名不能为空！');
                 return false;
             }
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+            var param={};
+            param['c_id']=userinfo['id'];
+            param['id']=currentStock.id;
+            $('#updateForm').find('input').each(function () {
+                 param[$(this).attr('name')]=$(this).val();
 
-            updateStock(currentStock.id);
+            });
+            $('#updateForm').find('select').each(function () {
+                param[$(this).attr('name')]=$(this).val();
+
+            });
+            updateStock(param);
         });
 
         //删除

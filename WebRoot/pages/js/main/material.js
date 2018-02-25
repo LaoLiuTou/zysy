@@ -201,8 +201,7 @@ function  queryMaterial (materialname,currentPage,pageSize) {
  */
 function  selectMaterial (currentPage,pageSize) {
 
-    var bodyParam={'page':currentPage,'size':pageSize};
-
+    var bodyParam={'page':currentPage,'size':pageSize,'state':'0'};
     var httpR = new createHttpR(url+'listMaterial','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);

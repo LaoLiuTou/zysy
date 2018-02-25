@@ -194,3 +194,85 @@ function  queryMatteboard (matteboardname,currentPage,pageSize) {
     });
 }
 
+/**
+ * 修改库存查询压光板
+ * @param id
+ */
+function  queryMatteboardById (id) {
+
+    var bodyParam={'id':id};
+
+    var httpR = new createHttpR(url+'selectMatteboard','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+             var html='<div class="form-group col-md-6">\n' +
+                 '    <label>荒料编号</label>\n' +
+                 '    <input type="text" class="form-control" id="update_sb_code" name="sb_code" value="'+msg['sb_code']+'" placeholder="请输入荒料编号">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>荒料规格</label>\n' +
+                 '    <input type="text" class="form-control" id="update_sb_spec" name="sb_spec" value="'+msg['sb_spec']+'" placeholder="请输入荒料规格">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>立方数</label>\n' +
+                 '    <input type="text" class="form-control" id="update_sb_cube" name="sb_cube" value="'+msg['sb_cube']+'" placeholder="请输入立方数">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>单据编号</label>\n' +
+                 '    <input type="text" class="form-control" id="update_code" name="code" value="'+msg['code']+'" placeholder="请输入单据编号">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>验收人</label>\n' +
+                 '    <input type="text" class="form-control" id="update_auditor" name="auditor" value="'+msg['auditor']+'" placeholder="请输入验收人">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>单据日期</label>\n' +
+                 '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="update_m_dt" name="m_dt" value="'+msg['m_dt']+'" placeholder="请输入单据日期">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>工组</label>\n' +
+                 '    <input type="text" class="form-control" id="update_workgroup" name="workgroup" value="'+msg['workgroup']+'" placeholder="请输入工组">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>料层</label>\n' +
+                 '    <select class="form-control m-bot15" id="update_layer" name="layer" >\n' +
+                 '        <option value="1">上</option>\n' +
+                 '        <option value="2">中</option>\n' +
+                 '        <option value="3">下</option>\n' +
+                 '    </select>\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>板材尺寸</label>\n' +
+                 '    <input type="text" class="form-control" id="update_msize" name="msize" value="'+msg['msize']+'" placeholder="请输入板材尺寸">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>厚度</label>\n' +
+                 '    <input type="text" class="form-control" id="update_height" name="height" value="'+msg['height']+'" placeholder="请输入板材厚度">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>总块数</label>\n' +
+                 '    <input type="text" class="form-control" id="update_blocknumber" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>平方数</label>\n' +
+                 '    <input type="text" class="form-control" id="update_square" name="square" value="'+msg['square']+'" placeholder="请输入平方数">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>不合格块数</label>\n' +
+                 '    <input type="text" class="form-control" id="update_belowgradeblock" value="'+msg['belowgradeblock']+'" name="belowgradeblock" placeholder="请输入不合格块数">\n' +
+                 '</div>\n' +
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>不合格平方数</label>\n' +
+                 '    <input type="text" class="form-control" id="update_belowgradesquare" value="'+msg['belowgradesquare']+'" name="belowgradesquare" placeholder="请输入不合格平方数">\n' +
+                 '</div>\n'   ;
+
+
+            $('#updateForms').html(html);
+            $('#update_layer').val(msg['layer']);
+        }
+    });
+}

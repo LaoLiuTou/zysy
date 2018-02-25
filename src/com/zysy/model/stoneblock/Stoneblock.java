@@ -182,6 +182,21 @@ public class Stoneblock {
 		this.c_id = c_id;
 	}
 
-
+	private Date rz_dt;
+	
+	public Date getRz_dt() {
+		return rz_dt;
+	}
+	public void setRz_dt(Date rz_dt) {
+		this.rz_dt = rz_dt;
+	}
+	
+	private Date yf_dt;
+	public Date getYf_dt() {
+		return yf_dt;
+	}
+	public void setYf_dt(Date yf_dt) {
+		this.yf_dt = yf_dt;
+	}
 
 }

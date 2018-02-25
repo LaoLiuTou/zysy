@@ -126,9 +126,13 @@ public class Stock {
 	public void setC_id(Long c_id) {
 		this.c_id = c_id;
 	}
-
-
-	
+	private  Long pid; 
+	public Long getPid() {
+		return pid;
+	}
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
 	private String material_name;
 	private String workshop_name;
 	private String stocktype_name;
@@ -171,6 +175,7 @@ public class Stock {
 	public void setSum_out(String sum_out) {
 		this.sum_out = sum_out;
 	}
+	
 	
 	
 }

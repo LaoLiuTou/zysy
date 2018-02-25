@@ -203,7 +203,7 @@ function  queryWorkshop (workshopname,currentPage,pageSize) {
  */
 function  selectWorkshop (currentPage,pageSize) {
 
-    var bodyParam={'page':currentPage,'size':pageSize};
+    var bodyParam={'page':currentPage,'size':pageSize,'state':'0'};
 
     var httpR = new createHttpR(url+'listWorkshop','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){

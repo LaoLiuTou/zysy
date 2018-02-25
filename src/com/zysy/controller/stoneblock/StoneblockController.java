@@ -33,6 +33,7 @@ public class StoneblockController {
 		try {
 			 stock.setMsize(stoneblock.getLength()+"*"+stoneblock.getWidth());
 			 stock.setUnit("立方米");
+			 stock.setNumber(stoneblock.getBlocknumber()+"");
 			iStoneblockService.addStoneblock(stoneblock,stock);
 			resultMap.put("status", "0");
 			resultMap.put("msg", stoneblock.getId());
