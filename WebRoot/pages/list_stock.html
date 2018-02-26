@@ -459,15 +459,15 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>长</label>\n' +
-                    '    <input type="text" class="form-control" id="length" placeholder="请输入长度">\n' +
+                    '    <input type="text" class="form-control" id="length" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>宽</label>\n' +
-                    '    <input type="text" class="form-control" id="width" placeholder="请输入长度">\n' +
+                    '    <input type="text" class="form-control" id="width" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>高</label>\n' +
-                    '    <input type="text" class="form-control" id="height" placeholder="请输入长度">\n' +
+                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>立方数</label>\n' +
@@ -479,7 +479,7 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>总块数</label>\n' +
-                    '    <input type="text" class="form-control" id="blocknumber" placeholder="请输入总块数">\n' +
+                    '    <input type="text" class="form-control" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入总块数">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>金额</label>\n' +
@@ -557,11 +557,11 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>厚度</label>\n' +
-                    '    <input type="text" class="form-control" id="height" placeholder="请输入板材厚度">\n' +
+                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>总块数</label>\n' +
-                    '    <input type="text" class="form-control" id="blocknumber" placeholder="请输入总块数">\n' +
+                    '    <input type="text" class="form-control" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入总块数">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>平方数</label>\n' +
@@ -569,7 +569,7 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>不合格块数</label>\n' +
-                    '    <input type="text" class="form-control" id="belowgradeblock" placeholder="请输入不合格块数">\n' +
+                    '    <input type="text" class="form-control" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入不合格块数">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>不合格平方数</label>\n' +
@@ -591,11 +591,11 @@
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>厚度</label>\n' +
-                    '    <input type="text" class="form-control" id="height" placeholder="请输入板材厚度">\n' +
+                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>数量</label>\n' +
-                    '    <input type="text" class="form-control" id="number" placeholder="请输入数量">\n' +
+                    '    <input type="text" class="form-control" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
                     '    <label>备注</label>\n' +
@@ -652,7 +652,7 @@
             }
         });
 
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //根据高度宽度计算体积
         $('#forms').on('blur','#length',function(){
             $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
@@ -673,6 +673,7 @@
         $('#updateForm').on('blur','#update_height',function(){
             $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //金额
         $('#forms').on('blur','#price',function(){
             $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
@@ -687,6 +688,7 @@
         $('#updateForm').on('blur','#update_blocknumber',function(){
             $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //根据编号查询荒料
         $('#forms').on('blur','#sb_code',function(){
             queryStoneblockByCode($('#sb_code').val());
@@ -695,6 +697,66 @@
         $('#updateForm').on('blur','#update_sb_code',function(){
             queryStoneblockByCode($('#update_sb_code').val());
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //计算合格数
+        $('#forms').on('blur','#msize',function(){
+            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
+                var specs=$('#sb_spec').val().split('*');
+                var msizes=$('#msize').val().split('*');
+                $('#blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val()));
+                $('#square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())*(msizes[0]*msizes[1])/10000);
+                $('#belowgradeblock').val('');
+                $('#belowgradesquare').val('');
+            }
+        });
+        $('#forms').on('blur','#height',function(){
+            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
+                var specs=$('#sb_spec').val().split('*');
+                var msizes=$('#msize').val().split('*');
+                $('#blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val()));
+                $('#square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())*(msizes[0]*msizes[1])/10000);
+            }
+        });
+        $('#forms').on('blur','#blocknumber',function(){
+            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
+                var specs=$('#sb_spec').val().split('*');
+                var msizes=$('#msize').val().split('*');
+                $('#belowgradeblock').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())-$('#blocknumber').val());
+                $('#belowgradesquare').val(((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())-$('#blocknumber').val())*(msizes[0]*msizes[1])/10000);
+                $('#square').val($('#blocknumber').val()*(msizes[0]*msizes[1])/10000);
+            }
+        });
+        ///////修改
+        $('#updateForm').on('blur','#update_msize',function(){
+            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
+                var specs=$('#update_sb_spec').val().split('*');
+                var msizes=$('#update_msize').val().split('*');
+                $('#update_blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val()));
+                $('#update_square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())*(msizes[0]*msizes[1])/10000);
+                $('#update_belowgradeblock').val('');
+                $('#update_belowgradesquare').val('');
+            }
+        });
+        $('#updateForm').on('blur','#update_height',function(){
+            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
+                var specs=$('#update_sb_spec').val().split('*');
+                var msizes=$('#update_msize').val().split('*');
+                $('#update_blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val()));
+                $('#update_square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())*(msizes[0]*msizes[1])/10000);
+            }
+        });
+        $('#updateForm').on('blur','#update_blocknumber',function(){
+            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
+                var specs=$('#update_sb_spec').val().split('*');
+                var msizes=$('#update_msize').val().split('*');
+                $('#update_belowgradeblock').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())-$('#update_blocknumber').val());
+                $('#update_belowgradesquare').val(((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())-$('#update_blocknumber').val())*(msizes[0]*msizes[1])/10000);
+                $('#update_square').val($('#update_blocknumber').val()*(msizes[0]*msizes[1])/10000);
+            }
+        });
+
+
+
 
         //新建
         $('#addBtn').click(function () {
@@ -815,11 +877,11 @@
                     '                    </div>\n' +
                     '                    <div class="form-group col-md-6">\n' +
                     '                    <label>厚度</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_height" placeholder="请输入板材厚度" name="height">\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度" name="height">\n' +
                     '                    </div>\n' +
                     '                    <div class="form-group col-md-6">\n' +
                     '                    <label>数量</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_number" placeholder="请输入数量" name="number">\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量" name="number">\n' +
                     '                    </div>\n' +
                     '                    </div>\n' +
                     '                    <div class="form-group col-md-6">\n' +

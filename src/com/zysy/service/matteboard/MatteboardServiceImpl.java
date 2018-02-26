@@ -77,11 +77,15 @@ public class MatteboardServiceImpl  implements IMatteboardService {
 	    stock.setPid(matteboard.getId());
 		if(matteboard.getBelowgradeblock()>0){
 			Stock temp=stock;
-			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
-			temp.setState(Long.parseLong("0"));
+			temp.setNumber(matteboard.getBlocknumber()+"");
+			//temp.setState(Long.parseLong("0"));
+			temp.setQualify("是");
+			temp.setDamage("否");
 			iStockMapper.addstock(temp);
 			temp.setNumber((matteboard.getBelowgradeblock())+"");
-			temp.setState(Long.parseLong("2"));
+			//temp.setState(Long.parseLong("2"));
+			temp.setQualify("否");
+			temp.setDamage("是");
 			iStockMapper.addstock(temp);
 		}
 		else{

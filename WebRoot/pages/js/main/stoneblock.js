@@ -268,15 +268,15 @@ function  queryStoneblockById (id) {
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>长</label>\n' +
-                '    <input type="text" class="form-control" id="update_length" name="length" value="'+msg['length']+'" placeholder="请输入长度">\n' +
+                '    <input type="text" class="form-control" id="update_length" name="length" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['length']+'" placeholder="请输入长度">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>宽</label>\n' +
-                '    <input type="text" class="form-control" id="update_width" name="width" value="'+msg['width']+'" placeholder="请输入长度">\n' +
+                '    <input type="text" class="form-control" id="update_width" name="width" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['width']+'" placeholder="请输入长度">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>高</label>\n' +
-                '    <input type="text" class="form-control" id="update_height" name="height" value="'+msg['height']+'" placeholder="请输入长度">\n' +
+                '    <input type="text" class="form-control" id="update_height" name="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['height']+'" placeholder="请输入长度">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>立方数</label>\n' +
@@ -288,7 +288,7 @@ function  queryStoneblockById (id) {
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>总块数</label>\n' +
-                '    <input type="text" class="form-control" id="update_blocknumber" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
+                '    <input type="text" class="form-control" id="update_blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>金额</label>\n' +

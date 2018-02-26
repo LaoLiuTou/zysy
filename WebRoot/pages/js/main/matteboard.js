@@ -249,11 +249,11 @@ function  queryMatteboardById (id) {
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>厚度</label>\n' +
-                 '    <input type="text" class="form-control" id="update_height" name="height" value="'+msg['height']+'" placeholder="请输入板材厚度">\n' +
+                 '    <input type="text" class="form-control" id="update_height" name="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['height']+'" placeholder="请输入板材厚度">\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>总块数</label>\n' +
-                 '    <input type="text" class="form-control" id="update_blocknumber" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
+                 '    <input type="text" class="form-control" id="update_blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" name="blocknumber" value="'+msg['blocknumber']+'" placeholder="请输入总块数">\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>平方数</label>\n' +
@@ -261,7 +261,7 @@ function  queryMatteboardById (id) {
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>不合格块数</label>\n' +
-                 '    <input type="text" class="form-control" id="update_belowgradeblock" value="'+msg['belowgradeblock']+'" name="belowgradeblock" placeholder="请输入不合格块数">\n' +
+                 '    <input type="text" class="form-control" id="update_belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['belowgradeblock']+'" name="belowgradeblock" placeholder="请输入不合格块数">\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>不合格平方数</label>\n' +
