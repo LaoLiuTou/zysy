@@ -32,11 +32,9 @@ function addMatteboard(bodyParam){
  * 修改哑光板
  * @param id
  */
-function updateMatteboard(id){
-    var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-    var bodyParam={'id':id,'name':$('#update_name').val(),'leader':$('#update_leader').val(),
-        'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
-    var httpR = new createHttpR(url+'updateMatteboard','post','text',bodyParam,'callBack');
+function updateMatteboard(param){
+
+    var httpR = new createHttpR(url+'updateMatteboard','post','text',param,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -273,6 +271,9 @@ function  queryMatteboardById (id) {
 
             $('#updateForms').html(html);
             $('#update_layer').val(msg['layer']);
+            $('.default-date-picker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         }
     });
 }

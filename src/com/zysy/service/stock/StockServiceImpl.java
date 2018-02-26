@@ -4,9 +4,11 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.zysy.dao.stock.IStockMapper;
+import com.zysy.dao.stoneblock.IStoneblockMapper;
 import com.zysy.model.stock.Stock;
 public class StockServiceImpl  implements IStockService {
-
+	@Autowired
+	private IStoneblockMapper iStoneblockMapper;
 	@Autowired
 	private IStockMapper iStockMapper;
 	/**
@@ -102,7 +104,18 @@ public class StockServiceImpl  implements IStockService {
  */ 
  @Transactional
 	public  int deleteStock(String id){
-		return iStockMapper.deletestock(id);
+	 	Stock stock=iStockMapper.selectstockById(id);
+		int result= iStockMapper.deletestock(id);
+		if(stock.getMaterial().equals("1")){
+			iStoneblockMapper.deletestoneblock(stock.getPid()+"");
+		}
+		else if(stock.getMaterial().equals("2")){
+			
+		}
+		else{
+			
+		}
+		return result;
 	}
 
 }

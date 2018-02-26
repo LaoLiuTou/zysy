@@ -32,11 +32,8 @@ function addStoneblock(bodyParam){
  * 修改荒料
  * @param id
  */
-function updateStoneblock(id){
-    var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-    var bodyParam={'id':id,'name':$('#update_name').val(),'leader':$('#update_leader').val(),
-        'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
-    var httpR = new createHttpR(url+'updateStoneblock','post','text',bodyParam,'callBack');
+function updateStoneblock(param){
+    var httpR = new createHttpR(url+'updateStoneblock','post','text',param,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -107,13 +104,13 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
                     '<td>'+data[o].sum+'</td>\n'  +
                     '<td>'+data[o].platenumber+'</td>\n';
                 if(data[o].rz_dt==''){
-                    html+='<td>'+'否'+'</td>\n';
+                    html+='<td>'+'未入账'+'</td>\n';
                 }
                 else{
                     html+='<td>'+data[o].rz_dt+'</td>\n';
                 }
                 if(data[o].yf_dt==''){
-                    html+='<td>'+'否'+'</td>\n';
+                    html+='<td>'+'未结算'+'</td>\n';
                 }
                 else{
                     html+='<td>'+data[o].yf_dt+'</td>\n';
@@ -227,6 +224,8 @@ function  queryStoneblockByCode (code) {
             for(var o in data){
                 $('#sb_spec').val(data[o].length+'*'+data[o].width+'*'+data[o].height);
                 $('#sb_cube').val(data[o].cube);
+                $('#update_sb_spec').val(data[o].length+'*'+data[o].width+'*'+data[o].height);
+                $('#update_sb_cube').val(data[o].cube);
             }
         }
     });
@@ -296,6 +295,14 @@ function  queryStoneblockById (id) {
                 '    <input type="text" class="form-control" id="update_sum" name="sum" value="'+msg['sum']+'" placeholder="请输入金额">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
+                '    <label>入账时间</label>\n' +
+                '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="update_rz_dt" name="rz_dt" value="'+msg['rz_dt']+'" placeholder="如未入账则为空">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>运费结算时间</label>\n' +
+                '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="update_yf_dt" name="yf_dt" value="'+msg['yf_dt']+'" placeholder="如未结算运费则为空">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
                 '    <label>车牌号</label>\n' +
                 '    <input type="text" class="form-control" id="update_platenumber" name="platenumber" value="'+msg['platenumber']+'" placeholder="请输入车牌号">\n' +
                 '</div>\n' +
@@ -312,6 +319,9 @@ function  queryStoneblockById (id) {
                 '    <input type="text" class="form-control" id="update_editor" name="editor" value="'+msg['editor']+'" placeholder="请输入录入人">\n' +
                 '</div> \n' ;
             $('#updateForms').html(html);
+            $('.default-date-picker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         }
     });
 }

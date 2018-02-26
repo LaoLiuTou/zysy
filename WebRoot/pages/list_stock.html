@@ -270,26 +270,7 @@
 
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label>单位</label>
-                        <input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>板材尺寸</label>
-                        <input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>厚度</label>
-                        <input type="text" class="form-control m-bot15" id="update_height" placeholder="请输入板材厚度" name="height">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>数量</label>
-                        <input type="text" class="form-control m-bot15" id="update_number" placeholder="请输入数量" name="number">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>备注</label>
-                        <input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">
-                    </div>
+
                     <div class="form-group col-md-6">
                         <label>状态</label>
                         <select class="form-control m-bot15" id="update_state" name="state">
@@ -509,6 +490,14 @@
                     '    <input type="text" class="form-control" id="platenumber" placeholder="请输入车牌号">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
+                    '    <label>入账时间</label>\n' +
+                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="rz_dt" placeholder="如未入账则为空">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '    <label>运费结算时间</label>\n' +
+                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="yf_dt"  placeholder="如未结算运费则为空">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
                     '    <label>账差</label>\n' +
                     '    <input type="text" class="form-control" id="accountdiff" placeholder="请输入账差">\n' +
                     '</div>\n' +
@@ -674,6 +663,16 @@
         $('#forms').on('blur','#height',function(){
             $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
         });
+        ///////修改
+        $('#updateForm').on('blur','#update_length',function(){
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+        });
+        $('#updateForm').on('blur','#update_width',function(){
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+        });
+        $('#updateForm').on('blur','#update_height',function(){
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+        });
         //金额
         $('#forms').on('blur','#price',function(){
             $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
@@ -681,13 +680,21 @@
         $('#forms').on('blur','#blocknumber',function(){
             $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
         });
-
+        ///////修改
+        $('#updateForm').on('blur','#update_price',function(){
+            $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
+        });
+        $('#updateForm').on('blur','#update_blocknumber',function(){
+            $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
+        });
         //根据编号查询荒料
         $('#forms').on('blur','#sb_code',function(){
-             alert($('#sb_code').val());
             queryStoneblockByCode($('#sb_code').val());
         });
-
+        ///////修改
+        $('#updateForm').on('blur','#update_sb_code',function(){
+            queryStoneblockByCode($('#update_sb_code').val());
+        });
 
         //新建
         $('#addBtn').click(function () {
@@ -785,6 +792,45 @@
             stockIndex=$(this).attr('index');
             currentStock=stockList[stockIndex];
 
+
+
+            $('#updateForms').html('');
+
+            if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){
+
+                queryStoneblockById(currentStock.pid);
+            }
+            else if(currentStock.material=='2'&&currentStock.pid!='0'&&currentStock.pid!=''){
+
+                queryMatteboardById(currentStock.pid);
+            }
+            else{
+                html='<div class="form-group col-md-6">\n' +
+                    '                    <label>单位</label>\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">\n' +
+                    '                    </div>\n' +
+                    '                    <div class="form-group col-md-6">\n' +
+                    '                    <label>板材尺寸</label>\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">\n' +
+                    '                    </div>\n' +
+                    '                    <div class="form-group col-md-6">\n' +
+                    '                    <label>厚度</label>\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_height" placeholder="请输入板材厚度" name="height">\n' +
+                    '                    </div>\n' +
+                    '                    <div class="form-group col-md-6">\n' +
+                    '                    <label>数量</label>\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_number" placeholder="请输入数量" name="number">\n' +
+                    '                    </div>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="form-group col-md-6">\n' +
+                    '                    <label>备注</label>\n' +
+                    '                    <input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">\n' +
+                    '                    </div>';
+
+
+
+                $('#updateForms').html(html);
+            }
             $('#update_material').val(currentStock.material);
             $('#update_stocktype').val(currentStock.stocktype);
             $('#update_workshop').val(currentStock.workshop);
@@ -796,29 +842,17 @@
             $('#update_state').val(currentStock.state);
             $('#update_qualify').val(currentStock.qualify);
             $('#update_damage').val(currentStock.damage);
-
-            $('#updateForms').html('');
-
-            if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){
-                queryStoneblockById(currentStock.pid);
-            }
-            else if(currentStock.material=='2'&&currentStock.pid!='0'&&currentStock.pid!=''){
-                queryMatteboardById(currentStock.pid);
-            }
-            else{
-
-            }
-
         });
         $('#updateBtn').click(function () {
             if($('#update_name').val()==''){
                 alert('车间名不能为空！');
                 return false;
             }
-            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+            //var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
             var param={};
-            param['c_id']=userinfo['id'];
+            //param['c_id']=userinfo['id'];
             param['id']=currentStock.id;
+            param['pid']=currentStock.pid;
             $('#updateForm').find('input').each(function () {
                  param[$(this).attr('name')]=$(this).val();
 
@@ -827,7 +861,16 @@
                 param[$(this).attr('name')]=$(this).val();
 
             });
-            updateStock(param);
+            if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){
+                updateStoneblock(param);
+            }
+            else if(currentStock.material=='2'&&currentStock.pid!='0'&&currentStock.pid!=''){
+                updateMatteboard(param);
+            }
+            else{
+                updateStock(param);
+            }
+
         });
 
         //删除

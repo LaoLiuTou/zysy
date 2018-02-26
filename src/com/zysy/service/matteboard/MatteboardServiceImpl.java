@@ -44,8 +44,24 @@ public class MatteboardServiceImpl  implements IMatteboardService {
  * @return 
  */ 
  @Transactional
-	public  int updateMatteboard(Matteboard matteboard){
-		return iMatteboardMapper.updatematteboard(matteboard);
+	public  int updateMatteboard(Matteboard matteboard,Stock stock){
+	 	int result=0;
+	 	matteboard.setId(stock.getPid());
+	 	result=iMatteboardMapper.updatematteboard(matteboard);
+	 	iStockMapper.updatestock(stock);
+		/*if(matteboard.getBelowgradeblock()>0){
+			Stock temp=stock;
+			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
+			temp.setState(Long.parseLong("0"));
+			iStockMapper.updatestock(temp);
+			temp.setNumber((matteboard.getBelowgradeblock())+"");
+			temp.setState(Long.parseLong("2"));
+			iStockMapper.updatestock(temp);
+		}
+		else{
+			iStockMapper.updatestock(stock);
+		}*/
+		return result;
 	}
 
 	/**
@@ -55,6 +71,10 @@ public class MatteboardServiceImpl  implements IMatteboardService {
  @Transactional
 	public  int addMatteboard(Matteboard matteboard,Stock stock){
 	 
+	    int result=0;
+	    
+	    result=iMatteboardMapper.addmatteboard(matteboard);
+	    stock.setPid(matteboard.getId());
 		if(matteboard.getBelowgradeblock()>0){
 			Stock temp=stock;
 			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
@@ -64,8 +84,11 @@ public class MatteboardServiceImpl  implements IMatteboardService {
 			temp.setState(Long.parseLong("2"));
 			iStockMapper.addstock(temp);
 		}
+		else{
+			iStockMapper.addstock(stock);
+		}
 	 
-		return iMatteboardMapper.addmatteboard(matteboard);
+		return result;
 	}
 
 	/**

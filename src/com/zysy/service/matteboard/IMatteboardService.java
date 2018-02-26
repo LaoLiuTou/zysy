@@ -25,7 +25,7 @@ public interface IMatteboardService {
  * 更新 
  * @return 
  */ 
-	public  int updateMatteboard(Matteboard matteboard);
+	public  int updateMatteboard(Matteboard matteboard,Stock stock);
 	/**
  * 添加 
  * @return

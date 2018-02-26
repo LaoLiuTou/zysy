@@ -96,7 +96,7 @@ public class MatteboardController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/updateMatteboard")
 	@ResponseBody
-	public Map update(Matteboard matteboard){
+	public Map update(Matteboard matteboard,Stock stock){
 		Map resultMap=new HashMap();
 		try {
 			if(matteboard.getId()==null){
@@ -104,7 +104,10 @@ public class MatteboardController {
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultUpdate=iMatteboardService.updateMatteboard(matteboard);
+				stock.setNumber(matteboard.getBlocknumber()+"");
+				stock.setMsize(matteboard.getMsize());
+				stock.setUnit("平方米");
+				int resultUpdate=iMatteboardService.updateMatteboard(matteboard,stock);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
 				logger.info("更新成功，主键："+matteboard.getId());

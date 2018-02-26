@@ -96,7 +96,7 @@ public class StoneblockController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/updateStoneblock")
 	@ResponseBody
-	public Map update(Stoneblock stoneblock){
+	public Map update(Stoneblock stoneblock,Stock stock){
 		Map resultMap=new HashMap();
 		try {
 			if(stoneblock.getId()==null){
@@ -104,7 +104,10 @@ public class StoneblockController {
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
-				int resultUpdate=iStoneblockService.updateStoneblock(stoneblock);
+				stock.setMsize(stoneblock.getLength()+"*"+stoneblock.getWidth());
+				stock.setUnit("立方米");
+				stock.setNumber(stoneblock.getBlocknumber()+"");
+				int resultUpdate=iStoneblockService.updateStoneblock(stoneblock,stock);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
 				logger.info("更新成功，主键："+stoneblock.getId());
