@@ -22,12 +22,13 @@ public class CORSFilter implements Filter {
     	HttpServletResponse response = (HttpServletResponse) res;  
 	    response.setCharacterEncoding("UTF-8"); 
 		response.setContentType("text/html;charset=UTF-8"); 
+		//response.setContentType("application/json;charset=UTF-8"); 
 	  //CORS跨域
 	    response.setHeader("Access-Control-Allow-Origin", "*");  
 	    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");  
 	    response.setHeader("Access-Control-Max-Age", "3600");  
 	    //response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-	    response.setHeader("Access-Control-Allow-Headers","x-requested-with,token,timesamp,sign");
+	    response.setHeader("Access-Control-Allow-Headers","x-requested-with,content-type,token,timesamp,sign");
 	    //response.setHeader("Access-Control-Allow-Headers","x-requested-with,content-type，requesttype");
         
 	    String uri = request.getServletPath();

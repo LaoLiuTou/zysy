@@ -79,6 +79,72 @@ createHttpR.prototype.HttpRequest = function(callBack){
                 'token' : token,
                 'timesamp' : timestamp,
                 'sign' : hash
+                //'content-Type': 'application/json'
+            },
+            success:function(response) {
+                var obj = JSON.parse(response);
+                var status = obj['status'];
+                var msg = obj['msg'];
+                if(status=='mismatch'||status=='expire'){
+                    console.log(msg);
+                    alert('验证信息错误，请重新登录！');
+                    //无用户信息，重新登录
+                    window.location.href='login.html';
+                    //login();
+                }
+                else if(status=='0'){
+                    callBack(response);
+                }
+                else{
+                    alert(msg);
+                }
+            },
+            error:function(response){
+                alert('请求失败！');
+                return false;
+            },
+            beforeSend:function(){
+                //alert('before');
+            },
+            complete:function(){
+                //alert('complete');
+            }
+
+        });
+    }
+    else{
+        alert('访问权限已过期，请重新登录！');
+        //无用户信息，重新登录
+        window.location.href='login.html';
+    }
+
+}
+
+function createJSONHttpR(url,type,dataType,bodyParam){
+    this.url = url;
+    this.type = type;
+    this.dataType = dataType;
+    this.bodyParam = bodyParam;
+}
+createJSONHttpR.prototype.HttpRequest = function(callBack){
+
+    if(sessionStorage.getItem('username')!=null||sessionStorage.getItem('token')!=null){
+        var  token = sessionStorage.getItem('token');
+        var timestamp = Date.parse(new Date());
+        var hash = md5(token+timestamp+sk);
+        $.ajax({
+            url:this.url,
+            type:this.type,
+            cache:false,
+            timeout:20,
+            dataType:this.dataType,
+            data :this.bodyParam,
+            async:false,
+            headers: {
+                'token' : token,
+                'timesamp' : timestamp,
+                'sign' : hash,
+                'content-Type': 'application/json'
             },
             success:function(response) {
                 var obj = JSON.parse(response);

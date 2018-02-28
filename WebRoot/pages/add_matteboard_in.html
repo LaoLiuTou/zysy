@@ -11,6 +11,12 @@
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -50,6 +56,15 @@
                     </ul>
                 </li>
                 <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>单据管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
+                        <li class="active"><a href="add_matteboard_in.html">大锯检验单</a></li>
+                        <li><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                    </ul>
+                </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="report_stock.html">库存</a></li>
@@ -62,7 +77,7 @@
 
                     </ul>
                 </li>
-                <li class="active"><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
 
             </ul>
             <!--sidebar nav end-->
@@ -144,7 +159,7 @@
                             大锯检验单
 
                             <span class="tools pull-right">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
+                            <button type="button" class="btn btn-primary" id="addBtn" >新建</button>
                             <!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -152,10 +167,10 @@
                         </header>
                         <div class="panel-body">
                             <div class="col-sm-12  m-bot15">
-                                编号:<input class="bottom_input" id="searchText" size="16" type="text"   />
-                                验收人:<input class="bottom_input" id="searchText" size="16" type="text"  />
-                                日期:<input class="bottom_input" id="searchText" size="16" type="text"  />
-                                工组:<input class="bottom_input" id="searchText" size="16" type="text"  />
+                                编号:<input class="bottom_input" id="code" size="16" type="text"   />
+                                验收人:<input class="bottom_input" id="auditor" size="16" type="text"  />
+                                日期:<input class="bottom_input default-date-picker" id="m_dt" size="16" type="text"  />
+                                工组:<input class="bottom_input" id="workgroup" size="16" type="text"  />
 
                             </div>
                             <div class="adv-table">
@@ -219,6 +234,16 @@
 
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
+<script src="js/main/matteboard.js"></script>
+<script src="js/main/stoneblock.js"></script>
+<!--pickers plugins-->
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -228,17 +253,17 @@
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_code" id="sb_code" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_spec" id="sb_spec" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_cube" id="sb_cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input layer" id="layer" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input msize" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input blocknumber" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input square" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input belowgradeblock" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input belowgradesquare" id="belowgradesquare" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
@@ -250,28 +275,135 @@
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;" id="squareSum"></td>\n' +
+            '<td style="padding: 0px;line-height: 30px;" id="squareSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;" id="belowgradesquareSum"></td>\n' +
+            '<td style="padding: 0px;line-height: 30px;" id="belowgradesquareSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
 
+        //根据编号查询荒料
+        $('.sb_code').on('blur',function(){
+            var index=$(this).attr("index");
+            queryStoneblockByCode($(this).val(),index);
+        });
+        //料层
+        $('.layer').on('change',function(){
+            if($(this).val()=='1'){
+                $(this).val('上');
+            }
+            else if($(this).val()=='2'){
+                $(this).val('中');
+            }
+            else if($(this).val()=='2'){
+                $(this).val('下');
+            }
+            else{}
+
+        });
+
+        //计算
+        $('.msize').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[index="'+index+'"][id="msize"]').val();
+            var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
+            var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
+            var msizes=msize.split('*');
+            if(msize!=''&&blocknumber!=''){
+                $('input[index="'+index+'"][id="square"]').val((msizes[0]*msizes[1]*blocknumber/1000000).toFixed(2));
+                $('input[index="'+index+'"][id="square"]').trigger("blur");
+            }
+            if(msize!=''&&belowgradeblock!=''){
+                $('input[index="'+index+'"][id="belowgradesquare"]').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
+                $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
+            }
+        });
+        $('.blocknumber').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[index="'+index+'"][id="msize"]').val();
+            var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
+            var msizes=msize.split('*');
+            if(msize!=''&&blocknumber!=''){
+                $('input[index="'+index+'"][id="square"]').val((msizes[0]*msizes[1]*blocknumber/1000000).toFixed(2));
+                $('input[index="'+index+'"][id="square"]').trigger("blur");
+            }
+        });
+        $('.belowgradeblock').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[index="'+index+'"][id="msize"]').val();
+            var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
+            var msizes=msize.split('*');
+            if(msize!=''&&belowgradeblock!=''){
+                $('input[index="'+index+'"][id="belowgradesquare"]').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
+                $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
+            }
+        });
+        //求和
+        $('.square').on('blur',function(){
+            var sum=0;
+            $('.square').each(function(){
+                if($(this).val!=''){
+                    sum+=Number($(this).val());
+                }
+            });
+            $('#squareSum').text(sum.toFixed(2));
+        });
+        $('.belowgradesquare').on('blur',function(){
+            var sum=0;
+            $('.belowgradesquare').each(function(){
+                if($(this).val!=''){
+                    sum+=Number($(this).val());
+                }
+            });
+            $('#belowgradesquareSum').text(sum.toFixed(2));
+        });
+
         //新建
         $('#addBtn').click(function () {
-            if($('#username').val()==''){
-                alert('用户名不能为空！');
+            if($('#code').val()==''){
+                alert('单据编号不能为空！');
                 return false;
             }
-            if($('#password').val()==''){
-                alert('用户密码不能为空！');
+            if($('#auditor').val()==''){
+                alert('验收人不能为空！');
                 return false;
             }
-            if($('#nickname').val()==''){
-                alert('用户昵称不能为空！');
+            if($('#m_dt').val()==''){
+                alert('日期不能为空！');
                 return false;
             }
-            addUser();
+            if($('#workgroup').val()==''){
+                alert('工组不能为空！');
+                return false;
+            }
+
+            var params = new Array();
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+
+
+            for(var i=1;i<11;i++) {
+                if($('input[index="'+i+'"][id="sb_code"]').val()!=''){
+
+                    var temp={};
+                    temp['c_id']=userinfo['id'];
+                    temp['code']=$('#code').val();
+                    temp['auditor']=$('#auditor').val();
+                    temp['m_dt']=$('#m_dt').val();
+                    temp['workgroup']=$('#workgroup').val();
+
+                    $('input[index="'+i+'"]').each(function () {
+                        if($(this).val()!='')
+                            temp[$(this).attr('id')]=$(this).val();
+                    });
+                    params.push(temp);
+                }
+            }
+
+            addmulMatteboard(params);
+        });
+
+        $('.default-date-picker').datepicker({
+            format: 'yyyy-mm-dd'
         });
 
     });

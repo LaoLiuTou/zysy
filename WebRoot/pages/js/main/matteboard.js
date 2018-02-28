@@ -29,6 +29,23 @@ function addMatteboard(bodyParam){
 }
 
 /**
+ * 添加多条亚光板
+ */
+function addmulMatteboard(bodyParam){
+
+    var httpR = new createJSONHttpR(url+'addMulMatteboard','post','text',JSON.stringify(bodyParam),'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        //var msg = obj['msg'];
+        if(status=='0'){
+            alert("新建成功！");
+            window.location.reload();
+            //window.location.href="interface.html?index="+interfaceIndex;
+        }
+    });
+}
+/**
  * 修改哑光板
  * @param id
  */

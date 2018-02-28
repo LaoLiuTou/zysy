@@ -14,11 +14,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zysy.service.matteboard.IMatteboardService;
 import com.zysy.model.matteboard.Matteboard;
 import com.zysy.model.stock.Stock;
+import com.zysy.model.stoneblock.Stoneblock;
 @Controller
 public class MatteboardController {
 	@Autowired
@@ -38,6 +40,44 @@ public class MatteboardController {
 			resultMap.put("status", "0");
 			resultMap.put("msg", matteboard.getId());
 			logger.info("新建成功，主键："+matteboard.getId());
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "新建失败！");
+			logger.info("新建失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/addMulMatteboard")
+	@ResponseBody
+	public Map addMul(@RequestBody List<Matteboard> mbList){
+		Map resultMap=new HashMap();
+		try {
+			String ids = "";
+		    for(Matteboard mb:mbList){
+		    	Stock stock = new Stock();
+		    	 stock.setMsize(mb.getMsize());
+				 stock.setUnit("立方米");
+				 stock.setNumber(mb.getBlocknumber()+"");
+				 stock.setC_id(mb.getC_id());
+				 stock.setComment(mb.getComment());
+				 stock.setDamage("否");
+				 stock.setHeight(mb.getHeight());
+				 stock.setMaterial("1");
+				 stock.setStocktype(mb.getStocktype());
+				 stock.setWorkshop(mb.getWorkshop());
+				 stock.setNumber("1");
+				 stock.setQualify("是");
+				 stock.setState(Long.parseLong("0"));
+				  
+				 iMatteboardService.addMatteboard(mb,stock);
+		    	ids+=mb.getId()+",";
+		    } 
+			
+			resultMap.put("status", "0");
+			resultMap.put("msg", ids);
+			logger.info("新建成功，主键："+ids);
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");

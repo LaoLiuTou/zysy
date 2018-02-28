@@ -77,7 +77,7 @@ public class MatteboardServiceImpl  implements IMatteboardService {
 	    stock.setPid(matteboard.getId());
 		if(matteboard.getBelowgradeblock()>0){
 			Stock temp=stock;
-			temp.setNumber(matteboard.getBlocknumber()+"");
+			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
 			//temp.setState(Long.parseLong("0"));
 			temp.setQualify("是");
 			temp.setDamage("否");

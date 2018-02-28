@@ -11,6 +11,12 @@
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -50,12 +56,13 @@
                     </ul>
                 </li>
                 <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>单据管理</span></a>
+                <li class="menu-list  nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>单据管理</span></a>
                     <ul class="sub-menu-list">
                         <li class="active"><a href="add_stoneblock_in.html">荒料入库单</a></li>
                         <li><a href="add_matteboard_in.html">大锯检验单</a></li>
-
-
+                        <li><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li><a href="add_huoshao_out.html">火烧出库单</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
@@ -162,7 +169,7 @@
                             <div class="col-sm-12  m-bot15">
                                 单据编号:<input class="bottom_input" id="code" size="16" type="text"   />
                                 荒料来源:<input class="bottom_input" id="source" size="16" type="text"  />
-                                日期:<input class="bottom_input" class="default-date-picker" id="s_dt" size="16" type="text"  />
+                                日期:<input class="bottom_input default-date-picker" id="s_dt" size="16" type="text"  />
                                 入库地点:<input class="bottom_input" id="place" size="16" type="text"  />
 
                             </div>
@@ -248,12 +255,12 @@
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="number" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="length" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="width" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="height" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="price" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input length" id="length" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input width" id="width" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input height" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input cube" id="cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input price" id="price" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sum" id="sum" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="platenumber" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="comment" ></td>\n' +
                 '</tr>';
@@ -264,13 +271,91 @@
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;" id="cubeSum"></td>\n' +
+            '<td style="padding: 0px;line-height: 30px;" id="cubeSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;" id="cubePrice"></td>\n' +
+            '<td style="padding: 0px;line-height: 30px;" id="cubePrice"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
+
+
+
+        //计算
+        $('.length').on('blur',function(){
+            var index=$(this).attr("index");
+            var length=$('input[index="'+index+'"][id="length"]').val();
+            var width=$('input[index="'+index+'"][id="width"]').val();
+            var height=$('input[index="'+index+'"][id="height"]').val();
+            if(length!=''&&width!=''&&height!=''){
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').trigger("blur");
+            }
+        });
+        $('.width').on('blur',function(){
+            var index=$(this).attr("index");
+            var length=$('input[index="'+index+'"][id="length"]').val();
+            var width=$('input[index="'+index+'"][id="width"]').val();
+            var height=$('input[index="'+index+'"][id="height"]').val();
+            if(length!=''&&width!=''&&height!=''){
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').trigger("blur");
+            }
+        });
+        $('.height').on('blur',function(){
+            var index=$(this).attr("index");
+            var length=$('input[index="'+index+'"][id="length"]').val();
+            var width=$('input[index="'+index+'"][id="width"]').val();
+            var height=$('input[index="'+index+'"][id="height"]').val();
+            if(length!=''&&width!=''&&height!=''){
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').trigger("blur");
+            }
+        });
+        $('.price').on('blur',function(){
+            var index=$(this).attr("index");
+            var price=$('input[index="'+index+'"][id="price"]').val();
+            var cube=$('input[index="'+index+'"][id="cube"]').val();
+            if(price!=''&&cube!=''){
+                $('input[index="'+index+'"][id="sum"]').val((price*cube).toFixed(2));
+                $('input[index="'+index+'"][id="sum"]').trigger("blur");
+            }
+        });
+        //求和
+        $('.cube').on('blur',function(){
+            var index=$(this).attr("index");
+            var price=$('input[index="'+index+'"][id="price"]').val();
+            var cube=$('input[index="'+index+'"][id="cube"]').val();
+            if(price!=''&&cube!=''){
+                $('input[index="'+index+'"][id="sum"]').val((price*cube).toFixed(2));
+                $('input[index="'+index+'"][id="sum"]').trigger("blur");
+            }
+
+            var sum=0;
+            $('.cube').each(function(){
+                if($(this).val!=''){
+                    sum+=Number($(this).val());
+                }
+            });
+            $('#cubeSum').text(sum.toFixed(3));
+        });
+        $('.sum').on('blur',function(){
+            var sum=0;
+            $('.sum').each(function(){
+                if($(this).val!=''){
+                    sum+=Number($(this).val());
+                }
+            });
+            sum+=Number($('#accountdiff').val());
+            $('#cubePrice').text(sum.toFixed(2));
+        });
+
+        $('#accountdiff').on('blur',function(){
+            $('#cubePrice').text((Number($('#accountdiff').val())+Number($('#cubePrice').text())).toFixed(2));
+        });
+
+
+
 
         //新建
         $('#addBtn').click(function () {
@@ -296,7 +381,7 @@
 
 
             for(var i=1;i<11;i++) {
-                if($('input[index="1"][id="number"]').val()!=''){
+                if($('input[index="'+i+'"][id="number"]').val()!=''){
 
                     var temp={};
                     temp['c_id']=userinfo['id'];
@@ -315,10 +400,7 @@
                     params.push(temp);
                 }
             }
-
-
-            var bodyParam = {'sbList':params};
-            addmulStoneblock(bodyParam);
+            addmulStoneblock(params);
         });
 
         $('.default-date-picker').datepicker({

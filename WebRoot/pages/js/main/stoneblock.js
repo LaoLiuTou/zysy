@@ -32,7 +32,7 @@ function addStoneblock(bodyParam){
  */
 function addmulStoneblock(bodyParam){
 
-    var httpR = new createHttpR(url+'addMulStoneblock','post','text',JSON.stringify(bodyParam),'callBack');
+    var httpR = new createJSONHttpR(url+'addMulStoneblock','post','text',JSON.stringify(bodyParam),'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -242,6 +242,24 @@ function  queryStoneblockByCode (code) {
                 $('#sb_cube').val(data[o].cube);
                 $('#update_sb_spec').val(data[o].length+'*'+data[o].width+'*'+data[o].height);
                 $('#update_sb_cube').val(data[o].cube);
+            }
+        }
+    });
+}
+function  queryStoneblockByCode (code,index) {
+
+    var bodyParam={'page':1,'size':1,'code':code};
+
+    var httpR = new createHttpR(url+'listStoneblock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+        if(status=='0'){
+            var data=msg['data'];
+            for(var o in data){
+                $('input[index="'+index+'"][id="sb_spec"]').val(data[o].length+'*'+data[o].width+'*'+data[o].height);
+                $('input[index="'+index+'"][id="sb_cube"]').val(data[o].cube);
             }
         }
     });

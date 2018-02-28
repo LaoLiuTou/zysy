@@ -1,14 +1,15 @@
 package com.zysy.controller.stoneblock;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -18,10 +19,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.zysy.service.stoneblock.IStoneblockService;
+
 import com.zysy.model.stock.Stock;
 import com.zysy.model.stoneblock.Stoneblock;
-import com.zysy.model.stoneblock.StoneblockList;
+import com.zysy.service.stoneblock.IStoneblockService;
 @Controller
 public class StoneblockController {
 	@Autowired
@@ -52,11 +53,11 @@ public class StoneblockController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addMulStoneblock")
 	@ResponseBody
-	public Map addMul(StoneblockList sbList){
+	public Map addMul(@RequestBody List<Stoneblock> sbList){
 		Map resultMap=new HashMap();
 		try {
 			String ids = "";
-		    for(Stoneblock sb:sbList.getSbList()){
+		    for(Stoneblock sb:sbList){
 		    	Stock stock = new Stock();
 		    	 stock.setMsize(sb.getLength()+"*"+sb.getWidth());
 				 stock.setUnit("立方米");
