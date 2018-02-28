@@ -1,5 +1,6 @@
 package com.zysy.controller.stoneblock;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zysy.service.stoneblock.IStoneblockService;
 import com.zysy.model.stock.Stock;
 import com.zysy.model.stoneblock.Stoneblock;
+import com.zysy.model.stoneblock.StoneblockList;
 @Controller
 public class StoneblockController {
 	@Autowired
@@ -38,6 +41,44 @@ public class StoneblockController {
 			resultMap.put("status", "0");
 			resultMap.put("msg", stoneblock.getId());
 			logger.info("新建成功，主键："+stoneblock.getId());
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "新建失败！");
+			logger.info("新建失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/addMulStoneblock")
+	@ResponseBody
+	public Map addMul(StoneblockList sbList){
+		Map resultMap=new HashMap();
+		try {
+			String ids = "";
+		    for(Stoneblock sb:sbList.getSbList()){
+		    	Stock stock = new Stock();
+		    	 stock.setMsize(sb.getLength()+"*"+sb.getWidth());
+				 stock.setUnit("立方米");
+				 stock.setNumber(sb.getBlocknumber()+"");
+				 stock.setC_id(sb.getC_id());
+				 stock.setComment(sb.getComment());
+				 stock.setDamage("否");
+				 stock.setHeight(sb.getHeight());
+				 stock.setMaterial("1");
+				 stock.setStocktype(sb.getStocktype());
+				 stock.setWorkshop(sb.getWorkshop());
+				 stock.setNumber("1");
+				 stock.setQualify("是");
+				 stock.setState(Long.parseLong("0"));
+				  
+
+		    	iStoneblockService.addStoneblock(sb,stock);
+		    	ids+=sb.getId()+",";
+		    } 
+			resultMap.put("status", "0");
+			resultMap.put("msg", ids);
+			logger.info("新建成功，主键："+ids);
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");

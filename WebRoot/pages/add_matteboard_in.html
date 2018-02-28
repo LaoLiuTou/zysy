@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>大锯检验单</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <!-- <a href=""><img src="images/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="logo-icon text-center" id="title">
+            <!--<a href=""><img src="images/logo_icon.png" alt=""></a>-->
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="list_stocktype.html">库别管理</a></li>
+                        <li><a href="list_workshop.html">车间管理</a></li>
+                        <li><a href="list_material.html">产品管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_stock_in_out.html">出入库明细</a></li>
+                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li><a href="report_stoneblock.html">原材料明细</a></li>
+                        <li><a href="report_matteboard.html">大锯产量统计</a></li>
+                        <li><a href="report_yield.html">产量日报</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>
+
+                    </ul>
+                </li>
+                <li class="active"><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+        <!--toggle button start-->
+        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+        <!--toggle button end-->
+
+        <!--search start-->
+       <!-- <form class="searchform" action="index.html" method="post">
+            <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+        </form>-->
+        <!--search end-->
+
+            <!-- header section start-->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                <!--search end-->
+                <!--<form class="searchform" action="" method="post">
+                    <input type="text" class="form-control" id="searchText" placeholder="请输入您要搜索的用户名..." />
+                    <button>搜索</button>
+                </form>-->
+
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <ul class="notification-menu">
+
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/photos/user-avatar.png" alt="" />
+                                <span id="loginName"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                                <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </div>
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <!--<div class="page-heading">-->
+            <!--页面标题-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <!--表格开始-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            大锯检验单
+
+                            <span class="tools pull-right">
+                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
+                            <!--<span class="tools pull-right">-->
+                            <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
+                            <!--<a href="javascript:;" class="fa fa-times"></a>-->
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-12  m-bot15">
+                                编号:<input class="bottom_input" id="searchText" size="16" type="text"   />
+                                验收人:<input class="bottom_input" id="searchText" size="16" type="text"  />
+                                日期:<input class="bottom_input" id="searchText" size="16" type="text"  />
+                                工组:<input class="bottom_input" id="searchText" size="16" type="text"  />
+
+                            </div>
+                            <div class="adv-table">
+                                <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>石料编号</th>
+                                        <th>石料规格</th>
+                                        <th>立方数</th>
+                                        <th>料层</th>
+                                        <th>板材尺寸</th>
+                                        <th>厚度</th>
+                                        <th>总块数</th>
+                                        <th>平方</th>
+                                        <th>不合格块数</th>
+                                        <th>不合格平方数</th>
+                                        <th>备注</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="htmlTbody">
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--表格结束-->
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2018 &copy; 版权所有
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+        var html='';
+        for(var i=1;i<11;i++){
+            html+='<tr>\n' +
+                '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" class="table_input"  ></td>\n' +
+                '</tr>';
+        }
+        html+='<tr>\n' +
+            '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">合计</td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;" id="squareSum"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;" id="belowgradesquareSum"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '</tr>';
+        $('#htmlTbody').html(html);
+
+        //新建
+        $('#addBtn').click(function () {
+            if($('#username').val()==''){
+                alert('用户名不能为空！');
+                return false;
+            }
+            if($('#password').val()==''){
+                alert('用户密码不能为空！');
+                return false;
+            }
+            if($('#nickname').val()==''){
+                alert('用户昵称不能为空！');
+                return false;
+            }
+            addUser();
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>

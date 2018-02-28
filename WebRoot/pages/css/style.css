@@ -4725,3 +4725,18 @@ ol.comment-list {
 .mb10 {
     margin-bottom: 10px!important;
 }
+
+.bottom_input{
+    border-left-width:0px;
+    border-top-width:0px;
+    border-right-width:0px;
+    border-bottom-color:grey;
+}
+.table_input{
+    width: 100%;
+    height:100%;
+    border: 0px;
+}
+.table-striped td{
+    line-height: 30px;
+}

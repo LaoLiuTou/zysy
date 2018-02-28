@@ -27,7 +27,23 @@ function addStoneblock(bodyParam){
         }
     });
 }
+/**
+ * 添加多条荒料
+ */
+function addmulStoneblock(bodyParam){
 
+    var httpR = new createHttpR(url+'addMulStoneblock','post','text',JSON.stringify(bodyParam),'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        //var msg = obj['msg'];
+        if(status=='0'){
+            alert("新建成功！");
+            window.location.reload();
+            //window.location.href="interface.html?index="+interfaceIndex;
+        }
+    });
+}
 /**
  * 修改荒料
  * @param id

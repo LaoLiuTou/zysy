@@ -199,4 +199,20 @@ public class Stoneblock {
 		this.yf_dt = yf_dt;
 	}
 
+	private String stocktype;
+	public String getStocktype() {
+		return stocktype;
+	}
+	public void setStocktype(String stocktype) {
+		this.stocktype = stocktype;
+	}
+	private Long workshop;
+	public Long getWorkshop() {
+		return workshop;
+	}
+	public void setWorkshop(Long workshop) {
+		this.workshop = workshop;
+	}
+	
 }
+ 
