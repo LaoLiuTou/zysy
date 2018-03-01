@@ -878,30 +878,77 @@
             }
             else{
                 html='<div class="form-group col-md-6">\n' +
-                    '                    <label>单位</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">\n' +
-                    '                    </div>\n' +
-                    '                    <div class="form-group col-md-6">\n' +
-                    '                    <label>板材尺寸</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">\n' +
-                    '                    </div>\n' +
-                    '                    <div class="form-group col-md-6">\n' +
-                    '                    <label>厚度</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度" name="height">\n' +
-                    '                    </div>\n' +
-                    '                    <div class="form-group col-md-6">\n' +
-                    '                    <label>数量</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量" name="number">\n' +
-                    '                    </div>\n' +
-                    '                    </div>\n' +
-                    '                    <div class="form-group col-md-6">\n' +
-                    '                    <label>备注</label>\n' +
-                    '                    <input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">\n' +
-                    '                    </div>';
+                    '<label>单位</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>板材尺寸</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>厚度</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度" name="height">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>数量</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量" name="number">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>加工方式</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_process" value="'+currentStock.process+'" name="process">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>包装</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_packaging" value="'+currentStock.packaging+'" name="packaging">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>班组号</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_workgroup" value="'+currentStock.workgroup+'" name="workgroup">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>订单编号</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_ordercode" value="'+currentStock.ordercode+'" name="ordercode">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>出库类型</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_outtype" value="'+currentStock.outtype+'" name="outtype">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>毛尺</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_maochi" value="'+currentStock.maochi+'" name="maochi">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>净尺</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_jingchi" value="'+currentStock.jingchi+'" name="jingchi">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>延米</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_yanmi" value="'+currentStock.yanmi+'" name="yanmi">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>单据编号</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_code" value="'+currentStock.code+'" name="code">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>验收人</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_auditor" value="'+currentStock.auditor+'" name="auditor">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>单据日期</label>\n' +
+                    '<input type="text" class="form-control m-bot15 default-date-picker" id="update_m_dt" value="'+currentStock.m_dt+'" name="m_dt">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>备注</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">\n' +
+                    '</div>';
+
 
 
 
                 $('#updateForms').html(html);
+                $('.default-date-picker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
             }
             $('#update_material').val(currentStock.material);
             $('#update_stocktype').val(currentStock.stocktype);
