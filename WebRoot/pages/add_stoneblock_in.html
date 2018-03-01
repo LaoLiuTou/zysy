@@ -203,6 +203,7 @@
                                 审核人:<input class="bottom_input" id="auditor" size="16" type="text"  />
                                 录入人:<input class="bottom_input" id="editor" size="16" type="text"  />
                             </div>
+                            <span style="color: red;">*注：长宽高单位为米</span>
                         </div>
                     </section>
                 </div>
@@ -251,6 +252,13 @@
 <script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 
 <script>
+    function Num(obj){
+        obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+    }
     $(document).ready(function () {
 
 
@@ -259,9 +267,9 @@
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="number" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input length" id="length" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input width" id="width" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input height" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input length" id="length" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input width" id="width" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input height" id="height" onkeyup="Num(this)"></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input cube" id="cube" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input price" id="price" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sum" id="sum" ></td>\n' +
@@ -294,7 +302,7 @@
             var width=$('input[index="'+index+'"][id="width"]').val();
             var height=$('input[index="'+index+'"][id="height"]').val();
             if(length!=''&&width!=''&&height!=''){
-                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height).toFixed(3));
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
@@ -304,7 +312,7 @@
             var width=$('input[index="'+index+'"][id="width"]').val();
             var height=$('input[index="'+index+'"][id="height"]').val();
             if(length!=''&&width!=''&&height!=''){
-                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height).toFixed(3));
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
@@ -314,7 +322,7 @@
             var width=$('input[index="'+index+'"][id="width"]').val();
             var height=$('input[index="'+index+'"][id="height"]').val();
             if(length!=''&&width!=''&&height!=''){
-                $('input[index="'+index+'"][id="cube"]').val((length*width*height/1000000000).toFixed(3));
+                $('input[index="'+index+'"][id="cube"]').val((length*width*height).toFixed(3));
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
