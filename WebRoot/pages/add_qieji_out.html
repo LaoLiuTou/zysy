@@ -47,15 +47,15 @@
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>系统设置</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="list_stocktype.html">库别管理</a></li>
                         <li><a href="list_workshop.html">车间管理</a></li>
                         <li><a href="list_material.html">产品管理</a></li>
                     </ul>
                 </li>
-                <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存管理</span></a></li>
-                <li class="menu-list  nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>单据管理</span></a>
+                <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存明细</span></a></li>
+                <li class="menu-list  nav-active"><a href=""><i class="fa fa-clipboard"></i> <span>单据管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
                         <li><a href="add_matteboard_in.html">大锯检验单</a></li>
@@ -77,7 +77,7 @@
 
                     </ul>
                 </li>
-                <li class="active"><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
 
             </ul>
             <!--sidebar nav end-->
@@ -445,7 +445,7 @@
                     temp['unit']='平方米';
                     temp['qualify']='否';
                     temp['damage']='是';
-                    temp['state']='2';
+                    temp['state']='1';
                     temp['outtype']='磨机';
                     $('input[mold="posun"][index="'+i+'"]').each(function () {
                         if($(this).val()!='')

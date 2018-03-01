@@ -64,7 +64,7 @@ public class MatteboardController {
 				 stock.setComment(mb.getComment());
 				 stock.setDamage("否");
 				 stock.setHeight(mb.getHeight());
-				 stock.setMaterial("1");
+				 stock.setMaterial("2");
 				 stock.setStocktype(mb.getStocktype());
 				 stock.setWorkshop(mb.getWorkshop());
 				 stock.setNumber("1");
