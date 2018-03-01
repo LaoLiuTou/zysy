@@ -297,6 +297,7 @@ function  reportDamage (c_dt,workshop) {
     if(workshop!=''){
         bodyParam['workshop']=workshop;
     }
+    bodyParam['damage']='是';
     var httpR = new createHttpR(url+'reportDamage','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);

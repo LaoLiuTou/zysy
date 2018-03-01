@@ -39,6 +39,19 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			
 		</trim>  
 		ORDER BY a.ID DESC 
 		LIMIT #{fromPage},#{toPage} 
@@ -68,6 +81,18 @@
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="pid != null"> AND PID =#{pid} </if>
+			
+			<if test="process != null"> AND PROCESS =#{process} </if>
+			<if test="packaging != null"> AND PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND YANMI =#{yanmi} </if>
+			<if test="code != null"> AND CODE =#{code} </if>
+			<if test="m_dt != null"> AND M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND AUDITOR =#{auditor} </if>
 		</trim>  
 	</select>
 
@@ -90,6 +115,19 @@
 			<if test="u_dt != null">U_DT=#{u_dt}, </if>
 			<if test="c_id != null">C_ID=#{c_id}, </if>
 			<if test="pid != null">PID=#{pid}, </if>
+			
+			<if test="process != null">PROCESS=#{process}, </if>
+			<if test="packaging != null">PACKAGING=#{packaging}, </if>
+			<if test="workgroup != null">WORKGROUP=#{workgroup}, </if>
+			<if test="ordercode != null">ORDERCODE=#{ordercode}, </if>
+			<if test="outtype != null">OUTTYPE=#{outtype}, </if>
+			<if test="maochi != null">MAOCHI=#{maochi}, </if>
+			<if test="jingchi != null">JINGCHI=#{jingchi}, </if>
+			<if test="yanmi != null">YANMI=#{yanmi}, </if>
+			<if test="code != null">CODE=#{code}, </if>
+			<if test="m_dt != null">M_DT=#{m_dt}, </if>
+			<if test="auditor != null">AUDITOR=#{auditor}, </if>
+			
 		</trim>
 		WHERE ID=#{id}
 	</update>
@@ -112,6 +150,19 @@
 			<if test="u_dt != null">U_DT, </if>
 			<if test="c_id != null">C_ID, </if>
 			<if test="pid != null">PID, </if>
+			
+			<if test="process != null">PROCESS, </if>
+			<if test="packaging != null">PACKAGING, </if>
+			<if test="workgroup != null">WORKGROUP, </if>
+			<if test="ordercode != null">ORDERCODE, </if>
+			<if test="outtype != null">OUTTYPE, </if>
+			<if test="maochi != null">MAOCHI, </if>
+			<if test="jingchi != null">JINGCHI, </if>
+			<if test="yanmi != null">YANMI, </if>
+			<if test="code != null">CODE, </if>
+			<if test="m_dt != null">M_DT, </if>
+			<if test="auditor != null">AUDITOR, </if>
+			
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
 			<if test="material != null">#{material}, </if>
@@ -129,6 +180,19 @@
 			<if test="u_dt != null">#{u_dt}, </if>
 			<if test="c_id != null">#{c_id}, </if>
 			<if test="pid != null">#{pid}, </if>
+			
+			<if test="process != null">#{process}, </if>
+			<if test="packaging != null">#{packaging}, </if>
+			<if test="workgroup != null">#{workgroup}, </if>
+			<if test="ordercode != null">#{ordercode}, </if>
+			<if test="outtype != null">#{outtype}, </if>
+			<if test="maochi != null">#{maochi}, </if>
+			<if test="jingchi != null">#{jingchi}, </if>
+			<if test="yanmi != null">#{yanmi}, </if>
+			<if test="code != null">#{code}, </if>
+			<if test="m_dt != null">#{m_dt}, </if>
+			<if test="auditor != null">#{auditor}, </if>
+			 
 		</trim>
 		<selectKey order="AFTER" resultType="long" keyProperty="id" > 
 			SELECT LAST_INSERT_ID()
@@ -163,6 +227,17 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -194,6 +269,17 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -225,6 +311,17 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -257,6 +354,17 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 		</trim>  
 		GROUP BY a.HEIGHT,a.UNIT
 	</select>
@@ -288,6 +396,17 @@
 			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
 			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
 			<if test="pid != null"> AND a.PID =#{pid} </if>
+			<if test="process != null"> AND a.PROCESS =#{process} </if>
+			<if test="packaging != null"> AND a.PACKAGING =#{packaging} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="ordercode != null"> AND a.ORDERCODE =#{ordercode} </if>
+			<if test="outtype != null"> AND a.OUTTYPE =#{outtype} </if>
+			<if test="maochi != null"> AND a.MAOCHI =#{maochi} </if>
+			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
+			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 		</trim>  
 		GROUP BY a.HEIGHT,a.UNIT
 	</select>

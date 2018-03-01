@@ -176,6 +176,84 @@ public class Stock {
 		this.sum_out = sum_out;
 	}
 	
-	
+	private String process;
+	private String packaging;
+	private String workgroup;
+	private String ordercode;
+	private String outtype;
+	private String maochi;
+	private String jingchi;
+	private String yanmi;
+	private String code;
+	private Date m_dt;
+	private String auditor;
+	public String getProcess() {
+		return process;
+	}
+	public void setProcess(String process) {
+		this.process = process;
+	}
+	public String getPackaging() {
+		return packaging;
+	}
+	public void setPackaging(String packaging) {
+		this.packaging = packaging;
+	}
+	public String getWorkgroup() {
+		return workgroup;
+	}
+	public void setWorkgroup(String workgroup) {
+		this.workgroup = workgroup;
+	}
+	public String getOrdercode() {
+		return ordercode;
+	}
+	public void setOrdercode(String ordercode) {
+		this.ordercode = ordercode;
+	}
+	public String getOuttype() {
+		return outtype;
+	}
+	public void setOuttype(String outtype) {
+		this.outtype = outtype;
+	}
+	public String getMaochi() {
+		return maochi;
+	}
+	public void setMaochi(String maochi) {
+		this.maochi = maochi;
+	}
+	public String getJingchi() {
+		return jingchi;
+	}
+	public void setJingchi(String jingchi) {
+		this.jingchi = jingchi;
+	}
+	public String getYanmi() {
+		return yanmi;
+	}
+	public void setYanmi(String yanmi) {
+		this.yanmi = yanmi;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public Date getM_dt() {
+		return m_dt;
+	}
+	public void setM_dt(Date m_dt) {
+		this.m_dt = m_dt;
+	}
+	public String getAuditor() {
+		return auditor;
+	}
+	public void setAuditor(String auditor) {
+		this.auditor = auditor;
+	}
+	 
+
 	
 }

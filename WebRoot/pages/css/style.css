@@ -4731,6 +4731,7 @@ ol.comment-list {
     border-top-width:0px;
     border-right-width:0px;
     border-bottom-color:grey;
+    width:100px;
 }
 .table_input{
     width: 100%;

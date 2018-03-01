@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.zysy.service.stock.IStockService;
 import com.zysy.model.stock.Stock;
+import com.zysy.model.stoneblock.Stoneblock;
 @Controller
 public class StockController {
 	@Autowired
@@ -32,6 +34,28 @@ public class StockController {
 			resultMap.put("status", "0");
 			resultMap.put("msg", stock.getId());
 			logger.info("新建成功，主键："+stock.getId());
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "新建失败！");
+			logger.info("新建失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/addMulStock")
+	@ResponseBody
+	public Map addMul(@RequestBody List<Stock> stockList){
+		Map resultMap=new HashMap();
+		try {
+			String ids = "";
+		    for(Stock stock:stockList){
+		    	iStockService.addStock(stock);
+		    	ids+=stock.getId()+",";
+		    } 
+			resultMap.put("status", "0");
+			resultMap.put("msg", ids);
+			logger.info("新建成功，主键："+ids);
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "新建失败！");

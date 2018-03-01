@@ -27,6 +27,23 @@ function addStockByParam(bodyParam){
         }
     });
 }
+/**
+ * 添加多条库存
+ */
+function addmulStock(bodyParam){
+
+    var httpR = new createJSONHttpR(url+'addMulStock','post','text',JSON.stringify(bodyParam),'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        //var msg = obj['msg'];
+        if(status=='0'){
+            alert("新建成功！");
+            window.location.reload();
+            //window.location.href="interface.html?index="+interfaceIndex;
+        }
+    });
+}
 
 /**
  * 添加库存
@@ -109,7 +126,6 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
         bodyParam['workshop']=workshop;
         $('#searchWorkshop').val(workshop);
     }
-
     var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);

@@ -216,6 +216,10 @@ function  selectMaterial (currentPage,pageSize) {
             $('#material').html(html);
             $('#update_material').html(html);
             $('#searchMaterial').html(html);
+
+            $('.material').html(html);
+
+
         }
     });
 }

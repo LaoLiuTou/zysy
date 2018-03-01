@@ -92,9 +92,9 @@ public class StockServiceImpl  implements IStockService {
  */ 
  @Transactional
 	public  int addStock(Stock stock){
-	 	if((stock.getState()+"").equals("1")){
+	 	/*if((stock.getState()+"").equals("1")){
 			stock.setNumber("-"+stock.getNumber());
-		}
+		}*/
 		return iStockMapper.addstock(stock);
 	}
 

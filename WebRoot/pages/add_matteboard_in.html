@@ -63,6 +63,7 @@
                         <li><a href="add_moji_out.html">磨机出库单</a></li>
                         <li><a href="add_qieji_out.html">切机出库单</a></li>
                         <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                        <li><a href="add_receive.html">领料单</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
@@ -171,7 +172,8 @@
                                 验收人:<input class="bottom_input" id="auditor" size="16" type="text"  />
                                 日期:<input class="bottom_input default-date-picker" id="m_dt" size="16" type="text"  />
                                 工组:<input class="bottom_input" id="workgroup" size="16" type="text"  />
-
+                                库房:<select class="bottom_input" id="searchStocktype" ></select>
+                                车间:<select class="bottom_input" id="searchWorkshop" ></select>
                             </div>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
@@ -235,7 +237,8 @@
 <script src="js/main/config.js"></script>
 <script src="js/main/md5.js"></script>
 <script src="js/main/matteboard.js"></script>
-<script src="js/main/stoneblock.js"></script>
+<script src="js/main/workshop.js"></script>
+<script src="js/main/stocktype.js"></script>
 <!--pickers plugins-->
 <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -281,6 +284,9 @@
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
+
+        selectWorkshop(1,100);
+        selectStocktype(1,100);
 
         //根据编号查询荒料
         $('.sb_code').on('blur',function(){
@@ -390,6 +396,9 @@
                     temp['auditor']=$('#auditor').val();
                     temp['m_dt']=$('#m_dt').val();
                     temp['workgroup']=$('#workgroup').val();
+
+                    temp['stocktype']=$('#searchStocktype').val();
+                    temp['workshop']=$('#searchWorkshop').val();
 
                     $('input[index="'+i+'"]').each(function () {
                         if($(this).val()!='')
