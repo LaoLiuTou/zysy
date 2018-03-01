@@ -255,9 +255,9 @@ function  queryMatteboardById (id) {
                  '<div class="form-group col-md-6">\n' +
                  '    <label>料层</label>\n' +
                  '    <select class="form-control m-bot15" id="update_layer" name="layer" >\n' +
-                 '        <option value="1">上</option>\n' +
-                 '        <option value="2">中</option>\n' +
-                 '        <option value="3">下</option>\n' +
+                 '        <option value="上">上</option>\n' +
+                 '        <option value="中">中</option>\n' +
+                 '        <option value="下">下</option>\n' +
                  '    </select>\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
@@ -284,8 +284,7 @@ function  queryMatteboardById (id) {
                  '    <label>不合格平方数</label>\n' +
                  '    <input type="text" class="form-control" id="update_belowgradesquare" value="'+msg['belowgradesquare']+'" name="belowgradesquare" placeholder="请输入不合格平方数">\n' +
                  '</div>\n'   ;
-
-
+ 
             $('#updateForms').html(html);
             $('#update_layer').val(msg['layer']);
             $('.default-date-picker').datepicker({
