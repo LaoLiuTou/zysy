@@ -172,8 +172,7 @@
                                 荒料来源:<input class="bottom_input" id="source" size="16" type="text"  />
                                 日期:<input class="bottom_input default-date-picker" id="s_dt" size="16" type="text"  />
                                 入库地点:<input class="bottom_input" id="place" size="16" type="text"  />
-                                库房:<select class="bottom_input" id="searchStocktype" ></select>
-                                车间:<select class="bottom_input" id="searchWorkshop" ></select>
+
                             </div>
                             <div class="adv-table" id="addForm">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
@@ -291,9 +290,8 @@
             '</tr>';
         $('#htmlTbody').html(html);
 
-        selectWorkshop(1,100);
-        selectStocktype(1,100);
-
+        var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+        $('#editor').val(userinfo['nickname']);
 
         //计算
         $('.length').on('blur',function(){
@@ -391,7 +389,7 @@
             }
 
             var params = new Array();
-            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+
 
 
             for(var i=1;i<11;i++) {
@@ -407,8 +405,6 @@
                     temp['auditor']=$('#auditor').val();
                     temp['editor']=$('#editor').val();
 
-                    temp['stocktype']=$('#searchStocktype').val();
-                    temp['workshop']=$('#searchWorkshop').val();
 
 
                     $('input[index="'+i+'"]').each(function () {
