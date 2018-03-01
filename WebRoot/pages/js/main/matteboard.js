@@ -284,7 +284,7 @@ function  queryMatteboardById (id) {
                  '    <label>不合格平方数</label>\n' +
                  '    <input type="text" class="form-control" id="update_belowgradesquare" value="'+msg['belowgradesquare']+'" name="belowgradesquare" placeholder="请输入不合格平方数">\n' +
                  '</div>\n'   ;
- 
+
             $('#updateForms').html(html);
             $('#update_layer').val(msg['layer']);
             $('.default-date-picker').datepicker({
