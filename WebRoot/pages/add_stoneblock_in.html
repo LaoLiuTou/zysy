@@ -168,10 +168,10 @@
                         </header>
                         <div class="panel-body" >
                             <div class="col-sm-12  m-bot15">
-                                单据编号:<input class="bottom_input" id="code" size="16" type="text"   />
-                                荒料来源:<input class="bottom_input" id="source" size="16" type="text"  />
-                                日期:<input class="bottom_input default-date-picker" id="s_dt" size="16" type="text"  />
-                                入库地点:<input class="bottom_input" id="place" size="16" type="text"  />
+                                单据编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
+                                荒料来源:<input class="bottom_input dom" keyIndex="2" id="source" size="16" type="text"  />
+                                日期:<input class="bottom_input default-date-picker dom" keyIndex="3" id="s_dt" size="16" type="text"  />
+                                入库地点:<input class="bottom_input dom" keyIndex="4" id="place" size="16" type="text"  />
 
                             </div>
                             <div class="adv-table" id="addForm">
@@ -198,9 +198,9 @@
 
                             </div>
                             <div class="col-sm-12">
-                                账差:<input class="bottom_input" id="accountdiff" size="16" type="text"  />
-                                审核人:<input class="bottom_input" id="auditor" size="16" type="text"  />
-                                录入人:<input class="bottom_input" id="editor" size="16" type="text"  />
+                                账差:<input class="bottom_input dom" keyIndex="95" id="accountdiff" size="16" type="text"  />
+                                审核人:<input class="bottom_input dom" keyIndex="96" id="auditor" size="16" type="text"  />
+                                录入人:<input class="bottom_input dom" keyIndex="97" id="editor" size="16" type="text"  />
                             </div>
                             <span style="color: red;">*注：长宽高单位为米</span>
                         </div>
@@ -267,15 +267,15 @@
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="number" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input length" id="length" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input width" id="width" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input height" id="height" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input cube" id="cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input price" id="price" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sum" id="sum" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="platenumber" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+1)+'" class="table_input dom" id="number" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+2)+'" class="table_input length dom" id="length" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+3)+'" class="table_input width dom" id="width" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+4)+'" class="table_input height dom" id="height" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+5)+'" class="table_input cube dom" id="cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+6)+'" class="table_input price dom" id="price" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+7)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+8)+'" class="table_input dom" id="platenumber" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+9)+'" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
@@ -291,6 +291,8 @@
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
+
+
 
         var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         $('#editor').val(userinfo['nickname']);
@@ -427,6 +429,6 @@
 
 </script>
 
-
+<script src="js/main/keydown.js"></script>
 </body>
 </html>

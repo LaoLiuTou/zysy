@@ -168,12 +168,12 @@
                         </header>
                         <div class="panel-body">
                             <div class="col-sm-12  m-bot15">
-                                编号:<input class="bottom_input" id="code" size="16" type="text"   />
-                                验收人:<input class="bottom_input" id="auditor" size="16" type="text"  />
-                                日期:<input class="bottom_input default-date-picker" id="m_dt" size="16" type="text"  />
-                                工组:<input class="bottom_input" id="workgroup" size="16" type="text"  />
-                                库房:<select class="bottom_input" id="searchStocktype" ></select>
-                                车间:<select class="bottom_input" id="searchWorkshop" ></select>
+                                编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
+                                验收人:<input class="bottom_input dom" keyIndex="2" id="auditor" size="16" type="text"  />
+                                日期:<input class="bottom_input dom default-date-picker" keyIndex="3" id="m_dt" size="16" type="text"  />
+                                工组:<input class="bottom_input dom" keyIndex="4" id="workgroup" size="16" type="text"  />
+                                库房:<select class="bottom_input dom" keyIndex="5" id="searchStocktype" ></select>
+                                车间:<select class="bottom_input dom" keyIndex="6" id="searchWorkshop" ></select>
                             </div>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
@@ -258,17 +258,17 @@
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_code" id="sb_code" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_spec" id="sb_spec" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input sb_cube" id="sb_cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input layer" id="layer" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input msize" id="msize" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input blocknumber" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input square" id="square" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input belowgradeblock" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input belowgradesquare" id="belowgradesquare" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" class="table_input" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+8)+'" class="table_input square dom" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+11)+'" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
@@ -287,8 +287,12 @@
             '</tr>';
         $('#htmlTbody').html(html);
 
+
+
         selectWorkshop(1,100);
-        selectStocktype(1,100);
+        setTimeout(function() {
+            selectStocktype(1, 100);
+        });
 
         //根据编号查询荒料
         $('.sb_code').on('blur',function(){
@@ -421,6 +425,6 @@
 
 </script>
 
-
+<script src="js/main/keydown.js"></script>
 </body>
 </html>

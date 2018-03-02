@@ -167,11 +167,11 @@
                         </header>
                         <div class="panel-body">
                             <div class="col-sm-12  m-bot15">
-                                单据编号:<input class="bottom_input" id="code" size="16" type="text"   />
-                                日期:<input class="bottom_input default-date-picker" id="m_dt" size="16" type="text"  />
-                                验收人:<input class="bottom_input" id="auditor" size="16" type="text"  />
-                                库房:<select class="bottom_input" id="searchStocktype" ></select>
-                                车间:<select class="bottom_input" id="searchWorkshop" ></select>
+                                单据编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
+                                日期:<input class="bottom_input default-date-picker dom" keyIndex="2" id="m_dt" size="16" type="text"  />
+                                验收人:<input class="bottom_input dom" keyIndex="3" id="auditor" size="16" type="text"  />
+                                库房:<select class="bottom_input dom" keyIndex="4" id="searchStocktype" ></select>
+                                车间:<select class="bottom_input dom" keyIndex="5" id="searchWorkshop" ></select>
                             </div>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
@@ -248,21 +248,23 @@
 <script>
     $(document).ready(function () {
         selectWorkshop(1,100);
-        selectStocktype(1,100);
+        setTimeout(function() {
+            selectStocktype(1, 100);
+        });
         var html='';
         for(var i=1;i<6;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" mold="process" class="table_input" id="process" style="width: 100px;"><option value=""></option><option value="火烧">火烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="packaging" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input msize" id="msize" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="height" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="number" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input maochi" id="maochi" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input jingchi" id="jingchi" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="workgroup" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="ordercode" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" mold="process" class="table_input" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(5+(i-1)*10+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="火烧">火烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+4)+'" mold="process" class="table_input dom" id="height" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+5)+'" mold="process" class="table_input dom" id="number" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+6)+'" mold="process" class="table_input maochi dom" id="maochi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+7)+'" mold="process" class="table_input jingchi dom" id="jingchi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+8)+'" mold="process" class="table_input dom" id="workgroup" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+9)+'" mold="process" class="table_input dom" id="ordercode" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(5+(i-1)*10+10)+'" mold="process" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
@@ -277,83 +279,90 @@
             '    <td colspan="2">原因</td>\n' +
             '</tr>\n' +
             '<tr>\n' +
-            '    <td style="padding: 0px;height: 30px;"><input type="text" mold="posun" index="1" class="table_input" id="number" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="1" class="table_input" id="msize" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="1" class="table_input" id="height" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="1" class="table_input" id="comment" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="2" class="table_input" id="number" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="2" class="table_input" id="msize" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="2" class="table_input" id="height" ></td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="posun" index="2" class="table_input" id="comment" ></td>\n' +
+            '    <td style="padding: 0px;height: 30px;"><input type="text" keyIndex="56" mold="posun" index="1" class="table_input dom" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="57" index="1" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="58" ="1" class="table_input dom" id="height" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="59" index="1" class="table_input dom" id="comment" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="60" index="2" class="table_input dom" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="61" index="2" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="62" index="2" class="table_input dom" id="height" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="63" mold="posun" index="2" class="table_input dom" id="comment" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
-            '    <td style="padding: 0px;height: 30px;"><input type="text" mold="posun" index="3" class="table_input" id="number" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="3" class="table_input" id="msize" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="3" class="table_input" id="height" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="3" class="table_input" id="comment" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="4" class="table_input" id="number" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="4" class="table_input" id="msize" ></td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="posun" index="4" class="table_input" id="height" ></td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="posun" index="4" class="table_input" id="comment" ></td>\n' +
+            '    <td style="padding: 0px;height: 30px;"><input type="text" keyIndex="64" mold="posun" index="3" class="table_input dom" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="65" index="3" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="66" index="3" class="table_input dom" id="height" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="67" index="3" class="table_input dom" id="comment" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="68" index="4" class="table_input dom" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="69" index="4" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="70" index="4" class="table_input dom" id="height" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="71" mold="posun" index="4" class="table_input dom" id="comment" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td colspan="2" style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">调厚</td>\n' +
             '    <td style="padding: 6px;">调整规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" class="table_input"  ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="72" class="table_input dom"  ></td>\n' +
             '    <td style="padding: 6px;">数量（块数）</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" class="table_input"  ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="73" class="table_input dom"  ></td>\n' +
             '    <td style="padding: 6px;">调整前厚度</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" class="table_input"  ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="74" class="table_input dom"  ></td>\n' +
             '    <td style="padding: 6px;">调整后厚度</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="tiaohou" class="table_input"  ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="75" mold="tiaohou" class="table_input dom"  ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td rowspan="3" colspan="2" style="padding: 0px;width:60px;text-align: center;line-height: 90px;">计划外入库</td>\n' +
             '    <td style="padding: 6px;height: 30px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="1" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="76" index="1" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="1" class="table_input" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="77" index="1" class="table_input dom" id="number" ></td>\n' +
             '    <td style="padding: 6px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="2" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="78" index="2" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" index="2" class="table_input"  id="number"></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="79" mold="ruku" index="2" class="table_input dom"  id="number"></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 6px;height: 30px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="3" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="80" index="3" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="3" class="table_input" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="81" index="3" class="table_input dom" id="number" ></td>\n' +
             '    <td style="padding: 6px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="4" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="82" index="4" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" index="4" class="table_input" id="number" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="83" mold="ruku" index="4" class="table_input dom" id="number" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 6px;height: 30px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="5" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="84" index="5" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="5" class="table_input" id="number" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="85" index="5" class="table_input dom" id="number" ></td>\n' +
             '    <td style="padding: 6px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" index="6" class="table_input" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="86" index="6" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 6px;">数量</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" index="6" class="table_input" id="number" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="87" mold="ruku" index="6" class="table_input dom" id="number" ></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
+
+
+
 
         //计算
         $('.msize[mold="process"]').on('blur',function(){
             var index=$(this).attr("index");
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
-            $('input[mold="process"][index="'+index+'"][id="jingchi"]').val(msizes[0]*msizes[1]);
-            var length=msizes[0],width=msizes[1];
-            if(msizes[0]%300>0){
-                length=msizes[0]-msizes[0]%300+300;
+            if(msizes==2){
+
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val(msizes[0]*msizes[1]);
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val(length*width);
             }
-            if(msizes[1]%300>0){
-                width=msizes[1]-msizes[1]%300+300;
-            }
-            $('input[mold="process"][index="'+index+'"][id="maochi"]').val(length*width);
+
 
         });
 
@@ -483,7 +492,7 @@
     });
 
 </script>
-
+<script src="js/main/keydown.js"></script>
 
 </body>
 </html>
