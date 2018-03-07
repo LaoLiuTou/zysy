@@ -169,23 +169,26 @@
                         <div class="panel-body" >
                             <div class="col-sm-12  m-bot15">
                                 单据编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
-                                荒料来源:<input class="bottom_input dom" keyIndex="2" id="source" size="16" type="text"  />
+                                <!--荒料名称:<input class="bottom_input dom" keyIndex="2" id="source" size="16" type="text"  />-->
+                                荒料名称:<select class="bottom_input dom" keyIndex="2" id="searchMaterial"></select>
                                 日期:<input class="bottom_input default-date-picker dom" keyIndex="3" id="s_dt" size="16" type="text"  />
                                 入库地点:<input class="bottom_input dom" keyIndex="4" id="place" size="16" type="text"  />
-
+                                <!--库房:<select class="bottom_input dom" keyIndex="5" id="searchStocktype" ></select>
+-->
                             </div>
                             <div class="adv-table" id="addForm">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
                                     <thead>
                                     <tr>
-                                        <th>序号</th>
+                                        <th width="6%">序号</th>
                                         <th>厂内料号</th>
-                                        <th>长</th>
-                                        <th>宽</th>
-                                        <th>高</th>
-                                        <th>立方数</th>
-                                        <th>单价</th>
-                                        <th>金额</th>
+                                        <th width="9%">荒料颜色</th>
+                                        <th width="5%">长</th>
+                                        <th width="5%">宽</th>
+                                        <th width="5%">高</th>
+                                        <th width="9%">立方数</th>
+                                        <th width="9%">单价</th>
+                                        <th width="9%">金额</th>
                                         <th>车牌号</th>
                                         <th>备注</th>
                                     </tr>
@@ -198,9 +201,9 @@
 
                             </div>
                             <div class="col-sm-12">
-                                账差:<input class="bottom_input dom" keyIndex="95" id="accountdiff" size="16" type="text"  />
-                                审核人:<input class="bottom_input dom" keyIndex="96" id="auditor" size="16" type="text"  />
-                                录入人:<input class="bottom_input dom" keyIndex="97" id="editor" size="16" type="text"  />
+                                账差:<input class="bottom_input dom" keyIndex="105" id="accountdiff" size="16" type="text"  />
+                                审核人:<input class="bottom_input dom" keyIndex="106" id="auditor" size="16" type="text"  />
+                                录入人:<input class="bottom_input dom" keyIndex="107" id="editor" size="16" type="text"  />
                             </div>
                             <span style="color: red;">*注：长宽高单位为米</span>
                         </div>
@@ -241,7 +244,7 @@
 <script src="js/main/workshop.js"></script>
 <script src="js/main/stocktype.js"></script>
 <script src="js/main/stoneblock.js"></script>
-
+<script src="js/main/material.js"></script>
 <!--pickers plugins-->
 <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -261,25 +264,29 @@
     $(document).ready(function () {
 
 
-
-
+        /*selectMaterial(1,100);
+        setTimeout(function() {
+            selectStocktype(1, 100);
+        });*/
         var html='';
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+1)+'" class="table_input dom" id="number" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+2)+'" class="table_input length dom" id="length" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+3)+'" class="table_input width dom" id="width" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+4)+'" class="table_input height dom" id="height" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+5)+'" class="table_input cube dom" id="cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+6)+'" class="table_input price dom" id="price" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+7)+'" class="table_input sum dom" id="sum" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+8)+'" class="table_input dom" id="platenumber" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*9+9)+'" class="table_input dom" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+1)+'" class="table_input dom" id="number" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+2)+'" class="table_input dom" id="color" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+3)+'" class="table_input length dom" id="length" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+4)+'" class="table_input width dom" id="width" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+5)+'" class="table_input height dom" id="height" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+6)+'" class="table_input cube dom" id="cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+7)+'" class="table_input price dom" id="price" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+8)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+9)+'" class="table_input dom" id="platenumber" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+10)+'" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
-            '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">合计</td>\n' +
+            '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 30px;">合计</td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
@@ -402,13 +409,13 @@
                     var temp={};
                     temp['c_id']=userinfo['id'];
                     temp['code']=$('#code').val();
-                    temp['source']=$('#source').val();
+                    temp['source']=$('#searchMaterial').val();
                     temp['s_dt']=$('#s_dt').val();
                     temp['place']=$('#place').val();
                     temp['accountdiff']=$('#accountdiff').val();
                     temp['auditor']=$('#auditor').val();
                     temp['editor']=$('#editor').val();
-
+                    /*temp['stocktype']=$('#searchStocktype').val();*/
 
 
                     $('input[index="'+i+'"]').each(function () {

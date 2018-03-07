@@ -171,9 +171,10 @@
                                 编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
                                 验收人:<input class="bottom_input dom" keyIndex="2" id="auditor" size="16" type="text"  />
                                 日期:<input class="bottom_input dom default-date-picker" keyIndex="3" id="m_dt" size="16" type="text"  />
-                                工组:<input class="bottom_input dom" keyIndex="4" id="workgroup" size="16" type="text"  />
+                                <!--工组:<input class="bottom_input dom" keyIndex="4" id="workgroup" size="16" type="text"  />
                                 库房:<select class="bottom_input dom" keyIndex="5" id="searchStocktype" ></select>
                                 车间:<select class="bottom_input dom" keyIndex="6" id="searchWorkshop" ></select>
+                            -->
                             </div>
                             <div class="adv-table">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
@@ -182,14 +183,16 @@
                                         <th>序号</th>
                                         <th>石料编号</th>
                                         <th>石料规格</th>
-                                        <th>立方数</th>
-                                        <th>料层</th>
+                                        <th width="7%">立方数</th>
+                                        <th width="5%">料层</th>
                                         <th>板材尺寸</th>
-                                        <th>厚度</th>
-                                        <th>总块数</th>
-                                        <th>平方</th>
-                                        <th>不合格块数</th>
-                                        <th>不合格平方数</th>
+                                        <th width="7%">厚度</th>
+                                        <th width="7%">总块数</th>
+                                        <th width="5%">平方</th>
+                                        <th width="7%">不合格块数</th>
+                                        <th width="7%">不合格平方数</th>
+                                        <th width="7%">加工价格</th>
+                                        <th width="5%">金额</th>
                                         <th>备注</th>
 
                                     </tr>
@@ -258,17 +261,19 @@
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+8)+'" class="table_input square dom" id="square" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*11+11)+'" class="table_input dom" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+8)+'" class="table_input square dom" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+11)+'" class="table_input price dom" id="price" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+12)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+13)+'" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
@@ -284,15 +289,17 @@
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;line-height: 30px;" id="belowgradesquareSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
 
 
 
-        selectWorkshop(1,100);
+        /*selectWorkshop(1,100);
         setTimeout(function() {
             selectStocktype(1, 100);
-        });
+        });*/
 
         //根据编号查询荒料
         $('.sb_code').on('blur',function(){

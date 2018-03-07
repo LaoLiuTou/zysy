@@ -191,4 +191,20 @@ public class Matteboard {
 		this.workshop = workshop;
 	}
  
+	private String price;
+	private String sum;
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getSum() {
+		return sum;
+	}
+	public void setSum(String sum) {
+		this.sum = sum;
+	}
+	
+	
 }

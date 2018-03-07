@@ -45,6 +45,7 @@
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="rz_dt != null"> AND RZ_DT =#{rz_dt} </if>
 			<if test="yf_dt != null"> AND YF_DT =#{yf_dt} </if>
+			<if test="color != null"> AND COLOR =#{color} </if>
 		</trim>  
 		ORDER BY ID DESC 
 		LIMIT #{fromPage},#{toPage} 
@@ -85,6 +86,7 @@
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
 			<if test="rz_dt != null"> AND RZ_DT =#{rz_dt} </if>
 			<if test="yf_dt != null"> AND YF_DT =#{yf_dt} </if>
+			<if test="color != null"> AND COLOR =#{color} </if>
 		</trim>  
 	</select>
 
@@ -115,6 +117,7 @@
 			<if test="c_id != null">C_ID=#{c_id}, </if>
 			<if test="rz_dt != null">RZ_DT=#{rz_dt}, </if>
 			<if test="yf_dt != null">YF_DT=#{yf_dt}, </if>
+			<if test="color != null">COLOR=#{color}, </if>
 			
 		</trim>
 		WHERE ID=#{id}
@@ -146,6 +149,7 @@
 			<if test="c_id != null">C_ID, </if>
 			<if test="rz_dt != null">RZ_DT, </if>
 			<if test="yf_dt != null">YF_DT, </if>
+			<if test="color != null">COLOR, </if>
 			
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
@@ -172,6 +176,7 @@
 			<if test="c_id != null">#{c_id}, </if>
 			<if test="rz_dt != null">#{rz_dt}, </if>
 			<if test="yf_dt != null">#{yf_dt}, </if> 
+			<if test="color != null">#{color}, </if> 
 		</trim>
 		<selectKey order="AFTER" resultType="long" keyProperty="id" > 
 			SELECT LAST_INSERT_ID()
