@@ -15,6 +15,8 @@ public interface IMatteboardService {
  */ 
  @SuppressWarnings("rawtypes")
 	public List<Matteboard> selectMatteboardByParam(Map paramMap); 
+ @SuppressWarnings("rawtypes")
+ public List<Matteboard> selectReportMatteboardByParam(Map paramMap); 
 	/**
 	* 通过查询参数获取总条数
 	 * @return

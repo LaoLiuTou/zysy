@@ -161,18 +161,15 @@ public class MatteboardController {
 		return resultMap;
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/listMatteboard")
+	@RequestMapping("/reportMatteboard")
 	@ResponseBody
-	public Map list(HttpServletRequest request, HttpServletResponse response,Matteboard matteboard)
+	public Map report(HttpServletRequest request, HttpServletResponse response,Matteboard matteboard)
 		throws ServletException, IOException {
 		Map resultMap=new HashMap();
 		try {
-			String page=request.getParameter("page");
-			String size=request.getParameter("size");
-			if(page!=null&&size!=null){
+			
 				Map paramMap=new HashMap();
-				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
-				paramMap.put("toPage",Integer.parseInt(size)); 
+				
 				paramMap.put("id",matteboard.getId());
 				paramMap.put("sb_id",matteboard.getSb_id());
 				paramMap.put("sb_code",matteboard.getSb_code());
@@ -203,6 +200,67 @@ public class MatteboardController {
 				paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
+				paramMap.put("state",matteboard.getState());
+				paramMap.put("c_id",matteboard.getC_id());
+				List<Matteboard> list=iMatteboardService.selectReportMatteboardByParam(paramMap);
+				//int totalnumber=iMatteboardService.selectCountMatteboardByParam(paramMap);
+				Map tempMap=new HashMap();
+				resultMap.put("status", "0");
+				//tempMap.put("num", totalnumber);
+				tempMap.put("data", list);
+				resultMap.put("msg", tempMap);
+			
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/listMatteboard")
+	@ResponseBody
+	public Map list(HttpServletRequest request, HttpServletResponse response,Matteboard matteboard)
+			throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			String page=request.getParameter("page");
+			String size=request.getParameter("size");
+			if(page!=null&&size!=null){
+				Map paramMap=new HashMap();
+				paramMap.put("fromPage",(Integer.parseInt(page)-1)*Integer.parseInt(size));
+				paramMap.put("toPage",Integer.parseInt(size)); 
+				paramMap.put("id",matteboard.getId());
+				paramMap.put("sb_id",matteboard.getSb_id());
+				paramMap.put("sb_code",matteboard.getSb_code());
+				paramMap.put("sb_spec",matteboard.getSb_spec());
+				paramMap.put("sb_cube",matteboard.getSb_cube());
+				paramMap.put("code",matteboard.getCode());
+				paramMap.put("auditor",matteboard.getAuditor());
+				if(matteboard.getM_dt()!=null&&!matteboard.getM_dt().equals(""))
+					paramMap.put("m_dt",matteboard.getM_dt());
+				paramMap.put("workgroup",matteboard.getWorkgroup());
+				paramMap.put("layer",matteboard.getLayer());
+				paramMap.put("msize",matteboard.getMsize());
+				paramMap.put("height",matteboard.getHeight());
+				paramMap.put("blocknumber",matteboard.getBlocknumber());
+				paramMap.put("square",matteboard.getSquare());
+				paramMap.put("belowgradeblock",matteboard.getBelowgradeblock());
+				paramMap.put("belowgradesquare",matteboard.getBelowgradesquare());
+				paramMap.put("comment",matteboard.getComment());
+				String c_dtFrom=request.getParameter("c_dtFrom");
+				String c_dtTo=request.getParameter("c_dtTo");
+				if(c_dtFrom!=null&&!c_dtFrom.equals(""))
+					paramMap.put("c_dtFrom", sdf.parse(c_dtFrom));
+				if(c_dtTo!=null&&!c_dtTo.equals(""))
+					paramMap.put("c_dtTo", sdf.parse(c_dtTo));
+				String u_dtFrom=request.getParameter("u_dtFrom");
+				String u_dtTo=request.getParameter("u_dtTo");
+				if(u_dtFrom!=null&&!u_dtFrom.equals(""))
+					paramMap.put("u_dtFrom", sdf.parse(u_dtFrom));
+				if(u_dtTo!=null&&!u_dtTo.equals(""))
+					paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("state",matteboard.getState());
 				paramMap.put("c_id",matteboard.getC_id());
 				List<Matteboard> list=iMatteboardService.selectMatteboardByParam(paramMap);

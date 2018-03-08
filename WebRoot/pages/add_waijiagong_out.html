@@ -7,7 +7,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>火烧出库单</title>
+    <title>外加工出库单</title>
 
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet">
@@ -44,7 +44,6 @@
         <div class="left-side-inner">
 
             <!--sidebar nav start-->
-
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
@@ -60,11 +59,11 @@
                     <ul class="sub-menu-list">
                         <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
                         <li><a href="add_matteboard_in.html">大锯检验单</a></li>
-                        <li><a href="add_moji_out.html">磨机出库单</a></li>
-                        <li><a href="add_qieji_out.html">切机出库单</a></li>
-                        <li class="active"><a href="add_huoshao_out.html">火烧出库单</a></li>
-                        <li><a href="add_waijiagong_out.html">外加工出库单</a></li>
-                        <li><a href="add_receive.html">领料单</a></li>
+                        <li ><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li ><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                        <li  class="active"><a href="add_waijiagong_out.html">外加工出库单</a></li>
+                        <li ><a href="add_receive.html">领料单</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
@@ -161,7 +160,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            火烧出库单
+                            外加工出库单
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary" id="addBtn">新建</button>
@@ -191,6 +190,7 @@
                                         <th>块数</th>
                                         <th>毛尺</th>
                                         <th>净尺</th>
+                                        <th>延米</th>
                                         <th>加工价格</th>
                                         <th>金额</th>
                                         <th>订单编号</th>
@@ -269,20 +269,21 @@
         for(var i=1;i<6;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*11+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="火烧">火烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+4)+'" mold="process" class="table_input dom" id="height" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+5)+'" mold="process" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+6)+'" mold="process" class="table_input maochi dom" id="maochi" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+7)+'" mold="process" class="table_input jingchi dom" id="jingchi" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+8)+'" mold="process" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+9)+'" mold="process" class="table_input ssum dom" id="ssum" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+10)+'" mold="process" class="table_input dom" id="ordercode" ></td>\n' +
-                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+11)+'" mold="process" class="table_input dom" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option></select></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+4)+'" mold="process" class="table_input height dom" id="height" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+5)+'" mold="process" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+6)+'" mold="process" class="table_input maochi dom" id="maochi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+7)+'" mold="process" class="table_input jingchi dom" id="jingchi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+8)+'" mold="process" class="table_input yanmi dom" id="yanmi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+9)+'" mold="process" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+10)+'" mold="process" class="table_input ssum dom" id="ssum" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+11)+'" mold="process" class="table_input dom" id="ordercode" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+12)+'" mold="process" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
-        html+='<tr style="height:3px;"></tr><tr >\n' +
+        /*html+='<tr style="height:3px;"></tr><tr >\n' +
             '    <td rowspan="3" colspan="2" style="padding: 0px;  width:60px;text-align: center;line-height: 120px;">破损</td>\n' +
             '    <td>数量</td>\n' +
             '    <td>规格</td>\n' +
@@ -301,7 +302,7 @@
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="64" index="2" class="table_input dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="65" index="2" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="66" index="2" class="table_input dom" id="height" ></td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="67" mold="posun" index="2" class="table_input dom" id="comment" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="67" mold="posun" index="2" class="table_input dom" id="comment" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 0px;height: 40px;"><input type="text" keyIndex="68" mold="posun" index="3" class="table_input dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
@@ -311,13 +312,13 @@
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="72" index="4" class="table_input dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="73" index="4" class="table_input dom" id="msize" ></td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="posun" keyIndex="74" index="4" class="table_input dom" id="height" ></td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="75" mold="posun" index="4" class="table_input dom" id="comment" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="75" mold="posun" index="4" class="table_input dom" id="comment" ></td>\n' +
             '</tr>\n' +
             '<tr style="height:3px;"></tr><tr>\n' +
             '    <td colspan="2" style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">调厚</td>\n' +
             '    <td style="padding: 10px;">调整规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="76" class="table_input dom"  ></td>\n' +
-            '    <td style="padding: 10px;">数量（块数）</td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="76" class="table_input dom"  ></td>\n' +
+            '    <td colspan="2" style="padding: 10px;">数量（块数）</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="77" class="table_input dom"  ></td>\n' +
             '    <td style="padding: 10px;">调整前厚度</td>\n' +
             '    <td colspan="2" style="padding: 0px;"><input type="text" mold="tiaohou" keyIndex="78" class="table_input dom"  ></td>\n' +
@@ -333,7 +334,7 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="82" index="1" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="83" mold="ruku" index="1" class="table_input ssum dom"  id="ssum"></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="83" mold="ruku" index="1" class="table_input ssum dom"  id="ssum"></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
@@ -343,7 +344,7 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="86" index="2" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="87" mold="ruku" index="2" class="table_input ssum dom" id="ssum" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="87" mold="ruku" index="2" class="table_input ssum dom" id="ssum" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
@@ -353,7 +354,7 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="90" index="3" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="91" mold="ruku" index="3" class="table_input  ssum dom" id="ssum" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="91" mold="ruku" index="3" class="table_input  ssum dom" id="ssum" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
@@ -363,7 +364,7 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="94" index="4" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="95" mold="ruku" index="4" class="table_input ssum dom" id="ssum" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="95" mold="ruku" index="4" class="table_input ssum dom" id="ssum" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
@@ -373,7 +374,7 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="98" index="5" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="99" mold="ruku" index="5" class="table_input ssum dom" id="ssum" ></td>\n' +
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="99" mold="ruku" index="5" class="table_input ssum dom" id="ssum" ></td>\n' +
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
@@ -383,10 +384,9 @@
             '    <td style="padding: 10px;">加工价格</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="102" index="6" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
             '    <td style="padding: 10px;">金额</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" keyIndex="103" mold="ruku" index="6" class="table_input ssum dom" id="ssum" ></td>\n' +
-            '</tr>';
+            '    <td colspan="3" style="padding: 0px;"><input type="text" keyIndex="103" mold="ruku" index="6" class="table_input ssum dom" id="ssum" ></td>\n' +
+            '</tr>';*/
         $('#htmlTbody').html(html);
-
 
 
 
@@ -395,8 +395,8 @@
             var index=$(this).attr("index");
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
-            if(msizes.length==2){
-
+            var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
+            if(msize!=''&&msizes.length==2){
                 $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]/1000000).toFixed(2));
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
@@ -406,7 +406,22 @@
                     width=msizes[1]-msizes[1]%300+300;
                 }
                 $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width/1000000).toFixed(2));
+
+                if(height!=''){
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+                }
             }
+
+        });
+        $('.height[mold="process"]').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
+            var msizes=msize.split('*');
+            if(msize!=''&&msizes.length==2&&height!=''){
+                $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+            }
+
         });
 
         $('.number[mold="process"]').on('blur',function(){
@@ -485,7 +500,7 @@
                     temp['qualify']='是';
                     temp['damage']='否';
                     temp['state']='1';
-                    temp['outtype']='火烧';
+                    temp['outtype']='外加工';
                     $('[mold="process"][index="'+i+'"]').each(function () {
                         if($(this).val()!='')
                             temp[$(this).attr('id')]=$(this).val();
@@ -494,7 +509,7 @@
                 }
             }
             //破损
-            for(var i=1;i<5;i++) {
+           /* for(var i=1;i<5;i++) {
                 if($('input[mold="posun"][index="'+i+'"][id="msize"]').val()!=''
                     &&$('input[mold="posun"][index="'+i+'"][id="number"]').val()!=''&&$('input[mold="posun"][index="'+i+'"][id="height"]').val()!=''){
 
@@ -503,16 +518,15 @@
                     temp['code']=$('#code').val();
                     temp['auditor']=$('#auditor').val();
                     temp['m_dt']=$('#m_dt').val();
-                    temp['worker']=$('#worker').val();
-                    /*temp['stocktype']=$('#searchStocktype').val();
-                    temp['workshop']=$('#searchWorkshop').val();*/
+                    /!*temp['stocktype']=$('#searchStocktype').val();
+                    temp['workshop']=$('#searchWorkshop').val();*!/
 
                     temp['material']='2';
                     temp['unit']='平方米';
                     temp['qualify']='否';
                     temp['damage']='是';
                     temp['state']='1';
-                    temp['outtype']='火烧';
+                    temp['outtype']='外加工';
                     $('input[mold="posun"][index="'+i+'"]').each(function () {
                         if($(this).val()!='')
                             temp[$(this).attr('id')]=$(this).val();
@@ -529,16 +543,15 @@
                     temp['code']=$('#code').val();
                     temp['auditor']=$('#auditor').val();
                     temp['m_dt']=$('#m_dt').val();
-                    temp['worker']=$('#worker').val();
-                    /*temp['stocktype']=$('#searchStocktype').val();
-                    temp['workshop']=$('#searchWorkshop').val();*/
+                    /!*temp['stocktype']=$('#searchStocktype').val();
+                    temp['workshop']=$('#searchWorkshop').val();*!/
 
                     temp['material']='2';
                     temp['unit']='平方米';
                     temp['qualify']='是';
                     temp['damage']='否';
                     temp['state']='0';
-                    temp['outtype']='火烧';
+                    temp['outtype']='外加工';
                     temp['comment']='计划外入库';
                     var msize=$('[mold="ruku"][index="'+i+'"][id="msize"]').val();
                     var msizes=msize.split('*');
@@ -551,15 +564,13 @@
                     else{
                         temp['msize']=msize;
                     }
-                    temp['sprice']=$('[mold="ruku"][index="'+i+'"][id="sprice"]').val();
-                    temp['ssum']=$('[mold="ruku"][index="'+i+'"][id="ssum"]').val();
-                    /*$('input[mold="ruku"][index="'+i+'"]').each(function () {
+                    /!*$('input[mold="ruku"][index="'+i+'"]').each(function () {
                         if($(this).val()!='')
                             temp[$(this).attr('id')]=$(this).val();
-                    });*/
+                    });*!/
                     params.push(temp);
                 }
-            }
+            }*/
 
             //alert(JSON.stringify(params));
             addmulStock(params);

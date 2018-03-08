@@ -51,6 +51,9 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
+			<if test="sprice != null"> AND a.SPRICE =#{sprice} </if>
+			<if test="ssum != null"> AND a.SSUM =#{ssum} </if>
 			
 		</trim>  
 		ORDER BY a.ID DESC 
@@ -93,6 +96,9 @@
 			<if test="code != null"> AND CODE =#{code} </if>
 			<if test="m_dt != null"> AND M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND WORKER =#{worker} </if>
+			<if test="sprice != null"> AND a.SPRICE =#{sprice} </if>
+			<if test="ssum != null"> AND a.SSUM =#{ssum} </if>
 		</trim>  
 	</select>
 
@@ -127,6 +133,9 @@
 			<if test="code != null">CODE=#{code}, </if>
 			<if test="m_dt != null">M_DT=#{m_dt}, </if>
 			<if test="auditor != null">AUDITOR=#{auditor}, </if>
+			<if test="worker != null">WORKER=#{worker}, </if>
+			<if test="sprice != null">SPRICE=#{sprice}, </if>
+			<if test="ssum != null">SSUM=#{ssum}, </if>
 			
 		</trim>
 		WHERE ID=#{id}
@@ -162,6 +171,9 @@
 			<if test="code != null">CODE, </if>
 			<if test="m_dt != null">M_DT, </if>
 			<if test="auditor != null">AUDITOR, </if>
+			<if test="worker != null">WORKER, </if>
+			<if test="sprice != null">SPRICE, </if>
+			<if test="ssum != null">SSUM, </if>
 			
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides="," >
@@ -192,7 +204,10 @@
 			<if test="code != null">#{code}, </if>
 			<if test="m_dt != null">#{m_dt}, </if>
 			<if test="auditor != null">#{auditor}, </if>
-			 
+			<if test="worker != null">#{worker}, </if>
+			<if test="sprice != null">#{sprice}, </if>
+			<if test="ssum != null">#{ssum}, </if>
+			  
 		</trim>
 		<selectKey order="AFTER" resultType="long" keyProperty="id" > 
 			SELECT LAST_INSERT_ID()
@@ -238,6 +253,7 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -280,6 +296,7 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -322,6 +339,7 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
 		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
 	</select>
@@ -365,6 +383,7 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
 		GROUP BY a.HEIGHT,a.UNIT
 	</select>
@@ -407,6 +426,7 @@
 			<if test="code != null"> AND a.CODE =#{code} </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
 		GROUP BY a.HEIGHT,a.UNIT
 	</select>

@@ -173,6 +173,30 @@ public class StockController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("c_id",stock.getC_id());
+				   
+				 
+				  
+				 
+
+				paramMap.put("pid",stock.getPid());
+				paramMap.put("process",stock.getProcess());
+				paramMap.put("packaging",stock.getPackaging());
+				paramMap.put("workgroup",stock.getWorkgroup());
+				paramMap.put("ordercode",stock.getOrdercode());
+				paramMap.put("outtype",stock.getOuttype());
+				paramMap.put("outtype",stock.getOuttype());
+				paramMap.put("code",stock.getCode());
+				String m_dtFrom=request.getParameter("m_dtFrom");
+				String m_dtTo=request.getParameter("m_dtTo");
+				if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+				paramMap.put("m_dtFrom", sdf.parse(m_dtFrom));
+				if(m_dtTo!=null&&!m_dtTo.equals(""))
+				paramMap.put("m_dtTo", sdf.parse(m_dtTo));
+				paramMap.put("auditor",stock.getAuditor());
+				paramMap.put("worker",stock.getWorker());
+				paramMap.put("sprice",stock.getSprice());
+				paramMap.put("ssum",stock.getSsum());
+				
 				List<Stock> list=iStockService.selectStockByParam(paramMap);
 				int totalnumber=iStockService.selectCountStockByParam(paramMap);
 				Map tempMap=new HashMap();

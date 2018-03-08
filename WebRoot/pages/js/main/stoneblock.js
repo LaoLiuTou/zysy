@@ -111,6 +111,7 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
                     '<td>'+data[o].code+'</td>\n' +
                     '<td>'+data[o].source+'</td>\n' +
                     '<td>'+data[o].place+'</td>\n' +
+                    '<td>'+data[o].color+'</td>\n'  +
                     '<td>'+data[o].number+'</td>\n'  +
                     '<td>'+data[o].length+'</td>\n'  +
                     '<td>'+data[o].width+'</td>\n'  +

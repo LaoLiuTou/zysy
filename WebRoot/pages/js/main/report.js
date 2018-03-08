@@ -14,6 +14,51 @@ $(document).ready(function(){
  * @param stocktype
  * @param workshop
  */
+function  reportListStock (bodyParam) {
+
+
+    var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+
+        if(status=='0'){
+            var data=msg['data'];
+            var html='';
+            for(var o in data){
+                var msizes=data[o].msize.split('*');
+
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+(Number(o)+1)+'</td>\n' +
+                    '<td>'+data[o].m_dt+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
+                    '<td>'+data[o].process+'</td>\n' +
+                    '<td>'+data[o].msize+'</td>\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].number+'</td>\n' +
+                    '<td>'+(msizes[0]*msizes[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+data[o].comment+'</td>\n' +
+                    '<td>'+data[o].worker+'</td>\n' +
+                    '<td>'+data[o].auditor+'</td>\n' +
+                    '<td>'+data[o].sprice+'</td>\n' +
+                    '<td>'+data[o].ssum+'</td>\n' +
+                    '</tr>' ;
+
+
+            }
+            $('#reportTbody').html(html);
+
+
+        }
+    });
+}
+/**
+ * 统计库存
+ * @param c_dt
+ * @param stocktype
+ * @param workshop
+ */
 function  reportStock (c_dt,stocktype,workshop) {
     var bodyParam={};
     if(c_dt!=''){
@@ -126,7 +171,7 @@ function  reportWorkshopInOut (c_dt) {
  * @param currentPage
  * @param pageSize
  */
-function  reportMatteboard (m_dt,currentPage,pageSize) {
+function  reportMatteboard (m_dt) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
@@ -134,10 +179,8 @@ function  reportMatteboard (m_dt,currentPage,pageSize) {
     if(m_dt!=''){
         bodyParam['m_dt']=m_dt+' 00:00:00';
     }
-    bodyParam['page']=currentPage;
-    bodyParam['size']=pageSize;
 
-    var httpR = new createHttpR(url+'listMatteboard','post','text',bodyParam,'callBack');
+    var httpR = new createHttpR(url+'reportMatteboard','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
@@ -145,103 +188,38 @@ function  reportMatteboard (m_dt,currentPage,pageSize) {
         if(status=='0'){
             var data=msg['data'];
             var html='';
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0,sum_6=0;
             for(var o in data){
+                sum_1=Number(sum_1)+Number(data[o].sum_blocknumber);
+                sum_2=Number(sum_2)+Number(data[o].sum_square);
+                sum_3=Number(sum_3)+Number(data[o].sum_belowgradeblock);
+                sum_4=Number(sum_4)+Number(data[o].sum_belowgradesquare);
+                sum_5=Number(sum_5)+Number(data[o].sum_gradeblock);
+                sum_6=Number(sum_6)+Number(data[o].sum_gradesquare);
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].m_dt+'</td>\n' +
-                    '<td>'+data[o].code+'</td>\n' +
-                    '<td>'+data[o].workgroup+'</td>\n' +
-                    '<td>'+data[o].layer+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
-                    '<td>'+data[o].msize+'</td>\n' +
-                    '<td>'+data[o].blocknumber+'</td>\n' +
-                    '<td>'+data[o].square+'</td>\n' +
-                    '<td>'+data[o].belowgradeblock+'</td>\n' +
-                    '<td>'+data[o].belowgradesquare+'</td>\n' +
-                    '<td>'+(data[o].blocknumber-data[o].belowgradeblock)+'</td>\n' +
-                    '<td>'+(data[o].square-data[o].belowgradesquare)+'</td>\n' +
-                    '<td>'+data[o].comment+'</td>\n' +
+                    '<td>'+data[o].sum_blocknumber+'</td>\n' +
+                    '<td>'+data[o].sum_square+'</td>\n' +
+                    '<td>'+data[o].sum_belowgradeblock+'</td>\n' +
+                    '<td>'+data[o].sum_belowgradesquare+'</td>\n' +
+                    '<td>'+data[o].sum_gradeblock+'</td>\n' +
+                    '<td>'+data[o].sum_gradesquare+'</td>\n' +
                     '</tr>';
             }
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td>'+sum_4+'</td>\n' +
+                '<td>'+sum_5+'</td>\n' +
+                '<td>'+sum_6+'</td>\n' +
+                '</tr>';
 
             $('#reportTbody').html(html);
-            var num=msg['num'];
-            if(num>0) {
-                var pageHtml = '';
-                var totalPage = 0;
-                if (num % pageSize == 0) {
-                    totalPage = num / pageSize;
-                }
-                else {
-                    totalPage = Math.ceil(num / pageSize);
-                }
 
-                if (currentPage == 1) {
-                    pageHtml += '<li class="disabled"><a href="#">|&laquo;</a></li>';
-                    pageHtml += '<li class="disabled"><a href="#">&laquo;</a></li>';
-                }
-                else {
-                    pageHtml += '<li ><a href="#" class="pageBtn" index="1">|&laquo;</a></li>';
-                    pageHtml += '<li ><a href="#" class="prevBtn" index="">&laquo;</a></li>';
-                }
-                if (totalPage <= showPage) {
-                    for (var i = 1; i < Number(totalPage) + 1; i++) {
-                        if (currentPage == i) {
-                            pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
-                        }
-                        else {
-                            pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
-                        }
-                    }
-                }
-                else {
-                    if (currentPage <= (showPage - 1) / 2) {
-                        for (var i = 1; i <= showPage; i++) {
-                            if (currentPage == i) {
-                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
-                            }
-                            else {
-                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
-                            }
-                        }
-                    }
-                    else if (totalPage - currentPage < (showPage - 1) / 2) {
-                        for (var i = Number(totalPage) - showPage; i <= totalPage; i++) {
-                            if (currentPage == i) {
-                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
-                            }
-                            else {
-                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
-                            }
-                        }
-                    }
-                    else {
-                        for (var i = Number(currentPage) - (showPage - 1) / 2; i <= Number(currentPage) + (showPage - 1) / 2; i++) {
-                            if (currentPage == i) {
-                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
-                            }
-                            else {
-                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
-                            }
-                        }
-                    }
-
-
-                }
-
-                if (currentPage == totalPage) {
-                    pageHtml += '<li class="disabled"><a href="#">&raquo;</a></li>';
-                    pageHtml += '<li class="disabled"><a href="#">&raquo;|</a></li>';
-                }
-                else {
-                    pageHtml += '<li class="nextBtn" index=""><a href="#">&raquo;</a></li>';
-                    pageHtml += '<li class="pageBtn" index="' + totalPage + '"><a href="#">&raquo;|</a></li>';
-                }
-                /* pageHtml+='<li><input type="text" id="jumpPageText" class="paging-inpbox form-control"></li>\n' +
-                     '<li><button type="button" id="jumpBtn" class="paging-btnbox btn btn-primary">跳转</button></li>\n' +
-                     '<li><span class="number-of-pages">共'+totalPage+'页</span></li>';*/
-
-                $('.pagination').html(pageHtml);
-            }
 
         }
     });

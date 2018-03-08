@@ -7,7 +7,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>原材料明细</title>
+    <title>荒料入库明细</title>
 
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet">
@@ -46,13 +46,13 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="list_stocktype.html">库别管理</a></li>
+                        <li ><a href="list_stocktype.html">库别管理</a></li>
                         <li><a href="list_workshop.html">车间管理</a></li>
-                        <li><a href="list_material.html">产品管理</a></li>
+                        <li ><a href="list_material.html">产品管理</a></li>
                     </ul>
                 </li>
                 <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存明细</span></a></li>
@@ -60,26 +60,30 @@
                     <ul class="sub-menu-list">
                         <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
                         <li><a href="add_matteboard_in.html">大锯检验单</a></li>
-                        <li><a href="add_moji_out.html">磨机出库单</a></li>
-                        <li><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li ><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li ><a href="add_qieji_out.html">切机出库单</a></li>
                         <li><a href="add_huoshao_out.html">火烧出库单</a></li>
-                        <li><a href="add_receive.html">领料单</a></li>
+                        <li ><a href="add_waijiagong_out.html">外加工出库单</a></li>
+                        <li ><a href="add_receive.html">领料单</a></li>
                     </ul>
                 </li>
-                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
+                <li class="menu-list  nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
                     <ul class="sub-menu-list">
-                        <li ><a href="report_stock.html">库存</a></li>
-                        <li ><a href="report_stock_in_out.html">出入库明细</a></li>
-                        <li ><a href="report_workshop_in_out.html">车间进出配比</a></li>
-                        <li class="active"><a href="report_stoneblock.html">原材料明细</a></li>
-                        <li><a href="report_matteboard.html">大锯产量统计</a></li>
+                        <li  class="active"><a href="report_stoneblock.html">荒料入库明细</a></li>
+                        <li ><a href="report_matteboard_test.html">大锯检验单流水</a></li>
+                        <li ><a href="report_matteboard.html">大锯产量统计</a></li>
                         <li><a href="report_yield.html">产量日报</a></li>
-                        <li><a href="report_damag.html">破损日报</a></li>
+                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li><a href="report_moji.html">磨机加工明细表</a></li>
+                        <li><a href="report_huoshao.html">火烧加工明细表</a></li>
+                        <li><a href="report_qieji.html">切机加工明细表</a></li>
+                        <li><a href="report_waijiagong.html">外加工明细表</a></li>
 
+                        <!--<li><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>-->
                     </ul>
                 </li>
-                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
-
+                <li><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
             </ul>
             <!--sidebar nav end-->
 
@@ -156,7 +160,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            原材料明细
+                            荒料入库明细
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary" id="printBtn">打印</button>
@@ -166,12 +170,15 @@
                             </span>
                         </header>
                         <div class="panel-body">
-
-                            <!--<form class="form-horizontal" role="form" id="form">
+<!--
+                            <form class="form-horizontal" role="form" id="form">
 
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
-                                    <div class="col-md-9 pdnone">
+                                    <div class="col-md-4 pdnone">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
+                                    </div>
+                                    <div class="col-md-4 pdnone">
                                         <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
                                     </div>
                                 </div>
@@ -192,6 +199,7 @@
                                         <th>单号</th>
                                         <th>来源</th>
                                         <th>入库地点</th>
+                                        <th>颜色</th>
                                         <th>料号</th>
                                         <th>长</th>
                                         <th>宽</th>
@@ -203,6 +211,7 @@
                                         <th>入账时间</th>
                                         <th>运费结算时间</th>
                                     </tr>
+
                                     </thead>
                                     <tbody id="stoneblockTbody">
 

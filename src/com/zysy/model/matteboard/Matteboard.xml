@@ -49,6 +49,46 @@
 		ORDER BY ID DESC 
 		LIMIT #{fromPage},#{toPage} 
 	</select>
+	<select id="selectReportMatteboardByParam" parameterType="java.util.Map" resultType="Matteboard">
+		SELECT a.m_dt,a.height , 
+		SUM(a.blocknumber)  as sum_blocknumber,SUM(a.square)  as sum_square,
+		SUM(a.blocknumber-a.belowgradeblock)  as sum_gradeblock,SUM(a.square-a.belowgradesquare)  as sum_gradesquare,
+		SUM(a.belowgradeblock)  as sum_belowgradeblock,SUM(a.belowgradesquare)  as sum_belowgradesquare 
+		FROM matteboard a 
+		 
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id != null"> AND a.ID =#{id} </if>
+			<if test="sb_id != null"> AND a.SB_ID =#{sb_id} </if>
+			<if test="sb_code != null"> AND a.SB_CODE =#{sb_code} </if>
+			<if test="sb_spec != null"> AND a.SB_SPEC =#{sb_spec} </if>
+			<if test="sb_cube != null"> AND a.SB_CUBE =#{sb_cube} </if> 
+			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
+			<if test="m_dtFrom != null"> AND unix_timestamp(a.M_DT) &gt;=unix_timestamp(#{m_dtFrom}) </if>
+			<if test="m_dtTo != null"> AND unix_timestamp(a.M_DT) &lt;=unix_timestamp(#{m_dtTo}) </if>
+			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
+			<if test="workgroup != null"> AND a.WORKGROUP =#{workgroup} </if>
+			<if test="layer != null"> AND a.LAYER =#{layer} </if>
+			<if test="msize != null"> AND a.MSIZE =#{msize} </if>
+			<if test="height != null"> AND a.HEIGHT =#{height} </if>
+			<if test="blocknumber != null"> AND a.BLOCKNUMBER =#{blocknumber} </if>
+			<if test="square != null"> AND a.SQUARE =#{square} </if>
+			<if test="belowgradeblock != null"> AND a.BELOWGRADEBLOCK =#{belowgradeblock} </if>
+			<if test="belowgradesquare != null"> AND a.BELOWGRADESQUARE =#{belowgradesquare} </if>
+			<if test="comment != null"> AND a.COMMENT =#{comment} </if>
+			<if test="c_dtFrom != null"> AND unix_timestamp(a.C_DT) &gt;=unix_timestamp(#{c_dtFrom}) </if>
+			<if test="c_dtTo != null"> AND unix_timestamp(a.C_DT) &lt;=unix_timestamp(#{c_dtTo}) </if>
+			<if test="c_dt != null"> AND a.C_DT =#{c_dt} </if>
+			<if test="u_dtFrom != null"> AND unix_timestamp(a.U_DT) &gt;=unix_timestamp(#{u_dtFrom}) </if>
+			<if test="u_dtTo != null"> AND unix_timestamp(a.U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
+			<if test="u_dt != null"> AND a.U_DT =#{u_dt} </if>
+			<if test="state != null"> AND a.STATE =#{state} </if>
+			<if test="c_id != null"> AND a.C_ID =#{c_id} </if>
+			<if test="price != null"> AND a.PRICE =#{price} </if>
+			<if test="sum != null"> AND a.SUM =#{sum} </if>
+		</trim>  
+		group by a.height ,a.m_dt 
+	</select>
 
 	<select id="selectCountmatteboardByParam" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(id) 

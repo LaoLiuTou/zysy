@@ -46,7 +46,7 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
@@ -63,23 +63,27 @@
                         <li><a href="add_moji_out.html">磨机出库单</a></li>
                         <li><a href="add_qieji_out.html">切机出库单</a></li>
                         <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                        <li><a href="add_waijiagong_out.html">外加工出库单</a></li>
                         <li><a href="add_receive.html">领料单</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="report_stock.html">库存</a></li>
-                        <li><a href="report_stock_in_out.html">出入库明细</a></li>
-                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
-                        <li><a href="report_stoneblock.html">原材料明细</a></li>
+                        <li><a href="report_stoneblock.html">荒料入库明细</a></li>
+                        <li ><a href="report_matteboard_test.html">大锯检验单流水</a></li>
                         <li><a href="report_matteboard.html">大锯产量统计</a></li>
                         <li><a href="report_yield.html">产量日报</a></li>
-                        <li><a href="report_damag.html">破损日报</a></li>
+                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li><a href="report_moji.html">磨机加工明细表</a></li>
+                        <li><a href="report_huoshao.html">火烧加工明细表</a></li>
+                        <li><a href="report_qieji.html">切机加工明细表</a></li>
+                        <li><a href="report_waijiagong.html">外加工明细表</a></li>
 
+                        <!--<li><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>-->
                     </ul>
                 </li>
-                <li ><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
-
+                <li><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
             </ul>
             <!--sidebar nav end-->
 
@@ -254,6 +258,13 @@
 
 
 <script>
+    function Num(obj){
+        obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+    }
     $(document).ready(function () {
 
 
@@ -261,23 +272,23 @@
         for(var i=1;i<11;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+8)+'" class="table_input square dom" id="square" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+11)+'" class="table_input price dom" id="price" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+12)+'" class="table_input sum dom" id="sum" ></td>\n' +
-                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(6+(i-1)*13+13)+'" class="table_input dom" id="comment" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+8)+'" class="table_input square dom" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+11)+'" class="table_input price dom" id="price" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+12)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+13)+'" class="table_input dom" id="comment" ></td>\n' +
                 '</tr>';
         }
         html+='<tr>\n' +
-            '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">合计</td>\n' +
+            '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">合计</td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
@@ -285,17 +296,17 @@
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;line-height: 30px;" id="squareSum"></td>\n' +
+            '<td style="padding: 0px;line-height: 40px;" id="squareSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;line-height: 30px;" id="belowgradesquareSum"></td>\n' +
+            '<td style="padding: 0px;line-height: 40px;" id="belowgradesquareSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
-            '<td style="padding: 0px;"></td>\n' +
+            '<td style="padding: 0px;line-height: 40px;" id="priceSum"></td>\n' +
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
 
 
-
+        selectWorkshop(1,100);
         /*selectWorkshop(1,100);
         setTimeout(function() {
             selectStocktype(1, 100);
@@ -337,26 +348,55 @@
                 $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
             }
         });
+
+        //合格数
+        var gradeblock=0;
         $('.blocknumber').on('blur',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
+            var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
+            var price=$('input[index="'+index+'"][id="price"]').val();
             var msizes=msize.split('*');
             if(msize!=''&&blocknumber!=''){
                 $('input[index="'+index+'"][id="square"]').val((msizes[0]*msizes[1]*blocknumber/1000000).toFixed(2));
                 $('input[index="'+index+'"][id="square"]').trigger("blur");
             }
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+                gradeblock=Number(blocknumber)-Number(belowgradeblock);
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+
+            }
         });
         $('.belowgradeblock').on('blur',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
+            var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
             var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
+            var price=$('input[index="'+index+'"][id="price"]').val();
             var msizes=msize.split('*');
             if(msize!=''&&belowgradeblock!=''){
                 $('input[index="'+index+'"][id="belowgradesquare"]').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
                 $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
             }
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+                gradeblock=Number(blocknumber)-Number(belowgradeblock);
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+            }
         });
+
+        $('.price').on('blur',function(){
+            var index=$(this).attr("index");
+            var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
+            var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
+            var price=$('input[index="'+index+'"][id="price"]').val();
+
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+                gradeblock=Number(blocknumber)-Number(belowgradeblock);
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+            }
+        });
+
         //求和
         $('.square').on('blur',function(){
             var sum=0;
@@ -376,7 +416,15 @@
             });
             $('#belowgradesquareSum').text(sum.toFixed(2));
         });
-
+        $('.sum').on('blur',function(){
+            var sum=0;
+            $('.sum').each(function(){
+                if($(this).val!=''){
+                    sum+=Number($(this).val());
+                }
+            });
+            $('#priceSum').text(sum.toFixed(2));
+        });
         //新建
         $('#addBtn').click(function () {
             if($('#code').val()==''){

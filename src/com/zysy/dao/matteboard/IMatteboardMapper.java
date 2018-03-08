@@ -14,6 +14,8 @@ import com.zysy.model.matteboard.Matteboard;
  */ 
  @SuppressWarnings("rawtypes")
 	public List<Matteboard> selectmatteboardByParam(Map paramMap); 
+ @SuppressWarnings("rawtypes")
+ public List<Matteboard> selectReportMatteboardByParam(Map paramMap); 
 	/**
 		* 通过查询参数获取总条数
 	    * @return

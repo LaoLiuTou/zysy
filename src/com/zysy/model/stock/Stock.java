@@ -187,6 +187,7 @@ public class Stock {
 	private String code;
 	private Date m_dt;
 	private String auditor;
+	private String worker;
 	public String getProcess() {
 		return process;
 	}
@@ -253,7 +254,27 @@ public class Stock {
 	public void setAuditor(String auditor) {
 		this.auditor = auditor;
 	}
+	public String getWorker() {
+		return worker;
+	}
+	public void setWorker(String worker) {
+		this.worker = worker;
+	}
 	 
 
+	private String sprice;
+	private String ssum;
+	public String getSprice() {
+		return sprice;
+	}
+	public void setSprice(String sprice) {
+		this.sprice = sprice;
+	}
+	public String getSsum() {
+		return ssum;
+	}
+	public void setSsum(String ssum) {
+		this.ssum = ssum;
+	}
 	
 }

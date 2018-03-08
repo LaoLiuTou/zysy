@@ -46,7 +46,7 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
 
                 <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
                     <ul class="sub-menu-list">
@@ -56,30 +56,34 @@
                     </ul>
                 </li>
                 <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存明细</span></a></li>
-                <li class="menu-list  nav-active"><a href=""><i class="fa fa-clipboard"></i> <span>单据管理</span></a>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-clipboard"></i> <span>单据管理</span></a>
                     <ul class="sub-menu-list">
-                        <li ><a href="add_stoneblock_in.html">荒料入库单</a></li>
+                        <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
                         <li><a href="add_matteboard_in.html">大锯检验单</a></li>
-                        <li><a href="add_moji_out.html">磨机出库单</a></li>
-                        <li><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li ><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li ><a href="add_qieji_out.html">切机出库单</a></li>
                         <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                        <li><a href="add_waijiagong_out.html">外加工出库单</a></li>
                         <li class="active"><a href="add_receive.html">领料单</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="report_stock.html">库存</a></li>
-                        <li><a href="report_stock_in_out.html">出入库明细</a></li>
-                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
-                        <li><a href="report_stoneblock.html">原材料明细</a></li>
+                        <li><a href="report_stoneblock.html">荒料入库明细</a></li>
+                        <li ><a href="report_matteboard_test.html">大锯检验单流水</a></li>
                         <li><a href="report_matteboard.html">大锯产量统计</a></li>
                         <li><a href="report_yield.html">产量日报</a></li>
-                        <li><a href="report_damag.html">破损日报</a></li>
+                        <li><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li><a href="report_moji.html">磨机加工明细表</a></li>
+                        <li><a href="report_huoshao.html">火烧加工明细表</a></li>
+                        <li><a href="report_qieji.html">切机加工明细表</a></li>
+                        <li><a href="report_waijiagong.html">外加工明细表</a></li>
 
+                        <!--<li><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>-->
                     </ul>
                 </li>
                 <li><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
-
             </ul>
             <!--sidebar nav end-->
 
@@ -168,23 +172,25 @@
                         </header>
                         <div class="panel-body" >
                             <div class="col-sm-12  m-bot15">
-                                类型:<select  class="bottom_input dom" keyIndex="1" id="outtype" style="width: 100px;"><option value=""></option><option value="磨机">磨机</option><option value="切机">切机</option><option value="火烧">火烧</option></select>
-                                单据编号:<input class="bottom_input dom" keyIndex="2" id="code" size="16" type="text"   />
-                                验收人:<input class="bottom_input dom" keyIndex="3" id="auditor" size="16" type="text"  />
-                                库房:<select class="bottom_input dom" keyIndex="4" id="searchStocktype" ></select>
-                                日期:<input class="bottom_input default-date-picker dom" keyIndex="5" id="m_dt" size="16" type="text"  />
-                                车间:<select class="bottom_input dom" keyIndex="6" id="searchWorkshop" ></select>
+                                <!--类型:<select  class="bottom_input dom" keyIndex="1" id="outtype" style="width: 100px;"><option value=""></option><option value="磨机">磨机</option><option value="切机">切机</option><option value="火烧">火烧</option></select>
+                                -->
+                                单据编号:<input class="bottom_input dom" keyIndex="1" id="code" size="16" type="text"   />
+                                验收人:<input class="bottom_input dom" keyIndex="2" id="auditor" size="16" type="text"  />
+                                <!--库房:<select class="bottom_input dom" keyIndex="4" id="searchStocktype" ></select>-->
+                                日期:<input class="bottom_input default-date-picker dom" keyIndex="3" id="m_dt" size="16" type="text"  />
+                               <!-- 车间:<select class="bottom_input dom" keyIndex="6" id="searchWorkshop" ></select>-->
+                                加工人员:<input class="bottom_input dom" keyIndex="2" id="auditor" size="16" type="text"  />
                             </div>
                             <div class="adv-table" id="addForm">
                                 <table  class="display table table-bordered table-striped" style="margin-bottom:10px;" id="dynamic-table">
                                     <thead>
                                     <tr>
                                         <th>序号</th>
-                                        <th>来料工艺</th>
-                                        <th>板材规格</th>
-                                        <th>厚度</th>
-                                        <th>块数</th>
-                                        <th>平方</th>
+                                        <th width="15%">来料工艺</th>
+                                        <th  width="15%">板材规格</th>
+                                        <th width="10%">厚度</th>
+                                        <th  width="10%">块数</th>
+                                        <th  width="10%">平方</th>
                                         <th>备注</th>
                                     </tr>
                                     </thead>
@@ -264,9 +270,8 @@
         }
         $('#htmlTbody').html(html);
 
-        selectWorkshop(1,100);
         setTimeout(function() {
-            selectStocktype(1, 100);
+            //selectStocktype(1, 100);
             selectMaterial(1,100);
         });
 

@@ -205,6 +205,49 @@ public class Matteboard {
 	public void setSum(String sum) {
 		this.sum = sum;
 	}
+
+	private String sum_blocknumber;
+	private String sum_square;
+	private String sum_gradeblock;
+	private String sum_gradesquare;
+	private String sum_belowgradeblock;
+	private String sum_belowgradesquare;
+	public String getSum_blocknumber() {
+		return sum_blocknumber;
+	}
+	public void setSum_blocknumber(String sum_blocknumber) {
+		this.sum_blocknumber = sum_blocknumber;
+	}
+	public String getSum_square() {
+		return sum_square;
+	}
+	public void setSum_square(String sum_square) {
+		this.sum_square = sum_square;
+	}
+	public String getSum_gradeblock() {
+		return sum_gradeblock;
+	}
+	public void setSum_gradeblock(String sum_gradeblock) {
+		this.sum_gradeblock = sum_gradeblock;
+	}
+	public String getSum_gradesquare() {
+		return sum_gradesquare;
+	}
+	public void setSum_gradesquare(String sum_gradesquare) {
+		this.sum_gradesquare = sum_gradesquare;
+	}
+	public String getSum_belowgradeblock() {
+		return sum_belowgradeblock;
+	}
+	public void setSum_belowgradeblock(String sum_belowgradeblock) {
+		this.sum_belowgradeblock = sum_belowgradeblock;
+	}
+	public String getSum_belowgradesquare() {
+		return sum_belowgradesquare;
+	}
+	public void setSum_belowgradesquare(String sum_belowgradesquare) {
+		this.sum_belowgradesquare = sum_belowgradesquare;
+	}
 	
 	
 }

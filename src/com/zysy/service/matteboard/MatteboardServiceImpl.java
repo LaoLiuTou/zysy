@@ -29,6 +29,10 @@ public class MatteboardServiceImpl  implements IMatteboardService {
 	public List<Matteboard> selectMatteboardByParam(Map paramMap){ 
 		return iMatteboardMapper.selectmatteboardByParam(paramMap);
 	}
+ @SuppressWarnings("rawtypes")
+ public List<Matteboard> selectReportMatteboardByParam(Map paramMap){ 
+	 return iMatteboardMapper.selectReportMatteboardByParam(paramMap);
+ }
 
 	/**
 	* 通过查询参数获取总条数
