@@ -109,12 +109,12 @@ function deleteStock(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
+function  queryStock (code,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
     var bodyParam={'page':currentPage,'size':pageSize};
-    if(material!=''){
+    /*if(material!=''){
         bodyParam['material']=material;
         $('#searchMaterial').val(material)
     }
@@ -125,7 +125,7 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
     if(workshop!=''){
         bodyParam['workshop']=workshop;
         $('#searchWorkshop').val(workshop);
-    }
+    }*/
     var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -137,11 +137,14 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
             var html='';
             for(var o in data){
 
+                var type=data[o].material_name;
+                if(type==''){
+                    type=data[o].outtype;
+                }
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].id+'</td>\n' +
-                    '<td>'+data[o].material_name+'</td>\n' +
-                    '<td>'+data[o].stocktype_name+'</td>\n' +
-                    '<td>'+data[o].workshop_name+'</td>\n' +
+                    '<td>'+type+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
@@ -173,6 +176,15 @@ function  queryStock (material,stocktype,workshop,currentPage,pageSize) {
                 else{
                     html+='<td><span class="label label-success label-mini">否</span></td>\n';
                 }
+                if(data[o].material=='1'){
+
+                    html+='<td><a class="updateRz" href="" index='+o+' data-toggle="modal" data-target="#updaterz-box"><span class="label label-info label-mini">入账</span></a>   ' +
+                        '<a class="updateYf" href="" index='+o+' data-toggle="modal" data-target="#updateyf-box"><span class="label label-info label-mini">结算</span></a></td>\n';
+                }
+                else{
+                    html+='<td> </td>\n';
+                }
+
 
                 html+='<td><a class="updateStock" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
                     '<a class="deleteStock" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';

@@ -27,7 +27,7 @@ import com.zysy.service.stoneblock.IStoneblockService;
 public class StoneblockController {
 	@Autowired
 	private IStoneblockService iStoneblockService;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Logger logger = Logger.getLogger("zysyLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addStoneblock")
@@ -38,6 +38,7 @@ public class StoneblockController {
 			 stock.setMsize(stoneblock.getLength()+"*"+stoneblock.getWidth());
 			 stock.setUnit("立方米");
 			 stock.setNumber(stoneblock.getBlocknumber()+"");
+			 stock.setCode(stoneblock.getCode());
 			iStoneblockService.addStoneblock(stoneblock,stock);
 			resultMap.put("status", "0");
 			resultMap.put("msg", stoneblock.getId());
@@ -61,7 +62,13 @@ public class StoneblockController {
 		    	Stock stock = new Stock();
 		    	 stock.setMsize(sb.getLength()+"*"+sb.getWidth());
 				 stock.setUnit("立方米");
-				 stock.setNumber(sb.getBlocknumber()+"");
+				 if(sb.getBlocknumber()==null){
+					stock.setNumber(1+"");
+				}
+				else{
+					stock.setNumber(sb.getBlocknumber()+"");
+				}
+				  
 				 stock.setC_id(sb.getC_id());
 				 stock.setComment(sb.getComment());
 				 stock.setDamage("否");
@@ -72,7 +79,7 @@ public class StoneblockController {
 				 stock.setNumber("1");
 				 stock.setQualify("是");
 				 stock.setState(Long.parseLong("0"));
-				  
+				 stock.setCode(sb.getCode());
 
 		    	iStoneblockService.addStoneblock(sb,stock);
 		    	ids+=sb.getId()+",";
@@ -148,12 +155,38 @@ public class StoneblockController {
 			else{
 				stock.setMsize(stoneblock.getLength()+"*"+stoneblock.getWidth());
 				stock.setUnit("立方米");
-				stock.setNumber(stoneblock.getBlocknumber()+"");
+				if(stoneblock.getBlocknumber()==null){
+					stock.setNumber(1+"");
+				}
+				else{
+					stock.setNumber(stoneblock.getBlocknumber()+"");
+				}
+				
 				int resultUpdate=iStoneblockService.updateStoneblock(stoneblock,stock);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
 				logger.info("更新成功，主键："+stoneblock.getId());
 			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "更新失败！");
+			logger.info("更新失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/singleupdateStoneblock")
+	@ResponseBody
+	public Map singleupdate(Stoneblock stoneblock){
+		Map resultMap=new HashMap();
+		try {
+			
+				int resultUpdate=iStoneblockService.updateStoneblock(stoneblock);
+				resultMap.put("status", "0");
+				resultMap.put("msg", "更新成功！");
+				logger.info("更新成功，主键："+stoneblock.getId());
+			
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
 			resultMap.put("msg", "更新失败！");
@@ -177,6 +210,12 @@ public class StoneblockController {
 				paramMap.put("toPage",Integer.parseInt(size)); 
 				paramMap.put("id",stoneblock.getId());
 				paramMap.put("code",stoneblock.getCode());
+				String s_dtFrom=request.getParameter("s_dtFrom");
+				String s_dtTo=request.getParameter("s_dtTo");
+				if(s_dtFrom!=null&&!s_dtFrom.equals(""))
+				paramMap.put("s_dtFrom", sdf.parse(s_dtFrom+" 00:00:00"));
+				if(s_dtTo!=null&&!s_dtTo.equals(""))
+				paramMap.put("s_dtTo", sdf.parse(s_dtTo+" 23:59:59"));
 				if(stoneblock.getS_dt()!=null&&!stoneblock.getS_dt().equals(""))
 				paramMap.put("s_dt",stoneblock.getS_dt());
 				paramMap.put("source",stoneblock.getSource());
@@ -194,11 +233,35 @@ public class StoneblockController {
 				if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 				paramMap.put("number",stoneblock.getNumber());
+				String lengthFrom=request.getParameter("lengthFrom");
+				String lengthTo=request.getParameter("lengthTo");
+				paramMap.put("lengthFrom",lengthFrom);
+				paramMap.put("lengthTo",lengthTo);
 				paramMap.put("length",stoneblock.getLength());
+				String widthFrom=request.getParameter("widthFrom");
+				String widthTo=request.getParameter("widthTo");
+				paramMap.put("widthFrom",widthFrom);
+				paramMap.put("widthTo",widthTo);
 				paramMap.put("width",stoneblock.getWidth());
+				String heightFrom=request.getParameter("heightFrom");
+				String heightTo=request.getParameter("heightTo");
+				paramMap.put("heightFrom",heightFrom);
+				paramMap.put("heightTo",heightTo);
 				paramMap.put("height",stoneblock.getHeight());
+				String cubeFrom=request.getParameter("cubeFrom");
+				String cubeTo=request.getParameter("cubeTo");
+				paramMap.put("cubeFrom",cubeFrom);
+				paramMap.put("cubeTo",cubeTo);
 				paramMap.put("cube",stoneblock.getCube());
+				String priceFrom=request.getParameter("priceFrom");
+				String priceTo=request.getParameter("priceTo");
+				paramMap.put("priceFrom",priceFrom);
+				paramMap.put("priceTo",priceTo);
 				paramMap.put("price",stoneblock.getPrice());
+				String sumFrom=request.getParameter("sumFrom");
+				String sumTo=request.getParameter("sumTo");
+				paramMap.put("sumFrom",sumFrom);
+				paramMap.put("sumTo",sumTo);
 				paramMap.put("sum",stoneblock.getSum());
 				paramMap.put("platenumber",stoneblock.getPlatenumber());
 				paramMap.put("accountdiff",stoneblock.getAccountdiff());
@@ -208,6 +271,21 @@ public class StoneblockController {
 				paramMap.put("state",stoneblock.getState());
 				paramMap.put("blocknumber",stoneblock.getBlocknumber());
 				paramMap.put("c_id",stoneblock.getC_id());
+				
+				String rz_dtFrom=request.getParameter("rz_dtFrom");
+				String rz_dtTo=request.getParameter("rz_dtTo");
+				if(rz_dtFrom!=null&&!rz_dtFrom.equals(""))
+				paramMap.put("rz_dtFrom", sdf.parse(rz_dtFrom+" 00:00:00"));
+				if(rz_dtTo!=null&&!rz_dtTo.equals(""))
+				paramMap.put("rz_dtTo", sdf.parse(rz_dtTo+" 23:59:59"));
+				
+				String yf_dtFrom=request.getParameter("yf_dtFrom");
+				String yf_dtTo=request.getParameter("yf_dtTo");
+				if(yf_dtFrom!=null&&!yf_dtFrom.equals(""))
+				paramMap.put("yf_dtFrom", sdf.parse(yf_dtFrom+" 00:00:00"));
+				if(yf_dtTo!=null&&!yf_dtTo.equals(""))
+				paramMap.put("yf_dtTo", sdf.parse(yf_dtTo+" 23:59:59"));
+				
 				List<Stoneblock> list=iStoneblockService.selectStoneblockByParam(paramMap);
 				int totalnumber=iStoneblockService.selectCountStoneblockByParam(paramMap);
 				Map tempMap=new HashMap();

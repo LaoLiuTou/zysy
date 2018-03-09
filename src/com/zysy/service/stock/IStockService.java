@@ -15,6 +15,12 @@ public interface IStockService {
  @SuppressWarnings("rawtypes")
 	public List<Stock> selectStockByParam(Map paramMap); 
  /**
+  * 查询唯一outtype
+  * @return
+  */ 
+ @SuppressWarnings("rawtypes")
+ public List<Stock> selectDistinctstockById(); 
+ /**
   * 库存
   * @return
   */ 

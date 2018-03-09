@@ -9,11 +9,16 @@ import com.zysy.model.stock.Stock;
  	*/
 	public Stock selectstockById(String id);
 	/**
-	 	* 通过查询参数获取信息
+	 	* 查询唯一outtype
 	 	* @return
-	 */ 
+	 */  
+	public List<Stock> selectDistinctstockById(); 
+	 /**
+	  * 通过查询参数获取信息
+	  * @return
+	  */ 
 	 @SuppressWarnings("rawtypes")
-	public List<Stock> selectstockByParam(Map paramMap); 
+	 public List<Stock> selectstockByParam(Map paramMap); 
 	 /**
 	  * 库存
 	  * @return

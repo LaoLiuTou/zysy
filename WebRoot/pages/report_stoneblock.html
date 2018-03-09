@@ -173,56 +173,106 @@
 
                             <form class="form-horizontal" role="form" id="form">
 
-                                <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
-                                    <div class="col-md-9 pdnone">
-                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="searchDate"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
-                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="searchDate"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
-                                    </div>
-                                </div>
+
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">单号：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                        <input class="form-control" id="code"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">来源：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                        <input class="form-control" id="source"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-4 form-sm-title pdnone">入库地点：</label>
-                                    <div class="col-md-8 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">入库地点：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="place"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">颜色：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                        <input class="form-control" id="color"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="s_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="s_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">料号：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                        <input class="form-control" id="number"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">长：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchStocktype">
-                                        </select>
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="lengthFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="lengthTo"  size="10" type="text" value="" class="form-control"/>
                                     </div>
                                 </div>
-
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">宽：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="widthFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="widthTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">高：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="heightFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="heightTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">立方：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="cubeFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="cubeTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">单价：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="priceFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="priceTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">金额：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="sumFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="sumTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">运输车辆：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input id="platenumber"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">入账时间：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="rz_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="rz_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                    </div>
+                                </div><div class="form-group col-md-3 mr10">
+                                <label class="control-label col-md-3 form-sm-title pdnone">结算时间：</label>
+                                <div class="col-md-9 pdnone">
+                                    <input  style=" display: inline-block;width:45%;padding:3px;" id="yf_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                    - <input  style=" display: inline-block;width:45%;padding:3px;" id="yf_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                </div>
+                            </div>
                                 <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
                             </form>
 
@@ -313,26 +363,44 @@
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryStoneblock('',currentPage,pageSize);
+        var bodyParam={'page':currentPage,'size':pageSize};
+
+
+        $('#searchBtn').on('click',function(){
+            bodyParam={'page':currentPage,'size':pageSize};
+            $('#form input').each(function () {
+                if($(this).val()!=''&&$(this).attr('id')!='square'){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
+            queryStoneblock(bodyParam);
+
+        });
+
+
+        queryStoneblock(bodyParam);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryStoneblock('',currentPage,pageSize);
+            bodyParam['page']=currentPage;
+            bodyParam['size']=pageSize;
+            queryStoneblock(bodyParam);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryStoneblock('',currentPage,pageSize);
+            queryStoneblock(bodyParam);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryStoneblock('',currentPage,pageSize);
+            queryStoneblock(bodyParam);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryStoneblock('',pageSize);
+                queryStoneblock(bodyParam);
             }else{
                 alert("页码输入有误！");
                 return false;

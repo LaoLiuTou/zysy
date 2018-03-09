@@ -21,7 +21,7 @@ import com.zysy.model.stoneblock.Stoneblock;
 public class StockController {
 	@Autowired
 	private IStockService iStockService;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Logger logger = Logger.getLogger("zysyLogger");
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/addStock")
@@ -154,7 +154,15 @@ public class StockController {
 				paramMap.put("workshop",stock.getWorkshop());
 				paramMap.put("unit",stock.getUnit());
 				paramMap.put("msize",stock.getMsize());
+				String heightFrom=request.getParameter("heightFrom");
+				String heightTo=request.getParameter("heightTo");
+				paramMap.put("heightFrom",heightFrom);
+				paramMap.put("heightTo",heightTo);
 				paramMap.put("height",stock.getHeight());
+				String numberFrom=request.getParameter("numberFrom");
+				String numberTo=request.getParameter("numberTo");
+				paramMap.put("numberFrom",numberFrom);
+				paramMap.put("numberTo",numberTo);
 				paramMap.put("number",stock.getNumber());
 				paramMap.put("comment",stock.getComment());
 				paramMap.put("qualify",stock.getQualify());
@@ -184,17 +192,24 @@ public class StockController {
 				paramMap.put("workgroup",stock.getWorkgroup());
 				paramMap.put("ordercode",stock.getOrdercode());
 				paramMap.put("outtype",stock.getOuttype());
-				paramMap.put("outtype",stock.getOuttype());
 				paramMap.put("code",stock.getCode());
 				String m_dtFrom=request.getParameter("m_dtFrom");
 				String m_dtTo=request.getParameter("m_dtTo");
 				if(m_dtFrom!=null&&!m_dtFrom.equals(""))
-				paramMap.put("m_dtFrom", sdf.parse(m_dtFrom));
+				paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
 				if(m_dtTo!=null&&!m_dtTo.equals(""))
-				paramMap.put("m_dtTo", sdf.parse(m_dtTo));
+				paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
 				paramMap.put("auditor",stock.getAuditor());
 				paramMap.put("worker",stock.getWorker());
+				String spriceFrom=request.getParameter("spriceFrom");
+				String spriceTo=request.getParameter("spriceTo");
+				paramMap.put("spriceFrom",spriceFrom);
+				paramMap.put("spriceTo",spriceTo);
 				paramMap.put("sprice",stock.getSprice());
+				String ssumFrom=request.getParameter("ssumFrom");
+				String ssumTo=request.getParameter("ssumTo");
+				paramMap.put("ssumFrom",ssumFrom);
+				paramMap.put("ssumTo",ssumTo);
 				paramMap.put("ssum",stock.getSsum());
 				
 				List<Stock> list=iStockService.selectStockByParam(paramMap);
@@ -251,6 +266,33 @@ public class StockController {
 			if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 			paramMap.put("c_id",stock.getC_id());
+			
+			paramMap.put("pid",stock.getPid());
+			paramMap.put("process",stock.getProcess());
+			paramMap.put("packaging",stock.getPackaging());
+			paramMap.put("workgroup",stock.getWorkgroup());
+			paramMap.put("ordercode",stock.getOrdercode());
+			paramMap.put("outtype",stock.getOuttype());
+			paramMap.put("code",stock.getCode());
+			String m_dtFrom=request.getParameter("m_dtFrom");
+			String m_dtTo=request.getParameter("m_dtTo");
+			if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+			paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
+			if(m_dtTo!=null&&!m_dtTo.equals(""))
+			paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
+			paramMap.put("auditor",stock.getAuditor());
+			paramMap.put("worker",stock.getWorker());
+			String spriceFrom=request.getParameter("spriceFrom");
+			String spriceTo=request.getParameter("spriceTo");
+			paramMap.put("spriceFrom",spriceFrom);
+			paramMap.put("spriceTo",spriceTo);
+			paramMap.put("sprice",stock.getSprice());
+			String ssumFrom=request.getParameter("ssumFrom");
+			String ssumTo=request.getParameter("ssumTo");
+			paramMap.put("ssumFrom",ssumFrom);
+			paramMap.put("ssumTo",ssumTo);
+			paramMap.put("ssum",stock.getSsum());
+			
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectReportStock(paramMap);
@@ -299,6 +341,34 @@ public class StockController {
 			if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 			paramMap.put("c_id",stock.getC_id());
+			
+			paramMap.put("pid",stock.getPid());
+			paramMap.put("process",stock.getProcess());
+			paramMap.put("packaging",stock.getPackaging());
+			paramMap.put("workgroup",stock.getWorkgroup());
+			paramMap.put("ordercode",stock.getOrdercode());
+			paramMap.put("outtype",stock.getOuttype());
+			paramMap.put("code",stock.getCode());
+			String m_dtFrom=request.getParameter("m_dtFrom");
+			String m_dtTo=request.getParameter("m_dtTo");
+			if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+			paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
+			if(m_dtTo!=null&&!m_dtTo.equals(""))
+			paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
+			paramMap.put("auditor",stock.getAuditor());
+			paramMap.put("worker",stock.getWorker());
+			String spriceFrom=request.getParameter("spriceFrom");
+			String spriceTo=request.getParameter("spriceTo");
+			paramMap.put("spriceFrom",spriceFrom);
+			paramMap.put("spriceTo",spriceTo);
+			paramMap.put("sprice",stock.getSprice());
+			String ssumFrom=request.getParameter("ssumFrom");
+			String ssumTo=request.getParameter("ssumTo");
+			paramMap.put("ssumFrom",ssumFrom);
+			paramMap.put("ssumTo",ssumTo);
+			paramMap.put("ssum",stock.getSsum());
+			
+			
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectStockInOut(paramMap);
@@ -347,6 +417,33 @@ public class StockController {
 			if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 			paramMap.put("c_id",stock.getC_id());
+			
+			paramMap.put("pid",stock.getPid());
+			paramMap.put("process",stock.getProcess());
+			paramMap.put("packaging",stock.getPackaging());
+			paramMap.put("workgroup",stock.getWorkgroup());
+			paramMap.put("ordercode",stock.getOrdercode());
+			paramMap.put("outtype",stock.getOuttype());
+			paramMap.put("code",stock.getCode());
+			String m_dtFrom=request.getParameter("m_dtFrom");
+			String m_dtTo=request.getParameter("m_dtTo");
+			if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+			paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
+			if(m_dtTo!=null&&!m_dtTo.equals(""))
+			paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
+			paramMap.put("auditor",stock.getAuditor());
+			paramMap.put("worker",stock.getWorker());
+			String spriceFrom=request.getParameter("spriceFrom");
+			String spriceTo=request.getParameter("spriceTo");
+			paramMap.put("spriceFrom",spriceFrom);
+			paramMap.put("spriceTo",spriceTo);
+			paramMap.put("sprice",stock.getSprice());
+			String ssumFrom=request.getParameter("ssumFrom");
+			String ssumTo=request.getParameter("ssumTo");
+			paramMap.put("ssumFrom",ssumFrom);
+			paramMap.put("ssumTo",ssumTo);
+			paramMap.put("ssum",stock.getSsum());
+			
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectWorkshopInOut(paramMap);
@@ -395,6 +492,33 @@ public class StockController {
 			if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 			paramMap.put("c_id",stock.getC_id());
+			
+			paramMap.put("pid",stock.getPid());
+			paramMap.put("process",stock.getProcess());
+			paramMap.put("packaging",stock.getPackaging());
+			paramMap.put("workgroup",stock.getWorkgroup());
+			paramMap.put("ordercode",stock.getOrdercode());
+			paramMap.put("outtype",stock.getOuttype());
+			paramMap.put("code",stock.getCode());
+			String m_dtFrom=request.getParameter("m_dtFrom");
+			String m_dtTo=request.getParameter("m_dtTo");
+			if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+			paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
+			if(m_dtTo!=null&&!m_dtTo.equals(""))
+			paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
+			paramMap.put("auditor",stock.getAuditor());
+			paramMap.put("worker",stock.getWorker());
+			String spriceFrom=request.getParameter("spriceFrom");
+			String spriceTo=request.getParameter("spriceTo");
+			paramMap.put("spriceFrom",spriceFrom);
+			paramMap.put("spriceTo",spriceTo);
+			paramMap.put("sprice",stock.getSprice());
+			String ssumFrom=request.getParameter("ssumFrom");
+			String ssumTo=request.getParameter("ssumTo");
+			paramMap.put("ssumFrom",ssumFrom);
+			paramMap.put("ssumTo",ssumTo);
+			paramMap.put("ssum",stock.getSsum());
+			
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectYield(paramMap);
@@ -443,9 +567,55 @@ public class StockController {
 			if(u_dtTo!=null&&!u_dtTo.equals(""))
 				paramMap.put("u_dtTo", sdf.parse(u_dtTo));
 			paramMap.put("c_id",stock.getC_id());
+			paramMap.put("pid",stock.getPid());
+			paramMap.put("process",stock.getProcess());
+			paramMap.put("packaging",stock.getPackaging());
+			paramMap.put("workgroup",stock.getWorkgroup());
+			paramMap.put("ordercode",stock.getOrdercode());
+			paramMap.put("outtype",stock.getOuttype());
+			paramMap.put("code",stock.getCode());
+			String m_dtFrom=request.getParameter("m_dtFrom");
+			String m_dtTo=request.getParameter("m_dtTo");
+			if(m_dtFrom!=null&&!m_dtFrom.equals(""))
+			paramMap.put("m_dtFrom", sdf.parse(m_dtFrom+" 00:00:00"));
+			if(m_dtTo!=null&&!m_dtTo.equals(""))
+			paramMap.put("m_dtTo", sdf.parse(m_dtTo+" 23:59:59"));
+			paramMap.put("auditor",stock.getAuditor());
+			paramMap.put("worker",stock.getWorker());
+			String spriceFrom=request.getParameter("spriceFrom");
+			String spriceTo=request.getParameter("spriceTo");
+			paramMap.put("spriceFrom",spriceFrom);
+			paramMap.put("spriceTo",spriceTo);
+			paramMap.put("sprice",stock.getSprice());
+			String ssumFrom=request.getParameter("ssumFrom");
+			String ssumTo=request.getParameter("ssumTo");
+			paramMap.put("ssumFrom",ssumFrom);
+			paramMap.put("ssumTo",ssumTo);
+			paramMap.put("ssum",stock.getSsum());
+			
 			String stateIn=request.getParameter("statein");
 			paramMap.put("statein",stateIn);
 			List<Stock> list=iStockService.selectDamage(paramMap);
+			resultMap.put("status", "0");
+			resultMap.put("msg", list);
+			
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "查询失败！");
+			logger.info("查询失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/distinctType")
+	@ResponseBody
+	public Map distinctType(HttpServletRequest request, HttpServletResponse response,Stock stock)
+			throws ServletException, IOException {
+		Map resultMap=new HashMap();
+		try {
+			
+			List<Stock> list=iStockService.selectDistinctstockById();
 			resultMap.put("status", "0");
 			resultMap.put("msg", list);
 			

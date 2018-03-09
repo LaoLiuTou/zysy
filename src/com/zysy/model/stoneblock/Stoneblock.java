@@ -1,5 +1,7 @@
 package com.zysy.model.stoneblock;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 /**
  * @author LT
  */
@@ -181,7 +183,7 @@ public class Stoneblock {
 	public void setC_id(Long c_id) {
 		this.c_id = c_id;
 	}
-
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date rz_dt;
 	
 	public Date getRz_dt() {
@@ -190,7 +192,7 @@ public class Stoneblock {
 	public void setRz_dt(Date rz_dt) {
 		this.rz_dt = rz_dt;
 	}
-	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date yf_dt;
 	public Date getYf_dt() {
 		return yf_dt;

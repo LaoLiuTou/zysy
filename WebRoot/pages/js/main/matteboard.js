@@ -87,16 +87,11 @@ function deleteMatteboard(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryMatteboard (matteboardname,currentPage,pageSize) {
+function  queryMatteboard (currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    if(matteboardname==null||matteboardname==''){
-        var bodyParam={'page':currentPage,'size':pageSize};
-    }
-    else{
-        var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+matteboardname+'%'};
-    }
+    var bodyParam={'page':currentPage,'size':pageSize};
 
     var httpR = new createHttpR(url+'listMatteboard','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
@@ -107,24 +102,76 @@ function  queryMatteboard (matteboardname,currentPage,pageSize) {
             var data=msg['data'];
             matteboardList=msg['data'];
             var html='';
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0,sum_6=0,sum_7=0,
+                sum_8=0,sum_9=0,sum_10=0,sum_11=0,sum_12=0,sum_13=0;
             for(var o in data){
+
+
+                var sb_specs=data[o].sb_spec.split('*');
+                var sb_cube=data[o].sb_cube;
+                if(sb_specs[2]>1.25&&(data[o].layer=='上'||data[o].layer=='下')){
+                    sb_cube=(sb_cube/2).toFixed(3);
+                }
+
+                sum_1=(Number(sum_1)+Number(sb_specs[0])).toFixed(2);
+                sum_2=(Number(sum_2)+Number(sb_specs[1])).toFixed(2);
+                sum_3=(Number(sum_3)+Number(sb_specs[2])).toFixed(2);
+                sum_4=(Number(sum_4)+Number(data[o].sb_cube)).toFixed(3);
+                sum_5=(Number(sum_5)+Number(sb_cube)).toFixed(3);
+                sum_6=Number(sum_6)+Number(data[o].blocknumber);
+                sum_7=(Number(sum_7)+Number(data[o].square)).toFixed(2);
+                sum_8=Number(sum_8)+Number(data[o].blocknumber-data[o].belowgradeblock);
+                sum_9=(Number(sum_9)+Number(data[o].square-data[o].belowgradesquare)).toFixed(2);
+                sum_10=Number(sum_10)+Number(data[o].belowgradeblock);
+                sum_11=(Number(sum_11)+Number(data[o].belowgradesquare)).toFixed(2);
+                sum_12=(Number(sum_12)+Number(data[o].price)).toFixed(2);
+                sum_13=(Number(sum_13)+Number(data[o].sum)).toFixed(2);
+
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+data[o].id+'</td>\n' +
-                    '<td>'+data[o].name+'</td>\n' +
-                    '<td>'+data[o].leader+'</td>\n' +
-                    '<td>'+data[o].comment+'</td>\n' +
-                    '<td>'+data[o].c_dt+'</td>\n' ;
-                if(data[o].state=='0'){
-                    html+='<td><span class="label label-success label-mini">可用</span></td>\n';
-                }
-                else{
-                    html+='<td><span class="label label-danger label-mini">禁用</span></td>\n';
-                }
-                html+='<td><a class="updateMatteboard" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteMatteboard" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
-                html+='</tr>';
+                    '<td>'+(Number(o)+1)+'</td>\n' +
+                    '<td>'+sb_specs[0]+'</td>\n' +
+                    '<td>'+sb_specs[1]+'</td>\n' +
+                    '<td>'+sb_specs[2]+'</td>\n' +
+                    '<td>'+data[o].sb_cube+'</td>\n' +
+                    '<td>'+data[o].layer+'</td>\n' +
+                    '<td>'+sb_cube+'</td>\n' +
+                    '<td>'+data[o].m_dt+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
+                    '<td>'+data[o].msize+'</td>\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].blocknumber+'</td>\n' +
+                    '<td>'+data[o].square+'</td>\n' +
+                    '<td>'+Number(data[o].blocknumber-data[o].belowgradeblock)+'</td>\n' +
+                    '<td>'+Number(data[o].square-data[o].belowgradesquare)+'</td>\n' +
+                    '<td>'+data[o].belowgradeblock+'</td>\n' +
+                    '<td>'+data[o].belowgradesquare+'</td>\n' +
+                    '<td>'+data[o].price+'</td>\n' +
+                    '<td>'+data[o].sum+'</td>\n' +
+                 '</tr>';
+                //alert(html);
             }
-            $('#matteboardTbody').html(html);
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td>'+sum_4+'</td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_5+'</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_6+'</td>\n' +
+                '<td>'+sum_7+'</td>\n' +
+                '<td>'+sum_8+'</td>\n' +
+                '<td>'+sum_9+'</td>\n' +
+                '<td>'+sum_10+'</td>\n' +
+                '<td>'+sum_11+'</td>\n' +
+                '<td>'+sum_12+'</td>\n' +
+                '<td>'+sum_13+'</td>\n' +
+                '</tr>';
+            $('#reportTbody').html(html);
             var num=msg['num'];
             if(num>0) {
                 var pageHtml = '';
@@ -248,9 +295,14 @@ function  queryMatteboardById (id) {
                  '    <label>单据日期</label>\n' +
                  '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="update_m_dt" name="m_dt" value="'+msg['m_dt']+'" placeholder="请输入单据日期">\n' +
                  '</div>\n' +
-                 '<div class="form-group col-md-6">\n' +
+                 /*'<div class="form-group col-md-6">\n' +
                  '    <label>工组</label>\n' +
                  '    <input type="text" class="form-control" id="update_workgroup" name="workgroup" value="'+msg['workgroup']+'" placeholder="请输入工组">\n' +
+                 '</div>\n' +*/
+
+                 '<div class="form-group col-md-6">\n' +
+                 '    <label>板材尺寸</label>\n' +
+                 '    <input type="text" class="form-control" id="update_msize" name="msize" value="'+msg['msize']+'" placeholder="格式为 长*宽">\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>料层</label>\n' +
@@ -259,10 +311,6 @@ function  queryMatteboardById (id) {
                  '        <option value="中">中</option>\n' +
                  '        <option value="下">下</option>\n' +
                  '    </select>\n' +
-                 '</div>\n' +
-                 '<div class="form-group col-md-6">\n' +
-                 '    <label>板材尺寸</label>\n' +
-                 '    <input type="text" class="form-control" id="update_msize" name="msize" value="'+msg['msize']+'" placeholder="格式为 长*宽">\n' +
                  '</div>\n' +
                  '<div class="form-group col-md-6">\n' +
                  '    <label>厚度</label>\n' +

@@ -27,6 +27,7 @@ public interface IStoneblockService {
  * @return 
  */ 
 	public  int updateStoneblock(Stoneblock stoneblock,Stock stock);
+	public  int updateStoneblock(Stoneblock stoneblock);
 	/**
  * 添加 
  * @return

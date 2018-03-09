@@ -223,7 +223,7 @@
                                     </tr>
 
                                     </thead>
-                                    <tbody id="stoneblockTbody">
+                                    <tbody id="reportTbody">
 
                                     </tbody>
                                 </table>
@@ -270,6 +270,7 @@
 <script src="js/main/md5.js"></script>
 <script src="js/main/report.js"></script>
 <script src="js/main/stoneblock.js"></script>
+<script src="js/main/matteboard.js"></script>
 <script src="js/main/jquery.jqprint-0.3.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -277,48 +278,57 @@
 <script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 <script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
 <script>
     $(document).ready(function () {
+
+
+        //搜索
+        $('#searchBtn').click(function () {
+            queryMatteboard(currentPage,pageSize);
+        });
 
         //列表
         var currentPage=1;
         var pageSize=10;
-        queryStoneblock('',currentPage,pageSize);
+        queryMatteboard(currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryStoneblock('',currentPage,pageSize);
+            queryMatteboard(currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryStoneblock('',currentPage,pageSize);
+            queryMatteboard(currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryStoneblock('',currentPage,pageSize);
+            queryMatteboard(currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                queryStoneblock('',pageSize);
+                queryMatteboard($('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;
             }
         });
+
         //打印
         $('#printBtn').click(function () {
             var $pringDom=$('.wrapper').clone();
             $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
             $pringDom.find('#pagination').remove();
-            var html='<label >日期：</label>\n' +
+            /*var html='<label >日期：</label>\n' +
                 '<label >'+$('#searchDate').val()+'</label>\n' ;
-            $pringDom.find('#form').html(html);
+            $pringDom.find('#form').html(html);*/
             $pringDom.jqprint();
         });
+
         $('.default-date-picker').datepicker({
             format: 'yyyy-mm-dd'
         });

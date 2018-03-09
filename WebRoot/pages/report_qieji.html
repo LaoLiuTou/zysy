@@ -176,19 +176,71 @@
                             <form class="form-horizontal" role="form" id="form">
 
 
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">单据号：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="code"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">加工方式：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="process"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">规格：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="msize"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">加工人：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="worker"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">验收人：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="auditor"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">厚度：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="heightFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="heightTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
                                     <div class="col-md-9 pdnone">
-                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">块数：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="numberFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="numberTo"  size="10" type="text" value="" class="form-control"/>
                                     </div>
                                 </div>
 
-
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">车间：</label>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">工价：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchWorkshop">
-                                        </select>
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="spriceFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="spriceTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">工资：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="ssumFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="ssumTo"  size="10" type="text" value="" class="form-control"/>
                                     </div>
                                 </div>
 
@@ -278,10 +330,17 @@
         var bodyParam={};
         bodyParam['page']=1;
         bodyParam['size']=1000;
+        bodyParam['state']=1;
         bodyParam['outtype']='切机';
         //搜索
         $('#searchBtn').click(function () {
-            bodyParam['workshop']=workshop;
+            bodyParam={'page':1,'size':1000,'outtype':'切机'};
+            $('#form input').each(function () {
+                if($(this).val()!=''&&$(this).attr('id')!='square'){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
             reportListStock(bodyParam);
         });
         //列表
@@ -292,11 +351,11 @@
             var $pringDom=$('.wrapper').clone();
             $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
-            var html='<label >日期：</label>\n' +
+           /* var html='<label >日期：</label>\n' +
                 '<label >'+$('#searchDate').val()+'</label>\n' +
                 '<label style="padding-left: 40px;">车间：</label>\n' +
                 '<label >'+$('#searchWorkshop option:selected').text()+'</label>\n';
-            $pringDom.find('#form').html(html);
+            $pringDom.find('#form').html(html);*/
             $pringDom.jqprint();
         });
 

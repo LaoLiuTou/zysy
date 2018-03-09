@@ -173,10 +173,9 @@
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">物品：</label>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">编号：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchMaterial">
-                                        </select>
+                                        <input class="form-control" id="searchCode" size="16" type="text"  />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
@@ -199,10 +198,9 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
+                                        <th>序号</th>
+                                        <th>类型</th>
                                         <th>编号</th>
-                                        <th>材料</th>
-                                        <th>库别</th>
-                                        <th>车间</th>
                                         <th>板材尺寸</th>
                                         <th>厚度</th>
                                         <th>单位</th>
@@ -211,6 +209,7 @@
                                         <th>状态</th>
                                         <th>合格</th>
                                         <th>破损</th>
+                                        <th>审核</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -266,7 +265,7 @@
             <div class="modal-body">
 
                 <form role="form" id="updateForm">
-                    <div class="form-group col-md-6">
+                    <!--<div class="form-group col-md-6">
                         <label>产品名称</label>
                         <select class="form-control m-bot15" name="material" id="update_material">
 
@@ -283,9 +282,13 @@
                         <select class="form-control m-bot15" id="update_workshop" name="workshop">
 
                         </select>
-                    </div>
+                    </div>-->
 
-                    <div class="form-group col-md-6">
+
+                    <div class="clearfix"></div>
+                    <div id="updateForms">
+                    </div>
+                    <!--<div class="form-group col-md-6">
                         <label>状态</label>
                         <select class="form-control m-bot15" id="update_state" name="state">
                             <option value="0">入库</option>
@@ -306,10 +309,7 @@
                             <option value="否">否</option>
                             <option value="是">是</option>
                         </select>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div id="updateForms">
-                    </div>
+                    </div>-->
                 </form>
             </div>
             <div class="clearfix"></div>
@@ -404,6 +404,43 @@
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
                 <button class="btn btn-primary" type="button" id="addBtn">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="updaterz-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">审核</h4>
+            </div>
+            <div class="modal-body">
+                确定要通过该单据吗？
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-primary" type="button" id="updaterzBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="updateyf-box" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">审核</h4>
+            </div>
+            <div class="modal-body">
+                确定要将单据修改为运费结算吗？
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button class="btn btn-primary" type="button" id="updateyfBtn">确定</button>
             </div>
         </div>
     </div>
@@ -626,34 +663,34 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),currentPage,pageSize);
         });
 
         //列表
         var currentPage=1;
         var pageSize=10;
         //$.when(queryStock('','','',currentPage,pageSize)).then(selectMaterial(1,100)).then(selectWorkshop(1,100)).then(selectStocktype(1,100));
-        queryStock('','','',currentPage,pageSize);
-        setTimeout(function() {
+        queryStock('',currentPage,pageSize);
+        /*setTimeout(function() {
             selectMaterial(1,100);
             selectWorkshop(1,100);
             selectStocktype(1,100);
-        }, 500);
+        }, 500);*/
 
 
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryStock($('#searchMaterial').val(),$('#searchStocktype').val(),$('#searchWorkshop').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
@@ -882,54 +919,6 @@
             }
             else{
                 html='<div class="form-group col-md-6">\n' +
-                    '<label>单位</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" name="unit">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>板材尺寸</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" name="msize">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>厚度</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度" name="height">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>数量</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量" name="number">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>加工方式</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_process" value="'+currentStock.process+'" name="process">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>包装</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_packaging" value="'+currentStock.packaging+'" name="packaging">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>班组号</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_workgroup" value="'+currentStock.workgroup+'" name="workgroup">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>订单编号</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_ordercode" value="'+currentStock.ordercode+'" name="ordercode">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>出库类型</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_outtype" value="'+currentStock.outtype+'" name="outtype">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>毛尺</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_maochi" value="'+currentStock.maochi+'" name="maochi">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>净尺</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_jingchi" value="'+currentStock.jingchi+'" name="jingchi">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '<label>延米</label>\n' +
-                    '<input type="text" class="form-control m-bot15" id="update_yanmi" value="'+currentStock.yanmi+'" name="yanmi">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
                     '<label>单据编号</label>\n' +
                     '<input type="text" class="form-control m-bot15" id="update_code" value="'+currentStock.code+'" name="code">\n' +
                     '</div>\n' +
@@ -942,6 +931,57 @@
                     '<input type="text" class="form-control m-bot15 default-date-picker" id="update_m_dt" value="'+currentStock.m_dt+'" name="m_dt">\n' +
                     '</div>\n' +
                     '<div class="form-group col-md-6">\n' +
+                    '<label>单位</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_unit" placeholder="请输入单位" value="'+currentStock.unit+'" name="unit">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>板材尺寸</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_msize" placeholder="请输入板材尺寸" value="'+currentStock.msize+'" name="msize">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>厚度</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_height" value="'+currentStock.height+'" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度" name="height">\n' +
+                    '</div>\n' +
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>数量</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_number" value="'+currentStock.number+'" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量" name="number">\n' +
+                    '</div>\n' +
+
+
+                    '<div class="form-group col-md-6">\n' +
+                    '<label>出库类型</label>\n' +
+                    '<input type="text" class="form-control m-bot15" id="update_outtype" value="'+currentStock.outtype+'" name="outtype">\n' +
+                    '</div>\n'
+                    ;
+                     if(currentStock.state!='2'){
+                         html+='<div class="form-group col-md-6">\n' +
+                         '<label>加工方式</label>\n' +
+                         '<input type="text" class="form-control m-bot15" id="update_process" value="'+currentStock.process+'" name="process">\n' +
+                         '</div>\n' +
+                         '<div class="form-group col-md-6">\n' +
+                         '<label>包装</label>\n' +
+                         '<input type="text" class="form-control m-bot15" id="update_packaging" value="'+currentStock.packaging+'" name="packaging">\n' +
+                         '</div>\n' +
+                         '<div class="form-group col-md-6">\n' +
+                         '<label>订单编号</label>\n' +
+                         '<input type="text" class="form-control m-bot15" id="update_ordercode" value="'+currentStock.ordercode+'" name="ordercode">\n' +
+                         '</div>\n' +
+                         '<div class="form-group col-md-6">\n' +
+                         '<label>毛尺</label>\n' +
+                         '<input type="text" class="form-control m-bot15" id="update_maochi" value="'+currentStock.maochi+'" name="maochi">\n' +
+                         '</div>\n' +
+                         '<div class="form-group col-md-6">\n' +
+                         '<label>净尺</label>\n' +
+                         '<input type="text" class="form-control m-bot15" id="update_jingchi" value="'+currentStock.jingchi+'" name="jingchi">\n' +
+                         '</div>\n';
+                     }
+                    if(currentStock.outtype=='火烧'){
+                        html+='<div class="form-group col-md-6">\n' +
+                            '<label>延米</label>\n' +
+                            '<input type="text" class="form-control m-bot15" id="update_yanmi" value="'+currentStock.yanmi+'" name="yanmi">\n' +
+                            '</div>\n';
+                    }
+                html+='<div class="form-group col-md-6">\n' +
                     '<label>备注</label>\n' +
                     '<input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">\n' +
                     '</div>';
@@ -954,13 +994,7 @@
                     format: 'yyyy-mm-dd'
                 });
             }
-            $('#update_material').val(currentStock.material);
-            $('#update_stocktype').val(currentStock.stocktype);
-            $('#update_workshop').val(currentStock.workshop);
-            $('#update_unit').val(currentStock.unit);
-            $('#update_msize').val(currentStock.msize);
-            $('#update_height').val(currentStock.height);
-            $('#update_number').val(currentStock.number);
+
             $('#update_comment').val(currentStock.comment);
             $('#update_state').val(currentStock.state);
             $('#update_qualify').val(currentStock.qualify);
@@ -977,13 +1011,19 @@
             param['id']=currentStock.id;
             param['pid']=currentStock.pid;
             $('#updateForm').find('input').each(function () {
-                 param[$(this).attr('name')]=$(this).val();
+                if($(this).val()!=''){
+
+                    param[$(this).attr('name')]=$(this).val();
+                }
 
             });
             $('#updateForm').find('select').each(function () {
-                param[$(this).attr('name')]=$(this).val();
-
+                if($(this).val()!='') {
+                    param[$(this).attr('name')] = $(this).val();
+                }
             });
+
+
             if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){
                 updateStoneblock(param);
             }
@@ -994,6 +1034,33 @@
                 updateStock(param);
             }
 
+        });
+
+        $('#stockTbody').on('click','.updateRz',function () {
+            stockIndex=$(this).attr('index');
+            currentStock=stockList[stockIndex];
+        });
+        $('#stockTbody').on('click','.updateYf',function () {
+            stockIndex=$(this).attr('index');
+            currentStock=stockList[stockIndex];
+        });
+        $('#updaterzBtn').click(function () {
+            var param={};
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+
+            param['auditor']=userinfo['nickname'];
+            param['id']=currentStock.pid;
+            param['rz_dt']=getNowFormatDate();
+            updatesingleStoneblock(param);
+        });
+        $('#updateyfBtn').click(function () {
+            var param={};
+            var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+
+            param['auditor']=userinfo['nickname'];
+            param['id']=currentStock.pid;
+            param['yf_dt']=getNowFormatDate();
+            updatesingleStoneblock(param);
         });
 
         //删除
@@ -1009,8 +1076,24 @@
 
 
 
-    });
 
+    });
+    //获取当前时间，格式YYYY-MM-DD
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
 </script>
 
 

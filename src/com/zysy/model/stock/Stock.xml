@@ -6,6 +6,9 @@
 		SELECT * FROM stock WHERE ID=#{id}
 	</select>
 
+	<select id="selectDistinctstockById" parameterType="String" resultType="Stock">
+		SELECT DISTINCT(outtype) FROM stock where pid=0
+	</select>
 
 	<delete id="deletestock" parameterType="String"> 
 		DELETE FROM stock WHERE ID=#{id}
@@ -25,7 +28,11 @@
 			<if test="workshop != null"> AND a.WORKSHOP =#{workshop} </if>
 			<if test="unit != null"> AND a.UNIT =#{unit} </if>
 			<if test="msize != null"> AND a.MSIZE =#{msize} </if>
+			<if test="heightFrom != null"> AND cast(a.HEIGHT as DECIMAL) &gt;=#{heightFrom} </if>
+			<if test="heightTo != null"> AND cast(a.HEIGHT as DECIMAL) &lt;=#{heightTo} </if>
 			<if test="height != null"> AND a.HEIGHT =#{height} </if>
+			<if test="numberFrom != null"> AND cast(a.NUMBER as DECIMAL) &gt;=#{numberFrom} </if>
+			<if test="numberTo != null"> AND cast(a.NUMBER as DECIMAL) &lt;=#{numberTo} </if>
 			<if test="number != null"> AND a.NUMBER =#{number} </if>
 			<if test="comment != null"> AND a.COMMENT =#{comment} </if>
 			<if test="qualify != null"> AND a.QUALIFY =#{qualify} </if>
@@ -49,10 +56,16 @@
 			<if test="jingchi != null"> AND a.JINGCHI =#{jingchi} </if>
 			<if test="yanmi != null"> AND a.YANMI =#{yanmi} </if>
 			<if test="code != null"> AND a.CODE =#{code} </if>
+			<if test="m_dtFrom != null"> AND unix_timestamp(a.M_DT) &gt;=unix_timestamp(#{m_dtFrom}) </if>
+			<if test="m_dtTo != null"> AND unix_timestamp(a.M_DT) &lt;=unix_timestamp(#{m_dtTo}) </if>
 			<if test="m_dt != null"> AND a.M_DT =#{m_dt} </if>
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 			<if test="worker != null"> AND a.WORKER =#{worker} </if>
+			<if test="spriceFrom != null"> AND cast(a.SPRICE as DECIMAL) &gt;=#{spriceFrom} </if>
+			<if test="spriceTo != null"> AND cast(a.SPRICE as DECIMAL) &lt;=#{spriceTo} </if>
 			<if test="sprice != null"> AND a.SPRICE =#{sprice} </if>
+			<if test="ssumFrom != null"> AND cast(a.SSUM as DECIMAL) &gt;=#{ssumFrom} </if>
+			<if test="ssumTo != null"> AND cast(a.SSUM as DECIMAL) &lt;=#{ssumTo} </if>
 			<if test="ssum != null"> AND a.SSUM =#{ssum} </if>
 			
 		</trim>  
@@ -302,8 +315,8 @@
 	</select>
 	<select id="selectWorkshopInOut" parameterType="java.util.Map" resultType="Stock">
 		SELECT a.*,b.name as material_name,c.name as workshop_name,
-		SUM(CASE WHEN a.state=2 THEN a.number ELSE 0 END)  as sum_in, 
-		SUM(CASE WHEN a.state=1 THEN a.number ELSE 0 END)  as sum_out 
+		SUM(CASE WHEN a.state=2 THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_in, 
+		SUM(CASE WHEN a.state=1 THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_out 
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 
@@ -341,13 +354,14 @@
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
-		GROUP BY a.MATERIAL,a.MSIZE,a.HEIGHT,a.UNIT
+		GROUP BY a.outtype,a.UNIT
 	</select>
 	
 	<select id="selectYield" parameterType="java.util.Map" resultType="Stock">
 		SELECT a.*,b.name as material_name,c.name as workshop_name,
-		SUM(CASE WHEN a.qualify='是' THEN a.number ELSE 0 END)  as sum_in, 
-		SUM(CASE WHEN a.qualify='否' THEN a.number ELSE 0 END)  as sum_out 
+		SUM(CASE WHEN a.qualify='是' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_in, 
+		SUM(CASE WHEN a.qualify='否' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_out ,
+		SUM(CASE WHEN a.comment='计划外入库' THEN a.number ELSE 0 END)  as sum_number 
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 
@@ -385,7 +399,7 @@
 			<if test="auditor != null"> AND a.AUDITOR =#{auditor} </if>
 			<if test="worker != null"> AND a.WORKER =#{worker} </if>
 		</trim>  
-		GROUP BY a.HEIGHT,a.UNIT
+		GROUP BY a.OUTTYPE,a.HEIGHT,a.UNIT
 	</select>
 	<select id="selectDamage" parameterType="java.util.Map" resultType="Stock">
 		SELECT a.*,b.name as material_name,c.name as workshop_name,

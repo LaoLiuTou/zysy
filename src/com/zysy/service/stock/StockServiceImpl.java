@@ -28,6 +28,13 @@ public class StockServiceImpl  implements IStockService {
 		return iStockMapper.selectstockByParam(paramMap);
 	}
  /**
+  * 查询唯一outtype
+  * @return
+  */ 
+ public List<Stock> selectDistinctstockById(){ 
+	 return iStockMapper.selectDistinctstockById();
+ }
+ /**
   *库存
   * @return
   */ 

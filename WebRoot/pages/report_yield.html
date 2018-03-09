@@ -185,9 +185,9 @@
 
 
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">车间：</label>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">类型：</label>
                                     <div class="col-md-9 pdnone">
-                                        <select class="form-control" id="searchWorkshop">
+                                        <select class="form-control" id="distinctOuttype">
                                         </select>
                                     </div>
                                 </div>
@@ -203,10 +203,12 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
+                                        <th>类型</th>
                                         <th>厚度</th>
                                         <th>单位</th>
                                         <th>合格平方数</th>
                                         <th>不合格平方数</th>
+                                        <th>计划外入库数量</th>
                                     </tr>
                                     </thead>
                                     <tbody id="reportTbody">
@@ -265,10 +267,10 @@
 <script>
     $(document).ready(function () {
 
-
+        selectDistinctOuttype($('#distinctOuttype').val());
         //搜索
         $('#searchBtn').click(function () {
-            reportYield($('#searchDate').val(),$('#searchWorkshop').val());
+            reportYield($('#searchDate').val(),$('#distinctOuttype').val());
         });
 
         //列表
@@ -279,11 +281,11 @@
             var $pringDom=$('.wrapper').clone();
             $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
-            var html='<label >日期：</label>\n' +
+            /*var html='<label >日期：</label>\n' +
                 '<label >'+$('#searchDate').val()+'</label>\n' +
                 '<label style="padding-left: 40px;">车间：</label>\n' +
                 '<label >'+$('#searchWorkshop option:selected').text()+'</label>\n';
-            $pringDom.find('#form').html(html);
+            $pringDom.find('#form').html(html);*/
             $pringDom.jqprint();
         });
 

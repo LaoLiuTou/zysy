@@ -29,11 +29,23 @@
 			<if test="u_dtTo != null"> AND unix_timestamp(U_DT) &lt;=unix_timestamp(#{u_dtTo}) </if>
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="number != null"> AND NUMBER =#{number} </if>
+			<if test="lengthFrom != null"> AND cast(LENGTH as DECIMAL) &gt;=#{lengthFrom} </if>
+			<if test="lengthTo != null"> AND cast(LENGTH as DECIMAL) &lt;=#{lengthTo} </if>
 			<if test="length != null"> AND LENGTH =#{length} </if>
+			<if test="widthFrom != null"> AND cast(WIDTH as DECIMAL) &gt;=#{widthFrom} </if>
+			<if test="widthTo != null"> AND cast(WIDTH as DECIMAL) &lt;=#{widthTo} </if>
 			<if test="width != null"> AND WIDTH =#{width} </if>
+			<if test="heightFrom != null"> AND cast(HEIGHT as DECIMAL) &gt;=#{heightFrom} </if>
+			<if test="heightTo != null"> AND cast(HEIGHT as DECIMAL) &lt;=#{heightTo} </if>
 			<if test="height != null"> AND HEIGHT =#{height} </if>
+			<if test="cubeFrom != null"> AND cast(CUBE as DECIMAL) &gt;=#{cubeFrom} </if>
+			<if test="cubeTo != null"> AND cast(CUBE as DECIMAL) &lt;=#{cubeTo} </if>
 			<if test="cube != null"> AND CUBE =#{cube} </if>
+			<if test="priceFrom != null"> AND cast(PRICE as DECIMAL) &gt;=#{priceFrom} </if>
+			<if test="priceTo != null"> AND cast(PRICE as DECIMAL) &lt;=#{priceTo} </if>
 			<if test="price != null"> AND PRICE =#{price} </if>
+			<if test="sumFrom != null"> AND cast(SUM as DECIMAL) &gt;=#{sumFrom} </if>
+			<if test="sumTo != null"> AND cast(SUM as DECIMAL) &lt;=#{sumTo} </if>
 			<if test="sum != null"> AND SUM =#{sum} </if>
 			<if test="platenumber != null"> AND PLATENUMBER =#{platenumber} </if>
 			<if test="accountdiff != null"> AND ACCOUNTDIFF =#{accountdiff} </if>
@@ -43,7 +55,11 @@
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
+			<if test="rz_dtFrom != null"> AND unix_timestamp(RZ_DT) &gt;=unix_timestamp(#{rz_dtFrom}) </if>
+			<if test="rz_dtTo != null"> AND unix_timestamp(RZ_DT) &lt;=unix_timestamp(#{rz_dtTo}) </if>
 			<if test="rz_dt != null"> AND RZ_DT =#{rz_dt} </if>
+			<if test="yf_dtFrom != null"> AND unix_timestamp(YF_DT) &gt;=unix_timestamp(#{yf_dtFrom}) </if>
+			<if test="yf_dtTo != null"> AND unix_timestamp(YF_DT) &lt;=unix_timestamp(#{yf_dtTo}) </if>
 			<if test="yf_dt != null"> AND YF_DT =#{yf_dt} </if>
 			<if test="color != null"> AND COLOR =#{color} </if>
 		</trim>  

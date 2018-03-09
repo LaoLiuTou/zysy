@@ -52,6 +52,12 @@ public class StoneblockServiceImpl  implements IStoneblockService {
 	 	iStockMapper.updatestock(stock);
 		return result; 
 	}
+ @Transactional
+ public  int updateStoneblock(Stoneblock stoneblock){
+	 int result = 0; 
+	 result=iStoneblockMapper.updatestoneblock(stoneblock);  
+	 return result; 
+ }
 
 	/**
  * 添加 

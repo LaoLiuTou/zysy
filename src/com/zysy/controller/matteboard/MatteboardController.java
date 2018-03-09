@@ -36,6 +36,7 @@ public class MatteboardController {
 			stock.setNumber(matteboard.getBlocknumber()+"");
 			stock.setMsize(matteboard.getMsize());
 			stock.setUnit("平方米");
+			stock.setCode(matteboard.getCode());
 			iMatteboardService.addMatteboard(matteboard,stock);
 			resultMap.put("status", "0");
 			resultMap.put("msg", matteboard.getId());
@@ -58,7 +59,7 @@ public class MatteboardController {
 		    for(Matteboard mb:mbList){
 		    	Stock stock = new Stock();
 		    	 stock.setMsize(mb.getMsize());
-				 stock.setUnit("立方米");
+				 stock.setUnit("平方米");
 				 stock.setNumber(mb.getBlocknumber()+"");
 				 stock.setC_id(mb.getC_id());
 				 stock.setComment(mb.getComment());
@@ -70,7 +71,7 @@ public class MatteboardController {
 				 stock.setNumber("1");
 				 stock.setQualify("是");
 				 stock.setState(Long.parseLong("0"));
-				  
+				 stock.setCode(mb.getCode());
 				 iMatteboardService.addMatteboard(mb,stock);
 		    	ids+=mb.getId()+",";
 		    } 

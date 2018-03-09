@@ -61,6 +61,23 @@ function updateStoneblock(param){
         }
     });
 }
+/**
+ * 修改荒料
+ * @param id
+ */
+function updatesingleStoneblock(param){
+    var httpR = new createHttpR(url+'singleupdateStoneblock','post','text',param,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        //var msg = obj['msg'];
+        if(status=='0'){
+            alert("修改成功！");
+            window.location.reload();
+            //window.location.href="interface.html?index="+interfaceIndex;
+        }
+    });
+}
 
 /**
  * 删除荒料
@@ -85,17 +102,18 @@ function deleteStoneblock(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryStoneblock (stoneblockname,currentPage,pageSize) {
+function  queryStoneblock (bodyParam) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    if(stoneblockname==null||stoneblockname==''){
+    /*if(stoneblockname==null||stoneblockname==''){
         var bodyParam={'page':currentPage,'size':pageSize};
     }
     else{
         var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+stoneblockname+'%'};
-    }
-
+    }*/
+    currentPage=bodyParam['page'];
+    pageSize=bodyParam['size'];
     var httpR = new createHttpR(url+'listStoneblock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -105,7 +123,13 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
             var data=msg['data'];
             stoneblockList=msg['data'];
             var html='';
+            var sum_1=0,sum_2=0,sum_3=0;
             for(var o in data){
+
+                sum_1=(Number(sum_1)+Number(data[o].cube)).toFixed(3);
+                sum_2=(Number(sum_2)+Number(data[o].price)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(data[o].sum)).toFixed(2);
+
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].s_dt+'</td>\n' +
                     '<td>'+data[o].code+'</td>\n' +
@@ -135,8 +159,30 @@ function  queryStoneblock (stoneblockname,currentPage,pageSize) {
                 html+= '</tr>';
 
             }
+
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '</tr>';
+
             $('#stoneblockTbody').html(html);
+
+
             var num=msg['num'];
+
             if(num>0) {
                 var pageHtml = '';
                 var totalPage = 0;
@@ -281,6 +327,7 @@ function  queryStoneblockById (id) {
         var status = obj['status'];
         var msg = obj['msg'];
         if(status=='0'){
+
             var  html='<div class="form-group col-md-6">\n' +
                 '    <label>单据编号</label>\n' +
                 '    <input type="text" class="form-control" id="update_code" name="code" value="'+msg['code']+'" placeholder="请输入单据编号">\n' +
@@ -300,6 +347,10 @@ function  queryStoneblockById (id) {
                 '<div class="form-group col-md-6">\n' +
                 '    <label>厂内料号</label>\n' +
                 '    <input type="text" class="form-control" id="update_number" name="number" value="'+msg['number']+'" placeholder="请输入厂内料号">\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>颜色</label>\n' +
+                '    <input type="text" class="form-control" id="update_color" name="color" value="'+msg['color']+'" placeholder="请输入颜色">\n' +
                 '</div>\n' +
                 '<div class="form-group col-md-6">\n' +
                 '    <label>长</label>\n' +

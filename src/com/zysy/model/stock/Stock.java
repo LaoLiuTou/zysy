@@ -1,5 +1,7 @@
 package com.zysy.model.stock;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 /**
  * @author LT
  */
@@ -185,6 +187,7 @@ public class Stock {
 	private String jingchi;
 	private String yanmi;
 	private String code;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date m_dt;
 	private String auditor;
 	private String worker;

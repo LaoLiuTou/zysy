@@ -179,7 +179,13 @@
                                         <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
                                     </div>
                                 </div>
-
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">类型：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control" id="distinctOuttype">
+                                        </select>
+                                    </div>
+                                </div>
                                 <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
                             </form>
 
@@ -193,7 +199,7 @@
                                 <table  class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
                                     <tr>
-                                        <th>车间	</th>
+                                        <th>类型	</th>
                                         <th>单位</th>
                                         <th>领料数量</th>
                                         <th>出库数量</th>
@@ -252,14 +258,14 @@
 <script>
     $(document).ready(function () {
 
-
+        selectDistinctOuttype($('#distinctOuttype').val());
         //搜索
         $('#searchBtn').click(function () {
-            reportWorkshopInOut($('#searchDate').val());
+            reportWorkshopInOut($('#searchDate').val(),$('#distinctOuttype').val());
         });
 
         //列表
-        reportWorkshopInOut('');
+        reportWorkshopInOut('','');
 
         //打印
         $('#printBtn').click(function () {

@@ -26,9 +26,13 @@ function  reportListStock (bodyParam) {
         if(status=='0'){
             var data=msg['data'];
             var html='';
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0;
             for(var o in data){
                 var msizes=data[o].msize.split('*');
-
+                sum_1=Number(sum_1)+Number(data[o].number);
+                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]/1000000)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(data[o].sprice)).toFixed(2);
+                sum_4=(Number(sum_4)+Number(data[o].ssum)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
                     '<td>'+data[o].m_dt+'</td>\n' +
@@ -45,8 +49,23 @@ function  reportListStock (bodyParam) {
                     '<td>'+data[o].ssum+'</td>\n' +
                     '</tr>' ;
 
-
             }
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td>'+sum_4+'</td>\n' +
+                '</tr>';
             $('#reportTbody').html(html);
 
 
@@ -139,8 +158,8 @@ function  reportStockInOut (stocktype,workshop,material) {
  * @param stocktype
  * @param workshop
  */
-function  reportWorkshopInOut (c_dt) {
-    var bodyParam={};
+function  reportWorkshopInOut (c_dt,outtype) {
+    var bodyParam={'pid':0};
     if(c_dt!=''){
         bodyParam['c_dtFrom']=c_dt+' 00:00:00';
         bodyParam['c_dtTo']=c_dt+' 23:59:59';
@@ -154,14 +173,14 @@ function  reportWorkshopInOut (c_dt) {
             var html='';
             for(var o in data){
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+data[o].workshop_name+'</td>\n' +
+                    '<td>'+data[o].outtype+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+Math.abs(data[o].sum_in)+'</td>\n' +
-                    '<td>'+Math.abs(data[o].sum_out)+'</td>\n' +
-                    '<td>'+(Math.abs(data[o].sum_in)-Math.abs(data[o].sum_out))+'</td>\n</tr>' ;
+                    '<td>'+Math.abs(data[o].sum_in).toFixed(2)+'</td>\n' +
+                    '<td>'+Math.abs(data[o].sum_out).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(data[o].sum_in)-Math.abs(data[o].sum_out)).toFixed(2)+'</td>\n</tr>' ;
             }
             $('#reportTbody').html(html);
-
+            selectDistinctOuttype(outtype);
         }
     });
 }
@@ -231,33 +250,38 @@ function  reportMatteboard (m_dt) {
  * @param c_dt
  * @param workshop
  */
-function  reportYield (c_dt,workshop) {
-    var bodyParam={};
+function  reportYield (c_dt,outtype) {
+    var bodyParam={'pid':0,'state':1,'damage':'否'};
     if(c_dt!=''){
         bodyParam['c_dtFrom']=c_dt+' 00:00:00';
         bodyParam['c_dtTo']=c_dt+' 23:59:59';
     }
-    if(workshop!=''){
-        bodyParam['workshop']=workshop;
+    if(outtype!=''){
+        outtype['outtype']=outtype;
     }
     var httpR = new createHttpR(url+'reportYield','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
         var status = obj['status'];
         var data = obj['msg'];
+
         if(status=='0'){
             var html='';
             for(var o in data){
 
                 html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+data[o].outtype+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].unit+'</td>\n' +
-                    '<td>'+(data[o].sum_in*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/10000).toFixed(2)+'</td>\n' +
-                    '<td>'+(data[o].sum_out*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/10000).toFixed(2)+'</td>\n</tr>' ;
+                    '<td>'+(data[o].sum_in*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+(data[o].sum_out*data[o].msize.split('*')[0]*data[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+data[o].sum_number+'</td>\n' +
+                    '</tr>' ;
             }
 
             $('#reportTbody').html(html);
-            selectWorkshop(1,100,workshop);
+            selectDistinctOuttype(outtype);
+            //selectWorkshop(1,100,workshop);
         }
     });
 }
@@ -363,6 +387,28 @@ function  selectStocktype (currentPage,pageSize,stocktype) {
             }
             $('#searchStocktype').html(html);
             $('#searchStocktype').val(stocktype);
+        }
+    });
+}/**
+ * 唯一类型
+ */
+function  selectDistinctOuttype (outtype) {
+    var bodyParam={};
+    var httpR = new createHttpR(url+'distinctType','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var data = obj['msg'];
+
+        if(status=='0'){
+            var html='<option value="">全部</option>';
+            for(var o in data){
+                if(data[o].outtype!=''){
+                    html+='<option value="'+data[o].outtype+'">'+data[o].outtype+'</option>\n';
+                }
+            }
+            $('#distinctOuttype').html(html);
+            $('#distinctOuttype').val(outtype);
         }
     });
 }
