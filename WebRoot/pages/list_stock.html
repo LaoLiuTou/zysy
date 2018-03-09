@@ -164,8 +164,8 @@
                             库存管理
 
                             <span class="tools pull-right">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
-                            <!--<span class="tools pull-right">-->
+                            <!--<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
+                            --><!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
                          </span>
@@ -178,7 +178,7 @@
                                         <input class="form-control" id="searchCode" size="16" type="text"  />
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3 mr10">
+                               <!-- <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">库别：</label>
                                     <div class="col-md-9 pdnone">
                                         <select class="form-control" id="searchStocktype">
@@ -191,7 +191,7 @@
                                         <select class="form-control" id="searchWorkshop">
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
                                 <button id="searchBtn" type="button" class="btn btn-primary mb10">搜索</button>
                             </form>
                             <div class="adv-table">
@@ -288,7 +288,7 @@
                     <div class="clearfix"></div>
                     <div id="updateForms">
                     </div>
-                    <!--<div class="form-group col-md-6">
+                    <div class="form-group col-md-6">
                         <label>状态</label>
                         <select class="form-control m-bot15" id="update_state" name="state">
                             <option value="0">入库</option>
@@ -309,7 +309,7 @@
                             <option value="否">否</option>
                             <option value="是">是</option>
                         </select>
-                    </div>-->
+                    </div>
                 </form>
             </div>
             <div class="clearfix"></div>
@@ -482,184 +482,15 @@
 
 <script>
     $(document).ready(function () {
+        function Num(obj){
+            obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
+            obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
+            obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
+            obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+            obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+        }
 
 
-        //select
-        $('#material').change(function () {
-            var html='';
-            if($(this).val()=='1'){
-                html='<div class="form-group col-md-6">\n' +
-                    '    <label>单据编号</label>\n' +
-                    '    <input type="text" class="form-control" id="code" placeholder="请输入单据编号">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>来源</label>\n' +
-                    '    <input type="text" class="form-control" id="source" placeholder="请输入来源">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>单据日期</label>\n' +
-                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="s_dt" placeholder="请输入单据日期">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>入库地点</label>\n' +
-                    '    <input type="text" class="form-control" id="place" placeholder="请输入入库地点">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>厂内料号</label>\n' +
-                    '    <input type="text" class="form-control" id="number" placeholder="请输入厂内料号">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>长</label>\n' +
-                    '    <input type="text" class="form-control" id="length" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>宽</label>\n' +
-                    '    <input type="text" class="form-control" id="width" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>高</label>\n' +
-                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入长度">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>立方数</label>\n' +
-                    '    <input type="text" class="form-control" id="cube" placeholder="请输入立方数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>单价</label>\n' +
-                    '    <input type="text" class="form-control" id="price" placeholder="请输入单价">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>总块数</label>\n' +
-                    '    <input type="text" class="form-control" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入总块数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>金额</label>\n' +
-                    '    <input type="text" class="form-control" id="sum" placeholder="请输入金额">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>车牌号</label>\n' +
-                    '    <input type="text" class="form-control" id="platenumber" placeholder="请输入车牌号">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>入账时间</label>\n' +
-                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="rz_dt" placeholder="如未入账则为空">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>运费结算时间</label>\n' +
-                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="yf_dt"  placeholder="如未结算运费则为空">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>账差</label>\n' +
-                    '    <input type="text" class="form-control" id="accountdiff" placeholder="请输入账差">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>审核人</label>\n' +
-                    '    <input type="text" class="form-control" id="auditor" placeholder="请输入审核人">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>录入人</label>\n' +
-                    '    <input type="text" class="form-control" id="editor" placeholder="请输入录入人">\n' +
-                    '</div> \n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>备注</label>\n' +
-                    '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
-                    '</div>\n' ;
-            }
-            else if($(this).val()=='2'){
-                html='<div class="form-group col-md-6">\n' +
-                    '    <label>荒料编号</label>\n' +
-                    '    <input type="text" class="form-control" id="sb_code" placeholder="请输入荒料编号">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>荒料规格</label>\n' +
-                    '    <input type="text" class="form-control" id="sb_spec" placeholder="格式为 长*宽*高">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>立方数</label>\n' +
-                    '    <input type="text" class="form-control" id="sb_cube" placeholder="请输入立方数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>单据编号</label>\n' +
-                    '    <input type="text" class="form-control" id="code" placeholder="请输入单据编号">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>验收人</label>\n' +
-                    '    <input type="text" class="form-control" id="auditor" placeholder="请输入验收人">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>单据日期</label>\n' +
-                    '    <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="m_dt" placeholder="请输入单据日期">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>工组</label>\n' +
-                    '    <input type="text" class="form-control" id="workgroup" placeholder="请输入工组">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>料层</label>\n' +
-                    '    <select class="form-control m-bot15" id="layer">\n' +
-                    '        <option value="1">上</option>\n' +
-                    '        <option value="2">中</option>\n' +
-                    '        <option value="3">下</option>\n' +
-                    '    </select>\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>板材尺寸</label>\n' +
-                    '    <input type="text" class="form-control" id="msize" placeholder="格式为 长*宽">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>厚度</label>\n' +
-                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>总块数</label>\n' +
-                    '    <input type="text" class="form-control" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入总块数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>平方数</label>\n' +
-                    '    <input type="text" class="form-control" id="square" placeholder="请输入平方数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>不合格块数</label>\n' +
-                    '    <input type="text" class="form-control" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入不合格块数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>不合格平方数</label>\n' +
-                    '    <input type="text" class="form-control" id="belowgradesquare" placeholder="请输入不合格平方数">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>备注</label>\n' +
-                    '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
-                    '</div>\n' ;
-            }
-            else{
-                html='<div class="form-group col-md-6">\n' +
-                    '    <label>单位</label>\n' +
-                    '    <input type="text" class="form-control" id="unit" placeholder="请输入单位">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>板材尺寸</label>\n' +
-                    '    <input type="text" class="form-control" id="msize" placeholder="格式为 长*宽">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>厚度</label>\n' +
-                    '    <input type="text" class="form-control" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入板材厚度">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>数量</label>\n' +
-                    '    <input type="text" class="form-control" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" placeholder="请输入数量">\n' +
-                    '</div>\n' +
-                    '<div class="form-group col-md-6">\n' +
-                    '    <label>备注</label>\n' +
-                    '    <input type="text" class="form-control" id="comment" placeholder="请输入描述">\n' +
-                    '</div>';
-            }
-            $('#forms').html(html);
-            $('.default-date-picker').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-
-
-        });
 
         //搜索
         $('#searchBtn').click(function () {
@@ -669,15 +500,7 @@
         //列表
         var currentPage=1;
         var pageSize=10;
-        //$.when(queryStock('','','',currentPage,pageSize)).then(selectMaterial(1,100)).then(selectWorkshop(1,100)).then(selectStocktype(1,100));
         queryStock('',currentPage,pageSize);
-        /*setTimeout(function() {
-            selectMaterial(1,100);
-            selectWorkshop(1,100);
-            selectStocktype(1,100);
-        }, 500);*/
-
-
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
@@ -704,35 +527,19 @@
         });
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //根据高度宽度计算体积
-        $('#forms').on('blur','#length',function(){
-            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
-        });
-        $('#forms').on('blur','#width',function(){
-            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
-        });
-        $('#forms').on('blur','#height',function(){
-            $('#cube').val(($('#length').val()*$('#width').val()*$('#height').val()/1000000).toFixed(2));
-        });
+
         ///////修改
         $('#updateForm').on('blur','#update_length',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
         });
         $('#updateForm').on('blur','#update_width',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
         });
         $('#updateForm').on('blur','#update_height',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()/1000000).toFixed(2));
+            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //金额
-        $('#forms').on('blur','#price',function(){
-            $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
-        });
-        $('#forms').on('blur','#blocknumber',function(){
-            $('#sum').val(($('#cube').val()*$('#price').val()*$('#blocknumber').val()).toFixed(2));
-        });
-        ///////修改
         $('#updateForm').on('blur','#update_price',function(){
             $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
         });
@@ -741,70 +548,14 @@
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //根据编号查询荒料
-        $('#forms').on('blur','#sb_code',function(){
-            queryStoneblockByCode($('#sb_code').val());
-        });
+
         ///////修改
         $('#updateForm').on('blur','#update_sb_code',function(){
             queryStoneblockByCode($('#update_sb_code').val());
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //计算合格数
-        $('#forms').on('blur','#msize',function(){
-            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
-                var specs=$('#sb_spec').val().split('*');
-                var msizes=$('#msize').val().split('*');
-                $('#blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val()));
-                $('#square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())*(msizes[0]*msizes[1])/10000);
-                $('#belowgradeblock').val('');
-                $('#belowgradesquare').val('');
-            }
-        });
-        $('#forms').on('blur','#height',function(){
-            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
-                var specs=$('#sb_spec').val().split('*');
-                var msizes=$('#msize').val().split('*');
-                $('#blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val()));
-                $('#square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())*(msizes[0]*msizes[1])/10000);
-            }
-        });
-        $('#forms').on('blur','#blocknumber',function(){
-            if($('#height').val()!=''&&$('#sb_spec').val()!=''&&$('#msize').val()!=''){
-                var specs=$('#sb_spec').val().split('*');
-                var msizes=$('#msize').val().split('*');
-                $('#belowgradeblock').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())-$('#blocknumber').val());
-                $('#belowgradesquare').val(((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#height').val())-$('#blocknumber').val())*(msizes[0]*msizes[1])/10000);
-                $('#square').val($('#blocknumber').val()*(msizes[0]*msizes[1])/10000);
-            }
-        });
-        ///////修改
-        $('#updateForm').on('blur','#update_msize',function(){
-            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
-                var specs=$('#update_sb_spec').val().split('*');
-                var msizes=$('#update_msize').val().split('*');
-                $('#update_blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val()));
-                $('#update_square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())*(msizes[0]*msizes[1])/10000);
-                $('#update_belowgradeblock').val('');
-                $('#update_belowgradesquare').val('');
-            }
-        });
-        $('#updateForm').on('blur','#update_height',function(){
-            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
-                var specs=$('#update_sb_spec').val().split('*');
-                var msizes=$('#update_msize').val().split('*');
-                $('#update_blocknumber').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val()));
-                $('#update_square').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())*(msizes[0]*msizes[1])/10000);
-            }
-        });
-        $('#updateForm').on('blur','#update_blocknumber',function(){
-            if($('#update_height').val()!=''&&$('#update_sb_spec').val()!=''&&$('#update_msize').val()!=''){
-                var specs=$('#update_sb_spec').val().split('*');
-                var msizes=$('#update_msize').val().split('*');
-                $('#update_belowgradeblock').val((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())-$('#update_blocknumber').val());
-                $('#update_belowgradesquare').val(((specs[0]/msizes[0])*(specs[1]/msizes[1])*(specs[2]/$('#update_height').val())-$('#update_blocknumber').val())*(msizes[0]*msizes[1])/10000);
-                $('#update_square').val($('#update_blocknumber').val()*(msizes[0]*msizes[1])/10000);
-            }
-        });
+        
 
 
 
