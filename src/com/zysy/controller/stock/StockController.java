@@ -50,7 +50,35 @@ public class StockController {
 		try {
 			String ids = "";
 		    for(Stock stock:stockList){
-		    	iStockService.addStock(stock);
+		    	
+		    	if(stock.getProcess().equals("调厚")){
+		    		if(stock.getMsize()!=null&&stock.getHeight()!=null&&stock.getNumber()!=null){
+		    			String[] heights=stock.getHeight().split("-");
+		    			if(heights.length==2){
+		    				Map paramMap= new HashMap();
+			    			paramMap.put("fromPage",0);
+			    			paramMap.put("toPage",1);
+			    			paramMap.put("code",stock.getCode()); 
+							paramMap.put("msize",stock.getMsize()); 
+							paramMap.put("height",heights[0]);
+							List<Stock> list=iStockService.selectStockByParam(paramMap);
+							if(list.size()>0){
+								Stock tempStock=list.get(0);
+								tempStock.setNumber((Integer.parseInt(tempStock.getNumber())-Integer.parseInt(stock.getNumber())+""));
+								iStockService.updateStock(tempStock);
+								stock.setHeight(heights[1]);
+								iStockService.addStock(stock);
+							}
+							
+		    			}
+		    			
+		    		}
+		    	}
+		    	else{
+		    		iStockService.addStock(stock);
+		    	}
+		    	
+		    	
 		    	ids+=stock.getId()+",";
 		    } 
 			resultMap.put("status", "0");

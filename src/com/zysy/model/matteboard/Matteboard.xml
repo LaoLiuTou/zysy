@@ -29,8 +29,14 @@
 			<if test="workgroup != null"> AND WORKGROUP =#{workgroup} </if>
 			<if test="layer != null"> AND LAYER =#{layer} </if>
 			<if test="msize != null"> AND MSIZE =#{msize} </if>
+			<if test="heightFrom != null"> AND cast(HEIGHT as DECIMAL) &gt;=#{heightFrom} </if>
+			<if test="heightTo != null"> AND cast(HEIGHT as DECIMAL) &lt;=#{heightTo} </if>
 			<if test="height != null"> AND HEIGHT =#{height} </if>
+			<if test="blocknumberFrom != null"> AND cast(BLOCKNUMBER as DECIMAL) &gt;=#{blocknumberFrom} </if>
+			<if test="blocknumberTo != null"> AND cast(BLOCKNUMBER as DECIMAL) &lt;=#{blocknumberTo} </if>
 			<if test="blocknumber != null"> AND BLOCKNUMBER =#{blocknumber} </if>
+			<if test="squareFrom != null"> AND cast(SQUARE as DECIMAL) &gt;=#{squareFrom} </if>
+			<if test="squareTo != null"> AND cast(SQUARE as DECIMAL) &lt;=#{squareTo} </if>
 			<if test="square != null"> AND SQUARE =#{square} </if>
 			<if test="belowgradeblock != null"> AND BELOWGRADEBLOCK =#{belowgradeblock} </if>
 			<if test="belowgradesquare != null"> AND BELOWGRADESQUARE =#{belowgradesquare} </if>
@@ -43,7 +49,11 @@
 			<if test="u_dt != null"> AND U_DT =#{u_dt} </if>
 			<if test="state != null"> AND STATE =#{state} </if>
 			<if test="c_id != null"> AND C_ID =#{c_id} </if>
+			<if test="priceFrom != null"> AND cast(PRICE as DECIMAL) &gt;=#{priceFrom} </if>
+			<if test="priceTo != null"> AND cast(PRICE as DECIMAL) &lt;=#{priceTo} </if>
 			<if test="price != null"> AND PRICE =#{price} </if>
+			<if test="sumFrom != null"> AND cast(SUM as DECIMAL) &gt;=#{umFrom} </if>
+			<if test="sumTo != null"> AND cast(SUM as DECIMAL) &lt;=#{umTo} </if>
 			<if test="sum != null"> AND SUM =#{sum} </if>
 		</trim>  
 		ORDER BY ID DESC 

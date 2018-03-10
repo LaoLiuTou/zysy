@@ -114,6 +114,10 @@ function  queryStock (code,currentPage,pageSize) {
     //分页显示的页码数  必须为奇数
     var showPage=7;
     var bodyParam={'page':currentPage,'size':pageSize};
+    if(code!=''){
+        bodyParam['code']=code;
+        $('#searchCode').val(code)
+    }
     /*if(material!=''){
         bodyParam['material']=material;
         $('#searchMaterial').val(material)
@@ -137,9 +141,32 @@ function  queryStock (code,currentPage,pageSize) {
             var html='';
             for(var o in data){
 
-                var type=data[o].material_name;
+                var type=data[o].material;
                 if(type==''){
-                    type=data[o].outtype;
+                    if(data[o].state=='2'){
+                        type='领料单';
+                    }
+                    else if(data[o].state=='1'){
+                        if(data[o].outtype=='磨机'){
+                            type='磨机出库单';
+                        }
+                        else if(data[o].outtype=='切机'){
+                            type='切机出库单';
+                        }
+                        else if(data[o].outtype=='火烧'){
+                            type='火烧出库单';
+                        }
+                        else if(data[o].outtype=='外加工'){
+                            type='外加工出库单';
+                        }
+                    }
+
+                }
+                else if(type=='1'){
+                    type='荒料入库单';
+                }
+                else if(type=='2'){
+                    type='大锯检验单';
                 }
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].id+'</td>\n' +

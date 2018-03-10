@@ -273,6 +273,7 @@
                                     - <input  style=" display: inline-block;width:45%;padding:3px;" id="yf_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
                                 </div>
                             </div>
+                                <button type="button" class="btn btn-primary mb10" id="resetBtn">重置</button>
                                 <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
                             </form>
 
@@ -297,6 +298,7 @@
                                         <th>立方</th>
                                         <th>单价</th>
                                         <th>金额</th>
+                                        <th>账差</th>
                                         <th>运辅车辆</th>
                                         <th>入账时间</th>
                                         <th>运费结算时间</th>
@@ -419,6 +421,14 @@
         });
         $('.default-date-picker').datepicker({
             format: 'yyyy-mm-dd'
+        });
+
+        $('#resetBtn').click(function(){
+
+            $('#form input').each(function () {
+                $(this).val('');
+            });
+
         });
     });
 

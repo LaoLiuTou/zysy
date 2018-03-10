@@ -186,6 +186,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <button type="button" class="btn btn-primary mb10" id="resetBtn">重置</button>
                                 <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
                             </form>
 
@@ -279,6 +280,15 @@
         });
         $('.default-date-picker').datepicker({
             format: 'yyyy-mm-dd'
+        });
+        $('#resetBtn').click(function(){
+
+            $('#form input').each(function () {
+                $(this).val('');
+            });
+            $('#form select').each(function () {
+                $(this).val('');
+            });
         });
     });
 

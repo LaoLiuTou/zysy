@@ -87,12 +87,13 @@ function deleteMatteboard(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryMatteboard (currentPage,pageSize) {
+function  queryMatteboard (bodyParam) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
-    var bodyParam={'page':currentPage,'size':pageSize};
-
+    //var bodyParam={'page':currentPage,'size':pageSize};
+    currentPage=bodyParam['page'];
+    pageSize=bodyParam['size'];
     var httpR = new createHttpR(url+'listMatteboard','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -129,6 +130,7 @@ function  queryMatteboard (currentPage,pageSize) {
 
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
+                    '<td>'+data[o].sb_code+'</td>\n' +
                     '<td>'+sb_specs[0]+'</td>\n' +
                     '<td>'+sb_specs[1]+'</td>\n' +
                     '<td>'+sb_specs[2]+'</td>\n' +
@@ -152,6 +154,7 @@ function  queryMatteboard (currentPage,pageSize) {
             }
             html+='<tr  class="gradeX">\n' +
                 '<td>合计</td>\n' +
+                '<td></td>\n' +
                 '<td>'+sum_1+'</td>\n' +
                 '<td>'+sum_2+'</td>\n' +
                 '<td>'+sum_3+'</td>\n' +

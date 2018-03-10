@@ -161,7 +161,7 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            库存管理
+                            单据管理
 
                             <span class="tools pull-right">
                             <!--<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newly-box">新建</button>
@@ -171,11 +171,18 @@
                          </span>
                         </header>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form">
+                            <form class="form-horizontal" role="form" id="form">
                                 <div class="form-group col-md-3 mr10">
                                     <label class="control-label col-md-3 form-sm-title pdnone">编号：</label>
                                     <div class="col-md-9 pdnone">
                                         <input class="form-control" id="searchCode" size="16" type="text"  />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
                                     </div>
                                 </div>
                                <!-- <div class="form-group col-md-3 mr10">
@@ -192,6 +199,7 @@
                                         </select>
                                     </div>
                                 </div>-->
+                                <button type="button" class="btn btn-primary mb10" id="resetBtn">重置</button>
                                 <button id="searchBtn" type="button" class="btn btn-primary mb10">搜索</button>
                             </form>
                             <div class="adv-table">
@@ -555,7 +563,7 @@
         });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //计算合格数
-        
+
 
 
 
@@ -823,9 +831,17 @@
             deleteStock(currentStock.id);
         });
 
+        $('.default-date-picker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
 
+        $('#resetBtn').click(function(){
 
+            $('#form input').each(function () {
+                $(this).val('');
+            });
 
+        });
 
 
     });

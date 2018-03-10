@@ -143,6 +143,7 @@ function  queryStoneblock (bodyParam) {
                     '<td>'+data[o].cube+'</td>\n'  +
                     '<td>'+data[o].price+'</td>\n'  +
                     '<td>'+data[o].sum+'</td>\n'  +
+                    '<td>'+data[o].accountdiff+'</td>\n'  +
                     '<td>'+data[o].platenumber+'</td>\n';
                 if(data[o].rz_dt==''){
                     html+='<td>'+'未入账'+'</td>\n';
@@ -173,6 +174,7 @@ function  queryStoneblock (bodyParam) {
                 '<td>'+sum_1+'</td>\n' +
                 '<td>'+sum_2+'</td>\n' +
                 '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
