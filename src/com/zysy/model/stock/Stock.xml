@@ -361,7 +361,7 @@
 		SELECT a.*,b.name as material_name,c.name as workshop_name,
 		SUM(CASE WHEN a.qualify='是' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_in, 
 		SUM(CASE WHEN a.qualify='否' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_out ,
-		SUM(CASE WHEN a.comment='计划外入库' THEN a.number ELSE 0 END)  as sum_number 
+		SUM(CASE WHEN a.outtype='计划外入库' THEN a.number ELSE 0 END)  as sum_number 
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 

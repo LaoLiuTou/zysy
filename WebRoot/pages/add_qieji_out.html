@@ -269,7 +269,7 @@
         for(var i=1;i<6;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="单烧">单烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="红外线切">红外线切</option><option value="其它">其它</option></select></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+4)+'" mold="process" class="table_input height dom" id="height" ></td>\n' +
@@ -328,9 +328,9 @@
             '<tr style="height:3px;"></tr><tr>\n' +
             '    <td rowspan="6" colspan="2" style="padding: 0px;width:60px;text-align: center;line-height: 240px;">计划外入库</td>\n' +
             '    <td style="padding: 10px;height: 30px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="80" index="1" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="80" index="1" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="81" index="1" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="81" index="1" class="table_input  height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="82" index="1" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -340,9 +340,9 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="85" index="2" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="85" index="2" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="86" index="2" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="86" index="2" class="table_input  height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="87" index="2" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -352,9 +352,9 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="90" index="3" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="90" index="3" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="91" index="3" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="91" index="3" class="table_input height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="92" index="3" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -364,9 +364,9 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="95" index="4" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="95" index="4" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="96" index="4" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="96" index="4" class="table_input height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="97" index="4" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -376,9 +376,9 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="100" index="5" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="100" index="5" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="101" index="5" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="101" index="5" class="table_input height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="102" index="5" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -388,9 +388,9 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="105" index="6" class="table_input dom" id="msize" ></td>\n' +
+            '    <td colspan="2" style="padding: 0px;"><input type="text" mold="ruku" keyIndex="105" index="6" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="106" index="6" class="table_input dom" id="height" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="106" index="6" class="table_input height dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="107" index="6" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
             '    <td style="padding: 10px;">加工价格</td>\n' +
@@ -408,8 +408,9 @@
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
             var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
-            if(msize!=''&&msizes.length==2){
-                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]/1000000).toFixed(2));
+            var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
+            if(msize!=''&&msizes.length==2&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
                     length=msizes[0]-msizes[0]%300+300;
@@ -417,10 +418,15 @@
                 if(msizes[1]%300>0){
                     width=msizes[1]-msizes[1]%300+300;
                 }
-                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width/1000000).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
 
                 if(height!=''){
-                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                    var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                    if(number!=''&&sprice!=''&&yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    }
                 }
             }
 
@@ -430,8 +436,14 @@
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
             var msizes=msize.split('*');
-            if(msize!=''&&msizes.length==2&&height!=''){
-                $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+            var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
+            if(msize!=''&&msizes.length==2&&height!=''&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                if(number!=''&&sprice!=''&&yanmi!=''){
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                }
             }
 
         });
@@ -439,33 +451,87 @@
         $('.number[mold="process"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
-            var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
+            if(msize!=''&&msizes.length==2&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
+
+                if(height!=''&&number!=''){
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                    var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                    if(number!=''&&sprice!=''&&yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    }
+                }
             }
         });
         $('.sprice[mold="process"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+            if(number!=''&&sprice!=''&&yanmi!=''){
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+            }
+        });
+
+        $('.msize[mold="ruku"]').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
+            var height=$('input[mold="ruku"][index="'+index+'"][id="height"]').val();
+            var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
+            if(msizes.length==2&&number!=''&&sprice!=''&&height!=''){
+                var yanmi=(((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2)
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((yanmi*sprice).toFixed(2));
+            }
+        });
+        $('.height[mold="ruku"]').on('blur',function(){
+            var index=$(this).attr("index");
+            var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
+            var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="ruku"][index="'+index+'"][id="height"]').val();
+            if(msizes.length==2&&number!=''&&sprice!=''&&height!=''){
+                var yanmi=(((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2)
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((yanmi*sprice).toFixed(2));
             }
         });
         $('.number[mold="ruku"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="ruku"][index="'+index+'"][id="height"]').val();
+            if(msizes.length==2&&number!=''&&sprice!=''&&height!=''){
+                var yanmi=(((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2)
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((yanmi*sprice).toFixed(2));
             }
         });
         $('.sprice[mold="ruku"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="ruku"][index="'+index+'"][id="height"]').val();
+            if(msizes.length==2&&number!=''&&sprice!=''&&height!=''){
+                var yanmi=(((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2)
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((yanmi*sprice).toFixed(2));
             }
         });
 

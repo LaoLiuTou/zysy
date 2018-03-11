@@ -51,7 +51,7 @@ public class StockController {
 			String ids = "";
 		    for(Stock stock:stockList){
 		    	
-		    	if(stock.getProcess().equals("调厚")){
+		    	if(stock.getProcess()!=null&&stock.getProcess().equals("调厚")){
 		    		if(stock.getMsize()!=null&&stock.getHeight()!=null&&stock.getNumber()!=null){
 		    			String[] heights=stock.getHeight().split("-");
 		    			if(heights.length==2){

@@ -269,8 +269,8 @@
         for(var i=1;i<6;i++){
             html+='<tr>\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
-                //'<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option></select></td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="红外线切">红外线切</option></select></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option></select></td>\n' +
+                //'<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="红外线切">红外线切</option></select></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+4)+'" mold="process" class="table_input height dom" id="height" ></td>\n' +
@@ -397,8 +397,9 @@
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
             var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
-            if(msize!=''&&msizes.length==2){
-                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]/1000000).toFixed(2));
+            var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
+            if(msize!=''&&msizes.length==2&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
                     length=msizes[0]-msizes[0]%300+300;
@@ -406,10 +407,15 @@
                 if(msizes[1]%300>0){
                     width=msizes[1]-msizes[1]%300+300;
                 }
-                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width/1000000).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
 
                 if(height!=''){
-                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                    var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                    if(number!=''&&sprice!=''&&yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    }
                 }
             }
 
@@ -419,8 +425,14 @@
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
             var msizes=msize.split('*');
+            var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             if(msize!=''&&msizes.length==2&&height!=''){
-                $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0])+Number(msizes[1]))*2*height/10000000);
+                $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                if(number!=''&&sprice!=''&&yanmi!=''){
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                }
             }
 
         });
@@ -432,13 +444,38 @@
             if(number!=''&&sprice!=''){
                 $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
             }
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
+            if(msize!=''&&msizes.length==2&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
+
+                if(height!=''&&number!=''){
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                    var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                    if(number!=''&&sprice!=''&&yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    }
+                }
+            }
         });
         $('.sprice[mold="process"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+
+            var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+            if(number!=''&&sprice!=''&&yanmi!=''){
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
             }
         });
         $('.number[mold="ruku"]').on('blur',function(){
@@ -447,6 +484,29 @@
             var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
             if(number!=''&&sprice!=''){
                 $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            }
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
+            if(msize!=''&&msizes.length==2&&number!=''){
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
+
+                if(height!=''){
+                    $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((((Number(msizes[0]/1000)+Number(msizes[1]/1000))*2*height/10)*number).toFixed(2));
+                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+                    var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                    if(number!=''&&sprice!=''&&yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice*yanmi).toFixed(2));
+                    }
+                }
             }
         });
         $('.sprice[mold="ruku"]').on('blur',function(){

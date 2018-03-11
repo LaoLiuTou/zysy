@@ -326,7 +326,7 @@
             '<tr style="height:3px;"></tr><tr>\n' +
             '    <td rowspan="6" colspan="2" style="padding: 0px;width:60px;text-align: center;line-height: 240px;">计划外入库</td>\n' +
             '    <td style="padding: 10px;height: 30px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="80" index="1" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="80" index="1" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="81" index="1" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -338,7 +338,7 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="85" index="2" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="85" index="2" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="86" index="2" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -350,7 +350,7 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="90" index="3" class="table_input dom" id="msize" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="90" index="3" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="91" index="3" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -362,7 +362,7 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="95" index="4" class="table_input dom" id="msize" ></td>\n' +
+            '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="95" index="4" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="96" index="4" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -374,7 +374,7 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="100" index="5" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="100" index="5" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td  style="padding: 0px;"><input type="text" mold="ruku" keyIndex="101" index="5" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -386,7 +386,7 @@
             '</tr>\n' +
             '<tr>\n' +
             '    <td style="padding: 10px;height: 40px;">规格</td>\n' +
-            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="105" index="6" class="table_input dom" id="msize" ></td>\n' +
+            '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="105" index="6" class="table_input msize dom" id="msize" ></td>\n' +
             '    <td style="padding: 10px;height: 30px;">厚度</td>\n' +
             '    <td style="padding: 0px;"><input type="text" mold="ruku" keyIndex="106" index="6" class="table_input dom" id="height" ></td>\n' +
             '    <td style="padding: 10px;">数量</td>\n' +
@@ -406,9 +406,11 @@
             var index=$(this).attr("index");
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
-            if(msizes.length==2){
+            var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
+            var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+            if(msizes.length==2&&number!=''){
 
-                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]/1000000).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
                     length=msizes[0]-msizes[0]%300+300;
@@ -416,7 +418,10 @@
                 if(msizes[1]%300>0){
                     width=msizes[1]-msizes[1]%300+300;
                 }
-                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width/1000000).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
+                if(number!=''&&sprice!=''){
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+                }
             }
         });
 
@@ -424,32 +429,64 @@
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            if(msizes.length==2&&number!=''){
+
+                $('input[mold="process"][index="'+index+'"][id="jingchi"]').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
+                if(number!=''&&sprice!=''){
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+                }
             }
         });
         $('.sprice[mold="process"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            if(msizes.length==2&&number!=''&&sprice!=''){
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+            }
+        });
+        $('.msize[mold="ruku"]').on('blur',function(){
+            var index=$(this).attr("index");
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
+
+            var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
+            if(msizes.length==2&&number!=''&&sprice!=''){
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
             }
         });
         $('.number[mold="ruku"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            if(msizes.length==2&&number!=''&&sprice!=''){
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
             }
         });
         $('.sprice[mold="ruku"]').on('blur',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="ruku"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="ruku"][index="'+index+'"][id="sprice"]').val();
-            if(number!=''&&sprice!=''){
-                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+            var msize=$('input[mold="ruku"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
+            if(msizes.length==2&&number!=''&&sprice!=''){
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
             }
         });
 
@@ -598,7 +635,7 @@
                 }
             }
 
-            alert(JSON.stringify(params));
+            //alert(JSON.stringify(params));
             addmulStock(params);
         });
 
