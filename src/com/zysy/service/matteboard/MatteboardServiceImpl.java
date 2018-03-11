@@ -79,7 +79,7 @@ public class MatteboardServiceImpl  implements IMatteboardService {
 	    
 	    result=iMatteboardMapper.addmatteboard(matteboard);
 	    stock.setPid(matteboard.getId());
-		if(matteboard.getBelowgradeblock()>0){
+		if(matteboard.getBelowgradeblock()!=null&&matteboard.getBelowgradeblock()>0){
 			Stock temp=stock;
 			temp.setNumber((matteboard.getBlocknumber()-matteboard.getBelowgradeblock())+"");
 			//temp.setState(Long.parseLong("0"));

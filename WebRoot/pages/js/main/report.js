@@ -26,13 +26,21 @@ function  reportListStock (bodyParam) {
         if(status=='0'){
             var data=msg['data'];
             var html='';
-            var sum_1=0,sum_2=0,sum_3=0,sum_4=0;
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0;
             for(var o in data){
                 var msizes=data[o].msize.split('*');
                 sum_1=Number(sum_1)+Number(data[o].number);
-                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]/1000000)).toFixed(2);
+                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
                 sum_3=(Number(sum_3)+Number(data[o].sprice)).toFixed(2);
                 sum_4=(Number(sum_4)+Number(data[o].ssum)).toFixed(2);
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                sum_5=(Number(sum_5)+Number(length*width*data[o].number/1000000)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
                     '<td>'+data[o].m_dt+'</td>\n' +
@@ -41,7 +49,9 @@ function  reportListStock (bodyParam) {
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].number+'</td>\n' +
-                    '<td>'+(msizes[0]*msizes[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+(msizes[0]*msizes[1]*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    //'<td>'+data[o].maochi+'</td>\n' +
+                    '<td>'+(length*width*data[o].number/1000000).toFixed(2)+'</td>\n' +
                     '<td>'+data[o].comment+'</td>\n' +
                     '<td>'+data[o].worker+'</td>\n' +
                     '<td>'+data[o].auditor+'</td>\n' +
@@ -59,6 +69,168 @@ function  reportListStock (bodyParam) {
                 '<td></td>\n' +
                 '<td>'+sum_1+'</td>\n' +
                 '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_5+'</td>\n' +
+
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td>'+sum_4+'</td>\n' +
+                '</tr>';
+            $('#reportTbody').html(html);
+
+
+        }
+    });
+}
+/**
+ * 统计库存
+ * @param c_dt
+ * @param stocktype
+ * @param workshop
+ */
+function  reportQJListStock (bodyParam) {
+
+
+    var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+
+        if(status=='0'){
+            var data=msg['data'];
+            var html='';
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0;
+            for(var o in data){
+                var msizes=data[o].msize.split('*');
+                sum_1=Number(sum_1)+Number(data[o].number);
+                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(data[o].sprice)).toFixed(2);
+                sum_4=(Number(sum_4)+Number(data[o].ssum)).toFixed(2);
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                sum_5=(Number(sum_5)+Number(length*width*data[o].number/1000000)).toFixed(2);
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+(Number(o)+1)+'</td>\n' +
+                    '<td>'+data[o].m_dt+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
+                    '<td>'+data[o].process+'</td>\n' +
+                    '<td>'+data[o].msize+'</td>\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].number+'</td>\n' +
+                    '<td>'+(msizes[0]*msizes[1]*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    //'<td>'+data[o].maochi+'</td>\n' +
+                    '<td>'+(length*width*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+data[o].comment+'</td>\n' +
+                    '<td>'+data[o].worker+'</td>\n' +
+                    '<td>'+data[o].auditor+'</td>\n' +
+                    '<td>'+data[o].yanmi+'</td>\n' +
+                    '<td>'+data[o].sprice+'</td>\n' +
+                    '<td>'+data[o].ssum+'</td>\n' +
+                    '</tr>' ;
+
+            }
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_5+'</td>\n' +
+
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_3+'</td>\n' +
+                '<td>'+sum_4+'</td>\n' +
+                '</tr>';
+            $('#reportTbody').html(html);
+
+
+        }
+    });
+}
+/**
+ * 统计库存
+ * @param c_dt
+ * @param stocktype
+ * @param workshop
+ */
+function  reportWJGListStock (bodyParam) {
+
+
+    var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
+    httpR.HttpRequest(function(response){
+        var obj = JSON.parse(response);
+        var status = obj['status'];
+        var msg = obj['msg'];
+
+        if(status=='0'){
+            var data=msg['data'];
+            var html='';
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0;
+            for(var o in data){
+                var msizes=data[o].msize.split('*');
+                sum_1=Number(sum_1)+Number(data[o].number);
+                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(data[o].sprice)).toFixed(2);
+                sum_4=(Number(sum_4)+Number(data[o].ssum)).toFixed(2);
+                sum_5=(Number(sum_5)+Number(data[o].yanmi)).toFixed(2);
+                var length=msizes[0],width=msizes[1];
+                if(msizes[0]%300>0){
+                    length=msizes[0]-msizes[0]%300+300;
+                }
+                if(msizes[1]%300>0){
+                    width=msizes[1]-msizes[1]%300+300;
+                }
+                html+='<tr index='+o+' class="gradeX">\n' +
+                    '<td>'+(Number(o)+1)+'</td>\n' +
+                    '<td>'+data[o].m_dt+'</td>\n' +
+                    '<td>'+data[o].code+'</td>\n' +
+                    '<td>'+data[o].process+'</td>\n' +
+                    '<td>'+data[o].msize+'</td>\n' +
+                    '<td>'+data[o].height+'</td>\n' +
+                    '<td>'+data[o].number+'</td>\n' +
+                    '<td>'+(msizes[0]*msizes[1]*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+data[o].yanmi+'</td>\n' +
+                    //'<td>'+data[o].maochi+'</td>\n' +
+                    //'<td>'+(length*width*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+data[o].comment+'</td>\n' +
+                    '<td>'+data[o].worker+'</td>\n' +
+                    '<td>'+data[o].auditor+'</td>\n' +
+
+                    '<td>'+data[o].sprice+'</td>\n' +
+                    '<td>'+data[o].ssum+'</td>\n' +
+                    '</tr>' ;
+
+            }
+            html+='<tr  class="gradeX">\n' +
+                '<td>合计</td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td></td>\n' +
+                '<td>'+sum_1+'</td>\n' +
+                '<td>'+sum_2+'</td>\n' +
+                '<td>'+sum_5+'</td>\n' +
 
                 '<td></td>\n' +
                 '<td></td>\n' +
@@ -161,8 +333,11 @@ function  reportStockInOut (stocktype,workshop,material) {
 function  reportWorkshopInOut (c_dt,outtype) {
     var bodyParam={'pid':0};
     if(c_dt!=''){
-        bodyParam['c_dtFrom']=c_dt+' 00:00:00';
-        bodyParam['c_dtTo']=c_dt+' 23:59:59';
+        bodyParam['m_dtFrom']=c_dt+' 00:00:00';
+        bodyParam['m_dtTo']=c_dt+' 23:59:59';
+    }
+    if(outtype!=''){
+        bodyParam['outtype']=outtype;
     }
     var httpR = new createHttpR(url+'reportWorkshopInOut','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
@@ -177,7 +352,11 @@ function  reportWorkshopInOut (c_dt,outtype) {
                     '<td>'+data[o].unit+'</td>\n' +
                     '<td>'+Math.abs(data[o].sum_in).toFixed(2)+'</td>\n' +
                     '<td>'+Math.abs(data[o].sum_out).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(data[o].sum_in)-Math.abs(data[o].sum_out)).toFixed(2)+'</td>\n</tr>' ;
+                    '<td>'+Math.abs(data[o].sprice).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(data[o].sum_in)-Math.abs(data[o].sum_out)-Math.abs(data[o].sprice)).toFixed(2)+'</td>\n' +
+                    '<td>'+Math.abs(data[o].ssum).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(data[o].sum_in)+Math.abs(data[o].ssum)).toFixed(2)+'</td>\n' +
+                    '</tr>' ;
             }
             $('#reportTbody').html(html);
             selectDistinctOuttype(outtype);
@@ -209,12 +388,12 @@ function  reportMatteboard (m_dt) {
             var html='';
             var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0,sum_6=0;
             for(var o in data){
-                sum_1=Number(sum_1)+Number(data[o].sum_blocknumber);
-                sum_2=Number(sum_2)+Number(data[o].sum_square);
-                sum_3=Number(sum_3)+Number(data[o].sum_belowgradeblock);
-                sum_4=Number(sum_4)+Number(data[o].sum_belowgradesquare);
-                sum_5=Number(sum_5)+Number(data[o].sum_gradeblock);
-                sum_6=Number(sum_6)+Number(data[o].sum_gradesquare);
+                sum_1=(Number(sum_1)+Number(data[o].sum_blocknumber)).toFixed(2);
+                sum_2=(Number(sum_2)+Number(data[o].sum_square)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(data[o].sum_belowgradeblock)).toFixed(2);
+                sum_4=(Number(sum_4)+Number(data[o].sum_belowgradesquare)).toFixed(2);
+                sum_5=(Number(sum_5)+Number(data[o].sum_gradeblock)).toFixed(2);
+                sum_6=(Number(sum_6)+Number(data[o].sum_gradesquare)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+data[o].m_dt+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
@@ -253,11 +432,11 @@ function  reportMatteboard (m_dt) {
 function  reportYield (c_dt,outtype) {
     var bodyParam={'pid':0,'state':1,'damage':'否'};
     if(c_dt!=''){
-        bodyParam['c_dtFrom']=c_dt+' 00:00:00';
-        bodyParam['c_dtTo']=c_dt+' 23:59:59';
+        bodyParam['m_dtFrom']=c_dt+' 00:00:00';
+        bodyParam['m_dtTo']=c_dt+' 23:59:59';
     }
     if(outtype!=''){
-        outtype['outtype']=outtype;
+        bodyParam['outtype']=outtype;
     }
     var httpR = new createHttpR(url+'reportYield','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){

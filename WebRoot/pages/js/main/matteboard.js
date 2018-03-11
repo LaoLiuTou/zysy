@@ -142,11 +142,11 @@ function  queryMatteboard (bodyParam) {
                     '<td>'+data[o].msize+'</td>\n' +
                     '<td>'+data[o].height+'</td>\n' +
                     '<td>'+data[o].blocknumber+'</td>\n' +
-                    '<td>'+data[o].square+'</td>\n' +
+                    '<td>'+Number(data[o].square).toFixed(2)+'</td>\n' +
                     '<td>'+Number(data[o].blocknumber-data[o].belowgradeblock)+'</td>\n' +
-                    '<td>'+Number(data[o].square-data[o].belowgradesquare)+'</td>\n' +
+                    '<td>'+Number(data[o].square-data[o].belowgradesquare).toFixed(2)+'</td>\n' +
                     '<td>'+data[o].belowgradeblock+'</td>\n' +
-                    '<td>'+data[o].belowgradesquare+'</td>\n' +
+                    '<td>'+Number(data[o].belowgradesquare).toFixed(2)+'</td>\n' +
                     '<td>'+data[o].price+'</td>\n' +
                     '<td>'+data[o].sum+'</td>\n' +
                  '</tr>';
