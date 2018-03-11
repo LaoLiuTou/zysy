@@ -172,7 +172,7 @@ function  queryStoneblock (bodyParam) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td>'+sum_1+'</td>\n' +
-                '<td>'+sum_2+'</td>\n' +
+                '<td>'+(sum_2/data.length).toFixed(2)+'</td>\n' +
                 '<td>'+sum_3+'</td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
@@ -295,9 +295,9 @@ function  queryStoneblockByCode (code) {
         }
     });
 }
-function  queryStoneblockByCode (code,index) {
+function  queryStoneblockByCode (number,index) {
 
-    var bodyParam={'page':1,'size':1,'code':code};
+    var bodyParam={'page':1,'size':1,'number':number};
 
     var httpR = new createHttpR(url+'listStoneblock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){

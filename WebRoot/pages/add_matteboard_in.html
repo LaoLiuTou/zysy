@@ -347,6 +347,13 @@
                 $('input[index="'+index+'"][id="belowgradesquare"]').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
                 $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
             }
+
+            var price=$('input[index="'+index+'"][id="price"]').val();
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''&&msize!=''){
+                gradeblock=Number(blocknumber)-Number(belowgradeblock);
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price*(msizes[0]*msizes[1]*blocknumber/1000000)).toFixed(2));
+
+            }
         });
 
         //合格数
@@ -362,9 +369,9 @@
                 $('input[index="'+index+'"][id="square"]').val((msizes[0]*msizes[1]*blocknumber/1000000).toFixed(2));
                 $('input[index="'+index+'"][id="square"]').trigger("blur");
             }
-            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''&&msize!=''){
                 gradeblock=Number(blocknumber)-Number(belowgradeblock);
-                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price*(msizes[0]*msizes[1]*blocknumber/1000000)).toFixed(2));
 
             }
         });
@@ -379,9 +386,9 @@
                 $('input[index="'+index+'"][id="belowgradesquare"]').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
                 $('input[index="'+index+'"][id="belowgradesquare"]').trigger("blur");
             }
-            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''&&msize!=''){
                 gradeblock=Number(blocknumber)-Number(belowgradeblock);
-                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price*(msizes[0]*msizes[1]*blocknumber/1000000)).toFixed(2));
             }
         });
 
@@ -390,10 +397,12 @@
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
             var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
             var price=$('input[index="'+index+'"][id="price"]').val();
+            var msize=$('input[index="'+index+'"][id="msize"]').val();
 
-            if(blocknumber!=''&&belowgradeblock!=''&&price!=''){
+            var msizes=msize.split('*');
+            if(blocknumber!=''&&belowgradeblock!=''&&price!=''&&msize!=''){
                 gradeblock=Number(blocknumber)-Number(belowgradeblock);
-                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price).toFixed(2));
+                $('input[index="'+index+'"][id="sum"]').val((gradeblock*price*(msizes[0]*msizes[1]*blocknumber/1000000)).toFixed(2));
             }
         });
 
