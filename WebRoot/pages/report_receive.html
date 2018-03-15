@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>领料明细表</title>
+
+
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet">
+    <!--pickers css-->
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <!-- <a href=""><img src="images/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="logo-icon text-center" id="title">
+            <!--<a href=""><img src="images/logo_icon.png" alt=""></a>-->
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>系统设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a href="list_stocktype.html">库别管理</a></li>
+                        <li><a href="list_workshop.html">车间管理</a></li>
+                        <li ><a href="list_material.html">产品管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="list_stock.html"><i class="fa fa-folder-open"></i> <span>库存明细</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-clipboard"></i> <span>单据管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="add_stoneblock_in.html">荒料入库单</a></li>
+                        <li><a href="add_matteboard_in.html">大锯检验单</a></li>
+                        <li ><a href="add_moji_out.html">磨机出库单</a></li>
+                        <li ><a href="add_qieji_out.html">切机出库单</a></li>
+                        <li><a href="add_huoshao_out.html">火烧出库单</a></li>
+                        <li ><a href="add_waijiagong_out.html">外加工出库单</a></li>
+                        <li ><a href="add_receive.html">领料单</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list  nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>报表统计</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a href="report_stoneblock.html">荒料入库明细</a></li>
+                        <li ><a href="report_matteboard_test.html">大锯检验单流水</a></li>
+                        <li ><a href="report_matteboard.html">大锯产量统计</a></li>
+                        <li ><a href="report_yield.html">产量日报</a></li>
+                        <li ><a href="report_workshop_in_out.html">车间进出配比</a></li>
+                        <li ><a href="report_moji.html">磨机加工明细表</a></li>
+                        <li><a href="report_huoshao.html">火烧加工明细表</a></li>
+                        <li><a href="report_qieji.html">切机加工明细表</a></li>
+                        <li><a href="report_waijiagong.html">外加工明细表</a></li>
+                        <li  class="active"><a href="report_receive.html">领料明细表</a></li>
+
+                        <!--<li><a href="report_stock.html">库存</a></li>
+                        <li><a href="report_damag.html">破损日报</a></li>-->
+                    </ul>
+                </li>
+                <li><a href="list_user.html"><i class="fa fa-group"></i> <span>用户管理</span></a></li>
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div class="header-section">
+
+            <!--toggle button start-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+
+            <!--search start-->
+            <!-- <form class="searchform" action="index.html" method="post">
+                 <input type="text" class="form-control" name="keyword" placeholder="请输入您要搜索的内容..." />
+             </form>-->
+            <!--search end-->
+
+            <!-- header section start-->
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+
+                <!--search start-->
+                <!--search end-->
+                <!--<form class="searchform" action="" method="post">
+                    <input type="text" class="form-control" id="searchText" placeholder="请输入您要搜索的用户名..." />
+                    <button>搜索</button>
+                </form>-->
+
+                <!--notification menu start -->
+                <div class="menu-right">
+                    <ul class="notification-menu">
+
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/photos/user-avatar.png" alt="" />
+                                <span id="loginName"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>  个人信息</a></li>
+                                <li><a href="#" ><i class="fa fa-cog"></i>  设置</a></li>
+                                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out"></i> 退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--notification menu end -->
+
+            </div>
+
+        </div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <!--<div class="page-heading">-->
+        <!--页面标题-->
+        <!--</div>-->
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+
+            <!--表格开始-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            领料明细表
+
+                            <span class="tools pull-right">
+                            <button type="button" class="btn btn-primary" id="printBtn">打印</button>
+                                <!--&lt;!&ndash;<span class="tools pull-right">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-chevron-down"></a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-times"></a>&ndash;&gt;-->
+                            </span>
+                        </header>
+                        <div class="panel-body">
+
+                            <form class="form-horizontal" role="form" id="form">
+
+
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">单据号：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="code"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">领料车间：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control" id="outtype"  ></select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">材料名称：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <select class="form-control material" id="material"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">材料规格：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="msize"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">加工人：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="worker"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">验收人：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control" id="auditor"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">厚度：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="heightFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="heightTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtFrom"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="m_dtTo"  size="10" type="text" value="" class="form-control form-control-inline input-medium default-date-picker"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">块数：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input  style=" display: inline-block;width:45%;padding:3px;" id="numberFrom"  size="10" type="text" value="" class="form-control"/>
+                                        - <input  style=" display: inline-block;width:45%;padding:3px;" id="numberTo"  size="10" type="text" value="" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary mb10" id="resetBtn">重置</button>
+                                <button type="button" class="btn btn-primary mb10" id="searchBtn">搜索</button>
+                            </form>
+
+                            <!--日期：<input type="text"  id="searchDate" class="dateform" placeholder="" />-->
+                            <!--库别：<input type="text"  id="searchStock" />-->
+                            <!--车间：<select  id="searchWorkshop"></select>-->
+                            <!--<button id="searchBtn">搜索</button>-->
+                            <div class="adv-table">
+                                <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>日期</th>
+                                        <th>单据号</th>
+                                        <th>领料车间</th>
+                                        <th>材料名称</th>
+                                        <th>材料规格</th>
+                                        <th>厚度</th>
+                                        <th>块数</th>
+                                        <th>平方数</th>
+                                        <th>备注</th>
+                                        <th>加工人</th>
+                                        <th>验收人</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="reportTbody">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--表格结束-->
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2018 &copy; 版权所有
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script src="js/main/config.js"></script>
+<script src="js/main/md5.js"></script>
+<script src="js/main/report.js"></script>
+<script src="js/main/material.js"></script>
+<script src="js/main/jquery.jqprint-0.3.js"></script>
+<!--pickers plugins-->
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+<!--时间选择器end-->
+
+<script>
+    $(document).ready(function () {
+
+        var bodyParam={};
+        bodyParam['page']=1;
+        bodyParam['size']=1000;
+        bodyParam['state']=2;
+        //搜索
+        $('#searchBtn').click(function () {
+            bodyParam={'page':1,'size':1000,'state':2};
+            $('#form input').each(function () {
+                if($(this).val()!=''&&$(this).attr('id')!='square'){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
+            $('#form select').each(function () {
+                if($(this).val()!=''&&$(this).attr('id')!='square'){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
+            reportReceiveListStock(bodyParam);
+        });
+        //列表
+        reportReceiveListStock(bodyParam);
+        setTimeout(function() {
+            //selectStocktype(1, 100);
+            selectMaterial(1,100);
+            selectDistinctOuttype($('#outtype').val());
+        });
+        //打印
+        $('#printBtn').click(function () {
+            var $pringDom=$('.wrapper').clone();
+            $pringDom.find('#form').empty();
+            $pringDom.find('#printBtn').hide();
+           /* var html='<label >日期：</label>\n' +
+                '<label >'+$('#searchDate').val()+'</label>\n' +
+                '<label style="padding-left: 40px;">车间：</label>\n' +
+                '<label >'+$('#searchWorkshop option:selected').text()+'</label>\n';
+            $pringDom.find('#form').html(html);*/
+            $pringDom.jqprint();
+        });
+
+        $('.default-date-picker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $('#resetBtn').click(function(){
+
+            $('#form input').each(function () {
+                $(this).val('');
+            });
+
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

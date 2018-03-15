@@ -260,14 +260,15 @@
     $(document).ready(function () {
 
 
-        //搜索
-        $('#searchBtn').click(function () {
-            reportMatteboard($('#searchDate').val(),currentPage,pageSize);
-        });
-
         //列表
         var currentPage=1;
         var pageSize=10;
+
+        //搜索
+        $('#searchBtn').click(function () {
+            reportMatteboard($('#searchDate').val(),1,pageSize);
+        });
+
         reportMatteboard('',currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){

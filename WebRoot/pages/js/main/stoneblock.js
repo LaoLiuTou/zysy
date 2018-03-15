@@ -102,7 +102,7 @@ function deleteStoneblock(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryStoneblock (bodyParam) {
+function  queryStoneblock (bodyParam,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
@@ -112,8 +112,8 @@ function  queryStoneblock (bodyParam) {
     else{
         var bodyParam={'page':currentPage,'size':pageSize,'name':'%'+stoneblockname+'%'};
     }*/
-    currentPage=bodyParam['page'];
-    pageSize=bodyParam['size'];
+    //currentPage=bodyParam['page'];
+    //pageSize=bodyParam['size'];
     var httpR = new createHttpR(url+'listStoneblock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -124,43 +124,41 @@ function  queryStoneblock (bodyParam) {
             stoneblockList=msg['data'];
             var html='';
             var sum_1=0,sum_2=0,sum_3=0;
-            for(var o in data){
-
-                sum_1=(Number(sum_1)+Number(data[o].cube)).toFixed(3);
-                sum_2=(Number(sum_2)+Number(data[o].price)).toFixed(2);
-                sum_3=(Number(sum_3)+Number(data[o].sum)).toFixed(2);
-
+            var subData=data.slice((currentPage-1)*pageSize,currentPage*pageSize);
+            for(var o in subData){
+                sum_1=(Number(sum_1)+Number(subData[o].cube)).toFixed(3);
+                sum_2=(Number(sum_2)+Number(subData[o].price)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(subData[o].sum)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+data[o].s_dt+'</td>\n' +
-                    '<td>'+data[o].code+'</td>\n' +
-                    '<td>'+data[o].source+'</td>\n' +
-                    '<td>'+data[o].place+'</td>\n' +
-                    '<td>'+data[o].color+'</td>\n'  +
-                    '<td>'+data[o].number+'</td>\n'  +
-                    '<td>'+data[o].length+'</td>\n'  +
-                    '<td>'+data[o].width+'</td>\n'  +
-                    '<td>'+data[o].height+'</td>\n'  +
-                    '<td>'+data[o].cube+'</td>\n'  +
-                    '<td>'+data[o].price+'</td>\n'  +
-                    '<td>'+data[o].sum+'</td>\n'  +
-                    '<td>'+data[o].accountdiff+'</td>\n'  +
-                    '<td>'+data[o].platenumber+'</td>\n';
-                if(data[o].rz_dt==''){
+                    '<td>'+subData[o].s_dt+'</td>\n' +
+                    '<td>'+subData[o].code+'</td>\n' +
+                    '<td>'+subData[o].source+'</td>\n' +
+                    '<td>'+subData[o].place+'</td>\n' +
+                    '<td>'+subData[o].color+'</td>\n'  +
+                    '<td>'+subData[o].number+'</td>\n'  +
+                    '<td>'+subData[o].length+'</td>\n'  +
+                    '<td>'+subData[o].width+'</td>\n'  +
+                    '<td>'+subData[o].height+'</td>\n'  +
+                    '<td>'+subData[o].cube+'</td>\n'  +
+                    '<td>'+subData[o].price+'</td>\n'  +
+                    '<td>'+subData[o].sum+'</td>\n'  +
+                    '<td>'+subData[o].accountdiff+'</td>\n'  +
+                    '<td>'+subData[o].platenumber+'</td>\n';
+                if(subData[o].rz_dt==''){
                     html+='<td>'+'未入账'+'</td>\n';
                 }
                 else{
-                    html+='<td>'+data[o].rz_dt+'</td>\n';
+                    html+='<td>'+subData[o].rz_dt+'</td>\n';
                 }
-                if(data[o].yf_dt==''){
+                if(subData[o].yf_dt==''){
                     html+='<td>'+'未结算'+'</td>\n';
                 }
                 else{
-                    html+='<td>'+data[o].yf_dt+'</td>\n';
+                    html+='<td>'+subData[o].yf_dt+'</td>\n';
                 }
                 html+= '</tr>';
 
             }
-
             html+='<tr  class="gradeX">\n' +
                 '<td>合计</td>\n' +
                 '<td></td>\n' +
@@ -180,6 +178,35 @@ function  queryStoneblock (bodyParam) {
                 '<td></td>\n' +
                 '</tr>';
 
+            //总合计
+            if(data.length>pageSize) {
+                sum_1=0,sum_2=0,sum_3=0;
+                for (var o in data) {
+                    sum_1 = (Number(sum_1) + Number(data[o].cube)).toFixed(3);
+                    sum_2 = (Number(sum_2) + Number(data[o].price)).toFixed(2);
+                    sum_3 = (Number(sum_3) + Number(data[o].sum)).toFixed(2);
+
+                }
+
+                html += '<tr  class="gradeX">\n' +
+                    '<td>总合计</td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td>' + sum_1 + '</td>\n' +
+                    '<td>' + (sum_2 / data.length).toFixed(2) + '</td>\n' +
+                    '<td>' + sum_3 + '</td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '</tr>';
+            }
             $('#stoneblockTbody').html(html);
 
 

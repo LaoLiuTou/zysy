@@ -276,7 +276,12 @@
 
                                     </tbody>
                                 </table>
+                                <!--分页-->
+                                <div class="text-center" id="pagination">
+                                    <ul class="pagination">
 
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -327,6 +332,10 @@
 
 <script>
     $(document).ready(function () {
+        //列表
+        var currentPage=1;
+        var pageSize=10;
+
 
         var bodyParam={};
         bodyParam['page']=1;
@@ -335,18 +344,31 @@
         bodyParam['outtype']='外加工';
         //搜索
         $('#searchBtn').click(function () {
-            bodyParam={'page':1,'size':1000,'outtype':'外加工'};
+            bodyParam={'page':1,'size':1000,'state':1,'outtype':'外加工'};
             $('#form input').each(function () {
                 if($(this).val()!=''&&$(this).attr('id')!='square'){
                     bodyParam[$(this).attr('id')]=$(this).val();
                 }
 
             });
-            reportWJGListStock(bodyParam);
+            reportWJGListStock(bodyParam,1,pageSize);
         });
         //列表
-        reportWJGListStock(bodyParam);
+        reportWJGListStock(bodyParam,1,pageSize);
+        $('.pagination').on('click','.pageBtn',function(){
+            currentPage=$(this).attr('index');
+            reportWJGListStock(bodyParam,currentPage,pageSize);
+        });
+        $('.pagination').on('click','.prevBtn',function(){
+            currentPage--;
+            reportWJGListStock(bodyParam,currentPage,pageSize);
 
+        });
+        $('.pagination').on('click','.nextBtn',function(){
+            currentPage++;
+            reportWJGListStock(bodyParam,currentPage,pageSize);
+
+        });
         //打印
         $('#printBtn').click(function () {
             var $pringDom=$('.wrapper').clone();

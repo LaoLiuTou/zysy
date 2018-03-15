@@ -32,7 +32,7 @@ public class CORSFilter implements Filter {
 	    //response.setHeader("Access-Control-Allow-Headers","x-requested-with,content-type，requesttype");
         
 	    String uri = request.getServletPath();
-	    if( !uri.startsWith("/login")&&!uri.startsWith("/pages")){
+	    if( !uri.startsWith("/login")&&!uri.startsWith("/pages")&&!uri.startsWith("/export")){
 	    	String token = request.getHeader("token");
 	        String timesamp = request.getHeader("timesamp");
 	        String sign = request.getHeader("sign");

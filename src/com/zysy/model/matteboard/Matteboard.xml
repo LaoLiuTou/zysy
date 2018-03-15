@@ -98,6 +98,7 @@
 			<if test="sum != null"> AND a.SUM =#{sum} </if>
 		</trim>  
 		group by a.height ,a.m_dt 
+		order by m_dt desc 
 	</select>
 
 	<select id="selectCountmatteboardByParam" parameterType="java.util.Map" resultType="int">

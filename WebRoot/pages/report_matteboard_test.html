@@ -367,43 +367,42 @@
 <script>
     $(document).ready(function () {
 
-
+        var currentPage=1;
+        var pageSize=10;
         //搜索
         $('#searchBtn').click(function () {
-            bodyParam={'page':currentPage,'size':pageSize};
+            bodyParam={'page':1,'size':10000};
             $('#form input').each(function () {
                 if($(this).val()!=''&&$(this).attr('id')!='square'){
                     bodyParam[$(this).attr('id')]=$(this).val();
                 }
 
             });
-            queryMatteboard(bodyParam);
+            $('#form select').each(function () {
+                if($(this).val()!=''){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
+            queryMatteboard(bodyParam,1,pageSize);
         });
 
 
-        var currentPage=1;
-        var pageSize=10;
-        var bodyParam={'page':currentPage,'size':pageSize};
-        queryMatteboard(bodyParam);
+        var bodyParam={'page':1,'size':10000};
+        queryMatteboard(bodyParam,1,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            bodyParam['page']=currentPage;
-            bodyParam['size']=pageSize;
-            queryMatteboard(bodyParam);
+            queryMatteboard(bodyParam,currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            bodyParam['page']=currentPage;
-            bodyParam['size']=pageSize;
-            queryMatteboard(bodyParam);
+            queryMatteboard(bodyParam,currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            bodyParam['page']=currentPage;
-            bodyParam['size']=pageSize;
-            queryMatteboard(bodyParam);
+            queryMatteboard(bodyParam,currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){

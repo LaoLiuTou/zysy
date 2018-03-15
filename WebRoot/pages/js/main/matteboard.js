@@ -87,13 +87,13 @@ function deleteMatteboard(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryMatteboard (bodyParam) {
+function  queryMatteboard (bodyParam,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
     //var bodyParam={'page':currentPage,'size':pageSize};
-    currentPage=bodyParam['page'];
-    pageSize=bodyParam['size'];
+    //currentPage=bodyParam['page'];
+    //pageSize=bodyParam['size'];
     var httpR = new createHttpR(url+'listMatteboard','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -105,50 +105,49 @@ function  queryMatteboard (bodyParam) {
             var html='';
             var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0,sum_6=0,sum_7=0,
                 sum_8=0,sum_9=0,sum_10=0,sum_11=0,sum_12=0,sum_13=0;
-            for(var o in data){
-
-
-                var sb_specs=data[o].sb_spec.split('*');
-                var sb_cube=data[o].sb_cube;
-                if(sb_specs[2]>1.25&&(data[o].layer=='上'||data[o].layer=='下')){
+            var subData=data.slice((currentPage-1)*pageSize,currentPage*pageSize);
+            for(var o in subData){
+                var sb_specs=subData[o].sb_spec.split('*');
+                var sb_cube=subData[o].sb_cube;
+                if(sb_specs[2]>1.25&&(subData[o].layer=='上'||subData[o].layer=='下')){
                     sb_cube=(sb_cube/2).toFixed(3);
                 }
 
                 sum_1=(Number(sum_1)+Number(sb_specs[0])).toFixed(2);
                 sum_2=(Number(sum_2)+Number(sb_specs[1])).toFixed(2);
                 sum_3=(Number(sum_3)+Number(sb_specs[2])).toFixed(2);
-                sum_4=(Number(sum_4)+Number(data[o].sb_cube)).toFixed(3);
+                sum_4=(Number(sum_4)+Number(subData[o].sb_cube)).toFixed(3);
                 sum_5=(Number(sum_5)+Number(sb_cube)).toFixed(3);
-                sum_6=Number(sum_6)+Number(data[o].blocknumber);
-                sum_7=(Number(sum_7)+Number(data[o].square)).toFixed(2);
-                sum_8=Number(sum_8)+Number(data[o].blocknumber-data[o].belowgradeblock);
-                sum_9=(Number(sum_9)+Number(data[o].square-data[o].belowgradesquare)).toFixed(2);
-                sum_10=Number(sum_10)+Number(data[o].belowgradeblock);
-                sum_11=(Number(sum_11)+Number(data[o].belowgradesquare)).toFixed(2);
-                sum_12=(Number(sum_12)+Number(data[o].price)).toFixed(2);
-                sum_13=(Number(sum_13)+Number(data[o].sum)).toFixed(2);
+                sum_6=Number(sum_6)+Number(subData[o].blocknumber);
+                sum_7=(Number(sum_7)+Number(subData[o].square)).toFixed(2);
+                sum_8=Number(sum_8)+Number(subData[o].blocknumber-subData[o].belowgradeblock);
+                sum_9=(Number(sum_9)+Number(subData[o].square-subData[o].belowgradesquare)).toFixed(2);
+                sum_10=Number(sum_10)+Number(subData[o].belowgradeblock);
+                sum_11=(Number(sum_11)+Number(subData[o].belowgradesquare)).toFixed(2);
+                sum_12=(Number(sum_12)+Number(subData[o].price)).toFixed(2);
+                sum_13=(Number(sum_13)+Number(subData[o].sum)).toFixed(2);
 
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
-                    '<td>'+data[o].sb_code+'</td>\n' +
+                    '<td>'+subData[o].sb_code+'</td>\n' +
                     '<td>'+sb_specs[0]+'</td>\n' +
                     '<td>'+sb_specs[1]+'</td>\n' +
                     '<td>'+sb_specs[2]+'</td>\n' +
-                    '<td>'+data[o].sb_cube+'</td>\n' +
-                    '<td>'+data[o].layer+'</td>\n' +
+                    '<td>'+subData[o].sb_cube+'</td>\n' +
+                    '<td>'+subData[o].layer+'</td>\n' +
                     '<td>'+sb_cube+'</td>\n' +
-                    '<td>'+data[o].m_dt+'</td>\n' +
-                    '<td>'+data[o].code+'</td>\n' +
-                    '<td>'+data[o].msize+'</td>\n' +
-                    '<td>'+data[o].height+'</td>\n' +
-                    '<td>'+data[o].blocknumber+'</td>\n' +
-                    '<td>'+Number(data[o].square).toFixed(2)+'</td>\n' +
-                    '<td>'+Number(data[o].blocknumber-data[o].belowgradeblock)+'</td>\n' +
-                    '<td>'+Number(data[o].square-data[o].belowgradesquare).toFixed(2)+'</td>\n' +
-                    '<td>'+data[o].belowgradeblock+'</td>\n' +
-                    '<td>'+Number(data[o].belowgradesquare).toFixed(2)+'</td>\n' +
-                    '<td>'+data[o].price+'</td>\n' +
-                    '<td>'+data[o].sum+'</td>\n' +
+                    '<td>'+subData[o].m_dt+'</td>\n' +
+                    '<td>'+subData[o].code+'</td>\n' +
+                    '<td>'+subData[o].msize+'</td>\n' +
+                    '<td>'+subData[o].height+'</td>\n' +
+                    '<td>'+subData[o].blocknumber+'</td>\n' +
+                    '<td>'+Number(subData[o].square).toFixed(2)+'</td>\n' +
+                    '<td>'+Number(subData[o].blocknumber-subData[o].belowgradeblock)+'</td>\n' +
+                    '<td>'+Number(subData[o].square-subData[o].belowgradesquare).toFixed(2)+'</td>\n' +
+                    '<td>'+subData[o].belowgradeblock+'</td>\n' +
+                    '<td>'+Number(subData[o].belowgradesquare).toFixed(2)+'</td>\n' +
+                    '<td>'+subData[o].price+'</td>\n' +
+                    '<td>'+subData[o].sum+'</td>\n' +
                  '</tr>';
                 //alert(html);
             }
@@ -174,6 +173,55 @@ function  queryMatteboard (bodyParam) {
                 '<td>'+sum_12+'</td>\n' +
                 '<td>'+sum_13+'</td>\n' +
                 '</tr>';
+            //总合计
+            if(data.length>pageSize) {
+                sum_1 = 0, sum_2 = 0, sum_3 = 0, sum_4 = 0, sum_5 = 0, sum_6 = 0, sum_7 = 0,
+                    sum_8 = 0, sum_9 = 0, sum_10 = 0, sum_11 = 0, sum_12 = 0, sum_13 = 0;
+                for (var o in data) {
+                    var sb_specs = data[o].sb_spec.split('*');
+                    var sb_cube = data[o].sb_cube;
+                    if (sb_specs[2] > 1.25 && (data[o].layer == '上' || data[o].layer == '下')) {
+                        sb_cube = (sb_cube / 2).toFixed(3);
+                    }
+
+                    sum_1 = (Number(sum_1) + Number(sb_specs[0])).toFixed(2);
+                    sum_2 = (Number(sum_2) + Number(sb_specs[1])).toFixed(2);
+                    sum_3 = (Number(sum_3) + Number(sb_specs[2])).toFixed(2);
+                    sum_4 = (Number(sum_4) + Number(data[o].sb_cube)).toFixed(3);
+                    sum_5 = (Number(sum_5) + Number(sb_cube)).toFixed(3);
+                    sum_6 = Number(sum_6) + Number(data[o].blocknumber);
+                    sum_7 = (Number(sum_7) + Number(data[o].square)).toFixed(2);
+                    sum_8 = Number(sum_8) + Number(data[o].blocknumber - data[o].belowgradeblock);
+                    sum_9 = (Number(sum_9) + Number(data[o].square - data[o].belowgradesquare)).toFixed(2);
+                    sum_10 = Number(sum_10) + Number(data[o].belowgradeblock);
+                    sum_11 = (Number(sum_11) + Number(data[o].belowgradesquare)).toFixed(2);
+                    sum_12 = (Number(sum_12) + Number(data[o].price)).toFixed(2);
+                    sum_13 = (Number(sum_13) + Number(data[o].sum)).toFixed(2);
+
+                }
+                html += '<tr  class="gradeX">\n' +
+                    '<td>总合计</td>\n' +
+                    '<td></td>\n' +
+                    '<td>' + sum_1 + '</td>\n' +
+                    '<td>' + sum_2 + '</td>\n' +
+                    '<td>' + sum_3 + '</td>\n' +
+                    '<td>' + sum_4 + '</td>\n' +
+                    '<td></td>\n' +
+                    '<td>' + sum_5 + '</td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td>' + sum_6 + '</td>\n' +
+                    '<td>' + sum_7 + '</td>\n' +
+                    '<td>' + sum_8 + '</td>\n' +
+                    '<td>' + sum_9 + '</td>\n' +
+                    '<td>' + sum_10 + '</td>\n' +
+                    '<td>' + sum_11 + '</td>\n' +
+                    '<td>' + sum_12 + '</td>\n' +
+                    '<td>' + sum_13 + '</td>\n' +
+                    '</tr>';
+            }
             $('#reportTbody').html(html);
             var num=msg['num'];
             if(num>0) {
