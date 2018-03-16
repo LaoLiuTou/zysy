@@ -78,7 +78,7 @@
                         <li><a href="report_huoshao.html">火烧加工明细表</a></li>
                         <li><a href="report_qieji.html">切机加工明细表</a></li>
                         <li><a href="report_waijiagong.html">外加工明细表</a></li>
-
+                        <li><a href="report_receive.html">领料明细表</a></li>
                         <!--<li><a href="report_stock.html">库存</a></li>
                         <li><a href="report_damag.html">破损日报</a></li>-->
                     </ul>
@@ -163,6 +163,7 @@
                             大锯检验单流水表
 
                             <span class="tools pull-right">
+                            <button type="button" class="btn btn-primary" id="exportBtn">导出</button>
                             <button type="button" class="btn btn-primary" id="printBtn">打印</button>
                                 <!--&lt;!&ndash;<span class="tools pull-right">&ndash;&gt;-->
                                 <!--&lt;!&ndash;<a href="javascript:;" class="fa fa-chevron-down"></a>&ndash;&gt;-->
@@ -422,11 +423,32 @@
             var $pringDom=$('.wrapper').clone();
             $pringDom.find('#form').empty();
             $pringDom.find('#printBtn').hide();
+            $pringDom.find('#exportBtn').hide();
             $pringDom.find('#pagination').remove();
             /*var html='<label >日期：</label>\n' +
                 '<label >'+$('#searchDate').val()+'</label>\n' ;
             $pringDom.find('#form').html(html);*/
             $pringDom.jqprint();
+        });
+
+        //导出
+        $('#exportBtn').on('click',function(){
+            var htmlExport=url+'exportMatteboard?page=1&size=10000';
+
+            $('#form input').each(function () {
+                if($(this).val()!=''&&$(this).attr('id')!='square'){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                    htmlExport+='&'+$(this).attr('id')+'='+$(this).val();
+                }
+
+            });
+            $('#form select').each(function () {
+                if($(this).val()!=''){
+                    bodyParam[$(this).attr('id')]=$(this).val();
+                }
+
+            });
+            window.open(htmlExport);
         });
 
         $('.default-date-picker').datepicker({

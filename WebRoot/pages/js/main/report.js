@@ -282,7 +282,7 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
         if(status=='0'){
             var data=msg['data'];
             var html='';
-            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0;
+            var sum_1=0,sum_2=0,sum_3=0,sum_4=0,sum_5=0,sum_6=0;
             var subData=data.slice((currentPage-1)*pageSize,currentPage*pageSize);
             for(var o in subData){
                 var msizes=subData[o].msize.split('*');
@@ -299,12 +299,8 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                 }
                 sum_5=(Number(sum_5)+Number(length*width*subData[o].number/1000000)).toFixed(2);
                 var length=msizes[0],width=msizes[1];
-                if(msizes[0]%300>0){
-                    length=msizes[0]-msizes[0]%300+300;
-                }
-                if(msizes[1]%300>0){
-                    width=msizes[1]-msizes[1]%300+300;
-                }
+
+                sum_6=(Number(sum_6)+Number(subData[o].yanmi)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
                     '<td>'+subData[o].m_dt+'</td>\n' +
@@ -339,7 +335,7 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
-                '<td></td>\n' +
+                '<td>'+sum_6+'</td>\n' +
                 '<td>'+sum_3+'</td>\n' +
                 '<td>'+sum_4+'</td>\n' +
                 '</tr>';
@@ -1044,7 +1040,7 @@ function  reportMatteboard (m_dt,currentPage,pageSize) {
 function  reportYield (c_dt,outtype,currentPage,pageSize) {
 
     var showPage=7;
-    var bodyParam={'pid':0,'state':1,'damage':'否'};
+    var bodyParam={'pid':0,'state':1};
     if(c_dt!=''){
         bodyParam['m_dtFrom']=c_dt+' 00:00:00';
         bodyParam['m_dtTo']=c_dt+' 23:59:59';
@@ -1067,8 +1063,10 @@ function  reportYield (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+subData[o].outtype+'</td>\n' +
                     '<td>'+subData[o].height+'</td>\n' +
                     '<td>'+subData[o].unit+'</td>\n' +
-                    '<td>'+(subData[o].sum_in*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
-                    '<td>'+(subData[o].sum_out*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
+                    /*'<td>'+(subData[o].sum_in*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+(subData[o].sum_out*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +*/
+                    '<td>'+subData[o].sum_in+'</td>\n' +
+                    '<td>'+subData[o].sum_out+'</td>\n' +
                     '<td>'+subData[o].sum_number+'</td>\n' +
                     '</tr>' ;
             }

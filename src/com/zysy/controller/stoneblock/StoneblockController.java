@@ -438,6 +438,7 @@ public class StoneblockController {
 						"宽" , "高", "立方", "单价", "金额", "账差", "运辅车辆", "入账时间", "运费结算时间"}; 
 				 
 				ExcelUtil.export(titles, out, exportList);
+				//ExcelUtil.exportRange(titles, out, exportList);
 			}
 			else{
 				logger.info("分页参数不能为空！");
