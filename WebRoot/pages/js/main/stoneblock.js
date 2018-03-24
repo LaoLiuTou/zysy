@@ -170,7 +170,8 @@ function  queryStoneblock (bodyParam,currentPage,pageSize) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td>'+sum_1+'</td>\n' +
-                '<td>'+(sum_2/data.length).toFixed(2)+'</td>\n' +
+                //'<td>'+(sum_2/data.length).toFixed(2)+'</td>\n' +
+                '<td></td>\n' +
                 '<td>'+sum_3+'</td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
@@ -199,7 +200,8 @@ function  queryStoneblock (bodyParam,currentPage,pageSize) {
                     '<td></td>\n' +
                     '<td></td>\n' +
                     '<td>' + sum_1 + '</td>\n' +
-                    '<td>' + (sum_2 / data.length).toFixed(2) + '</td>\n' +
+                    //'<td>' + (sum_2 / data.length).toFixed(2) + '</td>\n' +
+                    '<td></td>\n' +
                     '<td>' + sum_3 + '</td>\n' +
                     '<td></td>\n' +
                     '<td></td>\n' +
