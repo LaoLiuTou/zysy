@@ -35,10 +35,8 @@ function addUser(){
  * 修改用户
  * @param id
  */
-function updateUser(id){
-    var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-    var bodyParam={'id':id,'username':$('#update_username').val(),'nickname':$('#update_nickname').val(),
-        'comment':$('#update_comment').val(),'state':$('#update_state').val(),'c_id':userinfo['id']};
+function updateUser(bodyParam){
+
     var httpR = new createHttpR(url+'updateUser','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -109,7 +107,8 @@ function  queryUsers (username,currentPage,pageSize) {
                     html+='<td><span class="label label-danger label-mini">禁用</span></td>\n';
                 }
                 html+='<td><a class="updateUser" href="" index='+o+' data-toggle="modal" data-target="#update-box"><span class="label label-info label-mini">修改</span></a>   ' +
-                    '<a class="deleteUser" href="" index='+o+' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
+                    '<a class="passwordUser" href="" index='+o+' data-toggle="modal" data-target="#password-box"><span class="label label-info label-mini">重置密码</span></a>   ' +
+                    '<a class="deleteUser" href="" index=\'+o+\' data-toggle="modal" data-target="#delete-box"><span class="label label-info label-mini">删除</span></a></td>\n';
                 html+='</tr>';
             }
             $('#userTbody').html(html);

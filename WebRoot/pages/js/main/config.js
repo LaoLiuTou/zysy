@@ -17,6 +17,10 @@ $(document).ready(function(){
     var userinfo=sessionStorage.getItem('userinfo');
     if(userinfo!=null){
         $('#loginName').text(JSON.parse(userinfo)['nickname']);
+        if(JSON.parse(userinfo)['id']!='1'){
+            $('.custom-nav>li').last().hide();
+        }
+
 
     }
 

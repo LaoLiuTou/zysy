@@ -171,10 +171,48 @@ public class UserController {
 				resultMap.put("msg", "参数不能为空！");
 			}
 			else{
+				if(user.getPassword()!=null&&!user.getPassword().equals("")){
+					String pass=MD5Encryption.getEncryption(user.getPassword()).toLowerCase();
+					user.setPassword(pass);
+				}
+					
 				int resultUpdate=iUserService.updateUser(user);
 				resultMap.put("status", "0");
 				resultMap.put("msg", "更新成功！");
 				logger.info("更新成功，主键："+user.getId());
+			}
+		} catch (Exception e) {
+			resultMap.put("status", "-1");
+			resultMap.put("msg", "更新失败！");
+			logger.info("更新失败！"+e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("/passwordUser")
+	@ResponseBody
+	public Map password(User user){
+		Map resultMap=new HashMap();
+		try {
+			if(user.getId()==null){
+				resultMap.put("status", "-1");
+				resultMap.put("msg", "参数不能为空！");
+			}
+			else{
+				User temp=iUserService.selectUserById(user.getId()+"");
+				String pass=MD5Encryption.getEncryption(user.getPassword()).toLowerCase();
+				if(!pass.equals(temp.getPassword().toLowerCase())){
+					resultMap.put("status", "-1");
+					resultMap.put("msg", "密码不一致！");
+				}
+				else{
+					int resultUpdate=iUserService.updateUser(user);
+					resultMap.put("status", "0");
+					resultMap.put("msg", "更新成功！");
+					logger.info("更新成功，主键："+user.getId());
+				}
+				
 			}
 		} catch (Exception e) {
 			resultMap.put("status", "-1");
