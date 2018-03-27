@@ -165,6 +165,7 @@
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary" id="addBtn">新建</button>
+                            <button type="button" class="btn btn-primary"  id="addTr">插入行</button>
                                 <!--<span class="tools pull-right">-->
                                 <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                                 <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -273,7 +274,7 @@
         });*/
         var html='';
         for(var i=1;i<6;i++){
-            html+='<tr>\n' +
+            html+='<tr  trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*11+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="火烧">火烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
@@ -411,8 +412,35 @@
 
 
 
+        $('#addTr').click(function(){
+            var index=$('[trindex] :last').last().attr('index');
+            var i=Number(index)+1;
+            html='<tr  trindex="'+i+'">\n' +
+                '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*11+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="火烧">火烧</option><option value="烧切">烧切</option><option value="全切">全切</option></select></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+4)+'" mold="process" class="table_input dom" id="height" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+5)+'" mold="process" class="table_input number dom" id="number" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+6)+'" mold="process" class="table_input maochi dom" id="maochi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+7)+'" mold="process" class="table_input jingchi dom" id="jingchi" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+8)+'" mold="process" class="table_input sprice dom" id="sprice" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+9)+'" mold="process" class="table_input ssum dom" id="ssum" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+10)+'" mold="process" class="table_input dom" id="ordercode" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*11+11)+'" mold="process" class="table_input dom" id="comment" ></td>\n' +
+                '</tr>';
+            $('[trindex]:last').after(html);
+
+            var index=1;
+            $('.dom').each(function(){
+                $(this).attr('keyIndex',index);
+                index++;
+            });
+            $('.dom[keyIndex="'+Number(4+(i-1)*11+1)+'"]').focus();
+        });
+
         //计算
-        $('.msize[mold="process"]').on('blur',function(){
+        $('#htmlTbody').on('blur','.msize[mold="process"]',function(){
             var index=$(this).attr("index");
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
@@ -435,7 +463,7 @@
             }
         });
 
-        $('.number[mold="process"]').on('blur',function(){
+        $('#htmlTbody').on('blur','.number[mold="process"]',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
@@ -461,7 +489,7 @@
                 }
             }
         });
-        $('.sprice[mold="process"]').on('blur',function(){
+        $('#htmlTbody').on('blur','.sprice[mold="process"]',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();

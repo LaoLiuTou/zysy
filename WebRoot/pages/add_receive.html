@@ -273,6 +273,11 @@
         }
         $('#htmlTbody').html(html);
 
+        /*var index=1;
+        $('.dom').each(function(){
+            $(this).attr('keyIndex',index);
+            index++;
+        });*/
 
         $('#addTr').click(function(){
             var index=$('[trindex] :last').last().attr('index');
@@ -289,6 +294,8 @@
                 '</tr>';
             $('[trindex]:last').after(html);
             $('.dom[keyIndex="'+Number(5+(i-1)*6+1)+'"]').focus();
+
+
         });
 
 
