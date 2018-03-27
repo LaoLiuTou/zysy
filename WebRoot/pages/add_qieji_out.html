@@ -265,7 +265,7 @@
         obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
         obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
         obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
-        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3'); //只能输入两个小数
     }
     $(document).ready(function () {
         selectWorkshop(1,100);
@@ -485,7 +485,7 @@
                     var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''){
-                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                     }
                 }
             }
@@ -502,7 +502,7 @@
                 var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                 var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                 if(number!=''&&sprice!=''&&yanmi!=''){
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                 }
             }
 
@@ -531,7 +531,7 @@
                     var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''){
-                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                     }
                 }
             }
@@ -542,7 +542,7 @@
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
             var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
             if(number!=''&&sprice!=''&&yanmi!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
             }
         });
 
@@ -559,7 +559,7 @@
                 if(sprice!=''&&height!='') {
                     var sprice = $('input[mold="ruku"][index="' + index + '"][id="sprice"]').val();
                     var yanmi = $('input[mold="ruku"][index="' + index + '"][id="yanmi"]').val();
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(0));
                 }
             }
         });
@@ -576,7 +576,7 @@
                 if(sprice!=''&&height!='') {
                     var sprice = $('input[mold="ruku"][index="' + index + '"][id="sprice"]').val();
                     var yanmi = $('input[mold="ruku"][index="' + index + '"][id="yanmi"]').val();
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(0));
                 }
             }
         });
@@ -593,7 +593,7 @@
                 if(sprice!=''&&height!='') {
                     var sprice = $('input[mold="ruku"][index="' + index + '"][id="sprice"]').val();
                     var yanmi = $('input[mold="ruku"][index="' + index + '"][id="yanmi"]').val();
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val((sprice * yanmi).toFixed(0));
                 }
             }
         });
@@ -606,7 +606,7 @@
             var height=$('input[mold="ruku"][index="'+index+'"][id="height"]').val();
             if(msizes.length==2&&number!=''&&sprice!=''&&height!=''){
                 var yanmi=$('input[mold="ruku"][index="'+index+'"][id="yanmi"]').val();
-                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                $('input[mold="ruku"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
             }
         });
 
