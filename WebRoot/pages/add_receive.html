@@ -165,6 +165,7 @@
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary"  id="addBtn">新建</button>
+                            <button type="button" class="btn btn-primary"  id="addTr">插入行</button>
                                 <!--<span class="tools pull-right">-->
                                 <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                                 <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -259,7 +260,7 @@
 
         var html='';
         for(var i=1;i<11;i++){
-            html+='<tr>\n' +
+            html+='<tr  trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><select index="'+i+'" class="table_input material dom" keyIndex="'+Number(5+(i-1)*6+1)+'"  id="material" style="width: 100%;"></select></td>\n' +
                 //'<td style="padding: 0px;"><select index="'+i+'" class="table_input  dom" keyIndex="'+Number(4+(i-1)*6+1)+'"  id="outtype" style="width: 100%;"><option value=""></option><option value="磨机">磨机</option><option value="切机">切机</option><option value="火烧">火烧</option><option value="外加工">外加工</option><option value="其它">其它</option></select></td>\n' +
@@ -272,6 +273,25 @@
         }
         $('#htmlTbody').html(html);
 
+
+        $('#addTr').click(function(){
+            var index=$('[trindex] :last').last().attr('index');
+            var i=Number(index)+1;
+            html='<tr  trindex="'+i+'">\n' +
+                '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" class="table_input material dom" keyIndex="'+Number(5+(i-1)*6+1)+'"  id="material" style="width: 100%;">'+materialHtml+'</select></td>\n' +
+                //'<td style="padding: 0px;"><select index="'+i+'" class="table_input  dom" keyIndex="'+Number(4+(i-1)*6+1)+'"  id="outtype" style="width: 100%;"><option value=""></option><option value="磨机">磨机</option><option value="切机">切机</option><option value="火烧">火烧</option><option value="外加工">外加工</option><option value="其它">其它</option></select></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" class="table_input msize dom" keyIndex="'+Number(5+(i-1)*6+2)+'" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" class="table_input dom" keyIndex="'+Number(5+(i-1)*6+3)+'" id="height" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" class="table_input number dom" keyIndex="'+Number(5+(i-1)*6+4)+'" id="number" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" class="table_input square dom" keyIndex="'+Number(5+(i-1)*6+5)+'" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input type="text" index="'+i+'" class="table_input dom" keyIndex="'+Number(5+(i-1)*6+6)+'" id="comment" ></td>\n' +
+                '</tr>';
+            $('[trindex]:last').after(html);
+            $('.dom[keyIndex="'+Number(5+(i-1)*6+1)+'"]').focus();
+        });
+
+
         setTimeout(function() {
             //selectStocktype(1, 100);
             selectMaterial(1,100);
@@ -279,7 +299,7 @@
 
 
         //计算
-        $('.msize').on('blur',function(){
+        $('#htmlTbody').on('blur','.msize',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var number=$('input[index="'+index+'"][id="number"]').val();
@@ -289,7 +309,7 @@
             }
 
         });
-        $('.number').on('blur',function(){
+        $('#htmlTbody').on('blur','.number',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var number=$('input[index="'+index+'"][id="number"]').val();

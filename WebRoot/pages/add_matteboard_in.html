@@ -165,6 +165,7 @@
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary" id="addBtn" >新建</button>
+                            <button type="button" class="btn btn-primary"  id="addTr">插入行</button>
                             <!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -270,7 +271,7 @@
 
         var html='';
         for(var i=1;i<11;i++){
-            html+='<tr>\n' +
+            html+='<tr trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
@@ -306,6 +307,29 @@
         $('#htmlTbody').html(html);
 
 
+        $('#addTr').click(function(){
+            var index=$('[trindex] :last').last().attr('index');
+            var i=Number(index)+1;
+            html='<tr trindex="'+i+'">\n' +
+                '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+1)+'" class="table_input sb_code dom" id="sb_code" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+2)+'" class="table_input sb_spec dom" id="sb_spec" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+3)+'" class="table_input sb_cube dom" id="sb_cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+4)+'" class="table_input layer dom" id="layer" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+5)+'" class="table_input msize dom" id="msize" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+6)+'" class="table_input dom" id="height" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+7)+'" class="table_input blocknumber dom" id="blocknumber" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+8)+'" class="table_input square dom" id="square" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+9)+'" class="table_input belowgradeblock dom" id="belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+10)+'" class="table_input belowgradesquare dom" id="belowgradesquare" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+11)+'" class="table_input price dom" id="price" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+12)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(3+(i-1)*13+13)+'" class="table_input dom" id="comment" ></td>\n' +
+                '</tr>';
+            $('[trindex]:last').after(html);
+            $('.dom[keyIndex="'+Number(3+(i-1)*13+1)+'"]').focus();
+        });
+
         selectWorkshop(1,100);
         /*selectWorkshop(1,100);
         setTimeout(function() {
@@ -313,12 +337,12 @@
         });*/
 
         //根据编号查询荒料
-        $('.sb_code').on('blur',function(){
+        $('#htmlTbody').on('blur','.sb_code',function(){
             var index=$(this).attr("index");
             queryStoneblockByCode($(this).val(),index);
         });
         //料层
-        $('.layer').on('change',function(){
+        $('#htmlTbody').on('change','.layer',function(){
             if($(this).val()=='1'){
                 $(this).val('上');
             }
@@ -333,7 +357,7 @@
         });
 
         //计算
-        $('.msize').on('blur',function(){
+        $('#htmlTbody').on('blur','.msize',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
@@ -366,7 +390,7 @@
 
         //合格数
         var gradeblock=0;
-        $('.blocknumber').on('blur',function(){
+        $('#htmlTbody').on('blur','.blocknumber',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
@@ -390,7 +414,7 @@
 
             }
         });
-        $('.belowgradeblock').on('blur',function(){
+        $('#htmlTbody').on('blur','.belowgradeblock',function(){
             var index=$(this).attr("index");
             var msize=$('input[index="'+index+'"][id="msize"]').val();
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
@@ -414,7 +438,7 @@
             }
         });
 
-        $('.price').on('blur',function(){
+        $('#htmlTbody').on('blur','.price',function(){
             var index=$(this).attr("index");
             var blocknumber=$('input[index="'+index+'"][id="blocknumber"]').val();
             var belowgradeblock=$('input[index="'+index+'"][id="belowgradeblock"]').val();
@@ -436,7 +460,7 @@
         });
 
         //求和
-        $('.square').on('blur',function(){
+        $('#htmlTbody').on('blur','.square',function(){
             var sum=0;
             $('.square').each(function(){
                 if($(this).val!=''){
@@ -445,7 +469,7 @@
             });
             $('#squareSum').text(sum.toFixed(2));
         });
-        $('.belowgradesquare').on('blur',function(){
+        $('#htmlTbody').on('blur','.belowgradesquare',function(){
             var sum=0;
             $('.belowgradesquare').each(function(){
                 if($(this).val!=''){
@@ -454,7 +478,7 @@
             });
             $('#belowgradesquareSum').text(sum.toFixed(2));
         });
-        $('.sum').on('blur',function(){
+        $('#htmlTbody').on('blur','.sum',function(){
             var sum=0;
             $('.sum').each(function(){
                 if($(this).val!=''){

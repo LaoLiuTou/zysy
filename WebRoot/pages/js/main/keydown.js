@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //按键切换
-    $('.dom').bind('keydown', function (e) {
+    $('body').on('keydown','.dom', function (e) {
 
         var key = e.which;
         switch (key) {

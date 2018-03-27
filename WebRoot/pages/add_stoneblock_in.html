@@ -165,6 +165,7 @@
 
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary"  id="addBtn">新建</button>
+                            <button type="button" class="btn btn-primary"  id="addTr">插入行</button>
                             <!--<span class="tools pull-right">-->
                             <!--<a href="javascript:;" class="fa fa-chevron-down"></a>-->
                             <!--<a href="javascript:;" class="fa fa-times"></a>-->
@@ -274,7 +275,7 @@
        });*/
         var html='';
         for(var i=1;i<11;i++){
-            html+='<tr>\n' +
+            html+='<tr trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+1)+'" class="table_input dom" id="number" ></td>\n' +
                 '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+2)+'" class="table_input dom" id="color" ></td>\n' +
@@ -302,14 +303,35 @@
             '<td style="padding: 0px;"></td>\n' +
             '</tr>';
         $('#htmlTbody').html(html);
-
+        $('#addTr').click(function(){
+            var index=$('[trindex] :last').last().attr('index');
+            var i=Number(index)+1;
+            html='<tr trindex="'+i+'">\n' +
+                '<td style="padding: 0px;width:60px;height: 30px;text-align: center;line-height: 30px;">'+i+'</td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+1)+'" class="table_input dom" id="number" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+2)+'" class="table_input dom" id="color" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+3)+'" class="table_input length dom" id="length" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+4)+'" class="table_input width dom" id="width" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+5)+'" class="table_input height dom" id="height" onkeyup="Num(this)"></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+6)+'" class="table_input cube dom" id="cube" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+7)+'" class="table_input price dom" id="price" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+8)+'" class="table_input sum dom" id="sum" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+9)+'" class="table_input dom" id="platenumber" ></td>\n' +
+                '<td style="padding: 0px;"><input index="'+i+'" type="text" keyIndex="'+Number(4+(i-1)*10+10)+'" class="table_input dom" id="comment" ></td>\n' +
+                '</tr>';
+            $('[trindex]:last').after(html);
+            $('#accountdiff').attr('keyIndex',Number(4+(i-1)*10+11));
+            $('#auditor').attr('keyIndex',Number(4+(i-1)*10+12));
+            $('#editor').attr('keyIndex',Number(4+(i-1)*10+13));
+            $('.dom[keyIndex="'+Number(4+(i-1)*10+1)+'"]').focus();
+        });
 
 
         var userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         $('#editor').val(userinfo['nickname']);
 
         //计算
-        $('.length').on('blur',function(){
+        $('#htmlTbody').on('blur','.length',function(){
             var index=$(this).attr("index");
             var length=$('input[index="'+index+'"][id="length"]').val();
             var width=$('input[index="'+index+'"][id="width"]').val();
@@ -319,7 +341,7 @@
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
-        $('.width').on('blur',function(){
+        $('#htmlTbody').on('blur','.width',function(){
             var index=$(this).attr("index");
             var length=$('input[index="'+index+'"][id="length"]').val();
             var width=$('input[index="'+index+'"][id="width"]').val();
@@ -329,7 +351,7 @@
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
-        $('.height').on('blur',function(){
+        $('#htmlTbody').on('blur','.height',function(){
             var index=$(this).attr("index");
             var length=$('input[index="'+index+'"][id="length"]').val();
             var width=$('input[index="'+index+'"][id="width"]').val();
@@ -339,7 +361,7 @@
                 $('input[index="'+index+'"][id="cube"]').trigger("blur");
             }
         });
-        $('.price').on('blur',function(){
+        $('#htmlTbody').on('blur','.price',function(){
             var index=$(this).attr("index");
             var price=$('input[index="'+index+'"][id="price"]').val();
             var cube=$('input[index="'+index+'"][id="cube"]').val();
@@ -349,7 +371,7 @@
             }
         });
         //求和
-        $('.cube').on('blur',function(){
+        $('#htmlTbody').on('blur','.cube',function(){
             var index=$(this).attr("index");
             var price=$('input[index="'+index+'"][id="price"]').val();
             var cube=$('input[index="'+index+'"][id="cube"]').val();
@@ -366,7 +388,7 @@
             });
             $('#cubeSum').text(sum.toFixed(3));
         });
-        $('.sum').on('blur',function(){
+        $('#htmlTbody').on('blur','.sum',function(){
             var sum=0;
             $('.sum').each(function(){
                 if($(this).val!=''){

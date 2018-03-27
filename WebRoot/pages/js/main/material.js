@@ -193,6 +193,7 @@ function  queryMaterial (materialname,currentPage,pageSize) {
         }
     });
 }
+var materialHtml='';
 /**
  * 查询select
 
@@ -219,7 +220,7 @@ function  selectMaterial (currentPage,pageSize) {
 
             $('.material').html(html);
 
-
+            materialHtml=html;
         }
     });
 }
