@@ -32,8 +32,8 @@ function  reportListStock (bodyParam,currentPage,pageSize) {
                 var msizes=subData[o].msize.split('*');
                 sum_1=Number(sum_1)+Number(subData[o].number);
                 sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*subData[o].number/1000000)).toFixed(2);
-                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(2);
-                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(3);
+                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(0);
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
                     length=msizes[0]-msizes[0]%300+300;
@@ -56,8 +56,8 @@ function  reportListStock (bodyParam,currentPage,pageSize) {
                     '<td>'+subData[o].comment+'</td>\n' +
                     '<td>'+subData[o].worker+'</td>\n' +
                     '<td>'+subData[o].auditor+'</td>\n' +
-                    '<td>'+subData[o].sprice+'</td>\n' +
-                    '<td>'+subData[o].ssum+'</td>\n' +
+                    '<td>'+Number(subData[o].sprice).toFixed(3)+'</td>\n' +
+                    '<td>'+Number(subData[o].ssum).toFixed(0)+'</td>\n' +
                     '</tr>' ;
 
             }
@@ -75,7 +75,7 @@ function  reportListStock (bodyParam,currentPage,pageSize) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
-                '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
                 '<td>'+sum_4+'</td>\n' +
                 '</tr>';
             //总合计
@@ -288,8 +288,8 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                 var msizes=subData[o].msize.split('*');
                 sum_1=Number(sum_1)+Number(subData[o].number);
                 sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*subData[o].number/1000000)).toFixed(2);
-                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(2);
-                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(3);
+                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(0);
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
                     length=msizes[0]-msizes[0]%300+300;
@@ -316,8 +316,8 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                     '<td>'+subData[o].worker+'</td>\n' +
                     '<td>'+subData[o].auditor+'</td>\n' +
                     '<td>'+subData[o].yanmi+'</td>\n' +
-                    '<td>'+subData[o].sprice+'</td>\n' +
-                    '<td>'+subData[o].ssum+'</td>\n' +
+                    '<td>'+Number(subData[o].sprice).toFixed(3)+'</td>\n' +
+                    '<td>'+Number(subData[o].ssum).toFixed(0)+'</td>\n' +
                     '</tr>' ;
 
             }
@@ -336,7 +336,7 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td>'+sum_6+'</td>\n' +
-                '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
                 '<td>'+sum_4+'</td>\n' +
                 '</tr>';
             //总合计
@@ -493,8 +493,8 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
                 var msizes=subData[o].msize.split('*');
                 sum_1=Number(sum_1)+Number(subData[o].number);
                 sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*subData[o].number/1000000)).toFixed(2);
-                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(2);
-                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(2);
+                sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(3);
+                sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(0);
                 sum_5=(Number(sum_5)+Number(subData[o].yanmi)).toFixed(2);
                 var length=msizes[0],width=msizes[1];
                 if(msizes[0]%300>0){
@@ -519,8 +519,8 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
                     '<td>'+subData[o].worker+'</td>\n' +
                     '<td>'+subData[o].auditor+'</td>\n' +
 
-                    '<td>'+subData[o].sprice+'</td>\n' +
-                    '<td>'+subData[o].ssum+'</td>\n' +
+                    '<td>'+Number(subData[o].sprice).toFixed(3)+'</td>\n' +
+                    '<td>'+Number(subData[o].ssum).toFixed(0)+'</td>\n' +
                     '</tr>' ;
 
             }
@@ -538,7 +538,7 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
-                '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
                 '<td>'+sum_4+'</td>\n' +
                 '</tr>';
 
