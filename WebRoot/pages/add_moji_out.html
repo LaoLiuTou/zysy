@@ -264,7 +264,7 @@
         obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
         obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
         obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
-        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3'); //只能输入两个小数
     }
     $(document).ready(function () {
         selectWorkshop(1,100);
@@ -466,7 +466,7 @@
                 }
                 $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
                 if(number!=''&&sprice!=''){
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(0));
                 }
             }
         });
@@ -490,7 +490,7 @@
                 }
                 $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
                 if(number!=''&&sprice!=''){
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(0));
                 }
             }
         });
@@ -501,7 +501,7 @@
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
             if(msizes.length==2&&number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val(((msizes[0]*msizes[1]*number/1000000)*sprice).toFixed(0));
             }
         });
         $('.msize[mold="ruku"]').on('blur',function(){
@@ -515,7 +515,7 @@
             if(msizes.length==2&&number!=''){
                 $('input[mold="ruku"][index="' + index + '"][id="square"]').val((msizes[0] * msizes[1] * number / 1000000).toFixed(2));
                 if(sprice!='') {
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(0));
                 }
             }
         });
@@ -528,7 +528,7 @@
             if(msizes.length==2&&number!=''){
                 $('input[mold="ruku"][index="' + index + '"][id="square"]').val((msizes[0] * msizes[1] * number / 1000000).toFixed(2));
                 if(sprice!='') {
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(0));
                 }
             }
         });
@@ -541,7 +541,7 @@
             if(msizes.length==2&&number!=''){
                 $('input[mold="ruku"][index="' + index + '"][id="square"]').val((msizes[0] * msizes[1] * number / 1000000).toFixed(2));
                 if(sprice!='') {
-                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(2));
+                    $('input[mold="ruku"][index="' + index + '"][id="ssum"]').val(((msizes[0] * msizes[1] * number / 1000000) * sprice).toFixed(0));
                 }
             }
         });

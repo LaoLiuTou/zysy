@@ -259,7 +259,7 @@
         obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字
         obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个, 清除多余的
         obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
-        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3'); //只能输入两个小数
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d\d).*$/,'$1$2.$3'); //只能输入两个小数
     }
     $(document).ready(function () {
         selectWorkshop(1,100);
@@ -343,10 +343,10 @@
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
                         if(process=='沟槽磨边'){
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
                         }
                     }
                 }
@@ -373,10 +373,10 @@
                 var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                 if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
                     if(process=='沟槽磨边'){
-                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                     }
                     else{
-                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
                     }
                 }
             }
@@ -388,7 +388,7 @@
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
             if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(0));
             }
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
@@ -418,10 +418,10 @@
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
                         if(process=='沟槽磨边'){
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
                         }
                     }
                 }
@@ -432,7 +432,7 @@
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
             if(number!=''&&sprice!=''){
-                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(2));
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((number*sprice).toFixed(0));
             }
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
@@ -454,27 +454,30 @@
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
                         if(process=='沟槽磨边'){
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
-                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                            $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
                         }
                     }
                 }
             }
         });
+
         $('#htmlTbody').on('blur','.sprice[mold="process"]',function(){
             var index=$(this).attr("index");
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
             var process=$('[mold="process"][index="'+index+'"][id="process"]').val();
             var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+            var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
+            var msizes=msize.split('*');
             if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
                 if(process=='沟槽磨边'){
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(2));
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                 }
                 else{
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
                 }
             }
         });
