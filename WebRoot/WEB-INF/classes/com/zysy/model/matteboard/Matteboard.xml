@@ -61,9 +61,9 @@
 	</select>
 	<select id="selectReportMatteboardByParam" parameterType="java.util.Map" resultType="Matteboard">
 		SELECT a.m_dt,a.height , 
-		SUM(a.blocknumber)  as sum_blocknumber,FORMAT(SUM(a.square),2)  as sum_square,
-		SUM(a.blocknumber-a.belowgradeblock)  as sum_gradeblock,FORMAT(SUM(a.square-a.belowgradesquare),2)  as sum_gradesquare,
-		SUM(a.belowgradeblock)  as sum_belowgradeblock,FORMAT(SUM(a.belowgradesquare),2)  as sum_belowgradesquare 
+		SUM(a.blocknumber)  as sum_blocknumber,CONVERT(SUM(a.square),DECIMAL(10,2))  as sum_square,
+		SUM(a.blocknumber-a.belowgradeblock)  as sum_gradeblock,CONVERT(SUM(a.square-a.belowgradesquare),DECIMAL(10,2))  as sum_gradesquare,
+		SUM(a.belowgradeblock)  as sum_belowgradeblock,CONVERT(SUM(a.belowgradesquare),DECIMAL(10,2))  as sum_belowgradesquare 
 		FROM matteboard a 
 		 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
