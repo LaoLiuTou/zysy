@@ -782,11 +782,11 @@ function  reportWorkshopInOut (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+subData[o].outtype+'</td>\n' +
                     '<td>'+subData[o].unit+'</td>\n' +
                     '<td>'+Math.abs(subData[o].sum_in).toFixed(2)+'</td>\n' +
-                    '<td>'+Math.abs(subData[o].sum_out).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+'</td>\n' +
                     '<td>'+Math.abs(subData[o].damage_num).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(subData[o].sum_in)-Math.abs(subData[o].sum_out)-Math.abs(subData[o].damage_num)).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(subData[o].sum_in)-Math.abs(subData[o].sum_out)).toFixed(2)+'</td>\n' +
                     '<td>'+Math.abs(subData[o].outside_sum).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(subData[o].sum_in)+Math.abs(subData[o].outside_sum)).toFixed(2)+'</td>\n' +
+                    '<td>'+((Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+Math.abs(subData[o].outside_sum)).toFixed(2)+'</td>\n' +
                     '</tr>' ;
             }
             $('#reportTbody').html(html);
