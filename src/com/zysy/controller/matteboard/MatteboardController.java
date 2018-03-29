@@ -552,7 +552,7 @@ public class MatteboardController {
 				//String.format("%.2f", f)
 				 
 				String[] strings = {"合计", "","", sum_1+"", String.format("%.2f", sum_2), sum_3+"",
-						String.format("%.2f", sum_4), sum_5+"",String.format("%.2f", sum_5) };
+						String.format("%.2f", sum_4), sum_5+"",String.format("%.2f", sum_6) };
 				exportList.add(strings);
 				 
 				ServletOutputStream out=response.getOutputStream();
