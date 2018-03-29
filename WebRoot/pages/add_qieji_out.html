@@ -635,7 +635,8 @@
 
 
             //出库
-            for(var i=1;i<6;i++) {
+            var index=$('[trindex] :last').last().attr('index');
+            for(var i=1;i<Number(index)+1;i++) {
                 if($('[mold="process"][index="'+i+'"][id="process"]').val()!=''&&$('[mold="process"][index="'+i+'"][id="msize"]').val()!=''
                     &&$('[mold="process"][index="'+i+'"][id="number"]').val()!=''&&$('[mold="process"][index="'+i+'"][id="height"]').val()!=''){
 

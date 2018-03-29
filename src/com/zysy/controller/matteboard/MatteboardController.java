@@ -399,6 +399,9 @@ public class MatteboardController {
 					if(Float.parseFloat(mb.getSb_spec().split("\\*")[2])>1.25&&(mb.getLayer().equals("上")||mb.getLayer().equals("下"))){
 						real_cube=Float.parseFloat(mb.getSb_cube())/2;
 	                }
+					else{
+						real_cube=Float.parseFloat(mb.getSb_cube());
+					}
 					
 					String[] strings = {(index+1)+"", mb.getSb_code(), mb.getSb_spec().split("\\*")[0],
 							mb.getSb_spec().split("\\*")[1],mb.getSb_spec().split("\\*")[2],mb.getSb_cube(),
