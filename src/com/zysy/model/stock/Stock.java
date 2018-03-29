@@ -280,4 +280,20 @@ public class Stock {
 		this.ssum = ssum;
 	}
 	
+	private String damage_num;
+	private String outside_sum;
+	public String getDamage_num() {
+		return damage_num;
+	}
+	public void setDamage_num(String damage_num) {
+		this.damage_num = damage_num;
+	}
+	public String getOutside_sum() {
+		return outside_sum;
+	}
+	public void setOutside_sum(String outside_sum) {
+		this.outside_sum = outside_sum;
+	}
+	
+	
 }

@@ -118,10 +118,10 @@ public class StockServiceImpl  implements IStockService {
 	public  int deleteStock(String id){
 	 	Stock stock=iStockMapper.selectstockById(id);
 		int result= iStockMapper.deletestock(id);
-		if(stock.getMaterial().equals("1")){
+		if(stock.getMaterial()!=null&&stock.getMaterial().equals("1")){
 			iStoneblockMapper.deletestoneblock(stock.getPid()+"");
 		}
-		else if(stock.getMaterial().equals("2")){
+		else if(stock.getMaterial()!=null&&stock.getMaterial().equals("2")){
 			iMatteboardMapper.deletematteboard(stock.getPid()+"");
 		}
 		else{
