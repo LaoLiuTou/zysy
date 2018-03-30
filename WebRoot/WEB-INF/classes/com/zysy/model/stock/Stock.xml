@@ -317,8 +317,8 @@
 		SELECT a.*,b.name as material_name,c.name as workshop_name,
 		SUM(CASE WHEN a.state=2 THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_in, 
 		SUM(CASE WHEN a.state=1 THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END)  as sum_out ,
-		SUM(CASE WHEN a.damage='是' THEN a.number ELSE 0 END) as sprice,
-		SUM(CASE WHEN a.outtype='计划外入库' THEN a.number ELSE 0 END) as ssum
+		SUM(CASE WHEN a.damage='是' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END) as damage_num,
+		SUM(CASE WHEN a.process='计划外入库' THEN substring_index(a.MSIZE,'*',1)*substring_index(a.MSIZE,'*',-1)*a.number/1000000 ELSE 0 END) as outside_sum
 		FROM stock a 
 		left join material b on a.material=b.id 
 		left join workshop c on a.workshop=c.id 

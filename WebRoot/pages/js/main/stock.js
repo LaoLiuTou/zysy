@@ -98,7 +98,7 @@ function deleteStock(id){
         var status = obj['status'];
         //var msg = obj['msg'];
         if(status=='0'){
-            alert("修改成功！");
+            alert("删除成功！");
             window.location.reload();
         }
     });

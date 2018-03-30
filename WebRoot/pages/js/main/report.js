@@ -222,8 +222,14 @@ function  reportReceiveListStock (bodyParam) {
             var sum_1=0,sum_2=0;
             for(var o in data){
                 var msizes=data[o].msize.split('*');
-                sum_1=Number(sum_1)+Number(data[o].number);
-                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                if(data[o].number!=''){
+                    sum_1=Number(sum_1)+Number(data[o].number);
+                    if(data[o].msize!=''){
+                        sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                    }
+
+                }
+
 
 
                 html+='<tr index='+o+' class="gradeX">\n' +
@@ -776,11 +782,11 @@ function  reportWorkshopInOut (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+subData[o].outtype+'</td>\n' +
                     '<td>'+subData[o].unit+'</td>\n' +
                     '<td>'+Math.abs(subData[o].sum_in).toFixed(2)+'</td>\n' +
-                    '<td>'+Math.abs(subData[o].sum_out).toFixed(2)+'</td>\n' +
-                    '<td>'+Math.abs(subData[o].sprice).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(subData[o].sum_in)-Math.abs(subData[o].sum_out)-Math.abs(subData[o].sprice)).toFixed(2)+'</td>\n' +
-                    '<td>'+Math.abs(subData[o].ssum).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(subData[o].sum_in)+Math.abs(subData[o].ssum)).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+'</td>\n' +
+                    '<td>'+Math.abs(subData[o].damage_num).toFixed(2)+'</td>\n' +
+                    '<td>'+(Math.abs(subData[o].sum_in)-Math.abs(subData[o].sum_out)).toFixed(2)+'</td>\n' +
+                    '<td>'+Math.abs(subData[o].outside_sum).toFixed(2)+'</td>\n' +
+                    '<td>'+((Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+Math.abs(subData[o].outside_sum)).toFixed(2)+'</td>\n' +
                     '</tr>' ;
             }
             $('#reportTbody').html(html);
