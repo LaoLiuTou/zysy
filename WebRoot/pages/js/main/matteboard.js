@@ -375,6 +375,7 @@ function  queryMatteboardById (id) {
                  '    <label>平方数</label>\n' +
                  '    <input type="text" class="form-control" id="update_square" name="square" value="'+msg['square']+'" placeholder="请输入平方数">\n' +
                  '</div>\n' +
+
                  '<div class="form-group col-md-6">\n' +
                  '    <label>不合格块数</label>\n' +
                  '    <input type="text" class="form-control" id="update_belowgradeblock" onkeyup="this.value=this.value.replace(/[^0-9-]+/,\'\');" value="'+msg['belowgradeblock']+'" name="belowgradeblock" placeholder="请输入不合格块数">\n' +
@@ -382,13 +383,68 @@ function  queryMatteboardById (id) {
                  '<div class="form-group col-md-6">\n' +
                  '    <label>不合格平方数</label>\n' +
                  '    <input type="text" class="form-control" id="update_belowgradesquare" value="'+msg['belowgradesquare']+'" name="belowgradesquare" placeholder="请输入不合格平方数">\n' +
-                 '</div>\n'   ;
+                 '</div>\n'+
+                '<div class="form-group col-md-6">\n' +
+                '    <label>单价</label>\n' +
+                '    <input type="text" class="form-control" id="update_price" name="price" value="'+msg['price']+'"  >\n' +
+                '</div>\n' +
+                '<div class="form-group col-md-6">\n' +
+                '    <label>金额</label>\n' +
+                '    <input type="text" class="form-control" id="update_sum" name="sum" value="'+msg['sum']+'"  >\n' +
+                '</div>\n' ;
 
             $('#updateForms').html(html);
             $('#update_layer').val(msg['layer']);
             $('.default-date-picker').datepicker({
                 format: 'yyyy-mm-dd'
             });
+
+
+            //计算
+
+            $('#updateForms').on('blur','#update_msize',function(){
+                cal();
+            });
+            $('#updateForms').on('blur','#update_blocknumber',function(){
+                cal();
+            });
+            $('#updateForms').on('blur','#update_belowgradeblock',function(){
+                cal();
+            });
+            $('#updateForms').on('blur','#update_price',function(){
+                cal();
+            });
+
+
+
+        }
+        //合格数
+        var gradeblock=0;
+        function cal(){
+            var msize=$('#update_msize').val();
+            var blocknumber=$('#update_blocknumber').val();
+            var belowgradeblock=$('#update_belowgradeblock').val();
+            var msizes=msize.split('*');
+            if(msize!=''&&blocknumber!=''){
+                $('#update_square').val((msizes[0]*msizes[1]*blocknumber/1000000).toFixed(2));
+                $('#update_square').trigger("blur");
+            }
+            if(msize!=''&&belowgradeblock!=''){
+                $('#update_belowgradesquare').val((msizes[0]*msizes[1]*belowgradeblock/1000000).toFixed(2));
+                $('#update_belowgradesquare').trigger("blur");
+            }
+            var price=$('#update_price').val();
+            if(blocknumber!=''&&price!=''&&msize!=''){
+                if(belowgradeblock.length==0){
+                    belowgradeblock=0;
+                    $('#update_belowgradeblock').val('0')
+                    $('#update_belowgradesquare').val('0');
+                }
+                gradeblock=Number(blocknumber)-Number(belowgradeblock);
+
+                //$('input[index="'+index+'"][id="sum"]').val((gradeblock*price*(msizes[0]*msizes[1]*blocknumber/1000000)).toFixed(2));
+                $('#update_sum').val((gradeblock*price*(msizes[0]*msizes[1]/1000000)).toFixed(2));
+            }
         }
     });
 }

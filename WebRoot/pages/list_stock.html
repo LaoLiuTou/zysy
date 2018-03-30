@@ -534,35 +534,6 @@
             }
         });
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        ///////修改
-        $('#updateForm').on('blur','#update_length',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
-        });
-        $('#updateForm').on('blur','#update_width',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
-        });
-        $('#updateForm').on('blur','#update_height',function(){
-            $('#update_cube').val(($('#update_length').val()*$('#update_width').val()*$('#update_height').val()).toFixed(3));
-        });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //金额
-        $('#updateForm').on('blur','#update_price',function(){
-            $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
-        });
-        $('#updateForm').on('blur','#update_blocknumber',function(){
-            $('#update_sum').val(($('#update_cube').val()*$('#update_price').val()*$('#update_blocknumber').val()).toFixed(2));
-        });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //根据编号查询荒料
-
-        ///////修改
-        $('#updateForm').on('blur','#update_sb_code',function(){
-            queryStoneblockByCode($('#update_sb_code').val());
-        });
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //计算合格数
 
 
 
@@ -734,12 +705,22 @@
                          '<input type="text" class="form-control m-bot15" id="update_jingchi" value="'+currentStock.jingchi+'" name="jingchi">\n' +
                          '</div>\n';
                      }
-                    if(currentStock.outtype=='火烧'){
+                    if(currentStock.outtype=='切机'||currentStock.outtype=='外加工'){
                         html+='<div class="form-group col-md-6">\n' +
                             '<label>延米</label>\n' +
                             '<input type="text" class="form-control m-bot15" id="update_yanmi" value="'+currentStock.yanmi+'" name="yanmi">\n' +
                             '</div>\n';
                     }
+                if(currentStock.state!='2'){
+                    html+='<div class="form-group col-md-6">\n' +
+                        '<label>工价</label>\n' +
+                        '<input type="text" class="form-control m-bot15" id="update_sprice" value="'+currentStock.sprice+'" name="sprice">\n' +
+                        '</div>\n' +
+                        '<div class="form-group col-md-6">\n' +
+                        '<label>金额</label>\n' +
+                        '<input type="text" class="form-control m-bot15" id="update_ssum" value="'+currentStock.ssum+'" name="ssum">\n' +
+                        '</div>\n' ;
+                }
                 html+='<div class="form-group col-md-6">\n' +
                     '<label>备注</label>\n' +
                     '<input type="text" class="form-control m-bot15" id="update_comment" placeholder="请输入描述" name="comment">\n' +
@@ -752,6 +733,180 @@
                 $('.default-date-picker').datepicker({
                     format: 'yyyy-mm-dd'
                 });
+
+
+                //计算
+                $('#updateForms').on('blur','#update_msize',function(){
+                    var msize=$('#update_msize').val();
+                    var msizes=msize.split('*');
+                    var height=$('#update_height').val();
+                    var number=$('#update_number').val();
+                    if(msize!=''&&msizes.length==2&&number!=''){
+                        $('#update_jingchi').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                        var length=msizes[0],width=msizes[1];
+                        if(msizes[0]%300>0){
+                            length=msizes[0]-msizes[0]%300+300;
+                        }
+                        if(msizes[1]%300>0){
+                            width=msizes[1]-msizes[1]%300+300;
+                        }
+                        $('#update_maochi').val((length*width*number/1000000).toFixed(2));
+
+                        var sprice=$('#update_sprice').val();
+                        if($('#update_outtype').val()=='切机'){
+                            if(height!='') {
+                                $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+                                var yanmi = $('#update_yanmi').val();
+                                if (number != '' && sprice != '' && yanmi != '') {
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                        }
+                        else if($('#update_outtype').val()=='外加工'){
+
+                            if($('#update_process').val()=='沟槽磨边'){
+                                if(height!='') {
+                                    $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+                                    var yanmi = $('#update_yanmi').val();
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                            else{
+                                var jingchi=$('#update_jingchi').val();
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+                        else{
+                            var jingchi=$('#update_jingchi').val();
+                            if(number!=''&&sprice!=''&&jingchi!=''){
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+
+
+                    }
+
+                });
+                $('#updateForms').on('blur','#update_height',function(){
+                    var msize=$('#update_msize').val();
+                    var height=$('#update_height').val();
+                    var msizes=msize.split('*');
+                    var number=$('#update_number').val();
+                    if(msize!=''&&msizes.length==2&&number!=''){
+                        var sprice=$('#update_sprice').val();
+                        if($('#update_outtype').val()=='切机'){
+                            if(height!='') {
+                                $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+
+                                var yanmi = $('#update_yanmi').val();
+                                if (number != '' && sprice != '' && yanmi != '') {
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                        }
+                        else if($('#update_outtype').val()=='外加工'){
+
+                            if($('#update_process').val()=='沟槽磨边'){
+                                if(height!='') {
+                                    $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+                                    var yanmi = $('#update_yanmi').val();
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                            else{
+                                var jingchi=$('#update_jingchi').val();
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+                        else{
+                            var jingchi=$('#update_jingchi').val();
+                            if(number!=''&&sprice!=''&&jingchi!=''){
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+                    }
+
+                });
+
+                $('#updateForms').on('blur','#update_number',function(){
+                    var msize=$('#update_msize').val();
+                    var msizes=msize.split('*');
+                    var height=$('#update_height').val();
+                    var number=$('#update_number').val();
+                    if(msize!=''&&msizes.length==2&&number!=''){
+                        $('#update_jingchi').val((msizes[0]*msizes[1]*number/1000000).toFixed(2));
+                        var length=msizes[0],width=msizes[1];
+                        if(msizes[0]%300>0){
+                            length=msizes[0]-msizes[0]%300+300;
+                        }
+                        if(msizes[1]%300>0){
+                            width=msizes[1]-msizes[1]%300+300;
+                        }
+                        $('#update_maochi').val((length*width*number/1000000).toFixed(2));
+
+                        var sprice=$('#update_sprice').val();
+                        if($('#update_outtype').val()=='切机'){
+                            if(height!='') {
+                                $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+                                var yanmi = $('#update_yanmi').val();
+                                if (number != '' && sprice != '' && yanmi != '') {
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                        }
+                        else if($('#update_outtype').val()=='外加工'){
+
+                            if($('#update_process').val()=='沟槽磨边'){
+                                if(height!='') {
+                                    $('#update_yanmi').val((((Number(msizes[0] / 1000) + Number(msizes[1] / 1000)) * 2 * height / 10) * number).toFixed(2));
+                                    var yanmi = $('#update_yanmi').val();
+                                    $('#update_ssum').val((sprice * yanmi).toFixed(0));
+                                }
+                            }
+                            else{
+                                var jingchi=$('#update_jingchi').val();
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+                        else{
+                            var jingchi=$('#update_jingchi').val();
+                            if(number!=''&&sprice!=''&&jingchi!=''){
+                                $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                            }
+                        }
+                    }
+                });
+                $('#updateForms').on('blur','#update_sprice',function(){
+                    var number=$('#update_number').val();
+                    var sprice=$('#update_sprice').val();
+                    if($('#update_outtype').val()=='切机'){
+                        var yanmi=$('#update_yanmi').val();
+                        if(number!=''&&sprice!=''&&yanmi!=''){
+                            $('#update_ssum').val((sprice*yanmi).toFixed(0));
+                        }
+                    }
+                    else if($('#update_outtype').val()=='外加工'){
+
+                        if($('#update_process').val()=='沟槽磨边'){
+                            var yanmi=$('#update_yanmi').val();
+                            $('#update_ssum').val((sprice*yanmi).toFixed(0));
+                        }
+                        else{
+                            var jingchi=$('#update_jingchi').val();
+                            $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                        }
+                    }
+                    else{
+                        var jingchi=$('#update_jingchi').val();
+                        if(number!=''&&sprice!=''&&jingchi!=''){
+                            $('#update_ssum').val((sprice*jingchi).toFixed(0));
+                        }
+                    }
+                });
+
+
+
+
             }
 
             $('#update_comment').val(currentStock.comment);

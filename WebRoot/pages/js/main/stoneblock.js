@@ -439,6 +439,77 @@ function  queryStoneblockById (id) {
             $('.default-date-picker').datepicker({
                 format: 'yyyy-mm-dd'
             });
+
+
+            //计算
+            $('#updateForms').on('blur','#update_length',function(){
+                var length=$('#update_length').val();
+                var width=$('#update_width').val();
+                var height=$('#update_height').val();
+                if(length!=''&&width!=''&&height!=''){
+                    $('#update_cube').val((length*width*height).toFixed(3));
+                    $('#update_cube').trigger("blur");
+                }
+            });
+            $('#updateForms').on('blur','#update_width',function(){
+                var length=$('#update_length').val();
+                var width=$('#update_width').val();
+                var height=$('#update_height').val();
+                if(length!=''&&width!=''&&height!=''){
+                    $('#update_cube').val((length*width*height).toFixed(3));
+                    $('#update_cube').trigger("blur");
+                }
+            });
+            $('#updateForms').on('blur','#update_height',function(){
+                var length=$('#update_length').val();
+                var width=$('#update_width').val();
+                var height=$('#update_height').val();
+                if(length!=''&&width!=''&&height!=''){
+                    $('#update_cube').val((length*width*height).toFixed(3));
+                    $('#update_cube').trigger("blur");
+                }
+            });
+            $('#updateForms').on('blur','#update_price',function(){
+                var price=$('#update_price').val();
+                var cube=$('#update_cube').val();
+                if(price!=''&&cube!=''){
+                    $('#update_sum').val((price*cube).toFixed(2));
+                    $('#update_sum').trigger("blur");
+                }
+            });
+            //求和
+            $('#updateForms').on('blur','#update_cube',function(){
+                var price=$('#update_price').val();
+                var cube=$('#update_cube').val();
+                if(price!=''&&cube!=''){
+                    $('#update_sum').val((price*cube).toFixed(2));
+                    $('#update_sum').trigger("blur");
+                }
+
+            });
+            /*$('#updateForms').on('blur','#update_sum',function(){
+                var sum=0;
+                $('.sum').each(function(){
+                    if($(this).val!=''){
+                        sum+=Number($(this).val());
+                    }
+                });
+                sum+=Number($('#accountdiff').val());
+                $('#cubePrice').text(sum.toFixed(2));
+            });*/
+
+            /*$('#update_accountdiff').on('blur',function(){
+                var sum=0;
+                $('.sum').each(function(){
+                    if($(this).val!=''){
+                        sum+=Number($(this).val());
+                    }
+                });
+                $('#cubePrice').text((Number($('#accountdiff').val())+Number(sum)).toFixed(2));
+            });*/
+
+
+
         }
     });
 }
