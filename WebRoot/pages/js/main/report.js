@@ -1071,8 +1071,8 @@ function  reportYield (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+subData[o].unit+'</td>\n' +
                     /*'<td>'+(subData[o].sum_in*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +
                     '<td>'+(subData[o].sum_out*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +*/
-                    '<td>'+subData[o].sum_in+'</td>\n' +
-                    '<td>'+subData[o].sum_out+'</td>\n' +
+                    '<td>'+Number(subData[o].sum_in).toFixed(2)+'</td>\n' +
+                    '<td>'+Number(subData[o].sum_out).toFixed(2)+'</td>\n' +
                     '<td>'+subData[o].sum_number+'</td>\n' +
                     '</tr>' ;
             }
