@@ -184,6 +184,10 @@ public class MatteboardController {
 				paramMap.put("sb_cube",matteboard.getSb_cube());
 				paramMap.put("code",matteboard.getCode());
 				paramMap.put("auditor",matteboard.getAuditor());
+				String m_dtFrom=request.getParameter("m_dtFrom");
+				String m_dtTo=request.getParameter("m_dtTo");
+				paramMap.put("m_dtFrom",m_dtFrom);
+				paramMap.put("m_dtTo",m_dtTo);
 				if(matteboard.getM_dt()!=null&&!matteboard.getM_dt().equals(""))
 				paramMap.put("m_dt",matteboard.getM_dt());
 				paramMap.put("workgroup",matteboard.getWorkgroup());

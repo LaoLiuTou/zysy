@@ -176,9 +176,15 @@
 
 
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">开始日期：</label>
                                     <div class="col-md-9 pdnone">
-                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
+                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchFromDate"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">结束日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchToDate"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary mb10" id="resetBtn">重置</button>
@@ -267,29 +273,29 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            reportMatteboard($('#searchDate').val(),1,pageSize);
+            reportMatteboard($('#searchFromDate').val(),$('#searchToDate').val(),1,pageSize);
         });
 
-        reportMatteboard('',currentPage,pageSize);
+        reportMatteboard('','',currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            reportMatteboard($('#searchDate').val(),currentPage,pageSize);
+            reportMatteboard($('#searchDate').val(),$('#searchToDate').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            reportMatteboard($('#searchDate').val(),currentPage,pageSize);
+            reportMatteboard($('#searchDate').val(),$('#searchToDate').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            reportMatteboard($('#searchDate').val(),currentPage,pageSize);
+            reportMatteboard($('#searchDate').val(),$('#searchToDate').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
             var reg=/^[1-9]\d*$|^0$/;
             if(reg.test($('#jumpPageText').val())==true){
-                reportMatteboard($('#searchDate').val(),$('#jumpPageText').val(),pageSize);
+                reportMatteboard($('#searchDate').val(),$('#searchToDate').val(),$('#jumpPageText').val(),pageSize);
             }else{
                 alert("页码输入有误！");
                 return false;

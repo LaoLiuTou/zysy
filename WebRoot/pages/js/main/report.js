@@ -782,11 +782,11 @@ function  reportWorkshopInOut (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+subData[o].outtype+'</td>\n' +
                     '<td>'+subData[o].unit+'</td>\n' +
                     '<td>'+Math.abs(subData[o].sum_in).toFixed(2)+'</td>\n' +
-                    '<td>'+(Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+'</td>\n' +
+                    '<td>'+(Math.abs(subData[o].sum_out)-Math.abs(subData[o].damage_num)).toFixed(2)+'</td>\n' +
                     '<td>'+Math.abs(subData[o].damage_num).toFixed(2)+'</td>\n' +
                     '<td>'+(Math.abs(subData[o].sum_in)-Math.abs(subData[o].sum_out)).toFixed(2)+'</td>\n' +
                     '<td>'+Math.abs(subData[o].outside_sum).toFixed(2)+'</td>\n' +
-                    '<td>'+((Math.abs(subData[o].sum_out).toFixed(2)-Math.abs(subData[o].damage_num))+Math.abs(subData[o].outside_sum)).toFixed(2)+'</td>\n' +
+                    '<td>'+((Math.abs(subData[o].sum_out)-Math.abs(subData[o].damage_num))+Math.abs(subData[o].outside_sum)).toFixed(2)+'</td>\n' +
                     '</tr>' ;
             }
             $('#reportTbody').html(html);
@@ -880,13 +880,16 @@ function  reportWorkshopInOut (c_dt,outtype,currentPage,pageSize) {
  * @param currentPage
  * @param pageSize
  */
-function  reportMatteboard (m_dt,currentPage,pageSize) {
+function  reportMatteboard (from_dt,to_dt,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
     var bodyParam={};
-    if(m_dt!=''){
-        bodyParam['m_dt']=m_dt+' 00:00:00';
+    if(from_dt!=''){
+        bodyParam['m_dtFrom']=from_dt+' 00:00:00';
+    }
+    if(to_dt!=''){
+        bodyParam['m_dtTo']=to_dt+' 23:59:59';
     }
 
     var httpR = new createHttpR(url+'reportMatteboard','post','text',bodyParam,'callBack');
