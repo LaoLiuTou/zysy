@@ -322,7 +322,7 @@
             </div>
             <div class="clearfix"></div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button" id="hideUpdate">取消</button>
                 <button class="btn btn-primary" type="button" id="updateBtn">提交</button>
             </div>
         </div>
@@ -489,6 +489,9 @@
 <!--时间选择器end-->
 
 <script>
+    //列表
+    var currentPage=1;
+    var pageSize=10;
     $(document).ready(function () {
         function Num(obj){
             obj.value = obj.value.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
@@ -502,26 +505,24 @@
 
         //搜索
         $('#searchBtn').click(function () {
-            queryStock($('#searchCode').val(),1,pageSize);
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),1,pageSize);
         });
 
-        //列表
-        var currentPage=1;
-        var pageSize=10;
-        queryStock('',currentPage,pageSize);
+
+        queryStock('','','',currentPage,pageSize);
 
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            queryStock($('#searchCode').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            queryStock($('#searchCode').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            queryStock($('#searchCode').val(),currentPage,pageSize);
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','#jumpBtn',function(){
@@ -936,6 +937,7 @@
                     param[$(this).attr('name')] = $(this).val();
                 }
             });
+
 
 
             if(currentStock.material=='1'&&currentStock.pid!='0'&&currentStock.pid!=''){

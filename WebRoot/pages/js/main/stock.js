@@ -80,7 +80,9 @@ function updateStock(param){
         //var msg = obj['msg'];
         if(status=='0'){
             alert("修改成功！");
-            window.location.reload();
+            //window.location.reload();
+            $('#hideUpdate').click();
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),currentPage,pageSize);
             //window.location.href="interface.html?index="+interfaceIndex;
         }
     });
@@ -109,7 +111,7 @@ function deleteStock(id){
  * @param currentPage
  * @param pageSize
  */
-function  queryStock (code,currentPage,pageSize) {
+function  queryStock (code,m_dtFrom,m_dtTo,currentPage,pageSize) {
 
     //分页显示的页码数  必须为奇数
     var showPage=7;
@@ -117,6 +119,14 @@ function  queryStock (code,currentPage,pageSize) {
     if(code!=''){
         bodyParam['code']=code;
         $('#searchCode').val(code)
+    }
+    if(m_dtFrom!=''){
+        bodyParam['m_dtFrom']=m_dtFrom+' 00:00:00';
+        $('#m_dtFrom').val(m_dtFrom)
+    }
+    if(m_dtTo!=''){
+        bodyParam['m_dtTo']=m_dtTo+' 23:59:59';
+        $('#m_dtTo').val(m_dtTo)
     }
     /*if(material!=''){
         bodyParam['material']=material;

@@ -911,7 +911,7 @@ function  reportMatteboard (from_dt,to_dt,currentPage,pageSize) {
                 sum_5=(Number(sum_5)+Number(subData[o].sum_gradeblock)).toFixed(2);
                 sum_6=(Number(sum_6)+Number(subData[o].sum_gradesquare)).toFixed(2);
                 html+='<tr index='+o+' class="gradeX">\n' +
-                    '<td>'+subData[o].m_dt+'</td>\n' +
+                    //'<td>'+subData[o].m_dt+'</td>\n' +
                     '<td>'+subData[o].height+'</td>\n' +
                     '<td>'+subData[o].sum_blocknumber+'</td>\n' +
                     '<td>'+subData[o].sum_square+'</td>\n' +
@@ -923,7 +923,7 @@ function  reportMatteboard (from_dt,to_dt,currentPage,pageSize) {
             }
             html+='<tr  class="gradeX">\n' +
                 '<td>合计</td>\n' +
-                '<td></td>\n' +
+                //'<td></td>\n' +
                 '<td>'+sum_1+'</td>\n' +
                 '<td>'+sum_2+'</td>\n' +
                 '<td>'+sum_3+'</td>\n' +
@@ -1076,7 +1076,7 @@ function  reportYield (c_dt,outtype,currentPage,pageSize) {
                     '<td>'+(subData[o].sum_out*data[o].msize.split('*')[0]*subData[o].msize.split('*')[1]/1000000).toFixed(2)+'</td>\n' +*/
                     '<td>'+Number(subData[o].sum_in).toFixed(2)+'</td>\n' +
                     '<td>'+Number(subData[o].sum_out).toFixed(2)+'</td>\n' +
-                    '<td>'+subData[o].sum_number+'</td>\n' +
+                    '<td>'+Number(subData[o].sum_number).toFixed(2)+'</td>\n' +
                     '</tr>' ;
             }
 

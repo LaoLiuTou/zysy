@@ -56,7 +56,9 @@ function updateStoneblock(param){
         //var msg = obj['msg'];
         if(status=='0'){
             alert("修改成功！");
-            window.location.reload();
+            //window.location.reload();
+            $('#hideUpdate').click();
+            queryStock($('#searchCode').val(),$('#m_dtFrom').val(),$('#m_dtTo').val(),currentPage,pageSize);
             //window.location.href="interface.html?index="+interfaceIndex;
         }
     });

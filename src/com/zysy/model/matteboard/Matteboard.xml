@@ -60,7 +60,8 @@
 		LIMIT #{fromPage},#{toPage} 
 	</select>
 	<select id="selectReportMatteboardByParam" parameterType="java.util.Map" resultType="Matteboard">
-		SELECT a.m_dt,a.height , 
+		<!-- SELECT a.m_dt,a.height ,  -->
+		SELECT a.height ,
 		SUM(a.blocknumber)  as sum_blocknumber,CONVERT(SUM(a.square),DECIMAL(10,2))  as sum_square,
 		SUM(a.blocknumber-a.belowgradeblock)  as sum_gradeblock,CONVERT(SUM(a.square-a.belowgradesquare),DECIMAL(10,2))  as sum_gradesquare,
 		SUM(a.belowgradeblock)  as sum_belowgradeblock,CONVERT(SUM(a.belowgradesquare),DECIMAL(10,2))  as sum_belowgradesquare 
@@ -97,8 +98,10 @@
 			<if test="price != null"> AND a.PRICE =#{price} </if>
 			<if test="sum != null"> AND a.SUM =#{sum} </if>
 		</trim>  
-		group by a.height ,a.m_dt 
-		order by m_dt desc 
+		<!-- group by a.height ,a.m_dt 
+		order by m_dt desc  -->
+		group by a.height 
+		order by a.height asc
 	</select>
 
 	<select id="selectCountmatteboardByParam" parameterType="java.util.Map" resultType="int">
