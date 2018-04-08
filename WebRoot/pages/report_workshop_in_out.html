@@ -161,7 +161,7 @@
                     <section class="panel">
                         <header class="panel-heading">
                             车间进出配比
-
+f
                             <span class="tools pull-right">
                             <button type="button" class="btn btn-primary" id="exportBtn">导出</button>
                             <button type="button" class="btn btn-primary" id="printBtn">打印</button>
@@ -175,9 +175,15 @@
                             <form class="form-horizontal" role="form" id="form">
 
                                 <div class="form-group col-md-3 mr10">
-                                    <label class="control-label col-md-3 form-sm-title pdnone">日期：</label>
+                                    <label class="control-label col-md-3 form-sm-title pdnone">开始日期：</label>
                                     <div class="col-md-9 pdnone">
-                                        <input class="form-control form-control-inline input-medium default-date-picker" id="searchDate"  size="16" type="text" value="" />
+                                        <input class="form-control form-control-inline input-medium default-date-picker" id="fromDate"  size="16" type="text" value="" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3 mr10">
+                                    <label class="control-label col-md-3 form-sm-title pdnone">结束日期：</label>
+                                    <div class="col-md-9 pdnone">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" id="toDate"  size="16" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3 mr10">
@@ -274,23 +280,23 @@
         selectDistinctOuttype($('#distinctOuttype').val());
         //搜索
         $('#searchBtn').click(function () {
-            reportWorkshopInOut($('#searchDate').val(),$('#distinctOuttype').val(),1,pageSize);
+            reportWorkshopInOut($('#fromDate').val(),$('#toDate').val(),$('#distinctOuttype').val(),1,pageSize);
         });
 
         //列表
-        reportWorkshopInOut('','',1,pageSize);
+        reportWorkshopInOut('','','',1,pageSize);
         $('.pagination').on('click','.pageBtn',function(){
             currentPage=$(this).attr('index');
-            reportWorkshopInOut($('#searchDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
+            reportWorkshopInOut($('#fromDate').val(),$('#toDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
         });
         $('.pagination').on('click','.prevBtn',function(){
             currentPage--;
-            reportWorkshopInOut($('#searchDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
+            reportWorkshopInOut($('#fromDate').val(),$('#toDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
 
         });
         $('.pagination').on('click','.nextBtn',function(){
             currentPage++;
-            reportWorkshopInOut($('#searchDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
+            reportWorkshopInOut($('#fromDate').val(),$('#toDate').val(),$('#distinctOuttype').val(),currentPage,pageSize);
 
         });
         //打印

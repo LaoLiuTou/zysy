@@ -938,11 +938,11 @@ public class StockController {
 	                }
 	                sum_3+=Float.parseFloat(length)*Float.parseFloat(width)*Float.parseFloat(st.getNumber())/1000000;
 					
-	                if(st.getSprice()!=null)
+	                if(st.getSprice()!=null&&st.getSprice().length()>0)
 	                sum_4+=Float.parseFloat(st.getSprice());
-	                if(st.getSsum()!=null)
+	                if(st.getSsum()!=null&&st.getSsum().length()>0)
 	                sum_5+=Float.parseFloat(st.getSsum());
-	                if(st.getYanmi()!=null)
+	                if(st.getYanmi()!=null&&st.getYanmi().length()>0)
 	                sum_6+=Float.parseFloat(st.getYanmi());
 					if(stock.getState().equals("1")){
 						if(stock.getOuttype().equals("切机")){
@@ -1006,7 +1006,8 @@ public class StockController {
 				
 				ServletOutputStream out=response.getOutputStream();
 				String fileName = sdf.format(new Date());
-				if(stock.getState().equals("1")){
+				System.out.println(stock.getOuttype());
+				if((stock.getState()+"").equals("1")){
 					if(stock.getOuttype().equals("磨机")){
 						fileName = "磨机加工明细表"+fileName;
 					}

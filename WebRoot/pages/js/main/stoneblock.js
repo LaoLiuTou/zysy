@@ -158,7 +158,7 @@ function  queryStoneblock (bodyParam,currentPage,pageSize) {
                 else{
                     html+='<td>'+subData[o].yf_dt+'</td>\n';
                 }
-                html+= '</tr>';
+                html+= '<td>'+subData[o].comment+'</td></tr>';
 
             }
             html+='<tr  class="gradeX">\n' +
@@ -175,6 +175,7 @@ function  queryStoneblock (bodyParam,currentPage,pageSize) {
                 //'<td>'+(sum_2/data.length).toFixed(2)+'</td>\n' +
                 '<td></td>\n' +
                 '<td>'+sum_3+'</td>\n' +
+                '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '<td></td>\n' +
@@ -205,6 +206,7 @@ function  queryStoneblock (bodyParam,currentPage,pageSize) {
                     //'<td>' + (sum_2 / data.length).toFixed(2) + '</td>\n' +
                     '<td></td>\n' +
                     '<td>' + sum_3 + '</td>\n' +
+                    '<td></td>\n' +
                     '<td></td>\n' +
                     '<td></td>\n' +
                     '<td></td>\n' +

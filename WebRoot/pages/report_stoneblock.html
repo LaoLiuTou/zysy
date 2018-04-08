@@ -303,6 +303,7 @@
                                         <th>运辅车辆</th>
                                         <th>入账时间</th>
                                         <th>运费结算时间</th>
+                                        <th>备注</th>
                                     </tr>
 
                                     </thead>
@@ -367,11 +368,11 @@
         var currentPage=1;
         var pageSize=10;
 
-        var  bodyParam={'page':1,'size':10000};
+        var  bodyParam={'page':1,'size':100000};
 
 
         $('#searchBtn').on('click',function(){
-            bodyParam={'page':1,'size':10000};
+            bodyParam={'page':1,'size':100000};
             $('#form input').each(function () {
                 if($(this).val()!=''&&$(this).attr('id')!='square'){
                     bodyParam[$(this).attr('id')]=$(this).val();

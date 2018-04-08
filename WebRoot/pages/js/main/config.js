@@ -39,17 +39,23 @@ function login() {
         },
         success : function(response) {
             console.log(JSON.stringify(response));
-            var token = response['token'];
-            var userinfo = JSON.stringify(response['msg']);
-            //var timestamp = Date.parse(new Date());
-            //var hash = md5(token + timestamp + sk);
-            sessionStorage.setItem('username',$('#username').val());
-            sessionStorage.setItem('userpwd',$('#password').val());
-            sessionStorage.setItem('userinfo',userinfo);
-            sessionStorage.setItem('token',token);
+            if(response['status']=='0'){
+                var token = response['token'];
+                var userinfo = JSON.stringify(response['msg']);
+                //var timestamp = Date.parse(new Date());
+                //var hash = md5(token + timestamp + sk);
+                sessionStorage.setItem('username',$('#username').val());
+                sessionStorage.setItem('userpwd',$('#password').val());
+                sessionStorage.setItem('userinfo',userinfo);
+                sessionStorage.setItem('token',token);
 
-            //window.location.href='default-page.html?backurl='+window.location.href;
-            window.location.href='index.html';
+                //window.location.href='default-page.html?backurl='+window.location.href;
+                window.location.href='index.html';
+            }
+            else{
+                alert(response['msg']);
+            }
+
         },
         error : function(response) {
             alert('登录失败！');

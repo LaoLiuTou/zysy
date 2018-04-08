@@ -268,7 +268,11 @@
 
                                     </tbody>
                                 </table>
+                                <div class="text-center" id="pagination">
+                                    <ul class="pagination">
+                                    </ul>
 
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -320,14 +324,13 @@
 
 <script>
     $(document).ready(function () {
+        var currentPage=1;
+        var pageSize=10;
+        var  bodyParam={'page':1,'size':100000,'state':2};
 
-        var bodyParam={};
-        bodyParam['page']=1;
-        bodyParam['size']=1000;
-        bodyParam['state']=2;
         //搜索
         $('#searchBtn').click(function () {
-            bodyParam={'page':1,'size':1000,'state':2};
+            bodyParam={'page':1,'size':100000,'state':2};
             $('#form input').each(function () {
                 if($(this).val()!=''&&$(this).attr('id')!='square'){
                     bodyParam[$(this).attr('id')]=$(this).val();
@@ -340,10 +343,27 @@
                 }
 
             });
-            reportReceiveListStock(bodyParam);
+            reportReceiveListStock(bodyParam,1,pageSize);
         });
         //列表
-        reportReceiveListStock(bodyParam);
+        reportReceiveListStock(bodyParam,1,pageSize);
+
+        $('.pagination').on('click','.pageBtn',function(){
+            currentPage=$(this).attr('index');
+            reportReceiveListStock(bodyParam,currentPage,pageSize);
+        });
+        $('.pagination').on('click','.prevBtn',function(){
+            currentPage--;
+            reportReceiveListStock(bodyParam,currentPage,pageSize);
+
+        });
+        $('.pagination').on('click','.nextBtn',function(){
+            currentPage++;
+            reportReceiveListStock(bodyParam,currentPage,pageSize);
+
+
+        });
+
         setTimeout(function() {
             //selectStocktype(1, 100);
             selectMaterial(1,100);

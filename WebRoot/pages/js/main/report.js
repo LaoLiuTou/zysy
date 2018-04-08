@@ -207,9 +207,9 @@ function  reportListStock (bodyParam,currentPage,pageSize) {
  * @param stocktype
  * @param workshop
  */
-function  reportReceiveListStock (bodyParam) {
+function  reportReceiveListStock (bodyParam,currentPage,pageSize) {
 
-
+    var showPage=7;
     var httpR = new createHttpR(url+'listStock','post','text',bodyParam,'callBack');
     httpR.HttpRequest(function(response){
         var obj = JSON.parse(response);
@@ -219,33 +219,33 @@ function  reportReceiveListStock (bodyParam) {
         if(status=='0'){
             var data=msg['data'];
             var html='';
+
+            var subData=data.slice((currentPage-1)*pageSize,currentPage*pageSize);
             var sum_1=0,sum_2=0;
-            for(var o in data){
-                var msizes=data[o].msize.split('*');
-                if(data[o].number!=''){
-                    sum_1=Number(sum_1)+Number(data[o].number);
-                    if(data[o].msize!=''){
-                        sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+            for(var o in subData){
+                var msizes=subData[o].msize.split('*');
+                if(subData[o].number!=''){
+                    sum_1=Number(sum_1)+Number(subData[o].number);
+                    if(subData[o].msize!=''){
+                        sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*subData[o].number/1000000)).toFixed(2);
                     }
 
                 }
 
-
-
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
-                    '<td>'+data[o].m_dt+'</td>\n' +
-                    '<td>'+data[o].code+'</td>\n' +
-                    '<td>'+data[o].outtype+'</td>\n' +
-                    '<td>'+data[o].material_name+'</td>\n' +
-                    '<td>'+data[o].msize+'</td>\n' +
-                    '<td>'+data[o].height+'</td>\n' +
-                    '<td>'+data[o].number+'</td>\n' +
-                    '<td>'+(msizes[0]*msizes[1]*data[o].number/1000000).toFixed(2)+'</td>\n' +
+                    '<td>'+subData[o].m_dt+'</td>\n' +
+                    '<td>'+subData[o].code+'</td>\n' +
+                    '<td>'+subData[o].outtype+'</td>\n' +
+                    '<td>'+subData[o].material_name+'</td>\n' +
+                    '<td>'+subData[o].msize+'</td>\n' +
+                    '<td>'+subData[o].height+'</td>\n' +
+                    '<td>'+subData[o].number+'</td>\n' +
+                    '<td>'+(msizes[0]*msizes[1]*subData[o].number/1000000).toFixed(2)+'</td>\n' +
                     //'<td>'+data[o].maochi+'</td>\n' +
-                    '<td>'+data[o].comment+'</td>\n' +
-                    '<td>'+data[o].worker+'</td>\n' +
-                    '<td>'+data[o].auditor+'</td>\n' +
+                    '<td>'+subData[o].comment+'</td>\n' +
+                    '<td>'+subData[o].worker+'</td>\n' +
+                    '<td>'+subData[o].auditor+'</td>\n' +
                     '</tr>' ;
 
             }
@@ -264,6 +264,123 @@ function  reportReceiveListStock (bodyParam) {
                 '<td></td>\n' +
                 '<td></td>\n' +
                 '</tr>';
+
+
+
+
+
+
+            //总合计
+            if(data.length>pageSize) {
+                sum_1=0,sum_2=0;
+                for(var o in data){
+                    var msizes=data[o].msize.split('*');
+                    if(data[o].number!=''){
+                        sum_1=Number(sum_1)+Number(data[o].number);
+                        if(data[o].msize!=''){
+                            sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                        }
+
+                    }
+                }
+                html+='<tr  class="gradeX">\n' +
+                    '<td>总合计</td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td>'+sum_1+'</td>\n' +
+                    '<td>'+sum_2+'</td>\n' +
+
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '<td></td>\n' +
+                    '</tr>';
+            }
+
+            var num=data.length;
+            if(num>0) {
+                var pageHtml = '';
+                var totalPage = 0;
+                if (num % pageSize == 0) {
+                    totalPage = num / pageSize;
+                }
+                else {
+                    totalPage = Math.ceil(num / pageSize);
+                }
+
+                if (currentPage == 1) {
+                    pageHtml += '<li class="disabled"><a href="#">|&laquo;</a></li>';
+                    pageHtml += '<li class="disabled"><a href="#">&laquo;</a></li>';
+                }
+                else {
+                    pageHtml += '<li ><a href="#" class="pageBtn" index="1">|&laquo;</a></li>';
+                    pageHtml += '<li ><a href="#" class="prevBtn" index="">&laquo;</a></li>';
+                }
+                if (totalPage <= showPage) {
+                    for (var i = 1; i < Number(totalPage) + 1; i++) {
+                        if (currentPage == i) {
+                            pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
+                        }
+                        else {
+                            pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
+                        }
+                    }
+                }
+                else {
+                    if (currentPage <= (showPage - 1) / 2) {
+                        for (var i = 1; i <= showPage; i++) {
+                            if (currentPage == i) {
+                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
+                            }
+                            else {
+                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
+                            }
+                        }
+                    }
+                    else if (totalPage - currentPage < (showPage - 1) / 2) {
+                        for (var i = Number(totalPage) - showPage; i <= totalPage; i++) {
+                            if (currentPage == i) {
+                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
+                            }
+                            else {
+                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
+                            }
+                        }
+                    }
+                    else {
+                        for (var i = Number(currentPage) - (showPage - 1) / 2; i <= Number(currentPage) + (showPage - 1) / 2; i++) {
+                            if (currentPage == i) {
+                                pageHtml += '<li class="active"><a href="#" >' + i + '</a></li>';
+                            }
+                            else {
+                                pageHtml += '<li><a href="#" class="pageBtn" index="' + i + '">' + i + '</a></li>';
+                            }
+                        }
+                    }
+
+
+                }
+
+                if (currentPage == totalPage) {
+                    pageHtml += '<li class="disabled"><a href="#">&raquo;</a></li>';
+                    pageHtml += '<li class="disabled"><a href="#">&raquo;|</a></li>';
+                }
+                else {
+                    pageHtml += '<li class="nextBtn" index=""><a href="#">&raquo;</a></li>';
+                    pageHtml += '<li class="pageBtn" index="' + totalPage + '"><a href="#">&raquo;|</a></li>';
+                }
+                /* pageHtml+='<li><input type="text" id="jumpPageText" class="paging-inpbox form-control"></li>\n' +
+                     '<li><button type="button" id="jumpBtn" class="paging-btnbox btn btn-primary">跳转</button></li>\n' +
+                     '<li><span class="number-of-pages">共'+totalPage+'页</span></li>';*/
+
+                $('.pagination').html(pageHtml);
+
+            }
+
+
             $('#reportTbody').html(html);
 
 
@@ -758,12 +875,14 @@ function  reportStockInOut (stocktype,workshop,material) {
  * @param stocktype
  * @param workshop
  */
-function  reportWorkshopInOut (c_dt,outtype,currentPage,pageSize) {
+function  reportWorkshopInOut (fromm_dt,tom_dt,outtype,currentPage,pageSize) {
     var showPage=7;
     var bodyParam={'pid':0};
-    if(c_dt!=''){
-        bodyParam['m_dtFrom']=c_dt+' 00:00:00';
-        bodyParam['m_dtTo']=c_dt+' 23:59:59';
+    if(fromm_dt!=''){
+        bodyParam['m_dtFrom']=fromm_dt+' 00:00:00';
+    }
+    if(tom_dt!=''){
+        bodyParam['m_dtTo']=tom_dt+' 23:59:59';
     }
     if(outtype!=''){
         bodyParam['outtype']=outtype;

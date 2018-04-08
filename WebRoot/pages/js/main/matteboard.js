@@ -150,6 +150,7 @@ function  queryMatteboard (bodyParam,currentPage,pageSize) {
                     '<td>'+Number(subData[o].belowgradesquare).toFixed(2)+'</td>\n' +
                     '<td>'+subData[o].price+'</td>\n' +
                     '<td>'+subData[o].sum+'</td>\n' +
+                    '<td>'+subData[o].comment+'</td>\n' +
                  '</tr>';
                 //alert(html);
             }
@@ -174,6 +175,7 @@ function  queryMatteboard (bodyParam,currentPage,pageSize) {
                 '<td>'+sum_11+'</td>\n' +
                 '<td>'+sum_12+'</td>\n' +
                 '<td>'+sum_13+'</td>\n' +
+                '<td></td>\n' +
                 '</tr>';
             //总合计
             if(data.length>pageSize) {
@@ -222,6 +224,7 @@ function  queryMatteboard (bodyParam,currentPage,pageSize) {
                     '<td>' + sum_11 + '</td>\n' +
                     '<td>' + sum_12 + '</td>\n' +
                     '<td>' + sum_13 + '</td>\n' +
+                    '<td></td>\n' +
                     '</tr>';
             }
             $('#reportTbody').html(html);
