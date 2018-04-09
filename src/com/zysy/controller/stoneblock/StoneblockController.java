@@ -409,7 +409,7 @@ public class StoneblockController {
 					String[] strings = {(index+1)+"", sdf.format(sb.getS_dt()), sb.getCode(), sb.getSource(), sb.getPlace(), 
 							sb.getColor(), sb.getNumber(), sb.getLength(),sb.getWidth(),sb.getHeight(), 
 							sb.getCube(), sb.getPrice(), sb.getSum(), sb.getAccountdiff(), sb.getPlatenumber(),
-							"未入账", "未结算"};
+							"未入账", "未结算",sb.getComment()};
 					if(sb.getRz_dt()!=null){
 						strings[14]=sdf.format(sb.getRz_dt());
 					}
@@ -427,7 +427,7 @@ public class StoneblockController {
 				//String.format("%.2f", f)
 				String[] strings = {"合计", "", "", "", "","", "", "","","", 
 						String.format("%.3f", sum_1), String.format("%.2f", sum_2), String.format("%.2f", sum_3),
-						"", "","", ""};
+						"", "","", "", ""};
 				exportList.add(strings);
 				 
 				ServletOutputStream out=response.getOutputStream();
@@ -435,7 +435,7 @@ public class StoneblockController {
 				response.setContentType("application/vnd.ms-excel;charset=utf-8");
 				response.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8") + ".xls");
 				String[] titles = { "序号","日期", "单号", "来源", "入库地点", "颜色", "料号", "长", 
-						"宽" , "高", "立方", "单价", "金额", "账差", "运辅车辆", "入账时间", "运费结算时间"}; 
+						"宽" , "高", "立方", "单价", "金额", "账差", "运辅车辆", "入账时间", "运费结算时间","备注"}; 
 				 
 				ExcelUtil.export(titles, out, exportList);
 				//ExcelUtil.exportRange(titles, out, exportList);

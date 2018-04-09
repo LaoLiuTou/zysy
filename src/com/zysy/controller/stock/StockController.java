@@ -944,7 +944,7 @@ public class StockController {
 	                sum_5+=Float.parseFloat(st.getSsum());
 	                if(st.getYanmi()!=null&&st.getYanmi().length()>0)
 	                sum_6+=Float.parseFloat(st.getYanmi());
-					if(stock.getState().equals("1")){
+					if((stock.getState()+"").equals("1")){
 						if(stock.getOuttype().equals("切机")){
 							String[] strings = {(index+1)+"", sdf.format(st.getM_dt()),st.getCode(),st.getProcess(),
 									st.getMsize(),st.getHeight(),st.getNumber(),
@@ -980,7 +980,7 @@ public class StockController {
 					}
 					
 				}
-				if(stock.getState().equals("1")){
+				if((stock.getState()+"").equals("1")){
 					if(stock.getOuttype().equals("切机")){
 						String[] strings = {"合计", "", "", "", "","", String.format("%.0f", sum_1), String.format("%.2f", sum_2),String.format("%.2f", sum_3),
 								"","","", String.format("%.2f", sum_6),String.format("%.2f", sum_4), String.format("%.2f", sum_5)};
@@ -1026,7 +1026,7 @@ public class StockController {
 				}
 				response.setContentType("application/vnd.ms-excel;charset=utf-8");
 				response.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8") + ".xls");
-				if(stock.getState().equals("1")){
+				if((stock.getState()+"").equals("1")){
 					if(stock.getOuttype().equals("切机")){
 						String[] titles = { "序号","日期", "单据号", "加工方式", "规格", "厚度", 
 								"块数", "平方数", "平方数(毛尺)", "备注", "加工人", "验收人","延米", "工价", "工资"}; 

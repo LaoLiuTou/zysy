@@ -413,7 +413,7 @@ public class MatteboardController {
 							mb.getHeight(),mb.getBlocknumber()+"",mb.getSquare(),
 							mb.getBlocknumber()-mb.getBelowgradeblock()+"",
 							String.format("%.2f", Float.parseFloat(mb.getSquare())-Float.parseFloat(mb.getBelowgradesquare())),
-							mb.getBelowgradeblock()+"",mb.getBelowgradesquare(),mb.getPrice(),mb.getSum()};
+							mb.getBelowgradeblock()+"",mb.getBelowgradesquare(),mb.getPrice(),mb.getSum(),mb.getComment()};
 				     
 					
 					if(mb.getSb_spec()!=null){
@@ -447,7 +447,7 @@ public class MatteboardController {
 				String[] strings = {"合计", "", sum_1+"", sum_2+"", sum_3+"",String.format("%.3f", sum_4), "",
 						String.format("%.3f", sum_5),"","", "","", sum_6+"",String.format("%.2f", sum_7),
 						sum_8+"", String.format("%.2f", sum_9),sum_10+"", String.format("%.2f", sum_11),
-						sum_12+"",sum_13+"" };
+						sum_12+"",sum_13+"" , ""};
 				exportList.add(strings);
 			
 				ServletOutputStream out=response.getOutputStream();
@@ -455,12 +455,12 @@ public class MatteboardController {
 				response.setContentType("application/vnd.ms-excel;charset=utf-8");
 				response.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8") + ".xls");
 				String[] titles1 = { "序号","领用荒料", "日期", "单据号", "产品规格", "厚度", "产品总量",
-						"合格数量","不合格数量" , "工价", "金额"}; 
+						"合格数量","不合格数量" , "工价", "金额", "备注"}; 
 				
 				CellRangeAddress[] range1={new CellRangeAddress(0,1,0,0),new CellRangeAddress(0,0,1,7),new CellRangeAddress(0,1,8,8),
 						new CellRangeAddress(0,1,9,9),new CellRangeAddress(0,1,10,10),new CellRangeAddress(0,1,11,11),
 						new CellRangeAddress(0,0,12,13),new CellRangeAddress(0,0,14,15),new CellRangeAddress(0,0,16,17),
-						new CellRangeAddress(0,1,18,18),new CellRangeAddress(0,1,19,19)};
+						new CellRangeAddress(0,1,18,18),new CellRangeAddress(0,1,19,19),new CellRangeAddress(0,1,20,20)};
 				String[] titles2 = { "石料编号","长", "宽", "高", "立方数", "料层", "实际立方数", "块数", 
 						"平方数" , "块数", "平方数", "块数", "平方数"}; 
 				CellRangeAddress[] range2={new CellRangeAddress(1,1,1,1),new CellRangeAddress(1,1,2,2),
