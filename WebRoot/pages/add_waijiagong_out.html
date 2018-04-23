@@ -270,7 +270,7 @@
         for(var i=1;i<6;i++){
             html+='<tr trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input process dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option><option value="刨沟板">刨沟板</option><option value="单烧">单烧</option></select></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input process dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option><option value="刨沟板">刨沟板</option><option value="单烧">单烧</option><option value="背倒角">背倒角</option></select></td>\n' +
                 //'<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="红外线切">红外线切</option></select></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
@@ -293,7 +293,7 @@
             var i=Number(index)+1;
             html='<tr trindex="'+i+'">\n' +
                 '<td style="padding: 0px;width:60px;height: 40px;text-align: center;line-height: 40px;">'+i+'</td>\n' +
-                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input process dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option><option value="刨沟板">刨沟板</option><option value="单烧">单烧</option></select></td>\n' +
+                '<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input process dom" id="process" style="width: 100px;"><option value=""></option><option value="盲人道">盲人道</option><option value="止步石">止步石</option><option value="沟槽磨边">沟槽磨边</option><option value="防护">防护</option><option value="喷砂">喷砂</option><option value="刨沟板">刨沟板</option><option value="单烧">单烧</option><option value="背倒角">背倒角</option></select></td>\n' +
                 //'<td style="padding: 0px;"><select index="'+i+'" keyIndex="'+Number(4+(i-1)*12+1)+'" mold="process" class="table_input dom" id="process" style="width: 100px;"><option value=""></option><option value="红外线切">红外线切</option></select></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+2)+'" mold="process" class="table_input  dom" id="packaging" ></td>\n' +
                 '<td style="padding: 0px;"><input type="text" index="'+i+'" keyIndex="'+Number(4+(i-1)*12+3)+'" mold="process" class="table_input msize dom" id="msize" ></td>\n' +
@@ -331,7 +331,7 @@
                 }
                 $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
                 if(height!=''){
-                    if(process=='沟槽磨边'){
+                    if(process=='沟槽磨边'||process=='背倒角'){
                         $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0]/1000)*number).toFixed(2));
 
                     }
@@ -342,7 +342,7 @@
                    var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
-                        if(process=='沟槽磨边'){
+                        if(process=='沟槽磨边'||process=='背倒角'){
                             $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
@@ -361,7 +361,7 @@
             var number=$('input[mold="process"][index="'+index+'"][id="number"]').val();
             var process=$('[mold="process"][index="'+index+'"][id="process"]').val();
             if(msize!=''&&msizes.length==2&&height!=''&&number!=''){
-                if(process=='沟槽磨边'){
+                if(process=='沟槽磨边'||process=='背倒角'){
                     $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0]/1000)*number).toFixed(2));
 
                 }
@@ -372,7 +372,7 @@
                 var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                 var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                 if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
-                    if(process=='沟槽磨边'){
+                    if(process=='沟槽磨边'||process=='背倒角'){
                         $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                     }
                     else{
@@ -406,7 +406,7 @@
                 $('input[mold="process"][index="'+index+'"][id="maochi"]').val((length*width*number/1000000).toFixed(2));
 
                 if(height!=''&&number!=''){
-                    if(process=='沟槽磨边'){
+                    if(process=='沟槽磨边'||process=='背倒角'){
                         $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0]/1000)*number).toFixed(2));
 
                     }
@@ -417,7 +417,7 @@
                     var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
-                        if(process=='沟槽磨边'){
+                        if(process=='沟槽磨边'||process=='背倒角'){
                             $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
@@ -438,11 +438,15 @@
             var msizes=msize.split('*');
             var height=$('input[mold="process"][index="'+index+'"][id="height"]').val();
             var process=$('[mold="process"][index="'+index+'"][id="process"]').val();
+            if(process=='背倒角'){
+                var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+                $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
+            }
             if(msize!=''&&msizes.length==2&&number!=''){
 
 
                 if(height!=''&&number!=''){
-                    if(process=='沟槽磨边'){
+                    if(process=='沟槽磨边'||process=='背倒角'){
                         $('input[mold="process"][index="'+index+'"][id="yanmi"]').val((Number(msizes[0]/1000)*number).toFixed(2));
 
                     }
@@ -453,7 +457,7 @@
                     var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
                     var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
                     if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
-                        if(process=='沟槽磨边'){
+                        if(process=='沟槽磨边'||process=='背倒角'){
                             $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                         }
                         else{
@@ -472,12 +476,28 @@
             var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
             var msize=$('input[mold="process"][index="'+index+'"][id="msize"]').val();
             var msizes=msize.split('*');
-            if(number!=''&&sprice!=''&&yanmi!=''&&process!=''){
-                if(process=='沟槽磨边'){
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
+            if(sprice!=''&&process!=''){
+                if(process=='沟槽磨边'||process=='背倒角'){
+                    if(yanmi!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
+                    }
                 }
                 else{
-                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
+                    if(number!=''&&msize!=''){
+                        $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*msizes[0]*msizes[1]*number/1000000).toFixed(0));
+                    }
+                }
+            }
+        });
+        $('#htmlTbody').on('blur','.yanmi[mold="process"]',function(){
+            var index=$(this).attr("index");
+            var sprice=$('input[mold="process"][index="'+index+'"][id="sprice"]').val();
+            var process=$('[mold="process"][index="'+index+'"][id="process"]').val();
+            var yanmi=$('input[mold="process"][index="'+index+'"][id="yanmi"]').val();
+
+            if(sprice!=''&&yanmi!=''&&process!=''){
+                if(process=='沟槽磨边'||process=='背倒角'){
+                    $('input[mold="process"][index="'+index+'"][id="ssum"]').val((sprice*yanmi).toFixed(0));
                 }
             }
         });
