@@ -421,9 +421,9 @@ function  reportQJListStock (bodyParam,currentPage,pageSize) {
                     width=msizes[1]-msizes[1]%300+300;
                 }
                 sum_5=(Number(sum_5)+Number(length*width*subData[o].number/1000000)).toFixed(2);
-                var length=msizes[0],width=msizes[1];
 
                 sum_6=(Number(sum_6)+Number(subData[o].yanmi)).toFixed(2);
+
                 html+='<tr index='+o+' class="gradeX">\n' +
                     '<td>'+(Number(o)+1)+'</td>\n' +
                     '<td>'+subData[o].m_dt+'</td>\n' +
@@ -615,7 +615,9 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
             for(var o in subData){
                 var msizes=subData[o].msize.split('*');
                 sum_1=Number(sum_1)+Number(subData[o].number);
-                sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*subData[o].number/1000000)).toFixed(2);
+                if(msizes!=''&&data[o].number!='') {
+                    sum_2 = (Number(sum_2) + Number(msizes[0] * msizes[1] * subData[o].number / 1000000)).toFixed(2);
+                }
                 sum_3=(Number(sum_3)+Number(subData[o].sprice)).toFixed(3);
                 sum_4=(Number(sum_4)+Number(subData[o].ssum)).toFixed(0);
                 sum_5=(Number(sum_5)+Number(subData[o].yanmi)).toFixed(2);
@@ -633,9 +635,15 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
                     '<td>'+subData[o].process+'</td>\n' +
                     '<td>'+subData[o].msize+'</td>\n' +
                     '<td>'+subData[o].height+'</td>\n' +
-                    '<td>'+subData[o].number+'</td>\n' +
-                    '<td>'+(msizes[0]*msizes[1]*subData[o].number/1000000).toFixed(2)+'</td>\n' +
-                    '<td>'+subData[o].yanmi+'</td>\n' +
+                    '<td>'+subData[o].number+'</td>\n' ;
+                if(msizes!=''&&subData[o].number!=''){
+                    html+='<td>'+(msizes[0]*msizes[1]*subData[o].number/1000000).toFixed(2)+'</td>\n' ;
+                }
+                else{
+                    html+='<td></td>\n' ;
+                }
+
+                html+='<td>'+subData[o].yanmi+'</td>\n' +
                     //'<td>'+data[o].maochi+'</td>\n' +
                     //'<td>'+(length*width*data[o].number/1000000).toFixed(2)+'</td>\n' +
                     '<td>'+subData[o].comment+'</td>\n' +
@@ -671,7 +679,9 @@ function  reportWJGListStock (bodyParam,currentPage,pageSize) {
                 for(var o in data){
                     var msizes=data[o].msize.split('*');
                     sum_1=Number(sum_1)+Number(data[o].number);
-                    sum_2=(Number(sum_2)+Number(msizes[0]*msizes[1]*data[o].number/1000000)).toFixed(2);
+                    if(msizes!=''&&data[o].number!='') {
+                        sum_2 = (Number(sum_2) + Number(msizes[0] * msizes[1] * data[o].number / 1000000)).toFixed(2);
+                    }
                     sum_3=(Number(sum_3)+Number(data[o].sprice)).toFixed(2);
                     sum_4=(Number(sum_4)+Number(data[o].ssum)).toFixed(2);
                     sum_5=(Number(sum_5)+Number(data[o].yanmi)).toFixed(2);
